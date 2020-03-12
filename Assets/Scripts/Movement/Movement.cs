@@ -19,16 +19,16 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || (moveLeft && !moveRight))
             transform.position -= Vector3.right * speed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || (moveRight && !moveLeft))
             transform.position += Vector3.right * speed * Time.deltaTime;
 
-        if (moveLeft && !moveRight)
-            rigidbody2D.AddForce(Vector3.left * speed);
+        /*if (moveLeft && !moveRight)
+            //rigidbody2D.AddForce(Vector3.left * speed);
 
         if (moveRight && !moveLeft)
-            rigidbody2D.AddForce(Vector2.right * speed);
+            rigidbody2D.AddForce(Vector2.right * speed);*/
     }
 
     public void move(Vector2 dir)
