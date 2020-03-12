@@ -4,9 +4,8 @@ using UnityEngine;
 
 public abstract class BaseContactInteractables : BaseInteractable{
 
-
-    private void OnTriggerEnter(Collider other){
-        GameObject go = other.gameObject;
+    private void OnTriggerEnter2D(Collider2D collision){
+        GameObject go = collision.gameObject;
         interact(go);
     }
 
