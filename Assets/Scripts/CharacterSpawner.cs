@@ -6,9 +6,13 @@ public class CharacterSpawner : MonoBehaviour{
     public void requireSpawn() {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up); // fire a raycast directly down the player
 
-        if (hit.collider != null) { 
+     
+
+        if (hit.collider != null) {
             SpawnerTile st = hit.collider.gameObject.GetComponent<SpawnerTile>();
+            Debug.Log(st + "    " + hit.collider.gameObject.name);
             if (st != null) { // check whether the object hit has a spawnertile component (that means, if it can spawn plants)
+                Debug.Log("Require spawn");
                 st.spawn(gameObject); // invoke spawn passing the player as arg
             }
         }
