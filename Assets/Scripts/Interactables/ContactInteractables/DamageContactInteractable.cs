@@ -7,7 +7,8 @@ public class DamageContactInteractable : BaseContactInteractables{
     private EventEmitter ee;
 
     private void Start(){
-        ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
+        //ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
+        ee = FindObjectOfType<EventEmitter>();
     }
 
     public override void interact(GameObject initiator) {
