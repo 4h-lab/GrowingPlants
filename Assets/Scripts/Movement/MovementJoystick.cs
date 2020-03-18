@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementJoystick : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MovementJoystick : MonoBehaviour
 
     public void FixedUpdate()
     {
+        
         Vector3 direction =  Vector3.right * variableJoystick.Horizontal;
         transform.position += direction * speed * Time.deltaTime;
         /////////DEBUG
