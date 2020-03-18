@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquishContact : BaseContactInteractables
+public class SquishContactInteractable : BaseContactInteractables
 {
     public int damage;
     private EventEmitter ee;
