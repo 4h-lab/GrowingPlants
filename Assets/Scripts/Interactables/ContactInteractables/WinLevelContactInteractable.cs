@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class WinLevelContactInteractable : BaseContactInteractables
 {
     private EventEmitter ee;
+    [SerializeField] GameObject winScreen;
 
     private int currentLevel = 1;
     private int stars = 3;
@@ -20,6 +23,15 @@ public class WinLevelContactInteractable : BaseContactInteractables
     private void notifyWin(Object[] p)
     {
         Debug.Log("WIN. Level "+currentLevel+" - stars "+stars+" - time "+time);
+        GameObject popup = GameObject.Instantiate(
+            winScreen, 
+            Vector3.zero, 
+            Quaternion.identity, 
+            GameObject.FindObjectOfType<Canvas>().transform);
+        string obtainedStars = "";
+        for (int i = 0; i < stars; i++) obtainedStars += " *";
+        popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
+        popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = time.ToString();
     }
 
     public override void interact(GameObject initiator){
