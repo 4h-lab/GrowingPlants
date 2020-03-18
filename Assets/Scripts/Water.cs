@@ -13,11 +13,17 @@ public class Water : MonoBehaviour {
         cangoup = true;
     }
 
+    private void stopRisingLevel(Object[] p)
+    {
+        cangoup = false;
+    }
+
     // Start is called before the first frame update
     void Start(){
         initY = this.transform.position.y;
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.on("plant_created", triggerRisingLevel);
+        ee.on("win", stopRisingLevel);
 
     }
 
