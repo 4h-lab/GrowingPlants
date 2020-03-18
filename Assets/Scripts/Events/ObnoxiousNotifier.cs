@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObnoxiousNotifier : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class ObnoxiousNotifier : MonoBehaviour{
+
+    private EventEmitter ee;
+
+    private void notifyPlayerDamage(Object[] p) {
+        string msg = "Player damaged ";
+        if (p != null) msg += ((GameObject)p[0]).name;
+        Debug.Log(msg);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    // Start is called before the first frame update
+    void Start(){
+        ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
+        ee.on("player_damaged", notifyPlayerDamage);
     }
+
 }

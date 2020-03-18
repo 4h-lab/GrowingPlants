@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventEmitter : MonoBehaviour{
-    public delegate int EventCallback(Object[] parameters);
+    public delegate void EventCallback(Object[] parameters);
 
     private Dictionary<string, List<EventCallback>> events;
 
