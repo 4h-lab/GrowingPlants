@@ -17,12 +17,19 @@ public class ObnoxiousNotifier : MonoBehaviour{
         Debug.Log(msg);
     }
 
+    private void notifyPlayerSquished(Object[] p)
+    {
+        string msg = "Player has squished ";
+        if (p != null) msg += ((GameObject)p[0]).name;
+        Debug.Log(msg);
+    }
 
     // Start is called before the first frame update
     void Start(){
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.on("player_damaged", notifyPlayerDamage);
         ee.on("plant_created", notifyPlantCreated);
+        ee.on("player_squished", notifyPlayerSquished);
     }
 
 }
