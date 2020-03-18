@@ -22,6 +22,9 @@ public class WinLevelContactInteractable : BaseContactInteractables
 
     private void notifyWin(Object[] p)
     {
+        //placeholder
+        int currentLevel = 1;
+
         Debug.Log("WIN. Level "+currentLevel+" - stars "+stars+" - time "+time);
         GameObject popup = GameObject.Instantiate(
             winScreen, 
@@ -32,6 +35,7 @@ public class WinLevelContactInteractable : BaseContactInteractables
         for (int i = 0; i < stars; i++) obtainedStars += " *";
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
         popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = time.ToString();
+        popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
     }
 
     public override void interact(GameObject initiator){
