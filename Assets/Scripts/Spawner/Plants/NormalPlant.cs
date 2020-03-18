@@ -8,9 +8,13 @@ public class NormalPlant : MonoBehaviour{
 
     private float initY;
 
+    private EventEmitter ee;
+
     // Start is called before the first frame update
     void Start(){
         initY = this.transform.position.y;
+        ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
+        ee.invoke("plant_created", (new[] { this.gameObject }));
     }
 
     // Update is called once per frame

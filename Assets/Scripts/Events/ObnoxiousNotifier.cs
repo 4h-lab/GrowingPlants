@@ -11,11 +11,18 @@ public class ObnoxiousNotifier : MonoBehaviour{
         if (p != null) msg += ((GameObject)p[0]).name;
         Debug.Log(msg);
     }
+    private void notifyPlantCreated(Object[] p) {
+        string msg = "Plant created";
+        if (p != null) msg += ((GameObject)p[0]).name;
+        Debug.Log(msg);
+    }
+
 
     // Start is called before the first frame update
     void Start(){
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.on("player_damaged", notifyPlayerDamage);
+        ee.on("plant_created", notifyPlantCreated);
     }
 
 }
