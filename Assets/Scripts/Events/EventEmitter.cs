@@ -12,12 +12,12 @@ public class EventEmitter : MonoBehaviour{
     }
 
     public void on(string eventname, EventCallback eventcallback) {
-        if (events[eventname] == null) events[eventname] = new List<EventCallback>();
+        if (!events.ContainsKey(eventname)) events.Add(eventname, new List<EventCallback>());
         events[eventname].Add(eventcallback);
     }
 
     public void invoke(string eventname, Object[] parameters) {
-        if (events[eventname] == null) return;
+        if (!events.ContainsKey(eventname)) return;
         foreach (EventCallback e in events[eventname]) {
             e(parameters);
         }

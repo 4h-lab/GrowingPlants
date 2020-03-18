@@ -14,6 +14,6 @@ public class DamageContactInteractable : BaseContactInteractables{
         Health h = initiator.GetComponent<Health>();
         if (h != null) h.damage(damage);
 
-        ee.invoke("player_damaged", (new[] {this}));
+        ee.invoke("player_damaged", (new[] {this.gameObject}));
     }
 }
