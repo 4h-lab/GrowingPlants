@@ -12,7 +12,7 @@ public class ObnoxiousNotifier : MonoBehaviour{
         Debug.Log(msg);
     }
     private void notifyPlantCreated(Object[] p) {
-        string msg = "Plant created";
+        string msg = "Plant created ";
         if (p != null) msg += ((GameObject)p[0]).name;
         Debug.Log(msg);
     }
