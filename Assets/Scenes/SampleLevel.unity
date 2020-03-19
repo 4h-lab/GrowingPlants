@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40fd101b386db1740a1339a34783d21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  risingSpeed: 0
+  risingSpeed: 0.67
 --- !u!1 &1255921619
 GameObject:
   m_ObjectHideFlags: 0
