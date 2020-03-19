@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+
 public class WinLevelContactInteractable : BaseContactInteractables
 {
     private EventEmitter ee;
@@ -37,7 +38,7 @@ public class WinLevelContactInteractable : BaseContactInteractables
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
 
         time = Time.realtimeSinceStartup - time;
-        popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = time.ToString();
+        popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = formatGameTime(time);
         popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
         
     }
@@ -45,5 +46,17 @@ public class WinLevelContactInteractable : BaseContactInteractables
     public override void interact(GameObject initiator){
         Debug.Log("You won!!!!!!");
         ee.invoke("win", (new[] { this.gameObject }));
+    }
+
+    private static string formatGameTime(float seconds) {
+        Debug.Log(seconds);
+        int minutes = Mathf.FloorToInt(seconds / 60);
+        int s = Mathf.FloorToInt(seconds % 60);
+        int decimals = Mathf.FloorToInt( (seconds*100)%100);
+
+        string res =  (minutes < 10 ? "0" + minutes.ToString() : minutes.ToString());
+        res += ": " + (s < 10 ? "0" + s.ToString() : s.ToString());
+        res += ": " + (decimals < 10 ? "0" + decimals.ToString() : decimals.ToString());
+        return res;
     }
 }
