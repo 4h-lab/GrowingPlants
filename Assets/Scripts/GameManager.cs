@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     private void Start(){
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.on("win", (Object[] x) => { customTimeScale = 0f; });
+        customTimeScale = 1f;
     }
 
 }
