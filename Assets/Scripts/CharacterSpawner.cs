@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour{
+    private float radius;
+
+    private void Start()
+    {
+        radius= this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y;
+        //var vect = this.transform.position - new Vector3(0f, t, 0f);
+        //radius = vect.y;
+        Debug.Log(radius);
+    }
     public void requireSpawn() {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up); // fire a raycast directly down the player
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,radius); // fire a raycast directly down the player
 
      
 
@@ -14,6 +23,14 @@ public class CharacterSpawner : MonoBehaviour{
                 st.spawn(gameObject); // invoke spawn passing the player as arg
             }
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        
+        Gizmos.DrawLine(this.transform.position, this.transform.position - new Vector3(0f, radius, 0f)) ;
     }
 
 }
