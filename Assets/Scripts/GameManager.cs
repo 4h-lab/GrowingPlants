@@ -18,11 +18,15 @@ public class GameManager : MonoBehaviour {
         customTimeScale = 1f;
     }
 
-    public void setPause(bool pause){
+    public float setPause(bool pause){
+        float previousScale = customTimeScale;
         customTimeScale = pause ? 0f : 1f;
+        return previousScale;
     }
-    public void setPause() {
+    public float setPause() {
+        float previousScale = customTimeScale;
         customTimeScale = customTimeScale != 0f ? 0f :1f;
+        return previousScale;
     }
 
 
