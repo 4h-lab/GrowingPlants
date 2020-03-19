@@ -5,7 +5,7 @@ using UnityEngine;
 public class Passable : BaseContactInteractables
 {
     public override void interact(GameObject initiator){
-        gameObject.GetComponent<EdgeCollider2D>().enabled = (initiator.transform.position.y > transform.position.y);
+        //gameObject.GetComponent<EdgeCollider2D>().enabled = (initiator.transform.position.y > transform.position.y);
 
     }
 

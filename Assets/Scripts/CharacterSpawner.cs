@@ -24,11 +24,11 @@ public class CharacterSpawner : MonoBehaviour{
     }
 
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         
         Gizmos.DrawLine(this.transform.position, this.transform.position - new Vector3(0f, radius, 0f)) ;
-    }
+    }*/
 
 }

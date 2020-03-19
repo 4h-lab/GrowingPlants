@@ -16,6 +16,6 @@ public class PlantContactInteractable : BaseContactInteractables
         {
             return;
         }
-        this.transform.parent.GetComponent<NormalPlant>().hitStuff();
+        this.transform.parent.GetComponent<NormalPlant>();
     }
 }
