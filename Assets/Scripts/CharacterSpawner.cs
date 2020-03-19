@@ -8,9 +8,7 @@ public class CharacterSpawner : MonoBehaviour{
     private void Start()
     {
         radius= this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y*this.transform.localScale.y;
-        //var vect = this.transform.position - new Vector3(0f, t, 0f);
-        //radius = vect.y;
-        Debug.Log(this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.size);
+        
     }
     public void requireSpawn() {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,radius); // fire a raycast directly down the player
