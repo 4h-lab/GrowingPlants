@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 10081155}
   - component: {fileID: 10081154}
   - component: {fileID: 10081153}
+  - component: {fileID: 10081156}
   m_Layer: 0
   m_Name: Block (2)
   m_TagString: Untagged
@@ -148,8 +149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10081151}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.66, y: 4.87, z: -90}
-  m_LocalScale: {x: 1.6868557, y: 0.2649559, z: 1}
+  m_LocalPosition: {x: 2.74, y: 4.33, z: -90}
+  m_LocalScale: {x: 1.6868557, y: 0.32457098, z: 1}
   m_Children: []
   m_Father: {fileID: 1255921620}
   m_RootOrder: 8
@@ -244,6 +245,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &10081156
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10081151}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &50113545
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600237785759, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ebee692d26735409d89c8f07409b23, type: 3}
@@ -826,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40fd101b386db1740a1339a34783d21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  risingSpeed: 0.67
+  risingSpeed: 0
 --- !u!1 &1255921619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,6 +1861,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1255921620}
     m_Modifications:
+    - target: {fileID: 1101911679, guid: c53d69c41e5454748be5cc61dc2f683a, type: 3}
+      propertyPath: risingSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2483217789447425577, guid: c53d69c41e5454748be5cc61dc2f683a,
         type: 3}
       propertyPath: m_Name
