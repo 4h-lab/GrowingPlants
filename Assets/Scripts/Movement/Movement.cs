@@ -20,9 +20,9 @@ public class Movement : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.A) || (moveLeft && !moveRight))
-            transform.position -= Vector3.right * speed * Time.deltaTime;
+            transform.position -= Vector3.right * speed * Time.deltaTime * GameManager.customTimeScale;
         if (Input.GetKey(KeyCode.D) || (moveRight && !moveLeft))
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime  *GameManager.customTimeScale;
 
         /*if (moveLeft && !moveRight)
             //rigidbody2D.AddForce(Vector3.left * speed);
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 
     public void move(Vector2 dir)
     {
-        this.transform.position = dir * speed * Time.deltaTime;
+        this.transform.position = dir * speed * Time.deltaTime * GameManager.customTimeScale;
     }
     public void startRight()
     {

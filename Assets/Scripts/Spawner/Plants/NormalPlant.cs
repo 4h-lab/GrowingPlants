@@ -20,7 +20,7 @@ public class NormalPlant : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if (transform.position.y < initY + maxHeigth){
-            transform.Translate(Vector2.up * Time.deltaTime * growthSpeed);
+            transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
         }
 
     }

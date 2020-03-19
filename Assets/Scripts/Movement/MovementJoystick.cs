@@ -9,31 +9,20 @@ public class MovementJoystick : MonoBehaviour
 
     public float speed;
     public FixedJoystick variableJoystick;
-    private bool canMove = true;
 
-    void Start()
-    {
+    void Start() {
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
-        ee.on("win", StopPlayerMovement);
     }
 
-    public void FixedUpdate()
-    {
+    public void FixedUpdate(){
 
-        if (canMove)
-        {
             Vector3 direction = Vector3.right * variableJoystick.Horizontal;
-            transform.position += direction * speed * Time.deltaTime;
+            transform.position += direction * speed * Time.deltaTime  *GameManager.customTimeScale;
             /////////DEBUG
             if (Input.GetKey(KeyCode.A))
-                transform.position -= Vector3.right * speed * Time.deltaTime;
+                transform.position -= Vector3.right * speed * Time.deltaTime * GameManager.customTimeScale;
             if (Input.GetKey(KeyCode.D))
-                transform.position += Vector3.right * speed * Time.deltaTime;
-        }
-    }
-
-    public void StopPlayerMovement(Object[] p)
-    {
-        canMove = false;
+               transform.position += Vector3.right * speed * Time.deltaTime * GameManager.customTimeScale;
+        
     }
 }
