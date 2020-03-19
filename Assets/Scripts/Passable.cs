@@ -5,8 +5,8 @@ using UnityEngine;
 public class Passable : BaseContactInteractables
 {
     public override void interact(GameObject initiator){
-        if (initiator.transform.position.y <= transform.position.y) gameObject.GetComponent<EdgeCollider2D>().enabled = false;
-        else gameObject.GetComponent<EdgeCollider2D>().enabled = true;
+        gameObject.GetComponent<EdgeCollider2D>().enabled = (initiator.transform.position.y > transform.position.y);
+
     }
 
     // Start is called before the first frame update
