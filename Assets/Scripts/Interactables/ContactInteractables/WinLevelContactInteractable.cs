@@ -12,12 +12,13 @@ public class WinLevelContactInteractable : BaseContactInteractables
 
     private int currentLevel = 1;
     private int stars = 3;
-    private float time = 0.0f;  //TODO: change to time format
+    public float time  { get; private set; } = 0.0f;  //TODO: change to time format
 
     void Start()
     {
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.on("win", notifyWin);
+        time = Time.realtimeSinceStartup;
     }
 
     private void notifyWin(Object[] p)
@@ -34,8 +35,11 @@ public class WinLevelContactInteractable : BaseContactInteractables
         string obtainedStars = "";
         for (int i = 0; i < stars; i++) obtainedStars += " *";
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
+
+        time = Time.realtimeSinceStartup - time;
         popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = time.ToString();
         popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
+        
     }
 
     public override void interact(GameObject initiator){
