@@ -14,8 +14,9 @@ public class SquishContactInteractable : BaseContactInteractables
         ee.on("win", DeactivateSquishCollision);
     }
 
-    public override void interact(GameObject initiator)
-    {
+    public override void interact(GameObject initiator){
+        if (initiator.GetComponent<Passable>() != null) return;
+
         Health h = this.transform.parent.GetComponent<Health>();
         if (h != null) h.damage(damage);
 
