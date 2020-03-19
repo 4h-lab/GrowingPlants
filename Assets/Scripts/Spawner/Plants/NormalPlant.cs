@@ -9,6 +9,7 @@ public class NormalPlant : MonoBehaviour{
     private float initY;
 
     private EventEmitter ee;
+    private bool stopped=false;
 
     // Start is called before the first frame update
     void Start(){
@@ -19,10 +20,16 @@ public class NormalPlant : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if (transform.position.y < initY + maxHeigth){
+        if (transform.position.y < initY + maxHeigth && !stopped){
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
         }
 
+    }
+
+    public void hitStuff()
+    {
+        this.stopped = true;
+        Debug.Log("stopped");
     }
         
 }
