@@ -11,6 +11,7 @@ public class SquishContactInteractable : BaseContactInteractables
     {
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee = FindObjectOfType<EventEmitter>();
+        ee.on("win", DeactivateSquishCollision);
     }
 
     public override void interact(GameObject initiator)
@@ -19,5 +20,10 @@ public class SquishContactInteractable : BaseContactInteractables
         if (h != null) h.damage(damage);
 
         ee.invoke("player_damaged", (new[] { this.gameObject }));
+    }
+
+    public void DeactivateSquishCollision(Object[] p)
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 }
