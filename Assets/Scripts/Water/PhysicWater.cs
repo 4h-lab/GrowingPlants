@@ -26,7 +26,7 @@ public class PhysicWater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cangoup)
+        if (cangoup)    
         {
             transform.localScale+=new Vector3(0f, Time.deltaTime * risingSpeed * GameManager.customTimeScale,0f);
         }
