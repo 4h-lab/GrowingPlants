@@ -23,6 +23,7 @@ public class PauseMenuButtons : MonoBehaviour
     public void MainMenu()
     {
         Debug.Log("current " + currentLevel + " - MENU");
+        SceneManager.LoadScene(0);
     }
 
     public void SetCurrentLevel(int currentLevel)
