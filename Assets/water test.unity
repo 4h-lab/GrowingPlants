@@ -559,8 +559,9 @@ GameObject:
   - component: {fileID: 338463050}
   - component: {fileID: 338463049}
   - component: {fileID: 338463048}
+  - component: {fileID: 338463051}
   m_Layer: 0
-  m_Name: Floater
+  m_Name: Buoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,6 +678,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &338463051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338463046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585819eb71076434581a3fba9889aaed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &456884963
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +704,7 @@ GameObject:
   - component: {fileID: 456884965}
   - component: {fileID: 456884968}
   - component: {fileID: 456884969}
-  m_Layer: 4
+  m_Layer: 2
   m_Name: Physic Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
