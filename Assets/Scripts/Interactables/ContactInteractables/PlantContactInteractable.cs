@@ -12,7 +12,7 @@ public class PlantContactInteractable : BaseContactInteractables
     }
     public override void interact(GameObject initiator)
     {
-        if (initiator.GetComponent<CharacterSpawner>()!=null)
+        if (initiator.tag!="Player")
         {
             return;
         }

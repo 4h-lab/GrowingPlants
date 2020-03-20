@@ -10,12 +10,13 @@ public class NormalPlant : MonoBehaviour{
 
     private EventEmitter ee;
     private bool stopped=false;
-    private float radius;
+    private float ray_point;
+    private float small_radius = 0.01f;
 
     // Start is called before the first frame update
     void Start(){
         initY = this.transform.position.y;
-        radius= this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y;
+        ray_point= (this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y)+small_radius;
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
     }
@@ -23,7 +24,7 @@ public class NormalPlant : MonoBehaviour{
     // Update is called once per frame
     void Update(){
 
-        //checkObstacles();
+        checkObstacles();
         if (transform.position.y < initY + maxHeigth && !stopped){
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
         }
@@ -33,15 +34,12 @@ public class NormalPlant : MonoBehaviour{
 
     public void checkObstacles()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, radius); // fire a raycast directly down the player
-
-
-
+        RaycastHit2D hit = Physics2D.Raycast(transform.position+new Vector3(0f,ray_point,0f), Vector2.up,small_radius ); // fire a raycast directly down the player
         if (hit.collider != null && hit.collider.tag!="Player")
         {
            
            this.stopped = true;
-           Debug.Log("stopped");
+          
         }
 
         
@@ -52,6 +50,6 @@ public class NormalPlant : MonoBehaviour{
         Gizmos.color = Color.red;
 
         //Gizmos.DrawLine(this.transform.position, this.transform.position + new Vector3(0f, radius, 0f));
-        Gizmos.DrawWireSphere(this.transform.position, radius);
+        Gizmos.DrawLine(transform.position + new Vector3(0f, ray_point, 0f), transform.position + new Vector3(0f, ray_point+0.01f, 0f));
     }
 }
