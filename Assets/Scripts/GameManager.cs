@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-    public static float customTimeScale { get;  private set; } = 1f;
+    public static float customTimeScale = 1f;
 
     public static float totalTime = -1f;
     private static float timeSinceLevelStarted = 0f;
@@ -23,11 +24,24 @@ public class GameManager : MonoBehaviour {
         customTimeScale = pause ? 0f : 1f;
         return previousScale;
     }
+
     public float setPause() {
         float previousScale = customTimeScale;
         customTimeScale = customTimeScale != 0f ? 0f :1f;
         return previousScale;
     }
 
+    public float GetCustomTimeScale()
+    {
+        return customTimeScale;
+    }
 
+    public void ControlsEnabled(bool enable)
+    {
+        GameObject[] buttonList = GameObject.FindGameObjectsWithTag("Controls");
+        foreach (GameObject b in buttonList)
+        {
+            b.GetComponent<Button>().enabled = enable;
+        }
+    }
 }

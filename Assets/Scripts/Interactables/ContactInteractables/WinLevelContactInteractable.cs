@@ -27,6 +27,7 @@ public class WinLevelContactInteractable : BaseContactInteractables
         //placeholder
         int currentLevel = 1;
 
+        FindObjectOfType<GameManager>().GetComponent<GameManager>().ControlsEnabled(false);
         Debug.Log("WIN. Level "+currentLevel+" - stars "+stars+" - time "+time);
         GameObject popup = GameObject.Instantiate(
             winScreen, 
@@ -59,4 +60,6 @@ public class WinLevelContactInteractable : BaseContactInteractables
         res += ": " + (decimals < 10 ? "0" + decimals.ToString() : decimals.ToString());
         return res;
     }
+
+
 }
