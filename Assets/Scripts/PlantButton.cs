@@ -7,7 +7,7 @@ public class PlantButton : MonoBehaviour{
     //GameObject player
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && FindObjectOfType<GameManager>().GetComponent<GameManager>().GetCustomTimeScale() != 0f)
+        if (Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<Button>().enabled)
         {
             //TODO: change to simulate click if needed
             //https://answers.unity.com/questions/945299/how-to-trigger-a-button-click-from-script.html
