@@ -2,18 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalPlant : MonoBehaviour{
-    public float maxHeigth;
-    public float growthSpeed;
+public class NormalPlant : BasePlant
+{
 
-    private float initY;
-
-    private EventEmitter ee;
-    private bool stopped=false;
-    private float ray_point;
-    private float small_radius = 0.01f;
-
-    // Start is called before the first frame update
     void Start(){
         initY = this.transform.position.y;
         ray_point= (this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y)+small_radius;
@@ -21,7 +12,6 @@ public class NormalPlant : MonoBehaviour{
         ee.invoke("plant_created", (new[] { this.gameObject }));
     }
 
-    // Update is called once per frame
     void Update(){
 
         checkObstacles();

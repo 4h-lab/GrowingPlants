@@ -2,21 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinPlant : MonoBehaviour
+public class WinPlant : BasePlant
 {
-    public float maxHeigth;
-    public float growthSpeed;
-
-    private float initY;
-
-    private EventEmitter ee;
-    private GameObject player;
-    private bool stopped = false;
-    private float ray_point;
-    private float small_radius = 0.01f;
-
     void Start()
     {
+        FindObjectOfType<GameManager>().setPause(true);
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
         player = GameObject.Find("Player");
@@ -24,7 +14,6 @@ public class WinPlant : MonoBehaviour
         //TODO: block camera
         Destroy(player.GetComponent<Rigidbody2D>());
         Destroy(player.GetComponent<BoxCollider2D>());
-        Destroy(GameObject.Find("SquishCollider"));
     }
 
     void Update()
@@ -39,7 +28,7 @@ public class WinPlant : MonoBehaviour
 
     private void FlyAway()
     {
-        player.transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
-        gameObject.transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
+        player.transform.Translate(Vector2.up * Time.deltaTime * growthSpeed);
+        gameObject.transform.Translate(Vector2.up * Time.deltaTime * growthSpeed);
     }
 }
