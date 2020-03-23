@@ -12,11 +12,28 @@ public class GameManager : MonoBehaviour {
 
     EventEmitter ee;
 
+    public delegate int CalcScoreStep(List<string> s);
+    private List<string> notifiedAchievements;
+    private List<CalcScoreStep> scoreCalculator;
+
+    private void Awake(){
+        notifiedAchievements = new List<string>();
+        scoreCalculator = new List<CalcScoreStep>();
+    }
+
     private void Start(){
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.on("win", (Object[] x) => { customTimeScale = 0f; totalTime = Time.realtimeSinceStartup - timeSinceLevelStarted; });
         timeSinceLevelStarted = Time.realtimeSinceStartup;
         customTimeScale = 1f;
+
+
+        //todo: questi potrebbero esser presi da un file di config, magari diverso per ogni liv.
+        
+        scoreCalculator.Add((List<string> s) => s.FindAll(e => e == "star.pickup").Count); // conta quante stelle sono state raccolte nel liv
+        scoreCalculator.Add((List<string> s) => s.Contains("water.touchedby") ? 0 : 1); // +1 punto se NON sei stato toccato dall'acqua
+        scoreCalculator.Add((List<string> s) => s.Contains("water.touchedby") ? 1 : 0); // 1 punto se finisci il liv.
+
     }
 
     public float setPause(bool pause){
@@ -31,17 +48,26 @@ public class GameManager : MonoBehaviour {
         return previousScale;
     }
 
-    public float GetCustomTimeScale()
-    {
+    public float GetCustomTimeScale(){
         return customTimeScale;
     }
 
-    public void ControlsEnabled(bool enable)
-    {
+    public void ControlsEnabled(bool enable){
         GameObject[] buttonList = GameObject.FindGameObjectsWithTag("Controls");
         foreach (GameObject b in buttonList)
         {
             b.GetComponent<Button>().enabled = enable;
         }
+    }
+
+    public void notifyOfNewSomething(string something, bool unique = false) {
+        if (unique && notifiedAchievements.Contains(something)) return;
+        notifiedAchievements.Add(something);
+    }
+
+    public int calcScore() {
+        int totalscore = 0;
+        foreach (CalcScoreStep css in scoreCalculator) { totalscore += css(notifiedAchievements); }
+        return totalscore;
     }
 }

@@ -34,8 +34,15 @@ public class WinLevelContactInteractable : BaseContactInteractables
             Vector3.zero, 
             Quaternion.identity, 
             GameObject.FindObjectOfType<Canvas>().transform);
+
+        GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gm.notifyOfNewSomething("level.finished");
+        stars = gm.calcScore();
         string obtainedStars = "";
         for (int i = 0; i < stars; i++) obtainedStars += " *";
+
+
+
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
 
         time = Time.realtimeSinceStartup - time;

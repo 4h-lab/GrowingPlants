@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EventEmitter
   - Controls
+  - GameManager
   layers:
   - Default
   - TransparentFX
