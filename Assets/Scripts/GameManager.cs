@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
         
         scoreCalculator.Add((List<string> s) => s.FindAll(e => e == "star.pickup").Count); // conta quante stelle sono state raccolte nel liv
         scoreCalculator.Add((List<string> s) => s.Contains("water.touchedby") ? 0 : 1); // +1 punto se NON sei stato toccato dall'acqua
-        scoreCalculator.Add((List<string> s) => s.Contains("water.touchedby") ? 1 : 0); // 1 punto se finisci il liv.
+        scoreCalculator.Add((List<string> s) => s.Contains("level.finished") ? 1 : 0); // 1 punto se finisci il liv.
 
     }
 
