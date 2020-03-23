@@ -9,6 +9,7 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
 
     private bool shaking=false;
     private Vector3 originalPosition;
+    private float timer=0f;
 
     private void Start()
     {
@@ -16,7 +17,12 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
     }
     private void FixedUpdate()
     {
-        if (shaking) this.transform.position =originalPosition+ (Random.insideUnitSphere*Time.deltaTime);
+        if (shaking)
+        {
+            this.transform.position = originalPosition + (Random.insideUnitSphere * Time.deltaTime);
+            timer += Time.deltaTime;
+            if (timer >= fallDelay) FallAfterDelay();
+        }
 
     }
 
@@ -25,12 +31,11 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
         if (initiator.tag == "Player")
         {
             shaking=true;
-            StartCoroutine(FallAfterDelay());
         }
     }
-    IEnumerator FallAfterDelay()
+    void FallAfterDelay()
     {
-        yield return new WaitForSeconds(fallDelay);
+        
         shaking = false;
         this.gameObject.AddComponent<Rigidbody2D>();
     }
