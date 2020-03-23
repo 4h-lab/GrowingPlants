@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FallingPlatformContactInteractable : BaseCollisionInteractable
 {
-    // Start is called before the first frame update
-    public float fallDelay = 2.0f;
+    [SerializeField]
+    private float fallDelay = 2.0f;
 
     private bool shaking=false;
     private Vector3 originalPosition;
@@ -38,5 +38,15 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
         
         shaking = false;
         this.gameObject.AddComponent<Rigidbody2D>();
+        Destroy(this.gameObject.GetComponent<BoxCollider2D>());
+    }
+
+    public float getRemainingTime()
+    {
+        return timer;
+    }
+    public float getDelay()
+    {
+        return fallDelay;
     }
 }
