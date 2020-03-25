@@ -575,6 +575,16 @@ PrefabInstance:
       propertyPath: variableJoystick
       value: 
       objectReference: {fileID: 7289946385246184577}
+    - target: {fileID: 6219927600155200258, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600155200258, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: acceleration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_LocalPosition.x
