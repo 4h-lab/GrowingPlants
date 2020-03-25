@@ -27,7 +27,7 @@ public class WinSoil : MonoBehaviour
         //placeholder
         int currentLevel = 1;
 
-        FindObjectOfType<GameManager>().GetComponent<GameManager>().ControlsEnabled(false);
+        FindObjectOfType<GameManager>().ControlsEnabled(false);
         Debug.Log("WIN. Level " + currentLevel + " - stars " + stars + " - time " + time);
         GameObject popup = GameObject.Instantiate(
             winScreen,
