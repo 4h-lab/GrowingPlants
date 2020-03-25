@@ -25,8 +25,8 @@ public class MovementJoystick : MonoBehaviour
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
             movePlayer(dir);
         } 
-        else if (Input.GetKeyDown(KeyCode.A)) movePlayer(Vector3.left);
-        else if (Input.GetKeyDown(KeyCode.D)) movePlayer(Vector3.right);
+        else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);
+        else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);
         else speed = 0;
 
         /*
