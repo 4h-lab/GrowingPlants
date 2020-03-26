@@ -331,6 +331,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 634033218}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &42606736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3795575586834621234, guid: 1bd8dc9e4bef9ca4386d43e89401db95,
+    type: 3}
+  m_PrefabInstance: {fileID: 5213720948415949989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &42606737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42606736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585819eb71076434581a3fba9889aaed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &50113545
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,12 +596,12 @@ PrefabInstance:
     - target: {fileID: 6219927600155200258, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: maxSpeed
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200258, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: acceleration
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
@@ -4184,7 +4202,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: One-Way Platform
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3795575586834621245, guid: 1bd8dc9e4bef9ca4386d43e89401db95,
+        type: 3}
+      propertyPath: m_SideArc
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3795575586834621245, guid: 1bd8dc9e4bef9ca4386d43e89401db95,
+        type: 3}
+      propertyPath: m_SurfaceArc
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3795575586834621247, guid: 1bd8dc9e4bef9ca4386d43e89401db95,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3795575586834621247, guid: 1bd8dc9e4bef9ca4386d43e89401db95, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1bd8dc9e4bef9ca4386d43e89401db95, type: 3}
 --- !u!4 &6835671114821636607 stripped
 Transform:
