@@ -8,18 +8,26 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
     private float fallDelay = 2.0f;
 
     private bool shaking=false;
-    private Vector3 originalPosition;
+    private Vector3[] originalPosition;
     private float timer=0f;
 
     private void Start()
     {
-        originalPosition = this.transform.position;
+        originalPosition = new Vector3[this.transform.childCount];
+        for (int j = 0; j < this.transform.childCount; j++)
+        {
+            originalPosition[j]= this.gameObject.transform.GetChild(j).transform.position;
+        }
+        
     }
     private void FixedUpdate()
     {
         if (shaking)
         {
-            this.transform.position = originalPosition + (Random.insideUnitSphere * Time.deltaTime);
+            var r = (Random.insideUnitSphere * Time.deltaTime);
+            for (int i=0;i< this.transform.childCount; i++) { 
+            this.gameObject.transform.GetChild(i).transform.position = originalPosition[i] + r;
+            }
             timer += Time.deltaTime;
             if (timer >= fallDelay) FallAfterDelay();
         }
