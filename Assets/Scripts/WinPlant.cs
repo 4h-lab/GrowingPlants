@@ -11,7 +11,7 @@ public class WinPlant : BasePlant
         ee.invoke("plant_created", (new[] { this.gameObject }));
         player = GameObject.Find("Player");
 
-        //TODO: block camera
+        FindObjectOfType<SmoothCamera2D>().enabled = false;
         Destroy(player.GetComponent<Rigidbody2D>());
         Destroy(player.GetComponent<BoxCollider2D>());
     }
