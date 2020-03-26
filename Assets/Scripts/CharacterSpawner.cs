@@ -9,7 +9,7 @@ public class CharacterSpawner : MonoBehaviour{
     private void Start()
     {
         radius= this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.y*this.transform.localScale.y+(1f * this.transform.localScale.y);
-        radius_x= this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.x * this.transform.localScale.x-(0.1f* this.transform.localScale.x);
+        radius_x= this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.x * this.transform.localScale.x;
 
     }
     public void requireSpawn() {
