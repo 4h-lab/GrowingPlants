@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8040191261652622272}
   - component: {fileID: 7261524712061523076}
   m_Layer: 0
-  m_Name: Lava
+  m_Name: SpikyBrambles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8040191261652622278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.0425, y: 5.732528, z: 86.96289}
-  m_LocalScale: {x: 0.70449597, y: 0.295805, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 865bff851a45e484aadf4cbcbb094891, type: 3}
-  m_Color: {r: 0.9529412, g: 0.38121572, b: 0.031372532, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 53fb23d4fa1d70d4f880ad48f1a854d1, type: 3}
+  m_Color: {r: 0.9529412, g: 0.031372532, b: 0.06940459, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,14 +100,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.63, y: 1.92}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2.63, y: 1.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.63, y: 1.92}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7261524712061523076
 MonoBehaviour:
