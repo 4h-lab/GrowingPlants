@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlantButton : MonoBehaviour{
-    //GameObject player
+public class PlantButton : Controls{
+
+    private GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<Button>().enabled)
-        {
-            //TODO: change to simulate click if needed
-            //https://answers.unity.com/questions/945299/how-to-trigger-a-button-click-from-script.html
-            gameObject.GetComponent<Button>().onClick.Invoke();
-            //gameObject.GetComponent<>
-        }
+        if (Input.GetKeyDown(KeyCode.Space) && enabled) SpawnPlant();
+    }
+    public override void OnPointerDown(UnityEngine.EventSystems.PointerEventData data)
+    {
+        if (enabled) SpawnPlant();
+    }
+
+    private void SpawnPlant()
+    {
+        player.GetComponent<CharacterSpawner>().requireSpawn();
     }
 }

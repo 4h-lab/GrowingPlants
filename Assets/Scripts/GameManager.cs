@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour {
         GameObject[] buttonList = GameObject.FindGameObjectsWithTag("Controls");
         foreach (GameObject b in buttonList)
         {
-            b.GetComponent<Button>().enabled = enable;
+            b.GetComponent<Controls>().ControlsEnabled(enable);
         }
     }
 
