@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6874903135991784612}
   - component: {fileID: 3175967851183838150}
   m_Layer: 0
-  m_Name: Falling Block
+  m_Name: FragileSoil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993b14eae2dcba546be6317d870e998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallDelay: 2
+  fallDelay: 2.5
 --- !u!61 &3175967851183838150
 BoxCollider2D:
   m_ObjectHideFlags: 0

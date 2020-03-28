@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 787076992456545143}
   - component: {fileID: 3307133423286067685}
   m_Layer: 0
-  m_Name: Falling_Plant
+  m_Name: FragilePlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,5 +155,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeigth: 3.85
-  growthSpeed: 1.7
+  growthSpeed: 1.9
   fallDelay: 2

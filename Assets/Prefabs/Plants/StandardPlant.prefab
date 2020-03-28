@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2390971340211279573}
   - component: {fileID: 5383662852071757674}
   m_Layer: 0
-  m_Name: Standard_Plant
+  m_Name: StandardPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeigth: 3.85
-  growthSpeed: 1.7
+  growthSpeed: 1.9
 --- !u!251 &2390971340211279573
 PlatformEffector2D:
   m_ObjectHideFlags: 0
