@@ -19,8 +19,6 @@ public class MovementJoystick : MonoBehaviour
     }
 
     public void FixedUpdate(){
-        Debug.Log(variableJoystick.Horizontal);
-        
         if (variableJoystick.Horizontal != 0f) {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
             movePlayer(dir);
