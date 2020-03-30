@@ -21,8 +21,9 @@ public class CharacterSpawner : MonoBehaviour{
 
         if (hit.collider != null) {
             SpawnerTile st = hit.collider.gameObject.GetComponent<SpawnerTile>();
+            Vector3 pt = hit.point;
             if (st != null) { // check whether the object hit has a spawnertile component (that means, if it can spawn plants)
-                st.spawn(gameObject); // invoke spawn passing the player as arg
+                st.spawnHere(gameObject,pt); // invoke spawn passing the player as arg
             }
         }
     }
