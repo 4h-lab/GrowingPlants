@@ -26,14 +26,15 @@ public class WinSoil : MonoBehaviour
     {
         //placeholder
         int currentLevel = 1;
+        Canvas cavnas = GameObject.FindObjectOfType<Canvas>();
 
         FindObjectOfType<GameManager>().ControlsEnabled(false);
         Debug.Log("WIN. Level " + currentLevel + " - stars " + stars + " - time " + time);
         GameObject popup = GameObject.Instantiate(
             winScreen,
-            Vector3.zero,
+            cavnas.transform.position,
             Quaternion.identity,
-            GameObject.FindObjectOfType<Canvas>().transform);
+            cavnas.transform);
         string obtainedStars = "";
         for (int i = 0; i < stars; i++) obtainedStars += " *";
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
