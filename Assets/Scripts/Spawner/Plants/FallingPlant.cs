@@ -23,7 +23,7 @@ public class FallingPlant : BasePlant
     }
 
     private void FixedUpdate(){
-        timer += Time.deltaTime;
+        timer += Time.deltaTime * GameManager.customTimeScale;
         if (timer >= fallDelay) { stopped = true; FallAfterDelay(); }
     }
     void FallAfterDelay(){

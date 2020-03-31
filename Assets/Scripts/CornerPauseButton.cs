@@ -22,11 +22,12 @@ public class CornerPauseButton : MonoBehaviour
         if (previousScale != 0)
         {
             FindObjectOfType<GameManager>().GetComponent<GameManager>().ControlsEnabled(false);
+            Canvas cv = GameObject.FindObjectOfType<Canvas>();
             instancedPauseScreen = GameObject.Instantiate(
                 pauseScreen,
-                Vector3.zero,
+                cv.transform.position,
                 Quaternion.identity,
-                GameObject.FindObjectOfType<Canvas>().transform);
+                cv.transform);
         }
         else
         {

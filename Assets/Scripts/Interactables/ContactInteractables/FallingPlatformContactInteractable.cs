@@ -24,11 +24,11 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
     {
         if (shaking)
         {
-            var r = (Random.insideUnitSphere * Time.deltaTime);
+            var r = (Random.insideUnitSphere * Time.deltaTime * GameManager.customTimeScale);
             for (int i=0;i< this.transform.childCount; i++) { 
             this.gameObject.transform.GetChild(i).transform.position = originalPosition[i] + r;
             }
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * GameManager.customTimeScale;
             if (timer >= fallDelay) FallAfterDelay();
         }
 
