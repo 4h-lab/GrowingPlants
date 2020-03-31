@@ -334,6 +334,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 72050997753880557, guid: 1308ec8e5d4552945907fa9b805803c0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 72050997753880559, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -611,8 +616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17821d9e495cf7a42ba622bf8e261e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalRatioBeforeScrolling: 0.3
-  verticalRatioBeforeScrolling: 0.3
+  horizontalRatioBeforeScrolling: 0.27
+  verticalRatioBeforeScrolling: 0.27
   cameraspeed: 3
   follow: 1
 --- !u!20 &519420031
