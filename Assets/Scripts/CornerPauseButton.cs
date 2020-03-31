@@ -24,7 +24,7 @@ public class CornerPauseButton : MonoBehaviour
             FindObjectOfType<GameManager>().GetComponent<GameManager>().ControlsEnabled(false);
             instancedPauseScreen = GameObject.Instantiate(
                 pauseScreen,
-                Vector3.zero,
+                GameObject.FindObjectOfType<Canvas>().transform.position,
                 Quaternion.identity,
                 GameObject.FindObjectOfType<Canvas>().transform);
         }
