@@ -25,11 +25,8 @@ public class NormalPlant : BasePlant
     public void checkObstacles()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position+new Vector3(0f,ray_point,0f), Vector2.up,small_radius ); // fire a raycast directly down the player
-        if (hit.collider != null && hit.collider.tag!="Player" && hit.collider.GetComponent<Passable>()==null)
-        {
-           
+        if (hit.collider != null && hit.collider.tag!="Player" && hit.collider.GetComponent<Passable>()==null){
            this.stopped = true;
-          
         }
 
         

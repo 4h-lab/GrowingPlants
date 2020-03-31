@@ -15,32 +15,21 @@ public class FallingPlant : BasePlant
             timer = tile.getRemainingTime();
             fallDelay = tile.getDelay();
         }
-        initY = this.transform.position.y;
+       // initY = this.transform.position.y;
         ray_point = (this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y) + small_radius;
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        if (transform.position.y < initY + maxHeigth && !stopped)
-        {
-            transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
-        }
-    }
-    private void FixedUpdate()
-    {
+    private void FixedUpdate(){
         timer += Time.deltaTime;
         if (timer >= fallDelay) { stopped = true; FallAfterDelay(); }
     }
-    void FallAfterDelay()
-    {
-
-        
+    void FallAfterDelay(){
         this.gameObject.AddComponent<Rigidbody2D>();
         Destroy(this.gameObject.GetComponent<BoxCollider2D>());
     }
+
+
 }
