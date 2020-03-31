@@ -47,21 +47,16 @@ public class CameraMovement : MonoBehaviour{
         if (!follow) return;
 
         Vector2 relativePlayerPos = Camera.main.WorldToViewportPoint(playerTransform.position);
-        if ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling) || (relativePlayerPos.x < horizontalRatioBeforeScrolling) || (relativePlayerPos.x > 1 - horizontalRatioBeforeScrolling)) {
+        Vector3 dir = Vector3.zero;
 
-            //Vector3 newpos = playerTransform.position - transform.position;
+        if (canMoveAlongX && ((relativePlayerPos.x < horizontalRatioBeforeScrolling) || (relativePlayerPos.x > 1 - horizontalRatioBeforeScrolling))) {
+            dir.x = Mathf.Clamp(playerTransform.position.x, minX, maxX) - transform.position.x;
+        }
+        if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling))) { 
+            dir.y = Mathf.Clamp(playerTransform.position.y, minY, maxY) - transform.position.y;
+        }
 
-            Vector3 dir = Vector3.zero;
-
-            if (canMoveAlongX) {
-                dir.x = Mathf.Clamp(playerTransform.position.x, minX, maxX) - transform.position.x;
-            }
-            if (canMoveAlongY)
-            {
-                dir.y = Mathf.Clamp(playerTransform.position.y, minY, maxY) - transform.position.y;
-            }
-
-            transform.Translate(dir * Time.deltaTime * cameraspeed);
+        transform.Translate(dir * Time.deltaTime * cameraspeed);
 
            
 
@@ -80,7 +75,10 @@ public class CameraMovement : MonoBehaviour{
             transform.Translate(newpos * Time.deltaTime );
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), transform.position.z);
             */
-        }
+        
+
+
+
         Vector3 deb = transform.position;
         deb.z = 0;
 
@@ -89,19 +87,19 @@ public class CameraMovement : MonoBehaviour{
         Debug.DrawLine(new Vector3(minX, minY, 0), new Vector3(minX, maxY, 0), Color.red);
         Debug.DrawLine(new Vector3(maxX, minY, 0), new Vector3(maxX, maxY, 0), Color.red);
 
+        Debug.DrawLine(Camera.main.ViewportToWorldPoint(new Vector2(verticalRatioBeforeScrolling, 0 )), Camera.main.ViewportToWorldPoint(new Vector2(verticalRatioBeforeScrolling, 1)), Color.green);
+        Debug.DrawLine(Camera.main.ViewportToWorldPoint(new Vector2(1-verticalRatioBeforeScrolling, 0)), Camera.main.ViewportToWorldPoint(new Vector2(1-verticalRatioBeforeScrolling, 1)), Color.green);
+
+        Debug.DrawLine(Camera.main.ViewportToWorldPoint(new Vector2(0, horizontalRatioBeforeScrolling)), Camera.main.ViewportToWorldPoint(new Vector2(1, horizontalRatioBeforeScrolling)), Color.green);
+        Debug.DrawLine(Camera.main.ViewportToWorldPoint(new Vector2(0, 1- verticalRatioBeforeScrolling)), Camera.main.ViewportToWorldPoint(new Vector2(1, 1-horizontalRatioBeforeScrolling)), Color.green);
+
+
 
 
         Debug.DrawLine(deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.left, deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.right, Color.blue);
         Debug.DrawLine(deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.up, deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.down, Color.blue);
 
-        Debug.DrawLine(deb - new Vector3(Camera.main.orthographicSize, 0, 0) + Vector3.left, deb - new Vector3(Camera.main.orthographicSize, 0, 0) + Vector3.right, Color.blue);
-        Debug.DrawLine(deb - new Vector3(Camera.main.orthographicSize, 0, 0) + Vector3.up, deb - new Vector3(Camera.main.orthographicSize, 0, 0) + Vector3.down, Color.blue);
 
-        Debug.DrawLine(deb + new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.left, deb + new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.right, Color.blue);
-        Debug.DrawLine(deb + new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.up, deb + new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.down, Color.blue);
-
-        Debug.DrawLine(deb - new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.left, deb - new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.right, Color.blue);
-        Debug.DrawLine(deb - new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.up, deb - new Vector3(0, Camera.main.orthographicSize, 0) + Vector3.down, Color.blue);
 
     }
 }

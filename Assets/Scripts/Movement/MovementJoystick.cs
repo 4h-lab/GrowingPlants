@@ -22,25 +22,28 @@ public class MovementJoystick : MonoBehaviour
     public void FixedUpdate(){
         if (variableJoystick.Horizontal != 0f) {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
-            changeVelocity(variableJoystick.Horizontal);
+            changeVelocity(Mathf.Sign(variableJoystick.Horizontal));
         }
-        else if (Input.GetKey(KeyCode.A)) changeVelocity(-1f);
-        else if (Input.GetKey(KeyCode.D)) changeVelocity(1f);
+        else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);//changeVelocity(-1f);
+        else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);//changeVelocity(1f);
         else {
-            speed = 0;
-            changeVelocity(0f);
-        }
+                    speed = 0;
+                    changeVelocity(0f);
+                }
     }
     private void movePlayer(Vector3 dir) {
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
 
         transform.position += dir * speed * Time.deltaTime * GameManager.customTimeScale;
-    
+        if ((dir.x > 0) ^ facingRight) Flip(); 
+
     }
-    private void changeVelocity(float f)
-    {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(f * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+    private void changeVelocity(float f){
+        speed += acceleration * Time.deltaTime;
+        if (speed > maxSpeed) speed = maxSpeed;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(f * speed * GameManager.customTimeScale, GetComponent<Rigidbody2D>().velocity.y * GameManager.customTimeScale);
+
 
         if (f > 0 && !facingRight)
             // ... flip the player.
@@ -57,9 +60,8 @@ public class MovementJoystick : MonoBehaviour
         facingRight = !facingRight;
 
         // Multiply the player's x local scale by -1.
-        Vector3 theScale = this.transform.localScale;
-        theScale.x *= -1;
-        this.transform.localScale = theScale;
+        //Vector3 theScale =
+        this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
     }
 
 }
