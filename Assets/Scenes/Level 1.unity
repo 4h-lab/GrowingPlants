@@ -581,9 +581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17821d9e495cf7a42ba622bf8e261e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalRatioBeforeScrolling: 0.27
-  verticalRatioBeforeScrolling: 0.27
-  cameraspeed: 3
+  horizontalRatioBeforeScrolling: 0.5
+  verticalRatioBeforeScrolling: 0.5
+  cameraspeed: 4
   follow: 1
 --- !u!20 &519420031
 Camera:
