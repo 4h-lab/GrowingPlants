@@ -42,7 +42,12 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = pause ? 0f : 1f;
         return previousScale;
     }
-
+    public float setWinPause(bool pause)
+    {
+        float previousScale = customTimeScale;
+        customTimeScale = pause ? 0f : 1f;
+        return previousScale;
+    }
     public float setPause() {
         return setPause(customTimeScale != 0f);
     }

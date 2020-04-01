@@ -64,4 +64,24 @@ public class MovementJoystick : MonoBehaviour
         this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
     }
 
+    /*private void FinalCollisionCheck()
+    {
+        // Get the velocity
+        Vector2 moveDirection = new Vector2(GetComponent.velocity.x * Time.fixedDeltaTime, 0.2f);
+
+        // Get bounds of Collider
+        var bottomRight = new Vector2(playerCollider.bounds.max.x, player.collider.bounds.max.y);
+        var topLeft = new Vector2(playerCollider.bounds.min.x, player.collider.bounds.min.y);
+
+        // Move collider in direction that we are moving
+        bottomRight += moveDirection;
+        topLeft += moveDirection;
+
+        // Check if the body's current velocity will result in a collision
+        if (Physics2D.OverlapArea(topLeft, bottomRight, EnvironmentLayer))
+        {
+            // If so, stop the movement
+            rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
+        }
+    }*/
 }

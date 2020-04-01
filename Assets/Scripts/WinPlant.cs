@@ -6,12 +6,12 @@ public class WinPlant : BasePlant
 {
     void Start()
     {
-        FindObjectOfType<GameManager>().setPause(true);
+        FindObjectOfType<GameManager>().setWinPause(true);
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
         player = GameObject.Find("Player");
 
-        FindObjectOfType<SmoothCamera2D>().enabled = false;
+        //FindObjectOfType<SmoothCamera2D>().enabled = false;
         Destroy(player.GetComponent<Rigidbody2D>());
         Destroy(player.GetComponent<BoxCollider2D>());
     }
