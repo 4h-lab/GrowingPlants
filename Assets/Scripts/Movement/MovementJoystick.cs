@@ -22,13 +22,12 @@ public class MovementJoystick : MonoBehaviour
     public void FixedUpdate(){
         if (variableJoystick.Horizontal != 0f) {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
-            changeVelocity(Mathf.Sign(variableJoystick.Horizontal));
+            movePlayer(dir);
         }
         else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);//changeVelocity(-1f);
         else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);//changeVelocity(1f);
         else {
                     speed = 0;
-                    changeVelocity(0f);
                 }
     }
     private void movePlayer(Vector3 dir) {
@@ -37,8 +36,9 @@ public class MovementJoystick : MonoBehaviour
 
         transform.position += dir * speed * Time.deltaTime * GameManager.customTimeScale;
         if ((dir.x > 0) ^ facingRight) Flip(); 
-
     }
+
+    /*
     private void changeVelocity(float f){
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
@@ -53,7 +53,7 @@ public class MovementJoystick : MonoBehaviour
             // ... flip the player.
             Flip();
     }
-
+    */
     void Flip()
     {
         // Switch the way the player is labelled as facing.
