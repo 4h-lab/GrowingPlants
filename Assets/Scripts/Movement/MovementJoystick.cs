@@ -11,11 +11,23 @@ public class MovementJoystick : MonoBehaviour
     public float acceleration;
     private float speed;
     bool facingRight = true;
+    private Rigidbody2D mBody;
+    private BoxCollider2D playerCollider;
+    private  Vector3 mVelocity;
+    private Vector3 oldPos;
 
     public FixedJoystick variableJoystick;
 
+    [SerializeField]
+    LayerMask layerMask;
+
     void Start() {
+
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
+        mBody = this.GetComponent<Rigidbody2D>();
+        oldPos = this.transform.position;
+        playerCollider = this.GetComponent<BoxCollider2D>();
+        mVelocity = Vector3.zero;
         speed = 0f;
     }
 
@@ -29,20 +41,26 @@ public class MovementJoystick : MonoBehaviour
         else {
                     speed = 0;
                 }
+        //FinalCollisionCheck();
     }
-    private void movePlayer(Vector3 dir) {
+    private void movePlayer(Vector3 dir)
+    {
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
-
-        transform.position += dir * speed * Time.deltaTime * GameManager.customTimeScale;
-        if ((dir.x > 0) ^ facingRight) Flip(); 
+        oldPos = transform.position;
+        transform.Translate( dir * speed * Time.deltaTime * GameManager.customTimeScale);
+        
+        
+        if ((dir.x > 0) ^ facingRight) Flip();
+        
+        
     }
-
     /*
     private void changeVelocity(float f){
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(f * speed * GameManager.customTimeScale, GetComponent<Rigidbody2D>().velocity.y * GameManager.customTimeScale);
+        Vector3 targetVelocity = new Vector2(dir.x * 10f, mBody.velocity.y *GameManager.customTimeScale);
+        mBody.velocity = Vector3.SmoothDamp(mBody.velocity, targetVelocity, ref mVelocity, 0.1f);
 
 
         if (f > 0 && !facingRight)
@@ -64,24 +82,21 @@ public class MovementJoystick : MonoBehaviour
         this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
     }
 
-    /*private void FinalCollisionCheck()
+    private void FinalCollisionCheck()
     {
-        // Get the velocity
-        Vector2 moveDirection = new Vector2(GetComponent.velocity.x * Time.fixedDeltaTime, 0.2f);
+        
 
         // Get bounds of Collider
-        var bottomRight = new Vector2(playerCollider.bounds.max.x, player.collider.bounds.max.y);
-        var topLeft = new Vector2(playerCollider.bounds.min.x, player.collider.bounds.min.y);
+        var bottomRight = new Vector2(playerCollider.bounds.max.x, playerCollider.bounds.max.y);
+        var topLeft = new Vector2(playerCollider.bounds.min.x, playerCollider.bounds.min.y);
 
-        // Move collider in direction that we are moving
-        bottomRight += moveDirection;
-        topLeft += moveDirection;
+        
 
         // Check if the body's current velocity will result in a collision
-        if (Physics2D.OverlapArea(topLeft, bottomRight, EnvironmentLayer))
+        if (Physics2D.OverlapArea(topLeft, bottomRight,layerMask))
         {
             // If so, stop the movement
-            rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
+            transform.position = oldPos;
         }
-    }*/
+    }
 }
