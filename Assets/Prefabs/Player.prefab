@@ -160,7 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   acceleration: 20
-  variableJoystick: {fileID: 0}
+  variableJoystick: {fileID: 6937783472043827570, guid: 4641d879132506440847111253b04ef4,
+    type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 0
