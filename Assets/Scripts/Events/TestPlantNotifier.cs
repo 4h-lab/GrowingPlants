@@ -8,7 +8,6 @@ public class TestPlantNotifier : MonoBehaviour{
 
     private void newplant(Object[] o) {
         numofplants++;
-        Debug.Log("Created " + numofplants + " plant(s)");
     }
 
     // Start is called before the first frame update

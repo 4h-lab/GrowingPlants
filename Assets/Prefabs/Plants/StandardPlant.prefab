@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 5824947128459142697}
   - component: {fileID: 1862127777}
   - component: {fileID: 2390971340211279573}
-  - component: {fileID: 5383662852071757674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StandardPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,15 +143,3 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &5383662852071757674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7908200954036282873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585819eb71076434581a3fba9889aaed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

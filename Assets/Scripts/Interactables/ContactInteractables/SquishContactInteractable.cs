@@ -6,16 +6,19 @@ public class SquishContactInteractable : BaseContactInteractables
 {
     public int damage;
     private EventEmitter ee;
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    private int passableObjectsLayerMask = 0;
+
+    void Start(){
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee = FindObjectOfType<EventEmitter>();
         ee.on("win", DeactivateSquishCollision);
+
+        passableObjectsLayerMask = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant"));
     }
 
     public override void interact(GameObject initiator){
-        if (initiator.GetComponent<Passable>() != null) return;
+        if (((1 << initiator.layer) & passableObjectsLayerMask) != 0) return;
 
         Health h = this.transform.parent.GetComponent<Health>();
         if (h != null) h.damage(damage);
