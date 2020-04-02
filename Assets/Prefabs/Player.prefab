@@ -111,8 +111,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.1754477}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.4, y: 1.4}
+  m_EdgeRadius: 0.2
 --- !u!50 &6219927600155200262
 Rigidbody2D:
   serializedVersion: 4
@@ -161,6 +161,9 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 20
   variableJoystick: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &6219927600155200252
 MonoBehaviour:
   m_ObjectHideFlags: 0
