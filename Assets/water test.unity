@@ -4346,6 +4346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalRatioBeforeScrolling: 0.3
   verticalRatioBeforeScrolling: 0.3
+  cameraspeed: 0
+  follow: 1
 --- !u!1001 &1611943834607740693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4630,6 +4632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040191261652622278, guid: 3f0ed4eea2166c44d94ad7985630a8f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f0ed4eea2166c44d94ad7985630a8f7, type: 3}

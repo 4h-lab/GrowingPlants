@@ -11,7 +11,9 @@ public class FallingPlant : BasePlant
     {
         if (this.GetSpawner().GetComponent<FallingPlatformContactInteractable>() != null)
         {
+
             var tile = this.GetSpawner().GetComponent<FallingPlatformContactInteractable>();
+            tile.spawnedPlant(); // make the soil start to shake, so if the character created a plant before actually touching it shakes anyway
             timer = tile.getRemainingTime();
             fallDelay = tile.getDelay();
         }

@@ -57,4 +57,9 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
     {
         return fallDelay;
     }
+
+    public void spawnedPlant()
+    {
+        this.shaking = true;
+    }
 }
