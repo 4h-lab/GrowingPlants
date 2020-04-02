@@ -197,6 +197,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: requireSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 7640180228631224230, guid: 7ab9dcc7aaa30284a8435d64f2e17958,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7640180228631224231, guid: 7ab9dcc7aaa30284a8435d64f2e17958,
         type: 3}
       propertyPath: m_LocalPosition.x
