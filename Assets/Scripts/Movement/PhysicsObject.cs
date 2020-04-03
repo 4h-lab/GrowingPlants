@@ -52,7 +52,7 @@ public class PhysicsObject : MonoBehaviour
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         velocity.x = targetVelocity.x;
-
+        Debug.DrawLine(transform.position, transform.position + (Vector3)velocity *Time.deltaTime, Color.red);
         grounded = false;
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
@@ -60,11 +60,12 @@ public class PhysicsObject : MonoBehaviour
         Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
 
         Vector2 move = moveAlongGround * deltaPosition.x;
+        Debug.DrawLine(transform.position, transform.position + (Vector3)move, Color.blue);
 
         Movement(move, false);
 
         move = Vector2.up * deltaPosition.y;
-
+        Debug.DrawLine(transform.position, transform.position + (Vector3)move, Color.green);
         Movement(move, true);
     }
 
