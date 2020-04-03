@@ -16,16 +16,19 @@ public class MovementJoystick : MonoBehaviour
     private  Vector3 mVelocity;
     private Vector3 oldPos;
 
-    public FixedJoystick variableJoystick;
+    private FixedJoystick variableJoystick;
 
     [SerializeField]
-    LayerMask layerMask;
+    ContactFilter2D cf;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 
     void Start() {
 
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
+        variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
+        var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
+        cf.SetLayerMask(lm);
         mBody = this.GetComponent<Rigidbody2D>();
         oldPos = this.transform.position;
         playerCollider = this.GetComponent<BoxCollider2D>();
@@ -98,7 +101,7 @@ public class MovementJoystick : MonoBehaviour
     Vector2 projectRB(Vector2 dir){
         float distance = dir.magnitude;
 
-        int count = mBody.Cast(dir, hitBuffer, distance);
+        int count = mBody.Cast(dir,cf, hitBuffer, distance);
         for (int i = 0; i < count; i++){
             Vector2 currentNormal = hitBuffer[i].normal;
 
