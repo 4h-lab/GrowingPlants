@@ -101,7 +101,7 @@ public class MovementJoystick : MonoBehaviour
     Vector2 projectRB(Vector2 dir){
         float distance = dir.magnitude;
 
-        int count = mBody.Cast(dir,cf, hitBuffer, distance);
+        int count = mBody.Cast(dir,cf, hitBuffer, distance + 0.01f);
         for (int i = 0; i < count; i++){
             Vector2 currentNormal = hitBuffer[i].normal;
 
