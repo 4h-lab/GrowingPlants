@@ -363,14 +363,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6219927600155200257, guid: 88ebee692d26735409d89c8f07409b23,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6219927600155200258, guid: 88ebee692d26735409d89c8f07409b23,
-        type: 3}
-      propertyPath: variableJoystick
+    - target: {fileID: 1266408784, guid: 88ebee692d26735409d89c8f07409b23, type: 3}
+      propertyPath: joystick
       value: 
       objectReference: {fileID: 1075019728}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
@@ -412,6 +406,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200263, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}

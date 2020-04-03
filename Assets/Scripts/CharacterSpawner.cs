@@ -14,6 +14,7 @@ public class CharacterSpawner : MonoBehaviour{
     }
     public void requireSpawn() {
 
+        
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,radius); // fire a raycast directly down the player
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius_x, -Vector2.up,radius-radius_x);
 

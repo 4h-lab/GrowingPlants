@@ -28,6 +28,7 @@ public class WinPlant : BasePlant
 
     private void FlyAway()
     {
+        
         player.transform.Translate(Vector2.up * Time.deltaTime * growthSpeed);
         gameObject.transform.Translate(Vector2.up * Time.deltaTime * growthSpeed);
     }
