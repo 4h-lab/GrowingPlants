@@ -112,9 +112,9 @@ public class MovementJoystick : MonoBehaviour
                 dir -= projection * currentNormal; //velocity
             }
             float modifiedDistance = hitBuffer[i].distance;
-            distance = modifiedDistance < distance ? modifiedDistance : distance;
+            distance = modifiedDistance < distance ? modifiedDistance : distance - 0.01f;
         }
-        Debug.Log("Distance: " + distance + "   " + dir.normalized);
+        //Debug.Log("Distance: " + distance + "   " + dir.normalized);
         return dir.normalized * distance;
     }
 }

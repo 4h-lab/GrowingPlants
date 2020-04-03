@@ -83,7 +83,7 @@ public class PhysicsObject : MonoBehaviour
                     grounded = true;
                     if (yMovement){
                         groundNormal = currentNormal;
-                        currentNormal.x = 0;
+                         currentNormal.x = 0;
                     }
                 }
 
