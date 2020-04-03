@@ -30,6 +30,7 @@ public class PhysicsObject : MonoBehaviour
 
     void Start()
     {
+        joystick= GameObject.FindObjectOfType<FixedJoystick>();
         contactFilter.useTriggers = false;
         var lm = Physics2D.GetLayerCollisionMask(gameObject.layer);
         contactFilter.SetLayerMask(lm);
