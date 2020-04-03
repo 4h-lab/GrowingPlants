@@ -67,38 +67,30 @@ public class PhysicsObject : MonoBehaviour
         Movement(move, true);
     }
 
-    void Movement(Vector2 move, bool yMovement)
-    {
+    void Movement(Vector2 move, bool yMovement){
         float distance = move.magnitude;
 
-        if (distance > minMoveDistance)
-        {
+        if (distance > minMoveDistance){
             int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
             hitBufferList.Clear();
-            for (int i = 0; i < count; i++)
-            {
+            for (int i = 0; i < count; i++){
                 hitBufferList.Add(hitBuffer[i]);
             }
 
-            for (int i = 0; i < hitBufferList.Count; i++)
-            {
+            for (int i = 0; i < hitBufferList.Count; i++){
                 Vector2 currentNormal = hitBufferList[i].normal;
-                if (currentNormal.y > minGroundNormalY)
-                {
+                if (currentNormal.y > minGroundNormalY){
                     grounded = true;
-                    if (yMovement)
-                    {
+                    if (yMovement){
                         groundNormal = currentNormal;
                         currentNormal.x = 0;
                     }
                 }
 
                 float projection = Vector2.Dot(velocity, currentNormal);
-                if (projection < 0)
-                {
+                if (projection < 0){
                     velocity = velocity - projection * currentNormal;
                 }
-
                 float modifiedDistance = hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
             }

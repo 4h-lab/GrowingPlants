@@ -21,6 +21,8 @@ public class MovementJoystick : MonoBehaviour
     [SerializeField]
     LayerMask layerMask;
 
+    private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+
     void Start() {
 
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
@@ -32,6 +34,7 @@ public class MovementJoystick : MonoBehaviour
     }
 
     public void FixedUpdate(){
+        oldPos = transform.position;
         if (variableJoystick.Horizontal != 0f) {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
             movePlayer(dir);
@@ -41,14 +44,24 @@ public class MovementJoystick : MonoBehaviour
         else {
                     speed = 0;
                 }
-        //FinalCollisionCheck();
+        //cast the rb and see if it'll be stuck in something
+
+
+        // update speed accounting for effective movement
+        //Debug.Log("Speed : " + speed);
+        //Debug.Log("moved : " + (oldPos - transform.position).magnitude / (Time.deltaTime) + " --> from: " + oldPos + " to: " + transform.position );
+
+
+
+        speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
+
     }
     private void movePlayer(Vector3 dir)
     {
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
-        oldPos = transform.position;
-        transform.Translate( dir * speed * Time.deltaTime * GameManager.customTimeScale);
+
+        transform.Translate( projectRB(dir * speed * Time.deltaTime * GameManager.customTimeScale));
         
         
         if ((dir.x > 0) ^ facingRight) Flip();
@@ -82,21 +95,23 @@ public class MovementJoystick : MonoBehaviour
         this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
     }
 
-    private void FinalCollisionCheck()
-    {
-        
+    Vector2 projectRB(Vector2 dir){
+        float distance = dir.magnitude;
 
-        // Get bounds of Collider
-        var bottomRight = new Vector2(playerCollider.bounds.max.x, playerCollider.bounds.max.y);
-        var topLeft = new Vector2(playerCollider.bounds.min.x, playerCollider.bounds.min.y);
+        int count = mBody.Cast(dir, hitBuffer, distance);
+        for (int i = 0; i < count; i++){
+            Vector2 currentNormal = hitBuffer[i].normal;
 
-        
+            float projection = Vector2.Dot(dir, currentNormal);
 
-        // Check if the body's current velocity will result in a collision
-        if (Physics2D.OverlapArea(topLeft, bottomRight,layerMask))
-        {
-            // If so, stop the movement
-            transform.position = oldPos;
+            Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
+            if (projection < 0){
+                dir -= projection * currentNormal; //velocity
+            }
+            float modifiedDistance = hitBuffer[i].distance;
+            distance = modifiedDistance < distance ? modifiedDistance : distance;
         }
+        Debug.Log("Distance: " + distance + "   " + dir.normalized);
+        return dir.normalized * distance;
     }
 }
