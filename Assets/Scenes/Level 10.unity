@@ -811,15 +811,19 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 296945400}
+    - target: {fileID: 1902606923, guid: 88ebee692d26735409d89c8f07409b23, type: 3}
+      propertyPath: acceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.01
+      value: 6.92
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.28
+      value: 11.89
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
@@ -865,6 +869,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600155200262, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200263, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
