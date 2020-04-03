@@ -173,10 +173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 1
+  gravityModifier: 0.3
   joystick: {fileID: 0}
   maxSpeed: 5
-  acceleration: 20
+  acceleration: 75
 --- !u!114 &1902606923
 MonoBehaviour:
   m_ObjectHideFlags: 0
