@@ -92,7 +92,8 @@ public class PhysicsObject : MonoBehaviour
                 if (projection < 0){
                     velocity = velocity - projection * currentNormal;
                 }
-                if (hitBufferList[i].collider.gameObject.layer != LayerMask.NameToLayer("plant"))
+                
+                if (hitBufferList[i].collider.gameObject.layer != LayerMask.NameToLayer("plant") || yMovement)
                 {
                     float modifiedDistance = hitBufferList[i].distance - shellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
