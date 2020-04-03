@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  acceleration: 5
+  acceleration: 20
   cf:
     useTriggers: 0
     useLayerMask: 0
