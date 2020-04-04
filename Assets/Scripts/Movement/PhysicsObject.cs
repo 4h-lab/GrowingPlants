@@ -19,6 +19,7 @@ public class PhysicsObject : MonoBehaviour
 
     public FixedJoystick joystick;
 
+    private LayerMask distanceFilter;
 
     protected const float minMoveDistance = 0.001f;
     protected const float shellRadius = 0.01f;
@@ -35,6 +36,8 @@ public class PhysicsObject : MonoBehaviour
         var lm = Physics2D.GetLayerCollisionMask(gameObject.layer);
         contactFilter.SetLayerMask(lm);
         contactFilter.useLayerMask = true;
+        distanceFilter = (1 << LayerMask.NameToLayer("plant"));
+        distanceFilter |= (1 << LayerMask.NameToLayer("onewayplatform"));
     }
 
     void Update()
@@ -79,23 +82,24 @@ public class PhysicsObject : MonoBehaviour
                 hitBufferList.Add(hitBuffer[i]);
             }
 
-            for (int i = 0; i < hitBufferList.Count; i++){
+            for (int i = 0; i < hitBufferList.Count; i++) {
                 Vector2 currentNormal = hitBufferList[i].normal;
-                if (currentNormal.y > minGroundNormalY){
+                if (currentNormal.y > minGroundNormalY) {
                     grounded = true;
-                    if (yMovement){
+                    if (yMovement) {
                         groundNormal = currentNormal;
-                         currentNormal.x = 0;
+                        currentNormal.x = 0;
                     }
                 }
-
+                if (distanceFilter != (distanceFilter | (1 << hitBufferList[i].collider.gameObject.layer)) || yMovement)
+                {
                 float projection = Vector2.Dot(velocity, currentNormal);
-                if (projection < 0){
+                if (projection < 0) {
                     velocity = velocity - projection * currentNormal;
                 }
                 
-                if (hitBufferList[i].collider.gameObject.layer != LayerMask.NameToLayer("plant") || yMovement)
-                {
+                //if (hitBufferList[i].collider.gameObject.layer != distanceFilter || yMovement)
+                
                     float modifiedDistance = hitBufferList[i].distance - shellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
