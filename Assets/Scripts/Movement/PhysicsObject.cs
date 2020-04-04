@@ -98,8 +98,6 @@ public class PhysicsObject : MonoBehaviour
                     velocity = velocity - projection * currentNormal;
                 }
                 
-                //if (hitBufferList[i].collider.gameObject.layer != distanceFilter || yMovement)
-                
                     float modifiedDistance = hitBufferList[i].distance - shellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
