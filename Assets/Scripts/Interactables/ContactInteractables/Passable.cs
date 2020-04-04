@@ -9,7 +9,7 @@ public class Passable :MonoBehaviour
     Bounds bounds;
     Bounds playerBounds;
     Transform player;
-    float shellDistance = 0.01f;
+    float shellDistance = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class Passable :MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        var playerPos = player.position.y - (playerBounds.extents.y*player.localScale.y) + shellDistance;
+        var playerPos = player.position.y - (playerBounds.extents.y) + shellDistance;
         var thisPos = this.transform.position.y + bounds.extents.y * this.transform.localScale.y;
         if (playerPos > 0 && thisPos < 0)
         {
