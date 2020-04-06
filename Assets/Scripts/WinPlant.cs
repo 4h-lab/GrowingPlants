@@ -9,7 +9,7 @@ public class WinPlant : BasePlant
         FindObjectOfType<GameManager>().setWinPause(true);
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         //FindObjectOfType<SmoothCamera2D>().enabled = false;
         Destroy(player.GetComponent<Rigidbody2D>());
