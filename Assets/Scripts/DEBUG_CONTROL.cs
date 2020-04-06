@@ -14,7 +14,7 @@ public class DEBUG_CONTROL : MonoBehaviour{
     
     void Update(){
         if(Input.GetKeyDown(KeyCode.Tab))SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        if(Input.GetKeyDown(KeyCode.LeftControl))SceneManager.LoadScene(Mathf.Max(0, SceneManager.GetActiveScene().buildIndex + 1));
+        if(Input.GetKeyDown(KeyCode.LeftControl))SceneManager.LoadScene(Mathf.Max(0, SceneManager.GetActiveScene().buildIndex - 1));
 
     }
 }
