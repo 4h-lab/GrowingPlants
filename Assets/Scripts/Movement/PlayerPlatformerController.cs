@@ -10,7 +10,9 @@ public class PlayerPlatformerController : PhysicsObject{
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
- 
+
+    bool facingRight = true;
+
     // Use this for initialization
     void Awake(){
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,19 +33,14 @@ public class PlayerPlatformerController : PhysicsObject{
         speed = Mathf.Min(speed, velocity.magnitude );
         targetVelocity = movedir;
 
-        
-        // todo: flip code
-        /*
-        bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
-        if (flipSprite && move.x!=0){
-            spriteRenderer.flipX = !spriteRenderer.flipX;
-        }
 
-        //animator.SetBool("grounded", grounded);
-        //animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
-
-        targetVelocity = move * maxSpeed;
-        */
+        if (movedir.x > 0 && !facingRight)
+            // ... flip the player.
+            Flip();
+        // Otherwise if the input is moving the player left and the player is facing right...
+        else if (movedir.x < 0 && facingRight)
+            // ... flip the player.
+            Flip();
     }
 
     private Vector2 moveplayer(int d) {
@@ -54,5 +51,15 @@ public class PlayerPlatformerController : PhysicsObject{
         movedir.x = d;
         return movedir * speed;
 
+    }
+
+    void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        facingRight = !facingRight;
+
+        // Multiply the player's x local scale by -1.
+        //Vector3 theScale =
+        this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
     }
 }
