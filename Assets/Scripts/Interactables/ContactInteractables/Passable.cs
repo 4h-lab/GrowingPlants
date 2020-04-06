@@ -9,7 +9,7 @@ public class Passable :MonoBehaviour
     Bounds bounds;
     Bounds playerBounds;
     Transform player;
-    float shellDistance = 0.1f;
+    float shellDistance = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,18 +31,7 @@ public class Passable :MonoBehaviour
     {
         var playerPos = player.position.y - (playerBounds.extents.y) + shellDistance;
         var thisPos = this.transform.position.y + bounds.extents.y * this.transform.localScale.y;
-        if (playerPos > 0 && thisPos < 0)
-        {
-            collider.enabled = true;
-        }
-        else if (playerPos < 0 && thisPos > 0)
-        {
-            collider.enabled = false;
-        }
-        else 
-        {
-
-            if (playerPos >= thisPos)
+        if (playerPos >= thisPos)
             {
                 Debug.Log(playerPos + "<=" + thisPos);
                 Debug.DrawLine(player.position, playerPos * Vector3.up);
@@ -51,9 +40,12 @@ public class Passable :MonoBehaviour
             }
             else
             {
-                collider.enabled = false;
+            Debug.Log(playerPos + "<=" + thisPos);
+            Debug.DrawLine(player.position, playerPos * Vector3.up);
+            Debug.DrawLine(this.transform.position, Vector3.up * thisPos);
+            collider.enabled = false;
             }
-        }/*
+        /*
         else if (playerPos > 0 && thisPos > 0)
         {
 
