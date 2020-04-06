@@ -10,6 +10,7 @@ public class PauseMenuButtons : MonoBehaviour
     public void NextLevel()
     {
         Debug.Log("current " + currentLevel + " - NEXT");
+        FindObjectOfType<GameManager>().GetComponent<GameManager>().setPause(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -17,12 +18,15 @@ public class PauseMenuButtons : MonoBehaviour
     {
         Debug.Log("current " + currentLevel + " - RETRY");
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        FindObjectOfType<GameManager>().GetComponent<GameManager>().setPause(false); 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 
     public void MainMenu()
     {
         Debug.Log("current " + currentLevel + " - MENU");
+        FindObjectOfType<GameManager>().GetComponent<GameManager>().setPause(false); 
         SceneManager.LoadScene(0);
     }
 
