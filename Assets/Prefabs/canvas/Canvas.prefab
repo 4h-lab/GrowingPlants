@@ -348,6 +348,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseScreenPopup
       objectReference: {fileID: 0}
+    - target: {fileID: 2099183113518010844, guid: 9d508f6e6cf55284faa95d6994af7409,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4158298526596834505, guid: 9d508f6e6cf55284faa95d6994af7409,
         type: 3}
       propertyPath: m_LocalPosition.x
