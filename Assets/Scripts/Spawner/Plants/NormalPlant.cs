@@ -68,7 +68,7 @@ public class NormalPlant : BasePlant{
 
                 Debug.Log("posy " + h.collider.transform.position.y);
                 float dim_1w = ( h.collider.GetComponentInChildren<SpriteRenderer>().sprite.bounds.extents.y * h.collider.GetComponentInChildren<SpriteRenderer>().gameObject.transform.localScale.y);
-                float dim_p = (((GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y) - initY));
+                float dim_p = (((GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y)));
 
                 Debug.Log("dim_1w " + dim_1w);
                 Debug.Log("dim_p " + dim_p );
