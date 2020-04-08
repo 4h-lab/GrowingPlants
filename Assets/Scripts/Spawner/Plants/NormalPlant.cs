@@ -30,15 +30,17 @@ public class NormalPlant : BasePlant{
             budTimer = 0;
         }
         budTimer += Time.deltaTime;
+
         if (transform.position.y < initY + maxHeigth && !stopped){
             checkObstacles();
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
             stem.transform.localScale += Vector3.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
-            if (stem.transform.localScale.y > maxHeigth - this.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * 2 * this.transform.localScale.y)
-            {
+            if (stem.transform.localScale.y > maxHeigth - this.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * 2 * this.transform.localScale.y){
                 stem.transform.localScale = new Vector3(stem.transform.localScale.x, maxHeigth - this.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * 2 * this.transform.localScale.y, stem.transform.localScale.z);
             }
         }
+
+        Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y), new Vector2(transform.position.x + 5, transform.position.y), Color.red);
 
         if (transform.position.y > initY + maxHeigth)
         {
@@ -60,9 +62,18 @@ public class NormalPlant : BasePlant{
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0f, ray_point, 0f), Vector2.up, 20*small_radius, layermask_oneway);
         foreach ( RaycastHit2D h in hits) {
-            if (h.collider != null){
+            if (h.collider != null) {
                 Debug.Log("old:" + maxHeigth);
-                maxHeigth = Mathf.Min((h.collider.transform.position.y+h.collider.GetComponentInChildren<SpriteRenderer>().sprite.bounds.extents.y - initY + GetComponent<SpriteRenderer>().sprite.bounds.extents.y), maxHeigth);
+
+                Debug.Log("posy " + h.collider.transform.position.y);
+                float dim_1w = ( h.collider.GetComponentInChildren<SpriteRenderer>().sprite.bounds.extents.y * h.collider.GetComponentInChildren<SpriteRenderer>().gameObject.transform.localScale.y);
+                float dim_p = (((GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y) - initY));
+
+                Debug.Log("dim_1w " + dim_1w);
+                Debug.Log("dim_p " + dim_p );
+
+
+                maxHeigth = Mathf.Min((h.collider.transform.position.y + dim_1w  + dim_p - initY), maxHeigth);
                 Debug.Log(name + " collided with: " + h.collider.gameObject.name + " new: " + maxHeigth) ;
             }
         }
