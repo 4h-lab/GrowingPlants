@@ -33,16 +33,14 @@ public class Passable :MonoBehaviour
         var thisPos = this.transform.position.y + bounds.extents.y * this.transform.localScale.y;
         if (playerPos >= thisPos)
             {
-                Debug.Log(playerPos + "<=" + thisPos);
+                /*Debug.Log(playerPos + "<=" + thisPos);
                 Debug.DrawLine(player.position, playerPos * Vector3.up);
-                Debug.DrawLine(this.transform.position, Vector3.up * thisPos);
+                Debug.DrawLine(this.transform.position, Vector3.up * thisPos);*/
                 collider.enabled = true;
             }
             else
             {
-            Debug.Log(playerPos + "<=" + thisPos);
-            Debug.DrawLine(player.position, playerPos * Vector3.up);
-            Debug.DrawLine(this.transform.position, Vector3.up * thisPos);
+            
             collider.enabled = false;
             }
         /*
