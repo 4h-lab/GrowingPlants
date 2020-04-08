@@ -61,7 +61,7 @@ public class NormalPlant : BasePlant{
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0f, ray_point, 0f), Vector2.up, 20*small_radius, layermask_oneway);
         foreach ( RaycastHit2D h in hits) {
             if (h.collider != null){
-                Debug.Log("old:" + maxHeigth);
+                Debug.Log("old:" + (h.collider.transform.position.y + h.collider.GetComponentInChildren<SpriteRenderer>().sprite.bounds.extents.y - initY + GetComponent<SpriteRenderer>().sprite.bounds.extents.y));
                 maxHeigth = Mathf.Min((h.collider.transform.position.y+h.collider.GetComponentInChildren<SpriteRenderer>().sprite.bounds.extents.y - initY + GetComponent<SpriteRenderer>().sprite.bounds.extents.y), maxHeigth);
                 Debug.Log(name + " collided with: " + h.collider.gameObject.name + " new: " + maxHeigth) ;
             }
