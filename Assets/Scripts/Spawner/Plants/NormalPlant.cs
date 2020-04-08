@@ -74,7 +74,7 @@ public class NormalPlant : BasePlant{
                 Debug.Log("dim_p " + dim_p );
 
 
-                maxHeigth = Mathf.Min((h.collider.transform.position.y + dim_1w  + dim_p - initY), maxHeigth);
+                maxHeigth = Mathf.Min((h.collider.transform.position.y + dim_1w  - dim_p - initY), maxHeigth);
 
                 Debug.Log(name + " collided with: " + h.collider.gameObject.name + " new: " + maxHeigth) ;
             }
