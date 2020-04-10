@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageContactInteractable : BaseContactInteractables{
+public class DamageContactInteractable : BaseCollisionInteractable{
     public int damage;
     private EventEmitter ee;
 
@@ -13,6 +13,7 @@ public class DamageContactInteractable : BaseContactInteractables{
     public override void interact(GameObject initiator) {
         Health h = initiator.GetComponent<Health>();
         if (h != null) h.damage(damage);
+        else { Debug.Log("no health"); }
 
         ee.invoke("player_damaged", (new[] {this.gameObject}));
     }
