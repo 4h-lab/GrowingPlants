@@ -40,7 +40,7 @@ public class NormalPlant : BasePlant{
             }
         }
 
-        Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y), new Vector2(transform.position.x + 5, transform.position.y), Color.red);
+        Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), new Vector2(transform.position.x + 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), Color.red);
 
         if (transform.position.y > initY + maxHeigth)
         {
@@ -67,14 +67,10 @@ public class NormalPlant : BasePlant{
                 Debug.Log("old:" + maxHeigth);
 
                 Debug.Log("posy " + h.collider.transform.position.y);
-                float dim_1w = ( h.collider.GetComponentInChildren<SpriteRenderer>().sprite.bounds.extents.y * h.collider.GetComponentInChildren<SpriteRenderer>().gameObject.transform.localScale.y);
-                float dim_p = (((GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y)));
+                float sup_1w = h.collider.bounds.max.y;
+                float dim_p = gameObject.GetComponent<Collider2D>().bounds.extents.y;
 
-                Debug.Log("dim_1w " + dim_1w);
-                Debug.Log("dim_p " + dim_p );
-
-
-                maxHeigth = Mathf.Min((h.collider.transform.position.y + dim_1w  - dim_p - initY), maxHeigth);
+                maxHeigth = Mathf.Min(sup_1w - initY -dim_p, maxHeigth); 
 
                 Debug.Log(name + " collided with: " + h.collider.gameObject.name + " new: " + maxHeigth) ;
             }
