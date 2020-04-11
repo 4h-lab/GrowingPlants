@@ -9,7 +9,7 @@ public class Passable :MonoBehaviour
     Bounds bounds;
     Bounds playerBounds;
     Transform player;
-    float shellDistance = 0.3f;
+    float shellDistance = 0.1f;
 
     // Start is called before the first frame update
     void Start()
