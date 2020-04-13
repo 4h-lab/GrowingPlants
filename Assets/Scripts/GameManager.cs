@@ -71,7 +71,9 @@ public class GameManager : MonoBehaviour {
 
     public int calcScore() {
         int totalscore = 0;
-        foreach (CalcScoreStep css in scoreCalculator) { totalscore += css(notifiedAchievements); }
+        foreach (CalcScoreStep css in scoreCalculator) { totalscore += css(notifiedAchievements);  }
+
+        foreach (string s in notifiedAchievements) { Debug.Log("ACHIEVEMENT: " + s + " csss: " + scoreCalculator.Count + " notifachi: " + notifiedAchievements.Count); }
         return totalscore;
     }
 }
