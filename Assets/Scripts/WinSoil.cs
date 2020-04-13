@@ -28,18 +28,29 @@ public class WinSoil : MonoBehaviour
         int currentLevel = 1;
         Canvas cavnas = GameObject.FindObjectOfType<Canvas>();
 
-        FindObjectOfType<GameManager>().ControlsEnabled(false);
-        Debug.Log("WIN. Level " + currentLevel + " - stars " + stars + " - time " + time);
+        GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gm.ControlsEnabled(false);
+        gm.notifyOfNewSomething("level.finished");
+
+
         GameObject popup = GameObject.Instantiate(
             winScreen,
             cavnas.transform.position,
             Quaternion.identity,
             cavnas.transform);
+
+
         string obtainedStars = "";
-        for (int i = 0; i < stars; i++) obtainedStars += " *";
+        for (int i = 0; i < gm.calcScore(); i++) obtainedStars += " *";
+        
+        
+        
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
 
+        
         time = Time.realtimeSinceStartup - time;
+
+
         popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = formatGameTime(time);
         popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
 
