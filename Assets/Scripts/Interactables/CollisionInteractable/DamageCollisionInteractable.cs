@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageContactInteractable : BaseCollisionInteractable{
+public class DamageCollisionInteractable : BaseCollisionInteractable{
     public int damage;
     private EventEmitter ee;
 
