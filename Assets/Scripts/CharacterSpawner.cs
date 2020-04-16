@@ -13,6 +13,9 @@ public class CharacterSpawner : MonoBehaviour{
     [SerializeField]
     private float spawnOffset;
 
+    //temp?
+    [SerializeField] float bias = 0.01f;
+
     private void Start()
     {
         
@@ -44,7 +47,7 @@ public class CharacterSpawner : MonoBehaviour{
                 float soilUpperBound = hit.collider.gameObject.GetComponent<Collider2D>().bounds.center.y + hit.collider.gameObject.GetComponent<Collider2D>().bounds.extents.y;
                 float playerLowerBound = GetComponent<BoxCollider2D>().bounds.center.y - GetComponent<BoxCollider2D>().bounds.extents.y;
                 
-                if (hit.collider != null && soilUpperBound <= playerLowerBound)
+                if (hit.collider != null && soilUpperBound - bias <= playerLowerBound)
                 {
                     SpawnerTile st = hit.collider.gameObject.GetComponent<SpawnerTile>();
                     Vector3 pt = hit.point - Vector2.up * spawnOffset;
