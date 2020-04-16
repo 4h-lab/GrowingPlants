@@ -8,13 +8,10 @@ public class CharacterSpawner : MonoBehaviour{
     private Rigidbody2D rgb2d;
     protected ContactFilter2D contactFilter;
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
-    private float shellRadius=0.01f;
+    [SerializeField] private float shellRadius=0.01f;
 
     [SerializeField]
     private float spawnOffset;
-
-    //temp?
-    [SerializeField] float bias = 0.01f;
 
     private void Start()
     {
@@ -47,7 +44,7 @@ public class CharacterSpawner : MonoBehaviour{
                 float soilUpperBound = hit.collider.gameObject.GetComponent<Collider2D>().bounds.center.y + hit.collider.gameObject.GetComponent<Collider2D>().bounds.extents.y;
                 float playerLowerBound = GetComponent<BoxCollider2D>().bounds.center.y - GetComponent<BoxCollider2D>().bounds.extents.y;
                 
-                if (hit.collider != null && soilUpperBound - bias <= playerLowerBound)
+                if (hit.collider != null && soilUpperBound <= playerLowerBound)
                 {
                     SpawnerTile st = hit.collider.gameObject.GetComponent<SpawnerTile>();
                     Vector3 pt = hit.point - Vector2.up * spawnOffset;
