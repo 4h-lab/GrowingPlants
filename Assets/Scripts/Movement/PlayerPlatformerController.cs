@@ -62,4 +62,9 @@ public class PlayerPlatformerController : PhysicsObject{
         //Vector3 theScale =
         this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
     }
+
+    public float getTargetVelocityX()
+    {
+        return targetVelocity.x;
+    }
 }
