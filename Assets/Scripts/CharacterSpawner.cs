@@ -10,7 +10,7 @@ public class CharacterSpawner : MonoBehaviour{
 
 
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
-    private float shellRadius=0.01f;
+    [SerializeField] private float shellRadius=0.01f;
 
     [SerializeField]
     private float spawnOffset;
