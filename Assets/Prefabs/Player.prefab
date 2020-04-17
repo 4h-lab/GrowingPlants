@@ -191,10 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94018bb730ba29543bf5566bcb92c92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
   maxSpeed: 5
   acceleration: 80
-
   cf:
     useTriggers: 0
     useLayerMask: 0
