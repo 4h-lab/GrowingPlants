@@ -7,6 +7,8 @@ public class CharacterSpawner : MonoBehaviour{
     
     private Rigidbody2D rgb2d;
     protected ContactFilter2D contactFilter;
+
+
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     private float shellRadius=0.01f;
 
@@ -32,6 +34,7 @@ public class CharacterSpawner : MonoBehaviour{
         var d = new Dictionary<RaycastHit2D,float>();
         bool soilBelow = false;
         if (count > 0) { 
+            
             for (int i = 0; i < count; i++)
             {
                 d.Add(hitBuffer[i], hitBuffer[i].distance);

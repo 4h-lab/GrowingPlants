@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIMovement : MonoBehaviour
 {
-    private MovementJoystick player;
+    private PlayerPlatformerController player;
     private Image right;
     private Image left;
 
@@ -14,7 +14,7 @@ public class UIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementJoystick>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPlatformerController>();
         right = transform.GetChild(0).gameObject.GetComponent<Image>();
         left = transform.GetChild(1).gameObject.GetComponent<Image>();
     }
