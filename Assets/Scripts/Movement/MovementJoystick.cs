@@ -18,6 +18,8 @@ public class MovementJoystick : MonoBehaviour
 
     private FixedJoystick variableJoystick;
 
+    private Vector3 targetVelocity = Vector3.zero;
+
     [SerializeField]
     ContactFilter2D cf;
 
@@ -63,7 +65,7 @@ public class MovementJoystick : MonoBehaviour
     {
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
-
+        targetVelocity = dir;
         transform.Translate( projectRB(dir * speed * Time.deltaTime * GameManager.customTimeScale));
         
         
@@ -117,5 +119,10 @@ public class MovementJoystick : MonoBehaviour
         }
         //Debug.Log("Distance: " + distance + "   " + dir.normalized);
         return dir.normalized * distance;
+    }
+
+    public float getTargetVelocityX()
+    {
+        return targetVelocity.x;
     }
 }
