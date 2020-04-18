@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaypointsMovement : MonoBehaviour{
     public List<GameObject> wayPoints;
     public float speed;
-
+    public float minDesiredDistanceToWaypoint = .01f;
 
     private int wayPointIndex = 0;
     private Vector2 nextWayPoint;
@@ -26,8 +26,9 @@ public class WaypointsMovement : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        transform.Translate((nextWayPoint - (Vector2)transform.position).normalized * speed * Time.deltaTime * GameManager.customTimeScale ) ;
-        if (Vector2.Distance(transform.position, nextWayPoint) < 0.01f) {
+        float desiredDistance = Mathf.Min((nextWayPoint - (Vector2)transform.position).magnitude, speed * Time.deltaTime * GameManager.customTimeScale);
+        transform.Translate((nextWayPoint - (Vector2)transform.position).normalized * desiredDistance) ;
+        if (Vector2.Distance(transform.position, nextWayPoint) < minDesiredDistanceToWaypoint) {
             wayPointIndex = (wayPointIndex + 1) % wayPoints.Count;
             nextWayPoint = realWayPoints[wayPointIndex]; 
         } 
