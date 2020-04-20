@@ -11,7 +11,7 @@ public class NormalPlant : BasePlant{
     private float budTimer=0f;
 
     void Start(){
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2);
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform");
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
 
         stem = this.transform.GetChild(0).gameObject;
@@ -41,6 +41,8 @@ public class NormalPlant : BasePlant{
         }
 
         Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), new Vector2(transform.position.x + 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), Color.red);
+        Debug.DrawLine(new Vector2(transform.position.x - 5, initY+maxHeigth), new Vector2(transform.position.x + 5, initY + maxHeigth), Color.green);
+
 
         if (transform.position.y > initY + maxHeigth)
         {
@@ -64,10 +66,7 @@ public class NormalPlant : BasePlant{
         foreach ( RaycastHit2D h in hits) {
 
             if (h.collider != null) {
-                Debug.Log("old:" + maxHeigth);
-
-                Debug.Log("posy " + h.collider.transform.position.y);
-                float sup_1w = h.collider.bounds.max.y;
+                float sup_1w = h.collider.bounds.max.y + (0.02f*maxHeigth);
                 float dim_p = gameObject.GetComponent<Collider2D>().bounds.extents.y;
 
                 maxHeigth = Mathf.Min(sup_1w - initY -dim_p, maxHeigth); 
