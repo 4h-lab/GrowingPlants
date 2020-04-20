@@ -6,7 +6,8 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
 {
     [SerializeField]
     private float fallDelay = 2.0f;
-
+    [SerializeField]
+    private float shakeIntensity = 1.0f;
     private bool shaking=false;
     private Vector3[] originalPosition;
     private float timer=0f;
@@ -24,7 +25,7 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
     {
         if (shaking)
         {
-            var r = (Random.insideUnitSphere * Time.deltaTime * GameManager.customTimeScale);
+            var r = (Random.insideUnitSphere * Time.deltaTime * GameManager.customTimeScale*shakeIntensity);
             for (int i=0;i< this.transform.childCount; i++) { 
             this.gameObject.transform.GetChild(i).transform.position = originalPosition[i] + r * 3; //Added a * 3 to increase the trembling effect (Lorenzo)
             }
