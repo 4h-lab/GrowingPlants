@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -598,7 +599,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.6792453, g: 0.20825918, b: 0.2717591, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -645,6 +646,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a25e47336b7114783fae998a8ae4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionX: 18
+  resolutionY: 9
 --- !u!1001 &546151975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1654,6 +1669,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7077321986914493368, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077321986914493368, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7077321987424919315, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1774,6 +1799,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 955864236}
+    - target: {fileID: 7077321987997199577, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -113
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077321987997199577, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 73.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c5d60b8a38ba744c93fb7b722835c0a, type: 3}
 --- !u!114 &7289946385246184577 stripped

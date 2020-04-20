@@ -5,8 +5,8 @@ using UnityEngine;
 public class BlackBars : MonoBehaviour
 {
     // change these numbers to your preferred apect ratio (9:16 in this case)
-    const int resolutionX = 9;
-    const int resolutionY = 16;
+    [SerializeField] int resolutionX = 16;
+    [SerializeField] int resolutionY = 9;
 
     void Start()
     {
