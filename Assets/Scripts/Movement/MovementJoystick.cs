@@ -123,6 +123,7 @@ public class MovementJoystick : MonoBehaviour
 
     public float getTargetVelocityX()
     {
-        return targetVelocity.x;
+        
+        return variableJoystick.Horizontal;
     }
 }

@@ -27,7 +27,7 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable
         {
             var r = (Random.insideUnitSphere * Time.deltaTime * GameManager.customTimeScale*shakeIntensity);
             for (int i=0;i< this.transform.childCount; i++) { 
-            this.gameObject.transform.GetChild(i).transform.position = originalPosition[i] + r * 3; //Added a * 3 to increase the trembling effect (Lorenzo)
+            this.gameObject.transform.GetChild(i).transform.position = originalPosition[i] + r ; //Added a * 3 to increase the trembling effect (Lorenzo)
             }
             timer += Time.deltaTime * GameManager.customTimeScale;
             if (timer >= fallDelay) FallAfterDelay();
