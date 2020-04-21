@@ -1987,6 +1987,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 750426780}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1498219473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7260112055057475847, guid: 4b8a5633197e8d844b8102fe26adbcd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1895696734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1498219474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498219473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ceb45345a1759459c1b5737c44833d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minAwardedStars: 1
+--- !u!114 &1498219475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498219473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7adaa08837ef343a77cb4fd1257750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAllowedNumberOfPlants: 10
+--- !u!114 &1498219476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498219473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c7f6d38d96be94aa0cb28837d2b743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1515142815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3795575586834621233, guid: 1bd8dc9e4bef9ca4386d43e89401db95,
@@ -2964,6 +3008,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077321986914493368, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 29.629883
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077321986914493368, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30.70996
       objectReference: {fileID: 0}
     - target: {fileID: 7077321987424919315, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
         type: 3}

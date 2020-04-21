@@ -21,6 +21,8 @@ public class NormalPlant : BasePlant{
         ray_point= (this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.y +small_radius);
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
+
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
     }
 
     void Update(){
@@ -66,6 +68,7 @@ public class NormalPlant : BasePlant{
 
             if (h.collider != null) {
                 float sup_1w = h.collider.bounds.max.y + (0.02f * maxHeigth);
+
                 float dim_p = gameObject.GetComponent<Collider2D>().bounds.extents.y;
 
                 maxHeigth = Mathf.Min(sup_1w - initY -dim_p, maxHeigth); 

@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
     public static float customTimeScale = 1f;
@@ -9,12 +10,12 @@ public class GameManager : MonoBehaviour {
     public static float totalTime = -1f;
     private static float timeSinceLevelStarted = 0f;
 
-
     EventEmitter ee;
 
     public delegate int CalcScoreStep(List<string> s);
     private List<string> notifiedAchievements;
-    private List<CalcScoreStep> scoreCalculator;
+    private BaseCalcScoreStep[] allSteps;
+    public List<CalcScoreStep> scoreCalculator;
 
     private void Awake(){
         notifiedAchievements = new List<string>();
@@ -27,13 +28,11 @@ public class GameManager : MonoBehaviour {
         timeSinceLevelStarted = Time.realtimeSinceStartup;
         customTimeScale = 1f;
 
-
-        //todo: questi potrebbero esser presi da un file di config, magari diverso per ogni liv.
-        
-        scoreCalculator.Add((List<string> s) => s.FindAll(e => e == "star.pickup").Count); // conta quante stelle sono state raccolte nel liv
-        scoreCalculator.Add((List<string> s) => s.Contains("water.touchedby") ? 0 : 1); // +1 punto se NON sei stato toccato dall'acqua
-        scoreCalculator.Add((List<string> s) => s.Contains("level.finished") ? 1 : 0); // 1 punto se finisci il liv.
-
+        allSteps = GetComponents<BaseCalcScoreStep>();
+        foreach (BaseCalcScoreStep bcss in allSteps) {
+            scoreCalculator.Add(bcss.step);
+            Debug.Log("Added new bcss");
+        }
     }
 
     public float setPause(bool pause){
