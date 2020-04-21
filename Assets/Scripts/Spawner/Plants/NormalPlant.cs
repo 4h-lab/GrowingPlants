@@ -18,7 +18,7 @@ public class NormalPlant : BasePlant{
         bud = this.transform.GetChild(1).gameObject;
         stem.transform.localScale -= new Vector3(0f,stem.transform.localScale.y,0f);
         initY = this.transform.position.y;
-        ray_point= (this.gameObject.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y)+small_radius;
+        ray_point= (this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.y +small_radius);
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         ee.invoke("plant_created", (new[] { this.gameObject }));
     }
@@ -35,7 +35,7 @@ public class NormalPlant : BasePlant{
             checkObstacles();
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
             stem.transform.localScale += Vector3.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
-            if (stem.transform.localScale.y > maxHeigth - this.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * 2 * this.transform.localScale.y){
+            if (stem.transform.localScale.y > maxHeigth - this.GetComponent<BoxCollider2D>().bounds.extents.y ){
                 stem.transform.localScale = new Vector3(stem.transform.localScale.x, maxHeigth - this.GetComponent<SpriteRenderer>().sprite.bounds.extents.y * 2 * this.transform.localScale.y, stem.transform.localScale.z);
             }
             Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), new Vector2(transform.position.x + 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), Color.red);
@@ -65,7 +65,7 @@ public class NormalPlant : BasePlant{
         foreach ( RaycastHit2D h in hits) {
 
             if (h.collider != null) {
-                float sup_1w = h.collider.bounds.max.y + (0.05f * maxHeigth);
+                float sup_1w = h.collider.bounds.max.y; //+ (0.05f * maxHeigth);
                 float dim_p = gameObject.GetComponent<Collider2D>().bounds.extents.y;
 
                 maxHeigth = Mathf.Min(sup_1w - initY -dim_p, maxHeigth); 
