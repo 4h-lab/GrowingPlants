@@ -17,7 +17,17 @@ public class GameManager : MonoBehaviour {
     private BaseCalcScoreStep[] allSteps;
     public List<CalcScoreStep> scoreCalculator;
 
+    [SerializeField] private int targetFrameRate = 60;
+
     private void Awake(){
+        //framerate lock test
+        if(targetFrameRate != -1)
+        {
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+        }
+        //framerate lock test
+
         notifiedAchievements = new List<string>();
         scoreCalculator = new List<CalcScoreStep>();
     }
