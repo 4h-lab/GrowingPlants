@@ -148,8 +148,10 @@ MonoBehaviour:
   maxHeigth: 3.85
   growthSpeed: 2.3
   fallDelay: 2
-  shakeIntensity: 1
-  toMove: 3
+  shakeIntensityStem: 1
+  shakeIntensityFlower: 0.5
+  moveFlower: 1
+  allDirectionForFlower: 1
 --- !u!114 &9143814974126325656
 MonoBehaviour:
   m_ObjectHideFlags: 0
