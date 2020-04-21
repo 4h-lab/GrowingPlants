@@ -22,6 +22,6 @@ public class PlantButton : Controls{
 
     private void SpawnPlant()
     {
-        player.GetComponent<CharacterSpawner>().requireSpawn();
+        player.GetComponent<CharacterSpawner>().spawnPlantRequest = true;
     }
 }
