@@ -10,12 +10,11 @@ public class GameManager : MonoBehaviour {
     public static float totalTime = -1f;
     private static float timeSinceLevelStarted = 0f;
 
-    public List<UnityEvent> calcScoreSteps = new List<UnityEvent>();
-
     EventEmitter ee;
 
     public delegate int CalcScoreStep(List<string> s);
     private List<string> notifiedAchievements;
+    private BaseCalcScoreStep[] allSteps;
     public List<CalcScoreStep> scoreCalculator;
 
     private void Awake(){
@@ -28,6 +27,12 @@ public class GameManager : MonoBehaviour {
         ee.on("win", (Object[] x) => { customTimeScale = 0f; totalTime = Time.realtimeSinceStartup - timeSinceLevelStarted; });
         timeSinceLevelStarted = Time.realtimeSinceStartup;
         customTimeScale = 1f;
+
+        allSteps = GetComponents<BaseCalcScoreStep>();
+        foreach (BaseCalcScoreStep bcss in allSteps) {
+            scoreCalculator.Add(bcss.step);
+            Debug.Log("Added new bcss");
+        }
     }
 
     public float setPause(bool pause){
