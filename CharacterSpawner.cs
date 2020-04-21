@@ -4,24 +4,44 @@ using UnityEngine;
 using System.Linq;
 
 public class CharacterSpawner : MonoBehaviour{
-    
+
+    public bool spawnPlantRequest = false;
+
+    [SerializeField] private int bufferFrames;
+    [SerializeField] private float shellRadius = 0.01f;
+    [SerializeField] private float spawnOffset;
+
+    private int curBufferFrames;
     private Rigidbody2D rgb2d;
+
     protected ContactFilter2D contactFilter;
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
-    [SerializeField] private float shellRadius=0.01f;
-
-    [SerializeField]
-    private float spawnOffset;
 
     private void Start()
     {
-        
         contactFilter.useTriggers = false;
         var lm = Physics2D.GetLayerCollisionMask(gameObject.layer);
         lm |= (1 << LayerMask.NameToLayer("plant"));
         contactFilter.SetLayerMask(lm);
         rgb2d = GetComponent<Rigidbody2D>();
+        spawnPlantRequest = false;
+        curBufferFrames = 0;
+    }
 
+    private bool Buffer()
+    {
+        if (spawnPlantRequest)//if an input to spawn a plant has been buffered
+        {
+            if (requireSpawn())//if the spawning was successful remove bufferd input
+            {
+                spawnPlantRequest = false;
+                curBufferFrames = 0;
+                return true;
+            }
+            else curBufferFrames += 1;//if the spawning was not successful, keep waiting
+            if (curBufferFrames >= bufferFrames) spawnPlantRequest = false;//if there hasn't been a successful spawn within buffertime, remove buffered input
+        }
+        return false;
     }
 
     public bool requireSpawn() {
@@ -62,6 +82,9 @@ public class CharacterSpawner : MonoBehaviour{
 
     }
 
-    
+    private void Update()
+    {
+        Buffer();
+    }
 
 }
