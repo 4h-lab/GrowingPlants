@@ -65,7 +65,7 @@ public class NormalPlant : BasePlant{
         foreach ( RaycastHit2D h in hits) {
 
             if (h.collider != null) {
-                float sup_1w = h.collider.bounds.max.y; //+ (0.05f * maxHeigth);
+                float sup_1w = h.collider.bounds.max.y + (0.02f * maxHeigth);
                 float dim_p = gameObject.GetComponent<Collider2D>().bounds.extents.y;
 
                 maxHeigth = Mathf.Min(sup_1w - initY -dim_p, maxHeigth); 
