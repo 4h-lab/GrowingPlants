@@ -465,6 +465,7 @@ MonoBehaviour:
   - {fileID: 2045369317}
   - {fileID: 855518875}
   speed: 3
+  minDesiredDistanceToWaypoint: 0.01
 --- !u!1001 &129617719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,7 +485,7 @@ PrefabInstance:
     - target: {fileID: 2483217789447425582, guid: c53d69c41e5454748be5cc61dc2f683a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2483217789447425582, guid: c53d69c41e5454748be5cc61dc2f683a,
         type: 3}
@@ -810,7 +811,7 @@ PrefabInstance:
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
@@ -1244,7 +1245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457864273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1324882334}
@@ -1395,6 +1396,7 @@ MonoBehaviour:
   - {fileID: 1941477776}
   - {fileID: 60823}
   speed: 3
+  minDesiredDistanceToWaypoint: 0.01
 --- !u!1001 &541411503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1486,6 +1488,7 @@ MonoBehaviour:
   - {fileID: 840538553}
   - {fileID: 994333932}
   speed: 3
+  minDesiredDistanceToWaypoint: 0.01
 --- !u!1001 &681975568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2498,6 +2501,7 @@ MonoBehaviour:
   - {fileID: 12148573}
   - {fileID: 319472635}
   speed: 3
+  minDesiredDistanceToWaypoint: 0.01
 --- !u!1001 &1217981809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2853,6 +2857,7 @@ MonoBehaviour:
   - {fileID: 295242526}
   - {fileID: 1424300360}
   speed: 3
+  minDesiredDistanceToWaypoint: 0.01
 --- !u!1 &1559556045 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8040191261652622278, guid: 3f0ed4eea2166c44d94ad7985630a8f7,
@@ -2881,6 +2886,7 @@ MonoBehaviour:
   - {fileID: 731637089}
   - {fileID: 206828172}
   speed: 3
+  minDesiredDistanceToWaypoint: 0.01
 --- !u!1 &1592001689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3075,7 @@ PrefabInstance:
     - target: {fileID: 72050997753880559, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.5
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 72050997753880559, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
@@ -3305,7 +3311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878023017}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: -1}
+  m_LocalPosition: {x: -2, y: -1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 716963126}
