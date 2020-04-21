@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8b6d810c9239e5642bb134e083b76d59, type: 3}
-  m_Color: {r: 0.1254902, g: 0.50980395, b: 0, a: 1}
+  m_Color: {r: 0.15873085, g: 0.7232675, b: 0.8207547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 8a8912a6767c344489e87e029e1e501e, type: 3}
-  m_Color: {r: 0.12415458, g: 0.4811321, b: 0.04765931, a: 1}
+  m_Color: {r: 0.15873085, g: 0.7232675, b: 0.8207547, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b0b93ba0ebdf44d93cd34ea016e940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeigth: 3.85
-  growthSpeed: 1.9
+  maxHeigth: 2
+  growthSpeed: 4
   budTime: 0.3
   jumpForce: {x: 0, y: 10}
