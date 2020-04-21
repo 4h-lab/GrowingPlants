@@ -13,11 +13,21 @@ public class GameManager : MonoBehaviour {
     EventEmitter ee;
 
     public delegate int CalcScoreStep(List<string> s);
-    private List<string> notifiedAchievements;
-    private BaseCalcScoreStep[] allSteps;
-    public List<CalcScoreStep> scoreCalculator;
+    private List<string> notifiedAchievements; // questo raccoglie tutte le notifiche che gli oggetti inviano (ai fini del punteggio)
+    private BaseCalcScoreStep[] allSteps; 
+    public List<CalcScoreStep> scoreCalculator; // questo raccoglie i metodi che leggono dalla lista degli eventi e ti dicono quante stelle hai ottenuto
+
+    [SerializeField] private int targetFrameRate = 60;
 
     private void Awake(){
+        //framerate lock test
+        if(targetFrameRate != -1)
+        {
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+        }
+        //framerate lock test
+
         notifiedAchievements = new List<string>();
         scoreCalculator = new List<CalcScoreStep>();
     }
@@ -28,8 +38,8 @@ public class GameManager : MonoBehaviour {
         timeSinceLevelStarted = Time.realtimeSinceStartup;
         customTimeScale = 1f;
 
-        allSteps = GetComponents<BaseCalcScoreStep>();
-        foreach (BaseCalcScoreStep bcss in allSteps) {
+        allSteps = GetComponents<BaseCalcScoreStep>(); // prende tutte le componenti di tipo Basecalcscorestep e le mette nella lista
+        foreach (BaseCalcScoreStep bcss in allSteps) { // da quelle compoenenti estrae il metodo per calcolare le stelline
             scoreCalculator.Add(bcss.step);
             Debug.Log("Added new bcss");
         }
@@ -41,8 +51,7 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = pause ? 0f : 1f;
         return previousScale;
     }
-    public float setWinPause(bool pause)
-    {
+    public float setWinPause(bool pause){
         float previousScale = customTimeScale;
         customTimeScale = pause ? 0f : 1f;
         return previousScale;
