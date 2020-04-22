@@ -50,6 +50,7 @@ public class FallingPlant : BasePlant
         // shaking della pianta e dello stelo. Fatto in late update almeno viene effettuato dopo che la pianta è cresciuta.
         //Si basa sull posizione del box collider dell'oggetto padre.
     {
+        if (!stopped) { 
         for (int j = 0; j < stemflower.Length; j++)
         {
 
@@ -74,10 +75,10 @@ public class FallingPlant : BasePlant
 
         }
 
-        
+        }
 
 
-        
+
 
 
     }
