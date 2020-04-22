@@ -25,7 +25,10 @@ public class NormalPlant : BasePlant{
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
     }
 
-    void Update(){
+    void Update()
+    {
+        if (stopped) return;
+
         if(budTimer> budTime)
         {
             bud.SetActive(false);
@@ -33,7 +36,7 @@ public class NormalPlant : BasePlant{
         }
         budTimer += Time.deltaTime;
 
-        if (transform.position.y < initY + maxHeigth && !stopped){
+        if (transform.position.y < initY + maxHeigth){
             checkObstacles();
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
             stem.transform.localScale += Vector3.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;

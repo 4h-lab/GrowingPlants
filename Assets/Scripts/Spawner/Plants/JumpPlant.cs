@@ -33,6 +33,8 @@ public class JumpPlant : BasePlant
 
     void Update()
     {
+        if (stopped) return;
+
         if (budTimer > budTime)
         {
             bud.SetActive(false);
@@ -40,7 +42,7 @@ public class JumpPlant : BasePlant
         }
         budTimer += Time.deltaTime;
 
-        if (transform.position.y < initY + maxHeigth && !stopped)
+        if (transform.position.y < initY + maxHeigth)
         {
             checkObstacles();
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
@@ -57,6 +59,7 @@ public class JumpPlant : BasePlant
         if (transform.position.y > initY + maxHeigth)
         {
             transform.position = new Vector2(transform.position.x, initY + maxHeigth);
+            stopped = true;
             apex = true;
         }
 
