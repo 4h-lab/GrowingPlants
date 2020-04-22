@@ -14,7 +14,7 @@ public class NormalPlant : BasePlant{
     private Vector3 point;
 
     void Start(){
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform");
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible"));
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
 
         ray_point = (this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.y + small_radius);
@@ -31,15 +31,20 @@ public class NormalPlant : BasePlant{
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
     }
 
-    void Update(){
+    void Update()
+    {
+        if (stopped) return;
+
         if(budTimer> budTime)
         {
             bud.SetActive(false);
             budTimer = 0;
         }
         budTimer += Time.deltaTime;
+
         var step = Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
         if (transform.position.y < initY + maxHeigth && !stopped){
+
             checkObstacles();
             
             transform.Translate(step);

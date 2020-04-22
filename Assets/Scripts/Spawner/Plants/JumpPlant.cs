@@ -16,7 +16,7 @@ public class JumpPlant : BasePlant
 
     void Start()
     {
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform");
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible"));
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
 
         stem = this.transform.GetChild(0).gameObject;
@@ -33,6 +33,12 @@ public class JumpPlant : BasePlant
 
     void Update()
     {
+        if (stopped)
+        {
+            apex = false;
+            return;
+        }
+
         if (budTimer > budTime)
         {
             bud.SetActive(false);
@@ -40,7 +46,7 @@ public class JumpPlant : BasePlant
         }
         budTimer += Time.deltaTime;
 
-        if (transform.position.y < initY + maxHeigth && !stopped)
+        if (transform.position.y < initY + maxHeigth)
         {
             checkObstacles();
             transform.Translate(Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale);
@@ -57,6 +63,7 @@ public class JumpPlant : BasePlant
         if (transform.position.y > initY + maxHeigth)
         {
             transform.position = new Vector2(transform.position.x, initY + maxHeigth);
+            stopped = true;
             apex = true;
         }
 
@@ -72,6 +79,7 @@ public class JumpPlant : BasePlant
         {
             Debug.Log(hit.collider.gameObject.name);
             this.stopped = true;
+            apex = true;
         }
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0f, ray_point, 0f), Vector2.up, 20 * small_radius, layermask_oneway);
@@ -102,7 +110,7 @@ public class JumpPlant : BasePlant
     {
         if (!apex) return;
         GameObject gob = collision.collider.gameObject;
-        if (gob.name == "Player")
+        if (gob.name == "Player" )
         {
             Debug.Log("found the player!");
             gob.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
