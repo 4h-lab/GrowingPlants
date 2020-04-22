@@ -16,7 +16,7 @@ public class JumpPlant : BasePlant
 
     void Start()
     {
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform");
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible"));
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
 
         stem = this.transform.GetChild(0).gameObject;
