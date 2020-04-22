@@ -16,6 +16,7 @@ public class FallingPlant : BasePlant
     private bool allDirectionForFlower = true;
     private GameObject[] stemflower = new GameObject[2];
 
+    private Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,9 +74,7 @@ public class FallingPlant : BasePlant
 
         }
 
-        var steps = shakeIntensityStem * Time.deltaTime;
-        var r = new Vector3(Random.value - .5f, 0f, 0f);
-        stemflower[0].transform.position = Vector3.MoveTowards(originalPosition[0], originalPosition[0] + r, steps);
+        
 
 
         

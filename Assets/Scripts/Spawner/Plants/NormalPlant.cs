@@ -11,10 +11,8 @@ public class NormalPlant : BasePlant{
     public float budTime = 2f;
     private float budTimer=0f;
 
-    private Vector3 point;
-
     void Start(){
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible"));
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform");
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
 
         ray_point = (this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.y + small_radius);
@@ -31,20 +29,15 @@ public class NormalPlant : BasePlant{
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
     }
 
-    void Update()
-    {
-        if (stopped) return;
-
+    void Update(){
         if(budTimer> budTime)
         {
             bud.SetActive(false);
             budTimer = 0;
         }
         budTimer += Time.deltaTime;
-
         var step = Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
         if (transform.position.y < initY + maxHeigth && !stopped){
-
             checkObstacles();
             
             transform.Translate(step);
@@ -68,13 +61,13 @@ public class NormalPlant : BasePlant{
     /// </summary>
     private void checkEdges()
     {
-        /*RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.x/2, ray_point, 0f), -Vector2.up, small_radius, ~layermask_passables);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(this.gameObject.GetComponent<BoxCollider2D>().bounds.extents.x/2, ray_point, 0f), -Vector2.up, small_radius, ~layermask_passables);
          if (hit.collider==null)
             {
             Debug.Log("wollo");
             stem.GetComponent<SpriteRenderer>().flipX =true;
-            }  */
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, GetComponent<BoxCollider2D>().bounds.extents * 2, 0, -Vector2.up, ~layermask_passables);
+            }  
+        /*RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, GetComponent<BoxCollider2D>().bounds.extents * 2, 0, -Vector2.up, ~layermask_passables);
         var d = new Dictionary<RaycastHit2D, float>();
         foreach (RaycastHit2D hit in hits)
         {
@@ -96,9 +89,7 @@ public class NormalPlant : BasePlant{
             angle = 2;
         }
         
-        stem.transform.eulerAngles = new Vector3(0f,0f,angle);
-
-        point = (Vector3)nearest.point;
+        stem.transform.eulerAngles = new Vector3(0f,0f,angle);*/
 
 
 
@@ -152,7 +143,6 @@ public class NormalPlant : BasePlant{
         Gizmos.color = Color.red;
         //Gizmos.DrawLine(this.transform.position, this.transform.position + new Vector3(0f, radius, 0f));
         Gizmos.DrawLine(transform.position + new Vector3(0f, ray_point, 0f), transform.position + new Vector3(0f, ray_point+0.01f, 0f));
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position , point);
+        
     }
 }
