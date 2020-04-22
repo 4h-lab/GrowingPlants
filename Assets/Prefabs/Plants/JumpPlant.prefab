@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 3297556054455174177}
   - component: {fileID: -8423536569603437237}
   m_Layer: 10
-  m_Name: Jump Plant
+  m_Name: JumpPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,6 +401,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeigth: 2
-  growthSpeed: 4
+  growthSpeed: 5
   budTime: 0.3
-  jumpForce: {x: 0, y: 10}
+  jumpForce: {x: 0, y: 12}
