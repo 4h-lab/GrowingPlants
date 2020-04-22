@@ -33,7 +33,11 @@ public class JumpPlant : BasePlant
 
     void Update()
     {
-        if (stopped) return;
+        if (stopped)
+        {
+            apex = false;
+            return;
+        }
 
         if (budTimer > budTime)
         {
@@ -75,6 +79,7 @@ public class JumpPlant : BasePlant
         {
             Debug.Log(hit.collider.gameObject.name);
             this.stopped = true;
+            apex = true;
         }
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0f, ray_point, 0f), Vector2.up, 20 * small_radius, layermask_oneway);
@@ -105,7 +110,7 @@ public class JumpPlant : BasePlant
     {
         if (!apex) return;
         GameObject gob = collision.collider.gameObject;
-        if (gob.name == "Player")
+        if (gob.name == "Player" )
         {
             Debug.Log("found the player!");
             gob.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
