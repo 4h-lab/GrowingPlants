@@ -41,8 +41,8 @@ public class WinSoil : MonoBehaviour
 
 
         string obtainedStars = "";
-        for (int i = 0; i < gm.calcScore(); i++) obtainedStars += " *";
-        
+        int score = gm.calcScore();
+        for (int i = 0; i < score; i++) obtainedStars += " *";
         
         
         popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
@@ -54,6 +54,12 @@ public class WinSoil : MonoBehaviour
         popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = formatGameTime(time);
         popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
 
+        // after everithing was calculated, prepare to save the game : 
+        int id = SceneManager.GetActiveScene().buildIndex; 
+        SavedGameData.gamedata.addOrModifyCompletedLevel(id, time, score); //add the completed level to the game data
+        SavedGameData.gamedata.unlockNewLevel(id+1); //unlock the next level
+
+        SaveLoadManager.save(SavedGameData.gamedata);
     }
 
     private static string formatGameTime(float seconds)
