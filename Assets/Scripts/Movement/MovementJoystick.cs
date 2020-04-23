@@ -25,10 +25,14 @@ public class MovementJoystick : MonoBehaviour
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 
+    private void Awake()
+    {
+        variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
+    }
     void Start() {
 
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
-        variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
+        
         var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
         cf.SetLayerMask(lm);
         mBody = this.GetComponent<Rigidbody2D>();
