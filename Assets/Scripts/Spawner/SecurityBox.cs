@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlatformEffector2D))]
-public class AngleUpdate : MonoBehaviour
+public class SecurityBox : MonoBehaviour
 {
     // Start is called before the first frame update
     Collider2D collider;
@@ -17,9 +16,9 @@ public class AngleUpdate : MonoBehaviour
     void Start()
     {
         collider = this.GetComponent<Collider2D>();
-        
-       bounds = this.GetComponent<Collider2D>().bounds;
-        
+
+        bounds = this.GetComponent<Collider2D>().bounds;
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerBounds = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>().bounds;
         platform = this.GetComponent<PlatformEffector2D>();
@@ -28,18 +27,26 @@ public class AngleUpdate : MonoBehaviour
     private void Update()
     {
         var playerPos = player.position.y - (playerBounds.extents.y);
-        var thisPos = this.transform.position.y + bounds.extents.y ;
+        var thisPos = this.transform.position.y + bounds.extents.y;
+        /*if (playerPos >= thisPos)
+        {
+            platform.surfaceArc = 180f;
+        }
+        else
+        {
+            platform.surfaceArc = 150f;
+        }*/
         if (playerPos >= thisPos)
         {
             /*Debug.Log(playerPos + "<=" + thisPos);
             Debug.DrawLine(player.position, playerPos * Vector3.up);
             Debug.DrawLine(this.transform.position, Vector3.up * thisPos);*/
             //collider.enabled = true;
-            platform.surfaceArc = 180f;
+            collider.isTrigger = false;
         }
         else
         {
-            platform.surfaceArc = 150f;
+            collider.isTrigger = true;
             //collider.enabled = false;
         }
     }
