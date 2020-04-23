@@ -66,7 +66,6 @@ public class SavedGameData {
         levels[id].unlocked = true;
         levels[id].bestTime = Mathf.Min(time, levels[id].bestTime);
         levels[id].stars = Mathf.Max(stars, levels[id].stars);
-        Debug.Log("LVELECS: " + levels.Count);
     }
 
     public void unlockNewLevel(int id) {

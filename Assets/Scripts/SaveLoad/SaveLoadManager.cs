@@ -17,11 +17,8 @@ public static  class SaveLoadManager {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Create(Application.persistentDataPath + savefilename); // application.persistentdatapath ritorna la directory dove unity può scrivere dati
 
-        Debug.Log("Something something");
         bf.Serialize(fs, sgd);
         fs.Close();
-
-        Debug.Log(sgd);
     }
 
     public static SavedGameData load() {
@@ -34,8 +31,6 @@ public static  class SaveLoadManager {
             FileStream fs = File.Open(Application.persistentDataPath + savefilename, FileMode.Open); // application.persistentdatapath ritorna la directory dove unity può scrivere dati
             sgd = (SavedGameData)bf.Deserialize(fs);
             fs.Close();
-
-            Debug.Log(sgd);
         }
         return sgd;
     }
