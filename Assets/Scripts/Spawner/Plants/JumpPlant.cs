@@ -9,12 +9,13 @@ public class JumpPlant : BasePlant
     [SerializeField] private Vector2 jumpForce;
 
     private bool apex;
+    private bool a;
+    private bool b;
     private int layermask_passables;
     private int layermask_oneway;
     private float budTimer = 0f;
     private GameObject stem;
     private GameObject bud;
-    private GameObject gob;
 
     void Start()
     {
@@ -31,19 +32,30 @@ public class JumpPlant : BasePlant
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
         apex = false;
-        gob = null;
+        a = false;
+        b = false;
+        player = null;
     }
 
     void Update()
     {
-        if (apex && gob)
+        /*if (a)
         {
-            gob.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
+            b = true;
+            a = false;
+        }*/
+
+
+        if (player && stopped && !apex)
+        {
+            player.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
+            apex = true;
         }
 
         if (stopped)
         {
-            apex = false;
+            apex = true;
+            //gameObject.layer = 9;
             return;
         }
 
@@ -72,10 +84,12 @@ public class JumpPlant : BasePlant
         {
             transform.position = new Vector2(transform.position.x, initY + maxHeigth);
             stopped = true;
-            apex = true;
         }
 
-        if (gob) gob = null;
+        if (player)
+        {
+            player = null;
+        }
     }
 
 
@@ -87,7 +101,6 @@ public class JumpPlant : BasePlant
         {
             Debug.Log(hit.collider.gameObject.name);
             this.stopped = true;
-            apex = true;
         }
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0f, ray_point, 0f), Vector2.up, 20 * small_radius, layermask_oneway);
@@ -117,7 +130,10 @@ public class JumpPlant : BasePlant
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (Vector2.Angle(collision.GetContact(0).normal, Vector2.down) > upArc) return;
-        gob = collision.collider.gameObject;
-        if (gob.name != "Player") gob = null;
+        if (collision.gameObject.name == "Player")
+        {
+            player = collision.collider.gameObject;
+            //a = true;
+        }
     }
 }

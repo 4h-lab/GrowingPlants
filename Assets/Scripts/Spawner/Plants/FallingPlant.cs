@@ -14,17 +14,19 @@ public class FallingPlant : BasePlant
     private bool moveFlower = true;
     [SerializeField]
     private bool allDirectionForFlower = true;
+    private Vector3[] originalPosition= new Vector3[2];
     private GameObject[] stemflower = new GameObject[2];
 
-    private Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
         stemflower[0] = this.transform.Find("Stem").gameObject;
         stemflower[1] = this.transform.Find("Flower").gameObject;
-
-        offset = this.transform.position- stemflower[1].transform.position;
-
+        originalPosition = new Vector3[this.transform.childCount];
+        for (int j = 0; j < stemflower.Length; j++)
+        {
+            originalPosition[j] = stemflower[j].transform.position;
+        }
         if (this.GetSpawner().GetComponent<FallingPlatformContactInteractable>() != null)
         {
 
@@ -47,38 +49,28 @@ public class FallingPlant : BasePlant
     }
 
     private void LateUpdate()
-        // shaking della pianta e dello stelo. Fatto in late update almeno viene effettuato dopo che la pianta è cresciuta.
-        //Si basa sull posizione del box collider dell'oggetto padre.
     {
-        if (!stopped) { 
         for (int j = 0; j < stemflower.Length; j++)
         {
-
-            
-            if (allDirectionForFlower && moveFlower)
-            {
-                float step = shakeIntensityFlower * Time.deltaTime;
-                //stemflower[1].transform.position = Vector3.MoveTowards(this.transform.position- offset, this.transform.position -offset + Random.insideUnitSphere, step);
-                stemflower[1].transform.position = this.transform.position - offset + (Random.insideUnitSphere * shakeIntensityFlower);
-            }
-            else if (!allDirectionForFlower && moveFlower)
-            {
-                var steppo = shakeIntensityFlower * Time.deltaTime;
-                var l = new Vector3(Random.value - .5f, 0f, 0f);
-                stemflower[1].transform.position = this.transform.position - offset + (l * shakeIntensityFlower);
-            }
-
-            var steps = shakeIntensityStem * Time.deltaTime;
-            var r = new Vector3(Random.value - .5f, 0f, 0f);
-            //stemflower[0].transform.position = Vector3.MoveTowards(originalPosition[0], originalPosition[0] + r, steps);
-            stemflower[0].transform.position = this.transform.position - offset + (r * shakeIntensityStem);
-
+            originalPosition[j] = stemflower[j].transform.position;
+        }
+        if (allDirectionForFlower && moveFlower) { 
+        float step = shakeIntensityFlower * Time.deltaTime;
+        stemflower[1].transform.position = Vector3.MoveTowards(originalPosition[1], originalPosition[1] + Random.insideUnitSphere, step);
+        }
+        else if(moveFlower)
+        {
+            var steppo = shakeIntensityFlower * Time.deltaTime;
+            var l = new Vector3(Random.value - .5f, 0f, 0f);
+            stemflower[1].transform.position = Vector3.MoveTowards(originalPosition[1], originalPosition[1] + l, steppo);
         }
 
-        }
+        var steps = shakeIntensityStem * Time.deltaTime;
+        var r = new Vector3(Random.value - .5f, 0f, 0f);
+        stemflower[0].transform.position = Vector3.MoveTowards(originalPosition[0], originalPosition[0] + r, steps);
 
 
-
+        
 
 
     }
