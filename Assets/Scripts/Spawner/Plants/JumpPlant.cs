@@ -5,6 +5,7 @@ using UnityEngine;
 public class JumpPlant : BasePlant
 {
     [SerializeField] private float budTime = 2f;
+    [SerializeField] private float upArc = 45.0f;//the maximum angle there can be between Vector2.down and the normal of a collision between the plant and a body for it to cunt as standing on the plant
     [SerializeField] private Vector2 jumpForce;
 
     private bool apex;
@@ -13,6 +14,7 @@ public class JumpPlant : BasePlant
     private float budTimer = 0f;
     private GameObject stem;
     private GameObject bud;
+    private GameObject gob;
 
     void Start()
     {
@@ -29,10 +31,16 @@ public class JumpPlant : BasePlant
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
         apex = false;
+        gob = null;
     }
 
     void Update()
     {
+        if (apex && gob)
+        {
+            gob.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
+        }
+
         if (stopped)
         {
             apex = false;
@@ -67,7 +75,7 @@ public class JumpPlant : BasePlant
             apex = true;
         }
 
-
+        if (gob) gob = null;
     }
 
 
@@ -108,13 +116,8 @@ public class JumpPlant : BasePlant
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!apex) return;
-        GameObject gob = collision.collider.gameObject;
-        if (gob.name == "Player" )
-        {
-            Debug.Log("found the player!");
-            gob.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
-        }
-        apex = false;
+        if (Vector2.Angle(collision.GetContact(0).normal, Vector2.down) > upArc) return;
+        gob = collision.collider.gameObject;
+        if (gob.name != "Player") gob = null;
     }
 }
