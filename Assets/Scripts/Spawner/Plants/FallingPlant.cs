@@ -7,29 +7,24 @@ public class FallingPlant : BasePlant
     public float fallDelay = 2f;
     private float timer = 0f;
     [SerializeField]
-    private float shakeIntensityStem = 0.1f;
+    private float shakeIntensityStem = 1f;
     [SerializeField]
-    private float shakeIntensityFlower = 0.1f;
+    private float shakeIntensityFlower = 0.5f;
     [SerializeField]
     private bool moveFlower = true;
     [SerializeField]
     private bool allDirectionForFlower = true;
-    private Vector3[] originalPosition= new Vector3[2];
     private GameObject[] stemflower = new GameObject[2];
 
     private Vector3 offset;
-
     // Start is called before the first frame update
     void Start()
     {
         stemflower[0] = this.transform.Find("Stem").gameObject;
         stemflower[1] = this.transform.Find("Flower").gameObject;
+
         offset = this.transform.position- stemflower[1].transform.position;
-        originalPosition = new Vector3[this.transform.childCount];
-        for (int j = 0; j < stemflower.Length; j++)
-        {
-            originalPosition[j] = stemflower[j].transform.position;
-        }
+
         if (this.GetSpawner().GetComponent<FallingPlatformContactInteractable>() != null)
         {
 
@@ -52,13 +47,14 @@ public class FallingPlant : BasePlant
     }
 
     private void LateUpdate()
+        // shaking della pianta e dello stelo. Fatto in late update almeno viene effettuato dopo che la pianta è cresciuta.
+        //Si basa sull posizione del box collider dell'oggetto padre.
     {
-        if (!stopped)
+        if (!stopped) { 
+        for (int j = 0; j < stemflower.Length; j++)
         {
-            for (int j = 0; j < stemflower.Length; j++)
-            {
-                originalPosition[j] = stemflower[j].transform.position;
-            }
+
+            
             if (allDirectionForFlower && moveFlower)
             {
                 float step = shakeIntensityFlower * Time.deltaTime;
@@ -76,7 +72,11 @@ public class FallingPlant : BasePlant
             var r = new Vector3(Random.value - .5f, 0f, 0f);
             //stemflower[0].transform.position = Vector3.MoveTowards(originalPosition[0], originalPosition[0] + r, steps);
             stemflower[0].transform.position = this.transform.position - offset + (r * shakeIntensityStem);
+
         }
+
+        }
+
 
 
 
