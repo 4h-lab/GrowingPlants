@@ -59,7 +59,7 @@ public class NormalPlant : BasePlant{
         
     }
     /// <summary>
-    /// soluzione temporanea per le piante che nascono nel nulla. controlla se a destra ci sono oggetti, se ci sono flippa sulle x la sprite
+    /// sposta lo stem della pianta in base alla distanza tra il giocatore e il punto in cui la pianta viene spawnata.
     /// </summary>
     private void checkEdges()
     {
@@ -111,7 +111,10 @@ public class NormalPlant : BasePlant{
 
 
     }
+    private void platformAngle()
+    {
 
+    }
     /// <summary>
     /// modifica la scala dell'oggetto stem in modo da simulare la crescita della pianta. La scala viene settata alla posizione della del bc2D.
     /// L'oggetto stem ha settato il pivot a top, quindi l'aumento di scala parte dall'alto e non dal centro. Molplica lo step per una costante in 
