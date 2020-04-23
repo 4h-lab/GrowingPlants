@@ -12,7 +12,7 @@ public class SavedGameData {
      * This class is a Singleton.
      */
      [System.Serializable]
-    private class LevelData { // this class will contains the informations pertaininig a single level
+    public class LevelData { // this class will contains the informations pertaininig a single level
         public int levelID; // the id of this level's scene.
         public bool unlocked;
         //public bool completed;
@@ -82,6 +82,13 @@ public class SavedGameData {
          *  completed the level yet
          */
         return (levels.ContainsKey(id)) ? levels[id].bestTime : -1f;
+    }
+
+    public Dictionary<int, LevelData> getLevelInfos() {
+        /* This method returns a shallow copy of the levels dictionary.
+         */
+        return new Dictionary<int, LevelData>(levels);
+
     }
 
     public override string ToString() {
