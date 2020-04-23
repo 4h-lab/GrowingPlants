@@ -13,23 +13,31 @@ public static  class SaveLoadManager {
 
     private static string savefilename = "/save.sv";
 
-    public static void save() {
+    public static void save(SavedGameData sgd) {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Create(Application.persistentDataPath + savefilename); // application.persistentdatapath ritorna la directory dove unity può scrivere dati
-        bf.Serialize(fs, xxxx); // todo: sostituire xxxx con il savegame
+
+        Debug.Log("Something something");
+        bf.Serialize(fs, sgd);
         fs.Close();
 
+        Debug.Log(sgd);
     }
 
-    public static void load() {
+    public static SavedGameData load() {
+        /* This method returns the save file, or null if the file doesn't exists
+         */
+
+        SavedGameData sgd = null;
         if (File.Exists(Application.persistentDataPath + savefilename)) {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs = File.Create(Application.persistentDataPath + savefilename); // application.persistentdatapath ritorna la directory dove unity può scrivere dati
-
-            //LOAD THE DATA
+            FileStream fs = File.Open(Application.persistentDataPath + savefilename, FileMode.Open); // application.persistentdatapath ritorna la directory dove unity può scrivere dati
+            sgd = (SavedGameData)bf.Deserialize(fs);
             fs.Close();
 
+            Debug.Log(sgd);
         }
+        return sgd;
     }
 
 }
