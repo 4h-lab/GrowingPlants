@@ -20,7 +20,7 @@ public class SavedGameData {
         public int stars;
 
         public LevelData(int id) {
-            levelID = id - SavedGameData.minLevelIndex;
+            levelID = id;//- SavedGameData.minLevelIndex;
             unlocked = false;
             bestTime = float.MaxValue;
             stars = 0;
