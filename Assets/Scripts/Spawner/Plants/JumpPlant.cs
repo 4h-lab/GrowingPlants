@@ -9,8 +9,7 @@ public class JumpPlant : BasePlant
     [SerializeField] private Vector2 jumpForce;
 
     private bool apex;
-    private bool a;
-    private bool b;
+    private bool playerFound;
     private int layermask_passables;
     private int layermask_oneway;
     private float budTimer = 0f;
@@ -32,24 +31,15 @@ public class JumpPlant : BasePlant
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
         apex = false;
-        a = false;
-        b = false;
+        playerFound = false;
         player = null;
     }
 
     void Update()
     {
-        /*if (a)
-        {
-            b = true;
-            a = false;
-        }*/
-
-
         if (player && stopped && !apex)
         {
             player.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
-            apex = true;
         }
 
         if (stopped)
@@ -86,9 +76,10 @@ public class JumpPlant : BasePlant
             stopped = true;
         }
 
-        if (player)
+        if (player && playerFound)
         {
             player = null;
+            playerFound = false;
         }
     }
 
@@ -133,7 +124,7 @@ public class JumpPlant : BasePlant
         if (collision.gameObject.name == "Player")
         {
             player = collision.collider.gameObject;
-            //a = true;
+            playerFound = true;
         }
     }
 }
