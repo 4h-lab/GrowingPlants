@@ -22,7 +22,7 @@ public class LoadLevels : MonoBehaviour
         foreach (KeyValuePair<int, SavedGameData.LevelData> level in levels)
         {
             var c = Instantiate(button, this.transform);
-            c.transform.GetComponentInChildren<TextMeshProUGUI>().text = level.Value.levelID.ToString();
+            c.transform.GetComponentInChildren<TextMeshProUGUI>().text = (level.Value.levelID-1).ToString();
             startView = () => loadLevel(level.Value.levelID);
             if (level.Value.unlocked) { 
             c.GetComponent<Button>().onClick.AddListener(startView);
