@@ -31,7 +31,8 @@ public class LoadLevels : MonoBehaviour
             {
                 c.GetComponentInChildren<Button>().interactable = false;
             }
-            for (int i=0;i<level.Value.stars; i++)
+            var stars = level.Value.stars > 3 ? 3 : level.Value.stars;
+            for (int i=0;i<stars; i++)
             {
                 c.transform.Find("Stars").transform.GetChild(i).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
             }
