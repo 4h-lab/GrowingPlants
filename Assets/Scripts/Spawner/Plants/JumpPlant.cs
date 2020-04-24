@@ -10,6 +10,7 @@ public class JumpPlant : BasePlant
 
     private bool apex;
     private bool playerFound;
+    private bool playerFoundAfter;
     private int layermask_passables;
     private int layermask_oneway;
     private float budTimer = 0f;
@@ -32,11 +33,22 @@ public class JumpPlant : BasePlant
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
         apex = false;
         playerFound = false;
+        playerFoundAfter = false;
         player = null;
     }
 
     void Update()
     {
+
+        string str = "start of Update " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
+        Debug.Log(str);
+
+        if (playerFound && !playerFoundAfter)
+        {
+            apex = false;
+            playerFoundAfter = true;
+        }
+
         if (player && stopped && !apex)
         {
             player.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
@@ -76,11 +88,14 @@ public class JumpPlant : BasePlant
             stopped = true;
         }
 
-        if (player && playerFound)
+        if (player && !playerFound)
         {
             player = null;
-            playerFound = false;
         }
+
+        str = "end of Update " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
+        Debug.Log(str);
+
     }
 
 
@@ -120,11 +135,16 @@ public class JumpPlant : BasePlant
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        playerFound = false;
         if (Vector2.Angle(collision.GetContact(0).normal, Vector2.down) > upArc) return;
         if (collision.gameObject.name == "Player")
         {
             player = collision.collider.gameObject;
             playerFound = true;
         }
+
+        string str = "Collision " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
+        Debug.Log(str);
+
     }
 }
