@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPlantRequest: 0
-  bufferFrames: 30
+  bufferFrames: 20
   shellRadius: 0.1
   spawnOffset: 0
 --- !u!114 &6219927600155200252

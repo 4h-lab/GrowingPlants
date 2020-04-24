@@ -472,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeigth: 2
-  growthSpeed: 4
+  growthSpeed: 4.5
   budTime: 0.3
+  upArc: 45
   jumpForce: {x: 0, y: 10}
