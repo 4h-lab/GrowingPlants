@@ -19,6 +19,8 @@ public static  class SaveLoadManager {
 
         bf.Serialize(fs, sgd);
         fs.Close();
+
+        Debug.Log(sgd);
     }
 
     public static SavedGameData load() {

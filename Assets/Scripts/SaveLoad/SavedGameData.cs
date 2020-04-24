@@ -20,7 +20,7 @@ public class SavedGameData {
         public int stars;
 
         public LevelData(int id) {
-            levelID = id;
+            levelID = id;//- SavedGameData.minLevelIndex;
             unlocked = false;
             bestTime = float.MaxValue;
             stars = 0;
@@ -40,7 +40,8 @@ public class SavedGameData {
 
     private static SavedGameData _sd = null;
     private static int maxLevelIndex = SceneManager.sceneCountInBuildSettings;
-    private static int minLevelIndex = SceneManager.GetSceneByName("LV1").buildIndex; //todo: sostituire questo con qualcosa di meno error-prone;
+
+    private static int minLevelIndex = 2;//SceneManager.GetSceneByName("Lv1").buildIndex; //todo: sostituire questo con qualcosa di meno error-prone;
 
     private Dictionary<int, LevelData> levels;
 
@@ -51,6 +52,7 @@ public class SavedGameData {
          */
         SavedGameData sgd = SaveLoadManager.load();
         if (sgd == null) sgd = new SavedGameData();
+        Debug.Log(sgd);
         return sgd;
     }
 
@@ -62,7 +64,7 @@ public class SavedGameData {
         levels[minLevelIndex].unlocked = true; // the first level should always be unlocked;
 
         Debug.Log("Number of levels : " + (maxLevelIndex - minLevelIndex) + " ( " + maxLevelIndex + " - " + minLevelIndex + " )");
-
+        
     }
 
     public void addOrModifyCompletedLevel(int id, float time, int stars) {
@@ -102,8 +104,8 @@ public class SavedGameData {
 
     public override string ToString() {
         string str = "-------------------------------------\n";
-        foreach (LevelData lv in levels.Values) {
-            str += lv.ToString() + "\n";
+        foreach (KeyValuePair<int, LevelData> lv in levels) {
+            str += "[" + lv.Key + "] >> " + lv.Value.ToString() + "\n";
         }
         return str + "-------------------------------------"; 
     }
