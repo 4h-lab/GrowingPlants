@@ -60,6 +60,9 @@ public class SavedGameData {
             levels.Add(i, new LevelData(i)); // fill the dictionary with all the levels;
         }
         levels[minLevelIndex].unlocked = true; // the first level should always be unlocked;
+
+        Debug.Log("Number of levels : " + (maxLevelIndex - minLevelIndex) + " ( " + maxLevelIndex + " - " + minLevelIndex + " )");
+
     }
 
     public void addOrModifyCompletedLevel(int id, float time, int stars) {

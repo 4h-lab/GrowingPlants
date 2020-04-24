@@ -105,23 +105,22 @@ public class MovementJoystick : MonoBehaviour
     }
 
     Vector2 projectRB(Vector2 dir){
-        float distance = dir.magnitude ; // ciao
+        float distance = dir.magnitude ; 
+        if (mBody != null) {
+            int count = mBody.Cast(dir, cf, hitBuffer, distance + 0.01f);
+            for (int i = 0; i < count; i++) {
+                Vector2 currentNormal = hitBuffer[i].normal;
 
-        int count = mBody.Cast(dir,cf, hitBuffer, distance + 0.01f);
-        for (int i = 0; i < count; i++){
-            Vector2 currentNormal = hitBuffer[i].normal;
+                float projection = Vector2.Dot(dir, currentNormal);
 
-            float projection = Vector2.Dot(dir, currentNormal);
-
-            Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
-            if (projection < 0){
-                //dir -= projection * currentNormal; //velocity
-                Debug.Log("dir: " + dir);
+                Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
+                if (projection < 0) {
+                    Debug.Log("dir: " + dir);
+                }
+                float modifiedDistance = hitBuffer[i].distance;
+                distance = modifiedDistance < distance ? modifiedDistance : distance - 0.01f;
             }
-            float modifiedDistance = hitBuffer[i].distance;
-            distance = modifiedDistance < distance ? modifiedDistance : distance - 0.01f;
         }
-        //Debug.Log("Distance: " + distance + "   " + dir.normalized);
         return dir.normalized * distance;
     }
 
