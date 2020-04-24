@@ -40,7 +40,7 @@ public class SavedGameData {
 
     private static SavedGameData _sd = null;
     private static int maxLevelIndex = SceneManager.sceneCountInBuildSettings;
-    private static int minLevelIndex = SceneManager.GetSceneByName("LV1").buildIndex; //todo: sostituire questo con qualcosa di meno error-prone;
+    private static int minLevelIndex = SceneManager.GetSceneByName("Lv1").buildIndex; //todo: sostituire questo con qualcosa di meno error-prone;
 
     private Dictionary<int, LevelData> levels;
 
