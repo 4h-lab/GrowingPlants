@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 
 [System.Serializable] // this is required to inform unity that this is a serializable class
@@ -39,6 +39,8 @@ public class SavedGameData {
     }
 
     private static SavedGameData _sd = null;
+    private static int maxLevelIndex = SceneManager.sceneCountInBuildSettings;
+    private static int minLevelIndex = SceneManager.GetSceneByName("LV1").buildIndex; //todo: sostituire questo con qualcosa di meno error-prone;
 
     private Dictionary<int, LevelData> levels;
 
@@ -53,7 +55,11 @@ public class SavedGameData {
     }
 
     private SavedGameData() { 
-        levels = new Dictionary<int, LevelData>();
+        levels = new Dictionary<int, LevelData>(maxLevelIndex - minLevelIndex);
+        for (int i = minLevelIndex; i < maxLevelIndex; i++) { // todo: modificare l'indice in modo che i corrisponda all indice della scena
+            levels.Add(i, new LevelData(i)); // fill the dictionary with all the levels;
+        }
+        levels[minLevelIndex].unlocked = true; // the first level should always be unlocked;
     }
 
     public void addOrModifyCompletedLevel(int id, float time, int stars) {
@@ -85,7 +91,7 @@ public class SavedGameData {
     }
 
     public Dictionary<int, LevelData> getLevelInfos() {
-        /* This method returns a shallow copy of the levels dictionary.
+        /* This method returns a shallow copy of the levels dictionary. 
          */
         return new Dictionary<int, LevelData>(levels);
 
