@@ -46,7 +46,7 @@ public class NormalPlant : BasePlant{
             var step = Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
             transform.Translate(step);
             growStem(step);
-            stem.transform.localScale += Vector3.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
+            //stem.transform.localScale += Vector3.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
             /*if (stem.transform.localScale.y > maxHeigth - this.GetComponent<BoxCollider2D>().bounds.extents.y ){
                 stem.transform.localScale = new Vector3(stem.transform.localScale.x, maxHeigth - this.GetComponent<BoxCollider2D>().bounds.extents.y * 2 * this.transform.localScale.y, stem.transform.localScale.z);
             }*/
@@ -103,9 +103,7 @@ public class NormalPlant : BasePlant{
             if (stem.transform.localScale.y <= maxHeigth - ray_point * 2)
             {
                 stem.transform.localScale += step * 0.9f;
-                //Debug.Log(stem.transform.localScale.y);
-                //stem.transform.localScale = new Vector3(stem.transform.localScale.x, maxHeigth - this.transform.Find("Flower").GetComponent<SpriteRenderer>().sprite.bounds.extents.y  /** this.transform.Find("Flower").localScale.y*/, stem.transform.localScale.z);
-                //stem.transform.localScale = new Vector3(stem.transform.localScale.x, maxHeigth - ray_point * 2, stem.transform.localScale.z);
+                
             }
         }
     }
