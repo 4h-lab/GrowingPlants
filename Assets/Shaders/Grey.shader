@@ -1,19 +1,18 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Sprites/Gray"
-{
-    Properties
-    {
+Shader "Sprites/Gray"{
+    Properties {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-        _Color("Tint", Color) = (1,1,1,1)
-        [MaterialToggle] PixelSnap("Pixel snap", Float) = 0
-        _EffectAmount("Effect Amount", Range(0, 1)) = 1.0
+		_Color("Tint", Color) = (1,1,1,1)
+		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
+		_EffectAmount("Effect Amount", Range(0, 1)) = 1.0
+		_PlayerPosX("PlayerPosX", Float) = 0
+		_PlayerPosY("PlayerPosY", Float) = 0
+
     }
 
-        SubShader
-        {
-            Tags
-            {
+        SubShader{
+            Tags{
                 "Queue" = "Transparent"
                 "IgnoreProjector" = "True"
                 "RenderType" = "Transparent"
@@ -47,6 +46,7 @@ Shader "Sprites/Gray"
                     float4 vertex   : SV_POSITION;
                     fixed4 color : COLOR;
                     half2 texcoord  : TEXCOORD0;
+					float4 worldSpacePos : TEXCOORD1;
                 };
 
                 fixed4 _Color;
@@ -61,16 +61,29 @@ Shader "Sprites/Gray"
                     OUT.vertex = UnityPixelSnap(OUT.vertex);
                     #endif
 
+					OUT.worldSpacePos = mul(unity_ObjectToWorld, IN.vertex); //this should calculate the vertex position in (unity)world coordinates
+
                     return OUT;
                 }
 
                 sampler2D _MainTex;
                 uniform float _EffectAmount;
+				uniform float _PlayerPosX;
+				uniform float _PlayerPosY;
+				//float2 pp = float2(_PlayerPosX, _PlayerPosY);
 
-                fixed4 frag(v2f IN) : COLOR
-                {
+                fixed4 frag(v2f IN) : COLOR{
+					//float rnd = frac(sin(dot(IN.texcoord, float2(12.9898, 78.233))) * 43758.5453123);
+
+					float x = 1;
+					float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2)IN.worldSpacePos);
+					if (d < 2) {
+						x = 0;
+					}
+
+
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)), _EffectAmount);
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),x);
                     texcol = texcol * IN.color;
                     return texcol;
                 }
