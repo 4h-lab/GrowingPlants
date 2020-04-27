@@ -25,7 +25,7 @@ public class WaterSpeedTrigger : MonoBehaviour
     void Start()
     {
         //transform.localPosition = Vector2.zero;
-        lastDist = Mathf.Infinity;
+        lastDist = player.transform.position.y - transform.position.y;
         if (greater_lesser == 0) greater_lesser = 1;
         Water = water.GetComponent<Water>();
     }
