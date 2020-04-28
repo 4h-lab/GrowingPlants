@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class WaterSpeedTrigger : MonoBehaviour
 {
-    [SerializeField] private bool oneTime;
-    //wether the trigger applies the opposite of speedMod if the player passes it in the opposite direction from the one intended
-    [SerializeField] private bool reversible;
-    [SerializeField] private float distanceFromPlayer;
-    //wether the trigger activates when the player is farther than distanceFromPlayer, or closer
-    [SerializeField] [Range(-1,1)] private int greater_lesser;
-    [SerializeField] private float speedMod;
-    //wether speedMod is added or assigned to risingSpeed
-    [SerializeField] private bool relative;
+    [SerializeField] [Tooltip("if true, deactivate the script once the Trigger is activate")]
+    private bool oneTime;
+    [SerializeField] [Tooltip("if true, the trigger applies the opposite of speedMod if the player passes it in the opposite direction from the one")]
+    private bool reversible;
+    [SerializeField] [Tooltip("how far from the GameObject sits the trigger treshold")]
+    private float distanceFromPlayer;
+    [SerializeField] [Tooltip("if -1, the trigger activates when the player gets closer than distanceFromPlayer, if 0 or 1, it activates when the player goes farther")]
+    [Range(-1,1)] private int greater_lesser;
+    [SerializeField] [Tooltip("the amount by which Water.risingSpeed is increased on activation")]
+    private float speedMod;
+    [SerializeField] [Tooltip("if true, speedMod is added or assigned to risingSpeed")]
+    private bool relative;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject water;
 
-    private float lastDist;
+    private float lastDist = 0.0f;
 
     private Water Water;
 
@@ -25,33 +28,34 @@ public class WaterSpeedTrigger : MonoBehaviour
     void Start()
     {
         //transform.localPosition = Vector2.zero;
-        lastDist = player.transform.position.y - transform.position.y;
         if (greater_lesser == 0) greater_lesser = 1;
         Water = water.GetComponent<Water>();
+        Trigger();
+        lastDist = player.transform.position.y - transform.position.y;
     }
 
     private void Trigger()
     {
-        string str = "Triggered!" + (player.transform.position.y - transform.position.y);
-        Debug.Log(str);
-        str = "speed is " + Water.risingSpeed;
-        Debug.Log(str);
+        //string str = "Triggered!" + (player.transform.position.y - transform.position.y);
+        //Debug.Log(str);
+        //str = "speed is " + Water.risingSpeed;
+        //Debug.Log(str);
         if ((player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser > 0)
         {
-            str = "entered ";
-            Debug.Log(str);
+            //str = "entered ";
+            //Debug.Log(str);
             if (relative) Water.risingSpeed += speedMod;
             else Water.risingSpeed = speedMod;
-            if (oneTime) this.gameObject.SetActive(false);
+            if (oneTime) this.enabled = false;
         }
-        else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0)
+        else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
         {
-            str = "exited ";
-            Debug.Log(str);
+            //str = "exited ";
+            //Debug.Log(str);
             Water.risingSpeed -= speedMod;
         }
-        str = "speed is now " + Water.risingSpeed;
-        Debug.Log(str);
+        //str = "speed is now " + Water.risingSpeed;
+        //Debug.Log(str);
     }
 
     // Update is called once per frame
