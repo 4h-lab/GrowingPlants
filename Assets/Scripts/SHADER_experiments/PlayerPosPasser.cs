@@ -16,17 +16,18 @@ public class PlayerPosPasser : MonoBehaviour{
         //m.SetFloatArray("_Points", new float[10]);
     }
     void Start(){
-        
         playert = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update(){
-        
+        m.SetFloat("_PlayerPosX", playert.position.x);
+        m.SetFloat("_PlayerPosY", playert.position.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        return;
         var c = this.transform.position + new Vector3(0f,GetComponent<SpriteRenderer>().sprite.bounds.extents.y,0f);
         m.SetFloat("_PlayerPosX", c.x);
         m.SetFloat("_PlayerPosY", c.y);
