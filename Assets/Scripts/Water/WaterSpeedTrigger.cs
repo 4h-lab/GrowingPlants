@@ -20,7 +20,7 @@ public class WaterSpeedTrigger : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject water;
 
-    private float lastDist;
+    private float lastDist = 0.0f;
 
     private Water Water;
 
@@ -28,10 +28,10 @@ public class WaterSpeedTrigger : MonoBehaviour
     void Start()
     {
         //transform.localPosition = Vector2.zero;
-        lastDist = player.transform.position.y - transform.position.y;
         if (greater_lesser == 0) greater_lesser = 1;
         Water = water.GetComponent<Water>();
         Trigger();
+        lastDist = player.transform.position.y - transform.position.y;
     }
 
     private void Trigger()
@@ -48,7 +48,7 @@ public class WaterSpeedTrigger : MonoBehaviour
             else Water.risingSpeed = speedMod;
             if (oneTime) this.enabled = false;
         }
-        else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0)
+        else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
         {
             //str = "exited ";
             //Debug.Log(str);
