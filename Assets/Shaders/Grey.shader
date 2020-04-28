@@ -93,18 +93,20 @@ Shader "Sprites/Gray"{
 					}
 					*/
 
-                    fixed stepFactor = step(_Ray, d);
-                    x = lerp(0, 1, stepFactor);
-
-					_Pixels[0][0] = 1;
-					_ColorMaskTexture[(float2)IN.texcoord] = 1; //tex2D(_ColorMaskTexture, IN.texcoord).r;
+                    /*fixed stepFactor = step(_Ray, d);
+                    x = lerp(0, 1, stepFactor);*/
+                    d = d - _Ray;
+                    d = clamp(d, 0, 1);
+					//_Pixels[0][0] = 1;
+					//_ColorMaskTexture[(float2)IN.texcoord] = 1; //tex2D(_ColorMaskTexture, IN.texcoord).r;
 
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-					float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
+					//float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
 					
 
 
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)), maskedPixelGrayscale);
+                    //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)), maskedPixelGrayscale);
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)), d);
                     texcol = texcol * IN.color;
                     return texcol;
                 }

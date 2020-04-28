@@ -6,7 +6,7 @@ public class PlayerPosPasser : MonoBehaviour{
     private Material m;
     private Transform playert;
     private float time = 0;
-    float speed = 2;
+    float speed = 10;
     float ray=4;
     // Start is called before the first frame update
 
@@ -27,8 +27,9 @@ public class PlayerPosPasser : MonoBehaviour{
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        m.SetFloat("_PlayerPosX", collision.GetContact(0).point.x);
-        m.SetFloat("_PlayerPosY", collision.GetContact(0).point.y);
+        var c = this.transform.position + new Vector3(0f,GetComponent<SpriteRenderer>().sprite.bounds.extents.y,0f);
+        m.SetFloat("_PlayerPosX", c.x);
+        m.SetFloat("_PlayerPosY", c.y);
         StartCoroutine(colorSprite());
         
     }
