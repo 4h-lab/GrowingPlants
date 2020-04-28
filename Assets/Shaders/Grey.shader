@@ -3,11 +3,12 @@
 Shader "Sprites/Gray"{
     Properties {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-		_Color("Tint", Color) = (1,1,1,1)
-		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
-		_EffectAmount("Effect Amount", Range(0, 1)) = 1.0
-		_PlayerPosX("PlayerPosX", Float) = 0
-		_PlayerPosY("PlayerPosY", Float) = 0
+        _Color("Tint", Color) = (1,1,1,1)
+        [MaterialToggle] PixelSnap("Pixel snap", Float) = 0
+        _EffectAmount("Effect Amount", Range(0, 1)) = 1.0
+        _PlayerPosX("PlayerPosX", Float) = 0
+        _PlayerPosY("PlayerPosY", Float) = 0
+        _Ray("Ray",Float) = 0
 
     }
 
@@ -70,6 +71,7 @@ Shader "Sprites/Gray"{
                 uniform float _EffectAmount;
 				uniform float _PlayerPosX;
 				uniform float _PlayerPosY;
+                uniform float _Ray;
 				//float2 pp = float2(_PlayerPosX, _PlayerPosY);
 
                 fixed4 frag(v2f IN) : COLOR{
@@ -77,11 +79,9 @@ Shader "Sprites/Gray"{
 
 					float x = 1;
 					float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2)IN.worldSpacePos);
-					if (d < 2) {
-						x = 0;
-					}
-
-
+					
+                    fixed stepFactor = step(_Ray, d);
+                    x = lerp(0, 1, stepFactor);
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
                     texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),x);
                     texcol = texcol * IN.color;
