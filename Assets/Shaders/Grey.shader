@@ -4,15 +4,13 @@ Shader "Sprites/Gray"{
     Properties {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		_ColorMaskTexture("Lighting Mask (RGB)", 2D) = "white" {}
-
-		_PassMap("Sprite Texture", 2D) = "black" {}
-
+		_Pixels("Pixels", 2DArray) = "" {}
+		//_ColorMask = 
 
 		_Color("Tint", Color) = (1,1,1,1)
         [MaterialToggle] PixelSnap("Pixel snap", Float) = 0
         _EffectAmount("Effect Amount", Range(0, 1)) = 1.0
-        
-		_PlayerPosX("PlayerPosX", Float) = 0
+        _PlayerPosX("PlayerPosX", Float) = 0
         _PlayerPosY("PlayerPosY", Float) = 0
         _Ray("Ray",Float) = 0
 
@@ -74,14 +72,12 @@ Shader "Sprites/Gray"{
                 }
 
                 sampler2D _MainTex;
-				sampler2D _PassMap;
+				sampler2D _ColorMaskTexture;
                 uniform float _EffectAmount;
 				uniform float _PlayerPosX;
 				uniform float _PlayerPosY;
                 uniform float _Ray;
 				float2 _Pixels;
-
-				
 
 				//float2 pp = float2(_PlayerPosX, _PlayerPosY);
 
@@ -89,7 +85,7 @@ Shader "Sprites/Gray"{
 					//float rnd = frac(sin(dot(IN.texcoord, float2(12.9898, 78.233))) * 43758.5453123);
 
 					float x = 1;
-					float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2) IN.worldSpacePos);
+					float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2)IN.worldSpacePos);
 					
 					/*
 					if (d < 1) {
@@ -104,12 +100,10 @@ Shader "Sprites/Gray"{
                     d = clamp(pow(d,2), 0, 5);
 
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-
 					//float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
                     half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
                     texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
                     texcol = texcol * IN.color;
-
                     return texcol;
                 }
             ENDCG
