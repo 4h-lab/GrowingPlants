@@ -3,48 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPosPasser : MonoBehaviour{
+    public Shader drawShader;
+    private RenderTexture passMap; //this represent sort of an "heigthmap" that contains informations about the player passage.; basically is a texture in which every pixel color represent how near the player passed from a specific point
+
+
+    private Material drawM;
     private Material m;
     private Transform playert;
+
     private float time = 0;
     float speed = 10;
     float ray=4;
-    // Start is called before the first frame update
 
-    private void Awake()
-    {
+    // Start is called before the first frame update
+    private void Awake(){
+        drawM = new Material(drawShader);
+        drawM.SetColor("_ColorTint", Color.red); 
         m = gameObject.GetComponent<Renderer>().material;
-        //m.SetFloatArray("_Points", new float[10]);
     }
+
     void Start(){
         playert = GameObject.FindGameObjectWithTag("Player").transform;
+        passMap = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGBFloat);
+        m.SetTexture("_MainTex", passMap);
     }
 
     // Update is called once per frame
     void Update(){
+        drawM.SetFloat("_PlayerPosX", playert.position.x);
+        drawM.SetFloat("_PlayerPosY", playert.position.y);
+
         m.SetFloat("_PlayerPosX", playert.position.x);
         m.SetFloat("_PlayerPosY", playert.position.y);
+
+
+        /*
+        RenderTexture tmp = RenderTexture.GetTemporary(256, 256, 0, RenderTextureFormat.ARGBFloat);
+        Graphics.Blit(passMap, tmp);
+        Graphics.Blit(tmp, passMap, drawM);
+        RenderTexture.ReleaseTemporary(tmp);
+        */
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        return;
-        var c = this.transform.position + new Vector3(0f,GetComponent<SpriteRenderer>().sprite.bounds.extents.y,0f);
-        m.SetFloat("_PlayerPosX", c.x);
-        m.SetFloat("_PlayerPosY", c.y);
-        StartCoroutine(colorSprite());
-        
-    }
-
-
-    IEnumerator colorSprite()
-    {
-        while (time < ray) { 
-        time += Time.deltaTime*speed;
-        m.SetFloat("_Ray", time);
-        yield return new WaitForEndOfFrame();
-        }
-        time = 0;
-        yield return null;
-
+    private void OnGUI() {
+        GUI.DrawTexture(new Rect(0, 0, 128, 128), passMap, ScaleMode.ScaleToFit, false, 1);
     }
 }
