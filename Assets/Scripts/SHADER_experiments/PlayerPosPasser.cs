@@ -22,8 +22,10 @@ public class PlayerPosPasser : MonoBehaviour{
     private void Awake()
     {
         updater_m = new Material(updater);
-        updater_m.SetVector("_SpritePos", new Vector4(transform.position.x, transform.position.y, 0, 0));
-        updater_m.SetVector("_SpriteScale", new Vector4(GetComponent<SpriteRenderer>().sprite.bounds.extents.x, GetComponent<SpriteRenderer>().sprite.bounds.extents.y, 0, 0));
+        float cornerX = GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
+        float cornerY = GetComponent<SpriteRenderer>().sprite.bounds.extents.y;
+        updater_m.SetVector("_SpritePos", new Vector4(transform.position.x - cornerX, transform.position.y - cornerY, 0, 0));
+        updater_m.SetVector("_SpriteScale", new Vector4(2*cornerX, 2*cornerY, 0, 0));
 
 
         m = gameObject.GetComponent<Renderer>().material;

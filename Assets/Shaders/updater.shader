@@ -68,7 +68,7 @@
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, IN.texcoord);
 
-				float2 __pos = (IN.texcoord * _SpriteScale) + (float2)_SpritePos;
+				float2 __pos = float2(IN.texcoord.x * _SpriteScale.x, IN.texcoord.y * _SpriteScale.y)+ (float2)_SpritePos;
 				//float2 __pos = (IN.texcoord) + (float2)_SpritePos;
 
 				//float d = clamp(distance(__pos, _Point.xy), 0, 5);
