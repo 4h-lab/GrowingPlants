@@ -74,11 +74,12 @@ Shader "Sprites/Gray"{
                 }
 
                 sampler2D _MainTex;
-				sampler2D _PassMap;
+				sampler2D _ColorMaskTexture;
                 uniform float _EffectAmount;
 				uniform float _PlayerPosX;
 				uniform float _PlayerPosY;
                 uniform float _Ray;
+
 				float2 _Pixels;
 
 				

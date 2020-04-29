@@ -191,7 +191,7 @@ PrefabInstance:
     - target: {fileID: 72050997753880552, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 72050997753880556, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
@@ -570,10 +570,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e01074231eacb4ab7b286e760f011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
+  drawShader: {fileID: 0}
   x: 0
-  updater: {fileID: 4800000, guid: 4f0f33b094422e54b9affe6f57fbc2ae, type: 3}
-
+  updater: {fileID: 0}
 --- !u!61 &303965327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -697,10 +696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e01074231eacb4ab7b286e760f011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
+  drawShader: {fileID: 0}
   x: 220
-  updater: {fileID: 4800000, guid: 4f0f33b094422e54b9affe6f57fbc2ae, type: 3}
-
+  updater: {fileID: 0}
 --- !u!61 &447032647
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1069,7 +1067,7 @@ PrefabInstance:
     - target: {fileID: 72050997753880552, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 72050997753880556, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
@@ -1343,10 +1341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e01074231eacb4ab7b286e760f011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
+  drawShader: {fileID: 0}
   x: 110
-  updater: {fileID: 4800000, guid: 4f0f33b094422e54b9affe6f57fbc2ae, type: 3}
-
+  updater: {fileID: 0}
 --- !u!61 &1130874824
 BoxCollider2D:
   m_ObjectHideFlags: 0
