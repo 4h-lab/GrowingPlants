@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPosPasser : MonoBehaviour{
+    public Shader drawShader;
+    private RenderTexture passMap; //this represent sort of an "heigthmap" that contains informations about the player passage.; basically is a texture in which every pixel color represent how near the player passed from a specific point
+
+
+    private Material drawM;
     private Material m;
     private Transform playert;
+
     private float time = 0;
     float speed = 10;
     float ray=4;
+
 
     public float x = 0;
 
@@ -25,13 +32,18 @@ public class PlayerPosPasser : MonoBehaviour{
         //m.SetFloatArray("_Points", new float[10]);
         lightmap = new RenderTexture(GetComponent<SpriteRenderer>().sprite.texture.width, GetComponent<SpriteRenderer>().sprite.texture.height, 0, RenderTextureFormat.ARGBFloat);
         m.SetTexture("_ColorMaskTexture", lightmap);
+
     }
+
     void Start(){
         playert = GameObject.FindGameObjectWithTag("Player").transform;
+        passMap = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGBFloat);
+        m.SetTexture("_MainTex", passMap);
     }
 
     // Update is called once per frame
     void Update(){
+
         //updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
         
     }
@@ -48,16 +60,16 @@ public class PlayerPosPasser : MonoBehaviour{
     }
 
 
-    IEnumerator colorSprite()
-    {
-        while (time < ray) { 
-        time += Time.deltaTime*speed;
-        m.SetFloat("_Ray", time);
-        yield return new WaitForEndOfFrame();
-        }
-        time = 0;
-        yield return null;
+        /*
+        RenderTexture tmp = RenderTexture.GetTemporary(256, 256, 0, RenderTextureFormat.ARGBFloat);
+        Graphics.Blit(passMap, tmp);
+        Graphics.Blit(tmp, passMap, drawM);
+        RenderTexture.ReleaseTemporary(tmp);
+        */
+    }
 
+    private void OnGUI() {
+        GUI.DrawTexture(new Rect(0, 0, 128, 128), passMap, ScaleMode.ScaleToFit, false, 1);
     }
 
     private void OnGUI()
