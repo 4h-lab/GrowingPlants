@@ -21,6 +21,14 @@ public class TurnOffBlock : BaseSwitchable
 
     public int ChangeState(BaseSwitcher switcher)
     {
-        return 0;
+        if (currentState == 1) TurnOff();
+        return currentState;
+    }
+
+    public void TurnOff()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        currentState = 0;
     }
 }

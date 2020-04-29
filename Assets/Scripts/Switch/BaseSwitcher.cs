@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BaseSwitcher : MonoBehaviour
 {
+    [SerializeField] protected GameObject[] connected_switchables;
+
     void Start()
     {
         

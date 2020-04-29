@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class BaseSwitchable : MonoBehaviour
 {
-    [SerializeField] private int startingState = 0;
-    [SerializeField] private int currentState;
+    [SerializeField] protected int startingState = 0;
+    [SerializeField] protected int currentState;
 
     void Start()
     {

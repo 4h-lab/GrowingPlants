@@ -13,7 +13,7 @@ public class NormalPlant : BasePlant{
     private float budTimer=0f;
 
     void Start(){
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible"));
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible")) | (1 << LayerMask.NameToLayer("switch"));
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
         layermask_stem = (1 << LayerMask.NameToLayer("plant")) | (1 << 2);
 

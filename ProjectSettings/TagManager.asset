@@ -8,6 +8,7 @@ TagManager:
   - Controls
   - GameManager
   - CameraBoundary
+  - Plant
   layers:
   - Default
   - TransparentFX
