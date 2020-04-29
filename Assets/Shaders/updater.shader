@@ -3,9 +3,11 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Point("Point", Vector) = (0,0,0,0)
-        _Color("_Color",Color) = (1,0,0,0)
-        _Ray("Ray",Float) = 0
+		_Point("Point", Vector) = (0,0,0,0)
+		_Color("_Color",Color) = (1,0,0,0)
+		_Ray("Ray",Float) = 0
+		_SpritePos("Position", Vector) = (0,0,0,0)
+		_SpriteScale("Scale", Vector) = (1,1,0,0)
     }
     SubShader
     {
@@ -43,15 +45,17 @@
             sampler2D _MainTex;
             fixed4 _Point;
             float  _Ray;
+			float4 _SpritePos;
+			float4 _SpriteScale;
 
             v2f vert(appdata_t IN)
             {
                 v2f OUT;
                 OUT.vertex = UnityObjectToClipPos(IN.vertex);
                 OUT.texcoord = IN.texcoord;
-#ifdef PIXELSNAP_ON
+				#ifdef PIXELSNAP_ON
                 OUT.vertex = UnityPixelSnap(OUT.vertex);
-#endif
+				#endif
 
                 OUT.worldSpacePos = mul(unity_ObjectToWorld, IN.vertex); //this should calculate the vertex position in (unity)world coordinates
 
@@ -62,8 +66,21 @@
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, IN.texcoord);
-                float d = pow(saturate(distance(IN.texcoord.xy,_Point.xy)),2);
-                
+
+				float2 __pos = (IN.texcoord * _SpriteScale) + (float2)_SpritePos;
+				//float2 __pos = (IN.texcoord) + (float2)_SpritePos;
+
+				//float d = clamp(distance(__pos, _Point.xy), 0, 5);
+				//d = d / 5;
+				//float d = saturate(distance(__pos, _Point.xy));
+				float d = 3 - clamp(distance(__pos, _Point.xy), 0, 3);
+				d = d / 3;
+				d = pow(d, 2);
+                //float d = clamp(distance(IN.worldSpacePos,_Point.xy),1,0);
+				//float d = saturate(distance(IN.texcoord.xy, _Point.xy));
+				//float d = saturate(distance(IN.worldSpacePos.xy, _Point.xy));
+
+
                 fixed4 draw = _Color * (d *1);
                 return saturate(col+draw);
             }
