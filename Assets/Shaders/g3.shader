@@ -2,8 +2,8 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-		_ColorTint("ColorTint", Color) = (1,0,0,1)
+        _MainTex ("Texture", 2D) = "black" {}
+		_ColorTint("ColorTint", Color) = (1,0,0,0)
 
 		_PlayerPosX("PlayerPosX", Float) = 0
 		_PlayerPosY("PlayerPosY", Float) = 0
@@ -57,11 +57,13 @@
 				float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2) i.worldSpacePos);
 				d = clamp(d, 0, 5);
 
+
+				
 				if (d < 2) {
-					return _ColorTint;
+					return saturate((1,0,0,1) + tex2D(_MainTex, i.uv));//float4(1,0,0,1);
 				}
 				else {
-					return float4(0, 1, 0, 1);
+					return tex2D(_MainTex, i.uv);//float4(0, 1, 0, 1);
 				}
 
             }
