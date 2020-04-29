@@ -8,7 +8,8 @@
 		_Ray("Ray",Float) = 0
 		_SpritePos("Position", Vector) = (0,0,0,0)
 		_SpriteScale("Scale", Vector) = (1,1,0,0)
-    }
+		
+	}
     SubShader
     {
         Tags { "RenderType"="Opaque" }
@@ -73,13 +74,12 @@
 				//float d = clamp(distance(__pos, _Point.xy), 0, 5);
 				//d = d / 5;
 				//float d = saturate(distance(__pos, _Point.xy));
-				float d = 2- clamp(distance(__pos, _Point.xy), 0, 2);
-				d = d / 2;
+				float d = _Ray - clamp(distance(__pos, _Point.xy), 0, _Ray);
+				d = d / _Ray;
 				d = pow(d, 2);
                 //float d = clamp(distance(IN.worldSpacePos,_Point.xy),1,0);
 				//float d = saturate(distance(IN.texcoord.xy, _Point.xy));
 				//float d = saturate(distance(IN.worldSpacePos.xy, _Point.xy));
-
 
                 fixed4 draw = _Color * (d *1);
                 return saturate(col+draw);

@@ -35,14 +35,14 @@ public class PlayerPosPasser : MonoBehaviour{
         playert = GameObject.FindGameObjectWithTag("Player").transform;
 
         //m.SetTexture("_Colorm", passMap);
-
+        StartCoroutine(colorSprite());
     }
 
     // Update is called once per frame
     void Update(){
         //updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
-        
+        updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));
         RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
         Graphics.Blit(lightmap, temp);
         Graphics.Blit(temp, lightmap, updater_m);
@@ -63,25 +63,15 @@ public class PlayerPosPasser : MonoBehaviour{
     }
 
     IEnumerator colorSprite(){
-        
-        while (time < ray) {
-            updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
-
-            time += Time.deltaTime*speed;
-            m.SetFloat("_Ray", time);
+        updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
+        updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));
+        RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
+        Graphics.Blit(lightmap, temp);
+        Graphics.Blit(temp, lightmap, updater_m);
+        RenderTexture.ReleaseTemporary(temp);
         yield return new WaitForSeconds(.1f);
-        }
-        time = 0;
-        yield break;
-
     }
 
-    /*
-    RenderTexture tmp = RenderTexture.GetTemporary(256, 256, 0, RenderTextureFormat.ARGBFloat);
-    Graphics.Blit(passMap, tmp);
-    Graphics.Blit(tmp, passMap, drawM);
-    RenderTexture.ReleaseTemporary(tmp);
-    */
     private void OnGUI(){
         float ratio = GetComponent<SpriteRenderer>().sprite.texture.height / GetComponent<SpriteRenderer>().sprite.texture.width;
 
