@@ -1,7 +1,7 @@
 ﻿Shader "Unlit/grey2"{
 	Properties{
 			_MainTex("MainTex", 2D) = "white" {}
-			_ColorTint("ColorTint", Color) = (1,0,0,1)
+			_ColorTint("ColorTint", Color) = (1,1,1,1)
 
 
 			//_PassMap("Sprite Texture", 2D) = "black" {}
@@ -14,15 +14,15 @@
 		Tags{
 			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
-			"RenderType" = "Transparent"
 			"PreviewType" = "Plane"
 			"CanUseSpriteAtlas" = "True"
+			"RenderType" = "Opaque"
+
 		}
 
 		Cull Off
 		Lighting Off
 		ZWrite Off
-		Fog { Mode Off }
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass{
@@ -81,7 +81,14 @@
 				half4 texcol = tex2D(_MainTex, IN.texcoord);
 				//float maskedPixelGrayscale = tex2D(_MainTex, IN.texcoord).r; //questo dovrebbe campionare la maschera
 				//d = max(d, maskedPixelGrayscale);
-				texcol.rgb = lerp(texcol.rgb, _ColorTint, d);
+				//texcol.rgb = lerp(texcol.rgb, _ColorTint, d);
+
+				if (d < 2) {
+					return _ColorTint;
+				}
+				else {
+					return float4(0, 1, 0, 1);
+				}
 
 
 				return texcol;

@@ -3,6 +3,11 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+		_ColorTint("ColorTint", Color) = (1,0,0,1)
+
+		_PlayerPosX("PlayerPosX", Float) = 0
+		_PlayerPosY("PlayerPosY", Float) = 0
+
     }
     SubShader
     {
@@ -14,9 +19,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            // make fog work
-            #pragma multi_compile_fog
-
+            
             #include "UnityCG.cginc"
 
             struct appdata
@@ -28,29 +31,39 @@
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+				float4 worldSpacePos : TEXCOORD1;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            v2f vert (appdata v)
-            {
+            v2f vert (appdata v){
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
+
+				o.worldSpacePos = mul(unity_ObjectToWorld, v.vertex); //this should calculate the vertex position in (unity)world coordinates
+
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+			uniform float _PlayerPosX;
+			uniform float _PlayerPosY;
+			uniform float _ColorTint;
+
+
+            fixed4 frag (v2f i) : SV_Target{
+				float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2) i.worldSpacePos);
+				d = clamp(d, 0, 5);
+
+				if (d < 2) {
+					return _ColorTint;
+				}
+				else {
+					return float4(0, 1, 0, 1);
+				}
+
             }
             ENDCG
         }
