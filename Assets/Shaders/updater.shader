@@ -73,8 +73,8 @@
 				//float d = clamp(distance(__pos, _Point.xy), 0, 5);
 				//d = d / 5;
 				//float d = saturate(distance(__pos, _Point.xy));
-				float d = 3 - clamp(distance(__pos, _Point.xy), 0, 3);
-				d = d / 3;
+				float d = 2- clamp(distance(__pos, _Point.xy), 0, 2);
+				d = d / 2;
 				d = pow(d, 2);
                 //float d = clamp(distance(IN.worldSpacePos,_Point.xy),1,0);
 				//float d = saturate(distance(IN.texcoord.xy, _Point.xy));
