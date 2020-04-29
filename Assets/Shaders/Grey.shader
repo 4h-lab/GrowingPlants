@@ -97,7 +97,7 @@ Shader "Sprites/Gray"{
                     x = lerp(0, 1, stepFactor);*/
                     
 					//d = d - _Ray;
-                    d = clamp(d*d, 0, 5);
+                    d = clamp(pow(d,2), 0, 5);
 
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
 					//float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
