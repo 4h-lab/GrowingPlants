@@ -77,6 +77,7 @@ Shader "Sprites/Gray"{
 				uniform float _PlayerPosX;
 				uniform float _PlayerPosY;
                 uniform float _Ray;
+
 				float2 _Pixels;
 
 				//float2 pp = float2(_PlayerPosX, _PlayerPosY);

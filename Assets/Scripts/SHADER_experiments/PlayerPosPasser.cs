@@ -8,7 +8,8 @@ public class PlayerPosPasser : MonoBehaviour{
     private float time = 0;
     float speed = 10;
     float ray=4;
-
+    [SerializeField]
+    
     public float x = 0;
 
     [SerializeField]
@@ -28,6 +29,9 @@ public class PlayerPosPasser : MonoBehaviour{
     }
     void Start(){
         playert = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //m.SetTexture("_Colorm", passMap);
+
     }
 
     // Update is called once per frame
@@ -59,8 +63,19 @@ public class PlayerPosPasser : MonoBehaviour{
 
     }
 
+    /*
+    RenderTexture tmp = RenderTexture.GetTemporary(256, 256, 0, RenderTextureFormat.ARGBFloat);
+    Graphics.Blit(passMap, tmp);
+    Graphics.Blit(tmp, passMap, drawM);
+    RenderTexture.ReleaseTemporary(tmp);
+    */
     private void OnGUI()
     {
-        GUI.DrawTexture(new Rect(x, 0, 100, 100), lightmap,ScaleMode.ScaleToFit,false,1);
+        GUI.DrawTexture(new Rect(x, 0, 100, 100), lightmap, ScaleMode.ScaleToFit, false, 1);
     }
 }
+
+    
+
+    
+
