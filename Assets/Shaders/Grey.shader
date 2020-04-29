@@ -104,10 +104,12 @@ Shader "Sprites/Gray"{
                     d = clamp(pow(d,2), 0, 5);
 
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-					
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)), d/5);
-					
-					texcol = texcol * IN.color;
+
+					//float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
+                    half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
+                    texcol = texcol * IN.color;
+
                     return texcol;
                 }
             ENDCG
