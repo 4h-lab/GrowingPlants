@@ -8,12 +8,23 @@ public class PlayerPosPasser : MonoBehaviour{
     private float time = 0;
     float speed = 10;
     float ray=4;
+
+    public float x = 0;
+
+    [SerializeField]
+    private Shader updater;
+    private Material updater_m;
+
+    private RenderTexture lightmap;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        updater_m = new Material(updater);
         m = gameObject.GetComponent<Renderer>().material;
         //m.SetFloatArray("_Points", new float[10]);
+        lightmap = new RenderTexture(GetComponent<SpriteRenderer>().sprite.texture.width, GetComponent<SpriteRenderer>().sprite.texture.height, 0, RenderTextureFormat.ARGBFloat);
+        m.SetTexture("_ColorMaskTexture", lightmap);
     }
     void Start(){
         playert = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,18 +32,19 @@ public class PlayerPosPasser : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        m.SetFloat("_PlayerPosX", playert.position.x);
-        m.SetFloat("_PlayerPosY", playert.position.y);
+        //updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        return;
-        var c = this.transform.position + new Vector3(0f,GetComponent<SpriteRenderer>().sprite.bounds.extents.y,0f);
-        m.SetFloat("_PlayerPosX", c.x);
-        m.SetFloat("_PlayerPosY", c.y);
-        StartCoroutine(colorSprite());
+        updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
         
+        RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
+        Graphics.Blit(lightmap, temp);
+        Graphics.Blit(temp, lightmap, updater_m);
+        RenderTexture.ReleaseTemporary(temp);
+
     }
 
 
@@ -46,5 +58,10 @@ public class PlayerPosPasser : MonoBehaviour{
         time = 0;
         yield return null;
 
+    }
+
+    private void OnGUI()
+    {
+        GUI.DrawTexture(new Rect(x, 0, 100, 100), lightmap,ScaleMode.ScaleToFit,false,1);
     }
 }

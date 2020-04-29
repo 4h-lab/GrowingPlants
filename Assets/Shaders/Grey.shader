@@ -101,8 +101,8 @@ Shader "Sprites/Gray"{
 
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
 					//float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
-					
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)), d/5);
+                    half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
                     texcol = texcol * IN.color;
                     return texcol;
                 }
