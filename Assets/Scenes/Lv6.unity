@@ -1374,7 +1374,7 @@ PrefabInstance:
     - target: {fileID: 4145389255285149902, guid: ea0594feb3391f54d9126da8fdf6c82a,
         type: 3}
       propertyPath: m_Name
-      value: WaterSpeedTrigger
+      value: WaterSpeedTrigger_decrease
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea0594feb3391f54d9126da8fdf6c82a, type: 3}
