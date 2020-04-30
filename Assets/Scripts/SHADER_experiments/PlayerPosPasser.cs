@@ -40,6 +40,10 @@ public class PlayerPosPasser : MonoBehaviour{
 
         //m.SetTexture("_Colorm", passMap);
         //StartCoroutine(colorSprite());
+        //StartCoroutine(spray());
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
         StartCoroutine(spray());
     }
 
@@ -72,7 +76,7 @@ public class PlayerPosPasser : MonoBehaviour{
             float[] arrray = new float[10];
             for (int i = 0; i < 10; i++) {
                 arr[i] = new Vector4(Random.Range(0, 1f), Random.Range(0, 1f), 0, 0);
-                arrray[i] = Random.Range(.1f, .4f);
+                arrray[i] = Random.Range(.001f, .01f);
             }
             updater_m.SetVectorArray("_DaPoints", arr);
             updater_m.SetFloatArray("_DaRays", arrray);

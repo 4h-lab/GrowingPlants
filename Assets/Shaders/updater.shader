@@ -71,7 +71,13 @@
 				float d = 99999999;
 				fixed4 col = tex2D(_MainTex, IN.texcoord);
 				for (int i = 0; i < _DaPointsCount; i++) {
-					float dist = max(distance(IN.texcoord, (float2)_DaPoints[i]) - _DaRays[i], 0);
+					//float dist = max(pow(distance(IN.texcoord, (float2)_DaPoints[i]) - _DaRays[i], 3 ) , 0);
+
+					float dist = distance(IN.texcoord, (float2)_DaPoints[i]) - _DaRays[i];
+					dist = max(dist, 0);
+					dist = pow(dist, 0.3);
+
+
 					d = min(d, dist);
 					//d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
 					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), _DaRays[i]));
