@@ -191,12 +191,12 @@ PrefabInstance:
     - target: {fileID: 72050997753880559, guid: 7f1c932c77956bf4f8919bd90d7d5eb8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 2.37
       objectReference: {fileID: 0}
     - target: {fileID: 72050997753880559, guid: 7f1c932c77956bf4f8919bd90d7d5eb8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.62
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 72050997753880559, guid: 7f1c932c77956bf4f8919bd90d7d5eb8,
         type: 3}
@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 7289946385246184577}
+    - target: {fileID: 1902606923, guid: 88ebee692d26735409d89c8f07409b23, type: 3}
+      propertyPath: cf.layerMask.m_Bits
+      value: 16641
+      objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200257, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_Enabled
@@ -369,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.48
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
@@ -410,6 +414,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600237785759, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.08716984
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600237785759, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.08251411
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600237785759, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.43900678
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219927600237785759, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.12198645
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ebee692d26735409d89c8f07409b23, type: 3}
@@ -546,6 +570,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StandardSoil (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 72050997753880552, guid: 1308ec8e5d4552945907fa9b805803c0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 72050997753880559, guid: 1308ec8e5d4552945907fa9b805803c0,
         type: 3}
