@@ -39,11 +39,15 @@ public class PlayerPosPasser : MonoBehaviour{
         playert = GameObject.FindGameObjectWithTag("Player").transform;
 
         //m.SetTexture("_Colorm", passMap);
-        StartCoroutine(colorSprite());
+        //StartCoroutine(colorSprite());
+        StartCoroutine(spray());
     }
 
     // Update is called once per frame
     void Update(){
+
+
+        /*
         Vector4[] arr = new Vector4[10];
         for (int i = 0; i < 10; i++) {
             arr[i] = new Vector4(Random.Range(0,1f), Random.Range(0, 1f), 0, 0);
@@ -59,8 +63,24 @@ public class PlayerPosPasser : MonoBehaviour{
         Graphics.Blit(lightmap, temp);
         Graphics.Blit(temp, lightmap, updater_m);
         RenderTexture.ReleaseTemporary(temp);
+        */
     }
-    
+
+    IEnumerator spray() {
+        Vector4[] arr = new Vector4[10];
+        for (int i = 0; i < 10; i++) {
+            arr[i] = new Vector4(Random.Range(0, 1f), Random.Range(0, 1f), 0, 0);
+        }
+        updater_m.SetVectorArray("_DaPoints", arr);
+        updater_m.SetInt("_DaPointsCount", 10);
+
+        RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
+        Graphics.Blit(lightmap, temp);
+        Graphics.Blit(temp, lightmap, updater_m);
+        RenderTexture.ReleaseTemporary(temp);
+
+        yield return new WaitForSeconds(.1f);
+    }
 
     IEnumerator colorSprite(){
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
