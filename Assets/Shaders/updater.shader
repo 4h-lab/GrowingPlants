@@ -71,7 +71,7 @@
 					d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
 				}
 
-				fixed4 draw = _Color * (d * .5);
+				fixed4 draw = _Color * (pow((1 - d), 5) * .5);
 				return saturate( draw);
 
 
