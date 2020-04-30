@@ -50,8 +50,7 @@ public class PlayerPosPasser : MonoBehaviour{
         }
         updater_m.SetVectorArray("_DaPoints", arr);
         updater_m.SetInt("_DaPointsCount", 10);
-
-
+        
 
         //updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
@@ -61,19 +60,7 @@ public class PlayerPosPasser : MonoBehaviour{
         Graphics.Blit(temp, lightmap, updater_m);
         RenderTexture.ReleaseTemporary(temp);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision){
-        return;
-        updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0,0));
-        
-        RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
-        Graphics.Blit(lightmap, temp);
-        Graphics.Blit(temp, lightmap, updater_m);
-        RenderTexture.ReleaseTemporary(temp);
-
-        //StartCoroutine(colorSprite());
-
-    }
+    
 
     IEnumerator colorSprite(){
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
