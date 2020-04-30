@@ -22,7 +22,7 @@ public class TurnOffBlock : BaseSwitchable
 
     public void TurnOff()
     {
-        Color tmpColor = gameObject.GetComponent<SpriteRenderer>().color;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         ChangeColorPlaceholder(); //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
         currentState = 0;
     }
