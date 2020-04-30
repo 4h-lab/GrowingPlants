@@ -8,6 +8,7 @@ TagManager:
   - Controls
   - GameManager
   - CameraBoundary
+  - Plant
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - passable
   - player
   - collectible
-  - 
+  - switch
   - 
   - 
   - 

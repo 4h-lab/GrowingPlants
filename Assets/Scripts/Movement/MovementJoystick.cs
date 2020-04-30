@@ -33,8 +33,8 @@ public class MovementJoystick : MonoBehaviour
 
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         
-        var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
-        cf.SetLayerMask(lm);
+        //var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
+        //cf.SetLayerMask(lm);
         mBody = this.GetComponent<Rigidbody2D>();
         oldPos = this.transform.position;
         playerCollider = this.GetComponent<BoxCollider2D>();
