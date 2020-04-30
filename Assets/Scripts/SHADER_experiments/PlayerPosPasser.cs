@@ -56,7 +56,7 @@ public class PlayerPosPasser : MonoBehaviour{
         updater_m.SetInt("_DaPointsCount", 10);
         
 
-        //updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
+        //updater_m.SetVector("_Point", this .GetComponent<SpriteRenderer>().sprite.bounds.center);
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
         updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));
         RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
@@ -69,10 +69,13 @@ public class PlayerPosPasser : MonoBehaviour{
     IEnumerator spray() {
         while (true) {
             Vector4[] arr = new Vector4[10];
+            float[] arrray = new float[10];
             for (int i = 0; i < 10; i++) {
                 arr[i] = new Vector4(Random.Range(0, 1f), Random.Range(0, 1f), 0, 0);
+                arrray[i] = Random.Range(.1f, .4f);
             }
             updater_m.SetVectorArray("_DaPoints", arr);
+            updater_m.SetFloatArray("_DaRays", arrray);
             updater_m.SetInt("_DaPointsCount", 10);
 
             RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
@@ -80,7 +83,7 @@ public class PlayerPosPasser : MonoBehaviour{
             Graphics.Blit(temp, lightmap, updater_m);
             RenderTexture.ReleaseTemporary(temp);
 
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

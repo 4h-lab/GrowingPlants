@@ -19,6 +19,8 @@
 				CGPROGRAM
 				int _DaPointsCount = 20;
 				float2 _DaPoints[20];
+				float2 _DaRays[20];
+				
             #pragma vertex vert
             #pragma fragment frag
             
@@ -47,6 +49,7 @@
             sampler2D _MainTex;
             fixed4 _Point;
             float  _Ray;
+
 			float4 _SpritePos;
 			float4 _SpriteScale;
 
@@ -68,11 +71,16 @@
 				float d = 99999999;
 				fixed4 col = tex2D(_MainTex, IN.texcoord);
 				for (int i = 0; i < _DaPointsCount; i++) {
-					d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
+					float dist = max(distance(IN.texcoord, (float2)_DaPoints[i]) - _DaRays[i], 0);
+					d = min(d, dist);
+					//d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
+					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), _DaRays[i]));
+					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), 5));
 				}
 
-				fixed4 draw = _Color * (pow((1 - d), 5) * .5);
-				return saturate( draw);
+				//fixed4 draw = _Color * (pow((1 - d), 3));
+				fixed4 draw = _Color * (1 - d);
+				return saturate(col+ draw);
 
 
 				/*
