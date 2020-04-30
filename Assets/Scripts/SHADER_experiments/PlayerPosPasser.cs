@@ -78,9 +78,14 @@ public class PlayerPosPasser : MonoBehaviour{
                 arr[i] = new Vector4(Random.Range(0, 1f), Random.Range(0, 1f), 0, 0);
                 arrray[i] = Random.Range(.001f, .01f);
             }
-            updater_m.SetVectorArray("_DaPoints", arr);
-            updater_m.SetFloatArray("_DaRays", arrray);
-            updater_m.SetInt("_DaPointsCount", 10);
+            Shader.SetGlobalVectorArray("_DaPoints", arr);
+            Shader.SetGlobalFloatArray("_DaRays", arrray);
+            Shader.SetGlobalInt("_DaPointsCount", 10);
+            
+            
+            //updater_m.SetVectorArray("_DaPoints", arr);
+            //updater_m.SetFloatArray("_DaRays", arrray);
+            //updater_m.SetInt("_DaPointsCount", 10);
 
             RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
             Graphics.Blit(lightmap, temp);
