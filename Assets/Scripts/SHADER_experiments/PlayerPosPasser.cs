@@ -18,7 +18,7 @@ public class PlayerPosPasser : MonoBehaviour{
 
     private RenderTexture lightmap;
     // Start is called before the first frame update
-    private static bool col =false;
+    private static bool col =true;
     
     private void Awake()
     {
@@ -68,7 +68,7 @@ public class PlayerPosPasser : MonoBehaviour{
         updater_m.SetInt("_DaPointsCount", 10);
         
 
-        //updater_m.SetVector("_Point", this .GetComponent<SpriteRenderer>().sprite.bounds.center);
+        //updater_m.SetVector("_Point", this .GetComponent<SpriteRenderer>().sp rite.bounds.center);
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
         updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));
         RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
@@ -84,20 +84,17 @@ public class PlayerPosPasser : MonoBehaviour{
             Vector4[] arr = new Vector4[4];
             float[] arrray = new float[4];
 
-            arr[0] = new Vector4(playert.position.x + 2, playert.position.y - 2, 0,0);
-            arr[1] = new Vector4(playert.position.x + 1, playert.position.y - 2, 0, 0);
+            arr[0] = new Vector4(playert.position.x, playert.position.y-.5f, 0,0);
+            arr[1] = new Vector4(playert.position.x, playert.position.y - 2, 0, 0);
             arr[2] = new Vector4(playert.position.x, playert.position.y + 2, 0, 0);
-            arr[3] = new Vector4(playert.position.x + .5f, playert.position.y - 3, 0, 0);
+            arr[3] = new Vector4(playert.position.x, playert.position.y - 3, 0, 0);
 
             arrray[0] = 1f;
-            arrray[1] = 1.5f;
-            arrray[2] = 2f;
+            arrray[1] = .5f;
+            arrray[2] = .2f;
             arrray[3] = 1f;
 
-
-
-
-
+            
 
             Shader.SetGlobalVectorArray("_DaPoints", arr);
             Shader.SetGlobalFloatArray("_DaRays", arrray);

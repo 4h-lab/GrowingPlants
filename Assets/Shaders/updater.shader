@@ -19,7 +19,7 @@
 				CGPROGRAM
 				int _DaPointsCount = 20;
 				float2 _DaPoints[20];
-				float2 _DaRays[20];
+				float _DaRays[20];
 				
             #pragma vertex vert
             #pragma fragment frag
@@ -80,13 +80,12 @@
 					float dist = distance(__pos, (float2)_DaPoints[i]) - _DaRays[i];
 					dist = max(dist, 0);
 					dist = pow(dist, 0.3);
-
-
 					d = min(d, dist);
 					//d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
 					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), _DaRays[i]));
 					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), 5));
 				}
+				d = min(d, 1);
 
 				//fixed4 draw = _Color * (pow((1 - d), 3));
 				fixed4 draw = _Color * (1 - d);
