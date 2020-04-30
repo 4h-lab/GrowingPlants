@@ -81,21 +81,14 @@ public class PlayerPosPasser : MonoBehaviour{
     IEnumerator spray() {
         while (true) {
             //col = true;
-            Vector4[] arr = new Vector4[4];
-            float[] arrray = new float[4];
+            Vector4[] arr = new Vector4[10];
+            float[] arrray = new float[10];
 
-            arr[0] = new Vector4(playert.position.x, playert.position.y-.5f, 0,0);
-            arr[1] = new Vector4(playert.position.x, playert.position.y - 2, 0, 0);
-            arr[2] = new Vector4(playert.position.x, playert.position.y + 2, 0, 0);
-            arr[3] = new Vector4(playert.position.x, playert.position.y - 3, 0, 0);
-
-            arrray[0] = 1f;
-            arrray[1] = .5f;
-            arrray[2] = .2f;
-            arrray[3] = 1f;
-
+            for (int i = 0; i < 10; i++) {
+                arr[i] = new Vector4(playert.position.x + Random.Range(-2f, 2f), playert.position.y + Random.Range(-2f, 2f), 0, 0);
+                arrray[i] = Mathf.Min(1f / Vector2.Distance((Vector2)arr[i], (Vector2)playert.position), 1f);
+            }
             
-
             Shader.SetGlobalVectorArray("_DaPoints", arr);
             Shader.SetGlobalFloatArray("_DaRays", arrray);
             Shader.SetGlobalInt("_DaPointsCount", 10);

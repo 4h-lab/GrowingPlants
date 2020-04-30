@@ -3,7 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-		_Point("Point", Vector) = (0,0,0,0)
+		_Point("Point", Vector) = (-9999999999,-9999999999,0,0)
 		_Color("_Color",Color) = (1,0,0,0)
 		_Ray("Ray",Float) = 0
 		_SpritePos("Position", Vector) = (0,0,0,0)
@@ -90,7 +90,7 @@
 				//fixed4 draw = _Color * (pow((1 - d), 3));
 				fixed4 draw = _Color * (1 - d);
 
-				draw = max(col, draw + (0.05*col));
+				draw = max(col, draw) + (0.05*col);
 
 				return saturate(draw);
 
