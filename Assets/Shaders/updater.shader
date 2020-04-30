@@ -73,7 +73,11 @@
 				for (int i = 0; i < _DaPointsCount; i++) {
 					//float dist = max(pow(distance(IN.texcoord, (float2)_DaPoints[i]) - _DaRays[i], 3 ) , 0);
 
-					float dist = distance(IN.texcoord, (float2)_DaPoints[i]) - _DaRays[i];
+					float2 __pos = float2(IN.texcoord.x * _SpriteScale.x, IN.texcoord.y * _SpriteScale.y) + (float2)_SpritePos;
+					//__pos = (IN.texcoord) + (float2)_SpritePos;
+
+
+					float dist = distance(__pos, (float2)_DaPoints[i]) - _DaRays[i];
 					dist = max(dist, 0);
 					dist = pow(dist, 0.3);
 
@@ -87,10 +91,9 @@
 				//fixed4 draw = _Color * (pow((1 - d), 3));
 				fixed4 draw = _Color * (1 - d);
 
-				draw = max(draw, col);
+				draw = max(col, draw + (0.05*col));
 
 				return saturate(draw);
-
 
 				/*
                 // sample the texture
