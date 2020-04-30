@@ -86,7 +86,10 @@
 
 				//fixed4 draw = _Color * (pow((1 - d), 3));
 				fixed4 draw = _Color * (1 - d);
-				return saturate(col+ draw);
+
+				draw = max(draw, col);
+
+				return saturate(draw);
 
 
 				/*

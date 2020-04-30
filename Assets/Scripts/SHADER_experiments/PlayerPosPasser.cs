@@ -18,7 +18,8 @@ public class PlayerPosPasser : MonoBehaviour{
 
     private RenderTexture lightmap;
     // Start is called before the first frame update
-
+    private static bool col =false;
+    
     private void Awake()
     {
         updater_m = new Material(updater);
@@ -49,6 +50,13 @@ public class PlayerPosPasser : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+        if (col) {
+            RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
+            Graphics.Blit(lightmap, temp);
+            Graphics.Blit(temp, lightmap, updater_m);
+            RenderTexture.ReleaseTemporary(temp);
+
+        }
 
 
         /*
@@ -72,6 +80,7 @@ public class PlayerPosPasser : MonoBehaviour{
 
     IEnumerator spray() {
         while (true) {
+            //col = true;
             Vector4[] arr = new Vector4[10];
             float[] arrray = new float[10];
             for (int i = 0; i < 10; i++) {
@@ -81,16 +90,15 @@ public class PlayerPosPasser : MonoBehaviour{
             Shader.SetGlobalVectorArray("_DaPoints", arr);
             Shader.SetGlobalFloatArray("_DaRays", arrray);
             Shader.SetGlobalInt("_DaPointsCount", 10);
-            
-            
-            //updater_m.SetVectorArray("_DaPoints", arr);
-            //updater_m.SetFloatArray("_DaRays", arrray);
-            //updater_m.SetInt("_DaPointsCount", 10);
 
             RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
             Graphics.Blit(lightmap, temp);
             Graphics.Blit(temp, lightmap, updater_m);
             RenderTexture.ReleaseTemporary(temp);
+
+            //updater_m.SetVectorArray("_DaPoints", arr);
+            //updater_m.SetFloatArray("_DaRays", arrray);
+            //updater_m.SetInt("_DaPointsCount", 10);
 
             yield return new WaitForSeconds(1f);
         }
