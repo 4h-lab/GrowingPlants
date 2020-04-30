@@ -28,6 +28,8 @@ public class PlayerPosPasser : MonoBehaviour{
         updater_m.SetVector("_SpriteScale", new Vector4(2*cornerX, 2*cornerY, 0, 0));
 
 
+
+
         m = gameObject.GetComponent<Renderer>().material;
         //m.SetFloatArray("_Points", new float[10]);
         lightmap = new RenderTexture(GetComponent<SpriteRenderer>().sprite.texture.width, GetComponent<SpriteRenderer>().sprite.texture.height, 0, RenderTextureFormat.ARGBFloat);
@@ -42,6 +44,15 @@ public class PlayerPosPasser : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+        Vector4[] arr = new Vector4[10];
+        for (int i = 0; i < 10; i++) {
+            arr[i] = new Vector4(Random.Range(0,1f), Random.Range(0, 1f), 0, 0);
+        }
+        updater_m.SetVectorArray("_DaPoints", arr);
+        updater_m.SetInt("_DaPointsCount", 10);
+
+
+
         //updater_m.SetVector("_Point", this.GetComponent<SpriteRenderer>().sprite.bounds.center);
         updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
         updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));

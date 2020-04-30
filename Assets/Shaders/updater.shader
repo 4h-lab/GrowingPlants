@@ -8,16 +8,17 @@
 		_Ray("Ray",Float) = 0
 		_SpritePos("Position", Vector) = (0,0,0,0)
 		_SpriteScale("Scale", Vector) = (1,1,0,0)
-		
 	}
-    SubShader
-    {
-        Tags { "RenderType"="Opaque" }
-        LOD 100
+		SubShader
+		{
+			Tags { "RenderType" = "Opaque" }
+			LOD 100
 
-        Pass
-        {
-            CGPROGRAM
+			Pass
+			{
+				CGPROGRAM
+				int _DaPointsCount = 20;
+				float2 _DaPoints[20];
             #pragma vertex vert
             #pragma fragment frag
             
@@ -41,7 +42,7 @@
 
             fixed4 _Color;
 
-                
+               
 
             sampler2D _MainTex;
             fixed4 _Point;
@@ -63,8 +64,18 @@
                 return OUT;
             }
 
-            fixed4 frag (v2f IN) : COLOR
-            {
+            fixed4 frag (v2f IN) : COLOR{
+				float d = 99999999;
+				fixed4 col = tex2D(_MainTex, IN.texcoord);
+				for (int i = 0; i < _DaPointsCount; i++) {
+					d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
+				}
+
+				fixed4 draw = _Color * (d * .5);
+				return saturate( draw);
+
+
+				/*
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, IN.texcoord);
 
@@ -83,6 +94,7 @@
 
                 fixed4 draw = _Color * (d *1);
                 return saturate(col+draw);
+				*/
             }
             ENDCG
         }
