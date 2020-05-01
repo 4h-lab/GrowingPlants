@@ -8,7 +8,7 @@ public class TestTransitionToLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadSceneAsync("Lv1");
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 
     // Update is called once per frame
