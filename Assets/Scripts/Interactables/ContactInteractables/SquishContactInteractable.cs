@@ -24,8 +24,12 @@ public class SquishContactInteractable : BaseContactInteractables
     }
 
     public override void interact(GameObject initiator){
-        if ((((1 << initiator.layer) & passableObjectsLayerMask) != 0) || !Gr.GetGrounded()) return;
-
+        if ((((1 << initiator.layer) & passableObjectsLayerMask) != 0)) return;
+        if (!Gr.GetGrounded())
+        {
+            Debug.Log("player bonked their head but is not grounded");
+            return;
+        }
         Health h = this.transform.parent.GetComponent<Health>();
         if (h != null) h.damage(damage);
 
