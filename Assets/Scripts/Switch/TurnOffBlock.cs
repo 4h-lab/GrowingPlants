@@ -9,11 +9,6 @@ public class TurnOffBlock : BaseSwitchable
 
     }
 
-    void Update()
-    {
-        
-    }
-
     public override int ChangeState(BaseSwitcher switcher, string action)
     {
         return ChangeState(switcher);
@@ -27,8 +22,16 @@ public class TurnOffBlock : BaseSwitchable
 
     public void TurnOff()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        ChangeColorPlaceholder(); //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
         currentState = 0;
+    }
+
+    //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
+    private void ChangeColorPlaceholder()
+    {
+        Color tmpColor = gameObject.GetComponent<SpriteRenderer>().color;
+        tmpColor.a = 0.5f;
+        gameObject.GetComponent<SpriteRenderer>().color = tmpColor;
     }
 }

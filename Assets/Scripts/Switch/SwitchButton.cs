@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class SwitchButton : BaseSwitcher
 {
-    [SerializeField] string switchAction = "UNUSED";
     [SerializeField] string[] pressedBy;
+    [SerializeField] string switchAction = "UNUSED";
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public override void StartSwitcher() { }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("COLLISION");
+        if (currentState == 0) PressButton(collision);
+    }
+
+    public void PressButton(Collider2D collision)
+    {
         if (pressFilter(collision.gameObject.tag))
         {
-            Debug.Log("OK");
             for (int i = 0; i < connected_switchables.Length; i++)
             {
                 BaseSwitchable switchable = connected_switchables[i].GetComponent<BaseSwitchable>();
@@ -32,6 +27,8 @@ public class SwitchButton : BaseSwitcher
                 }
             }
         }
+        currentState = 1;
+        ChangeColorPlaceholder(); //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
     }
 
     //checks if an object tag is contained in the pressedBy array
@@ -40,5 +37,13 @@ public class SwitchButton : BaseSwitcher
     {
         for (int i = 0; i < pressedBy.Length; i++) if (collisionTag.Equals(pressedBy[i])) return true;
         return false;
+    }
+
+    //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
+    private void ChangeColorPlaceholder()
+    {
+        Color tmpColor = gameObject.GetComponent<SpriteRenderer>().color;
+        tmpColor.a = 0.5f;
+        gameObject.GetComponent<SpriteRenderer>().color = tmpColor;
     }
 }
