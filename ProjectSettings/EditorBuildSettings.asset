@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/blackscreen.unity
+    guid: 52561deeb62758e45a19f3c9313395a3
+  - enabled: 1
     path: Assets/Scenes/Menu/MainMenu.unity
     guid: c0883b28e0acfcc429d1bbe4c385df5f
   - enabled: 1
