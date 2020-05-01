@@ -17,10 +17,14 @@ public class SquishContactInteractable : BaseContactInteractables
         ee = FindObjectOfType<EventEmitter>();
         ee.on("win", DeactivateSquishCollision);
 
+<<<<<<< HEAD
         passableObjectsLayerMask = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("collectible")) |(1<<2);
 
         player = GameObject.Find("Player");
         Gr = player.GetComponent<IsGrounded>();
+=======
+        passableObjectsLayerMask = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("collectible")) | (1<<2);
+>>>>>>> b58a1a3e62cdaddf5d064fb53e9ced1895b3ce22
     }
 
     public override void interact(GameObject initiator){
