@@ -75,13 +75,16 @@ public class FallingPlant : BasePlant
 
     }
     void FallAfterDelay(){
+        
         for (int j = 0; j < this.transform.childCount; j++)
         {
             var r = this.gameObject.transform.GetChild(j).gameObject.AddComponent<Rigidbody2D>();
             r.AddForce(Random.insideUnitSphere*2, ForceMode2D.Impulse);
         }
-        
         Destroy(this.gameObject.GetComponent<BoxCollider2D>());
+        Destroy(this.gameObject.GetComponentInChildren<BoxCollider2D>());
+        Destroy(this.transform.Find("SecurityBox").gameObject);
+
     }
 
 
