@@ -41,79 +41,29 @@ public class PlayerPosPasser : MonoBehaviour{
 
         //m.SetTexture("_Colorm", passMap);
         //StartCoroutine(colorSprite());
-        //StartCoroutine(spray());
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) {
         StartCoroutine(spray());
     }
-
+    
     // Update is called once per frame
     void Update(){
-        if (col) {
+        if (!col) {
             RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
             Graphics.Blit(lightmap, temp);
             Graphics.Blit(temp, lightmap, updater_m);
             RenderTexture.ReleaseTemporary(temp);
 
         }
-
-
-        /*
-        Vector4[] arr = new Vector4[10];
-        for (int i = 0; i < 10; i++) {
-            arr[i] = new Vector4(Random.Range(0,1f), Random.Range(0, 1f), 0, 0);
-        }
-        updater_m.SetVectorArray("_DaPoints", arr);
-        updater_m.SetInt("_DaPointsCount", 10);
-        
-
-        //updater_m.SetVector("_Point", this .GetComponent<SpriteRenderer>().sp rite.bounds.center);
-        updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
-        updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));
-        RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
-        Graphics.Blit(lightmap, temp);
-        Graphics.Blit(temp, lightmap, updater_m);
-        RenderTexture.ReleaseTemporary(temp);
-        */
     }
 
     IEnumerator spray() {
         while (true) {
-            //col = true;
-            Vector4[] arr = new Vector4[10];
-            float[] arrray = new float[10];
-
-            for (int i = 0; i < 10; i++) {
-                arr[i] = new Vector4(playert.position.x + Random.Range(-2f, 2f), playert.position.y + Random.Range(-2f, 2f), 0, 0);
-                arrray[i] = Mathf.Min(1f / Vector2.Distance((Vector2)arr[i], (Vector2)playert.position), 1f);
-            }
-            
-            Shader.SetGlobalVectorArray("_DaPoints", arr);
-            Shader.SetGlobalFloatArray("_DaRays", arrray);
-            Shader.SetGlobalInt("_DaPointsCount", 10);
-
             RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
             Graphics.Blit(lightmap, temp);
             Graphics.Blit(temp, lightmap, updater_m);
             RenderTexture.ReleaseTemporary(temp);
 
-            //updater_m.SetVectorArray("_DaPoints", arr);
-            //updater_m.SetFloatArray("_DaRays", arrray);
-            //updater_m.SetInt("_DaPointsCount", 10);
-
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.1f);
         }
-    }
-
-    IEnumerator colorSprite(){
-        updater_m.SetVector("_Point", new Vector4(playert.position.x, playert.position.y, 0, 0));
-        updater_m.SetFloat("_Ray", Random.Range(.5f, 3.5f));
-        RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
-        Graphics.Blit(lightmap, temp);
-        Graphics.Blit(temp, lightmap, updater_m);
-        RenderTexture.ReleaseTemporary(temp);
-        yield return new WaitForSeconds(.1f);
     }
 
     private void OnGUI(){

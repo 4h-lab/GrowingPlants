@@ -83,28 +83,12 @@ Shader "Sprites/Gray"{
 				//float2 pp = float2(_PlayerPosX, _PlayerPosY);
 
                 fixed4 frag(v2f IN) : COLOR{
-					//float rnd = frac(sin(dot(IN.texcoord, float2(12.9898, 78.233))) * 43758.5453123);
-
-					float x = 1;
-					float d = distance(float2(_PlayerPosX, _PlayerPosY), (float2)IN.worldSpacePos);
 					
-					/*
-					if (d < 1) {
-						
-					}
-					*/
-
-                    /*fixed stepFactor = step(_Ray, d);
-                    x = lerp(0, 1, stepFactor);*/
-                    
-					//d = d - _Ray;
-                    d = clamp(pow(d,2), 0, 5);
-
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-					//float maskedPixelGrayscale = tex2D(_ColorMaskTexture, IN.texcoord).r; //questo dovrebbe campionare la maschera
-                    half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+					half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+
                     texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
-                    texcol = texcol * IN.color;
+                    texcol = texcol * IN.color * (1-maskcol.r);
                     return texcol;
                 }
             ENDCG
