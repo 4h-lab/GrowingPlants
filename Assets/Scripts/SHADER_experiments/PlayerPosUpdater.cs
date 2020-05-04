@@ -13,6 +13,9 @@ public class PlayerPosUpdater : MonoBehaviour{
     private float bsr;
     [Tooltip("The radius around the player in which a color splat can be thrown")]
     public float baseThrownRadius = 2f;
+
+    [Tooltip("The Frequency at which the texture are updated in seconds")]
+    public float frequency = 0.1f;
     private float btr;
     
     void Start(){
@@ -38,7 +41,7 @@ public class PlayerPosUpdater : MonoBehaviour{
     public IEnumerator splat() {
         while (!stopColor) {
             x();
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(frequency);
         }
     }
 

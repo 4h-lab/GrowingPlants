@@ -14,6 +14,11 @@ public class PlayerPosPasser : MonoBehaviour{
 
     [SerializeField]
     private Shader updater;
+
+    [Tooltip("the amount of color to add every frame, is only the tones of red, any other color part will have no effect")]
+    [SerializeField]
+    private Color RedIntensity = new Color(0.2f, 0f, 0f);
+
     private Material updater_m;
 
     private RenderTexture lightmap;
@@ -22,11 +27,13 @@ public class PlayerPosPasser : MonoBehaviour{
     
     private void Awake()
     {
+        
         updater_m = new Material(updater);
         float cornerX = GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
         float cornerY = GetComponent<SpriteRenderer>().sprite.bounds.extents.y;
         updater_m.SetVector("_SpritePos", new Vector4(transform.position.x - cornerX, transform.position.y - cornerY, 0, 0));
         updater_m.SetVector("_SpriteScale", new Vector4(2*cornerX, 2*cornerY, 0, 0));
+        updater_m.SetColor("_Color", RedIntensity);
 
 
 

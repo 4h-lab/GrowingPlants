@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   updater: {fileID: 4800000, guid: 4f0f33b094422e54b9affe6f57fbc2ae, type: 3}
+  RedIntensity: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &3377570284080787475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -153,3 +154,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 110
   updater: {fileID: 4800000, guid: 4f0f33b094422e54b9affe6f57fbc2ae, type: 3}
+  RedIntensity: {r: 0.19607843, g: 0, b: 0, a: 0}
