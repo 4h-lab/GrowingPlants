@@ -67,6 +67,7 @@ public class CharacterSpawner : MonoBehaviour{
                     if (st != null)
                     { // check whether the object hit has a spawnertile component (that means, if it can spawn plants)
                         st.spawnHere(gameObject, pt); // invoke spawn passing the player as arg
+                        StartCoroutine(splat(hit.collider.gameObject));
                         return true;
                     }
                 }
@@ -75,6 +76,24 @@ public class CharacterSpawner : MonoBehaviour{
         return false;
     }
 
+    public IEnumerator splat(GameObject g)
+    {
+
+        Vector4[] arr = new Vector4[1];
+        float[] arrray = new float[1];
+        float max = Mathf.Sqrt(Mathf.Pow(g.GetComponent<SpriteRenderer>().sprite.bounds.extents.y, 2) + Mathf.Pow(g.GetComponent<SpriteRenderer>().sprite.bounds.extents.x, 2));
+        arr[0] = g.transform.position;
+        arrray[0] = 0.1f;
+        while (arrray[0] <= max)
+        {
+            arrray[0] += Time.deltaTime * 10;
+            Shader.SetGlobalVectorArray("_DaPoints", arr);
+            Shader.SetGlobalFloatArray("_DaRays", arrray);
+            Shader.SetGlobalInt("_DaPointsCount", 1);
+            yield return new WaitForSeconds(.1f);
+        }
+
+    }
 
     private void OnDrawGizmos()
     {
