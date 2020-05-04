@@ -38,7 +38,7 @@ public class PlayerPosUpdater : MonoBehaviour{
     public IEnumerator splat() {
         while (!stopColor) {
             x();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.1f);
         }
     }
 
