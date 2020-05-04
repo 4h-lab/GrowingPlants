@@ -609,6 +609,11 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 7289946385246184577}
+    - target: {fileID: 4888245688514815458, guid: 88ebee692d26735409d89c8f07409b23,
+        type: 3}
+      propertyPath: frequency
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200257, guid: 88ebee692d26735409d89c8f07409b23,
         type: 3}
       propertyPath: m_Enabled

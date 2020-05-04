@@ -4,7 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
 		_Point("Point", Vector) = (-9999999999,-9999999999,0,0)
-		_Color("_Color",Color) = (0.2,0,0,0)
+		_Color("_Color",Color) = (0.3,0,0,0)
 		_Ray("Ray",Float) = 0
 		_SpritePos("Position", Vector) = (0,0,0,0)
 		_SpriteScale("Scale", Vector) = (1,1,0,0)
