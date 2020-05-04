@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1266408784}
   - component: {fileID: 1902606923}
   - component: {fileID: 6736633655642152901}
+  - component: {fileID: 4888245688514815458}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -225,6 +226,22 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 18177
+--- !u!114 &4888245688514815458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219927600155200263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1412e6944ba0eb428f93d56a82193e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopColor: 0
+  pointsGenerated: 10
+  baseSplatRadius: 1
+  baseThrownRadius: 2
 --- !u!1 &6219927600237785762
 GameObject:
   m_ObjectHideFlags: 0
