@@ -16,14 +16,16 @@ public class IsGrounded : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.GetContact(0).normal.normalized == Vector2.up && ground == (ground | (1 << collision.gameObject.layer))) grounded = true;
+    private void OnCollisionEnter2D(Collision2D collision){
+        if (collision?.contactCount > 0) {
+            if (collision?.GetContact(0).normal.normalized == Vector2.up && ground == (ground | (1 << collision.gameObject.layer))) grounded = true;
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.GetContact(0).normal.normalized == Vector2.up && ground == (ground | (1 << collision.gameObject.layer))) grounded = false;
+    private void OnCollisionExit2D(Collision2D collision){
+        if (collision?.contactCount > 0) {
+            if (collision?.GetContact(0).normal.normalized == Vector2.up && ground == (ground | (1 << collision.gameObject.layer))) grounded = false;
+        }
     }
 
     // Update is called once per frame
