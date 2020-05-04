@@ -67,7 +67,8 @@ public class CharacterSpawner : MonoBehaviour{
                     if (st != null)
                     { // check whether the object hit has a spawnertile component (that means, if it can spawn plants)
                         st.spawnHere(gameObject, pt); // invoke spawn passing the player as arg
-                        StartCoroutine(splat(hit.collider.gameObject));
+                        //StartCoroutine(splat(hit.collider.gameObject));
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPosUpdater>().setParams(20, 3.5f, 5f);
                         return true;
                     }
                 }
@@ -76,6 +77,7 @@ public class CharacterSpawner : MonoBehaviour{
         return false;
     }
 
+    /*
     public IEnumerator splat(GameObject g)
     {
 
@@ -94,6 +96,7 @@ public class CharacterSpawner : MonoBehaviour{
         }
 
     }
+    */
 
     private void OnDrawGizmos()
     {
