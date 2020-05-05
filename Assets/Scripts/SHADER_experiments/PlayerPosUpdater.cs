@@ -20,6 +20,14 @@ public class PlayerPosUpdater : MonoBehaviour{
 
     private Vector3 center;
     private float offset;
+    private void Awake()
+    {
+        //reset the arrays to delete past iteration
+        Shader.SetGlobalVectorArray("_DaPoints", new Vector4[] { Vector4.positiveInfinity });
+        Shader.SetGlobalFloatArray("_DaRays", new float[] { 0f });
+        Shader.SetGlobalInt("_DaPointsCount", 1);
+        
+    }
     void Start(){
         center = transform.position -Vector3.up*GetComponent<BoxCollider2D>().bounds.extents.y * 2;
         offset = GetComponent<BoxCollider2D>().bounds.extents.y * 2;
@@ -58,7 +66,7 @@ public class PlayerPosUpdater : MonoBehaviour{
             //arr[i] = new Vector4(center.x + Random.Range(-btr, btr), center.y + Random.Range(-btr, btr), 0, 0);
             arr[i] = center + Random.insideUnitSphere * btr;
             arrray[i] = Mathf.Min(bsr / Vector2.Distance((Vector2)arr[i], (Vector2)transform.position), bsr);
-            Debug.Log("center in " + center.ToString() + " " + arr[i].ToString());
+            
         }
 
         Shader.SetGlobalVectorArray("_DaPoints", arr);
@@ -76,5 +84,10 @@ public class PlayerPosUpdater : MonoBehaviour{
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(center, baseThrownRadius);
+    }
+
+    private void OnDestroy()
+    {
+        
     }
 }

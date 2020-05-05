@@ -53,13 +53,13 @@ public class PlayerPosPasser : MonoBehaviour{
     
     // Update is called once per frame
     void Update(){
-        if (!col) {
+        /*if (!col) {
             RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
             Graphics.Blit(lightmap, temp);
             Graphics.Blit(temp, lightmap, updater_m);
             RenderTexture.ReleaseTemporary(temp);
 
-        }
+        }*/
     }
 
     IEnumerator spray() {
@@ -77,6 +77,11 @@ public class PlayerPosPasser : MonoBehaviour{
         float ratio = GetComponent<SpriteRenderer>().sprite.texture.height / GetComponent<SpriteRenderer>().sprite.texture.width;
 
         GUI.DrawTexture(new Rect(x, 0, 100, 100*ratio), lightmap, ScaleMode.ScaleToFit, false, 1);
+    }
+
+    private void OnDestroy()
+    {
+        lightmap.Release();
     }
 }
 
