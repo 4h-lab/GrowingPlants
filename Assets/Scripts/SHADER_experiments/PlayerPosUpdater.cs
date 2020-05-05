@@ -13,12 +13,16 @@ public class PlayerPosUpdater : MonoBehaviour{
     private float bsr;
     [Tooltip("The radius around the player in which a color splat can be thrown")]
     public float baseThrownRadius = 2f;
+    private float btr;
 
     [Tooltip("The Frequency at which the texture are updated in seconds")]
     public float frequency = 0.1f;
-    private float btr;
-    
+
+    private Vector3 center;
+    private float offset;
     void Start(){
+        center = transform.position -Vector3.up*GetComponent<BoxCollider2D>().bounds.extents.y * 2;
+        offset = GetComponent<BoxCollider2D>().bounds.extents.y * 2;
         pg = pointsGenerated;
         bsr = baseSplatRadius;
         btr = baseThrownRadius;
@@ -48,19 +52,29 @@ public class PlayerPosUpdater : MonoBehaviour{
     private void x() {
         Vector4[] arr = new Vector4[pg];
         float[] arrray = new float[pg];
-
+        
         for (int i = 0; i < pg; i++) {
-            arr[i] = new Vector4(transform.position.x + Random.Range(-btr, btr), transform.position.y + Random.Range(-btr, btr), 0, 0);
+            
+            //arr[i] = new Vector4(center.x + Random.Range(-btr, btr), center.y + Random.Range(-btr, btr), 0, 0);
+            arr[i] = center + Random.insideUnitSphere * btr;
             arrray[i] = Mathf.Min(bsr / Vector2.Distance((Vector2)arr[i], (Vector2)transform.position), bsr);
+            Debug.Log("center in " + center.ToString() + " " + arr[i].ToString());
         }
 
         Shader.SetGlobalVectorArray("_DaPoints", arr);
         Shader.SetGlobalFloatArray("_DaRays", arrray);
         Shader.SetGlobalInt("_DaPointsCount", pg);
 
+
         // after updating the points, the values are resetted;
         pg = pointsGenerated;
         bsr = baseSplatRadius;
         btr = baseThrownRadius;
+        center = transform.position - Vector3.up * offset;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(center, baseThrownRadius);
     }
 }
