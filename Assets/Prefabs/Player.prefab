@@ -241,7 +241,7 @@ MonoBehaviour:
   stopColor: 0
   pointsGenerated: 10
   baseSplatRadius: 1
-  baseThrownRadius: 2
+  baseThrownRadius: 1
   frequency: 0.2
 --- !u!1 &6219927600237785762
 GameObject:
