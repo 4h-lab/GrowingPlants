@@ -40,7 +40,7 @@ public class PlayerPosPasser : MonoBehaviour{
 
         m = gameObject.GetComponent<Renderer>().material;
         //m.SetFloatArray("_Points", new float[10]);
-        lightmap = new RenderTexture(GetComponent<SpriteRenderer>().sprite.texture.width, GetComponent<SpriteRenderer>().sprite.texture.height, 0, RenderTextureFormat.ARGBFloat);
+        lightmap = new RenderTexture(32, 32, 0, RenderTextureFormat.ARGBFloat);
         m.SetTexture("_ColorMaskTexture", lightmap);
     }
     void Start(){
@@ -73,11 +73,11 @@ public class PlayerPosPasser : MonoBehaviour{
         }
     }
 
-    private void OnGUI(){
+    /*private void OnGUI(){
         float ratio = GetComponent<SpriteRenderer>().sprite.texture.height / GetComponent<SpriteRenderer>().sprite.texture.width;
 
         GUI.DrawTexture(new Rect(x, 0, 100, 100*ratio), lightmap, ScaleMode.ScaleToFit, false, 1);
-    }
+    }*/
 
     private void OnDestroy()
     {
