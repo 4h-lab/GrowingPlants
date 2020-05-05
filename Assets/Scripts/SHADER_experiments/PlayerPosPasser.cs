@@ -29,8 +29,8 @@ public class PlayerPosPasser : MonoBehaviour{
     {
         
         updater_m = new Material(updater);
-        float cornerX = GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
-        float cornerY = GetComponent<SpriteRenderer>().sprite.bounds.extents.y;
+        float cornerX = GetComponent<SpriteRenderer>().sprite.bounds.extents.x*this.transform.localScale.x;
+        float cornerY = GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y;
         updater_m.SetVector("_SpritePos", new Vector4(transform.position.x - cornerX, transform.position.y - cornerY, 0, 0));
         updater_m.SetVector("_SpriteScale", new Vector4(2*cornerX, 2*cornerY, 0, 0));
         //updater_m.SetColor("_Color", RedIntensity);
