@@ -136,9 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38a1df5c3423a14294b8ae952f6ec49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  wayPoints: []
   speed: 5
   minDesiredDistanceToWaypoint: 0.01
   collisionFilter:
