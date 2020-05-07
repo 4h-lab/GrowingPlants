@@ -137,4 +137,22 @@ public class NormalPlant : BasePlant{
         //Gizmos.DrawLine(this.transform.position, this.transform.position + new Vector3(0f, radius, 0f));
         Gizmos.DrawLine(transform.position + new Vector3(0f, ray_point, 0f), transform.position + new Vector3(0f, ray_point+0.01f, 0f));
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.tag == "Player")
+        {
+            collision.collider.transform.SetParent(this.transform);
+            collision.collider.transform.SetAsLastSibling();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.tag == "Player")
+        {
+            collision.collider.transform.SetParent(null);
+        }
+    }
+
 }
