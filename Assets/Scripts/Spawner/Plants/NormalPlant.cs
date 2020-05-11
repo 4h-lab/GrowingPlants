@@ -13,7 +13,7 @@ public class NormalPlant : BasePlant{
     private float budTimer=0f;
 
     void Start(){
-        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible"));
+        layermask_passables = (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("passable")) | (1 << 2) | 1 << LayerMask.NameToLayer("onewayplatform") | (1 << LayerMask.NameToLayer("collectible") | (1 << LayerMask.NameToLayer("water")));
         layermask_oneway = 1 << LayerMask.NameToLayer("onewayplatform");
         layermask_stem = (1 << LayerMask.NameToLayer("plant")) | (1 << 2);
 
@@ -46,13 +46,6 @@ public class NormalPlant : BasePlant{
             var step = Vector2.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
             transform.Translate(step);
             growStem(step);
-            //stem.transform.localScale += Vector3.up * Time.deltaTime * growthSpeed * GameManager.customTimeScale;
-            /*if (stem.transform.localScale.y > maxHeigth - this.GetComponent<BoxCollider2D>().bounds.extents.y ){
-                stem.transform.localScale = new Vector3(stem.transform.localScale.x, maxHeigth - this.GetComponent<BoxCollider2D>().bounds.extents.y * 2 * this.transform.localScale.y, stem.transform.localScale.z);
-            }*/
-            Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), new Vector2(transform.position.x + 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), Color.red);
-            Debug.DrawLine(new Vector2(transform.position.x - 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), new Vector2(transform.position.x + 5, transform.position.y + gameObject.GetComponent<Collider2D>().bounds.extents.y), Color.red);
-            Debug.DrawLine(new Vector2(transform.position.x - 5, initY + maxHeigth), new Vector2(transform.position.x + 5, initY + maxHeigth), Color.green);
         }
 
         
