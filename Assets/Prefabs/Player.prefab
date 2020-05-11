@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1902606923}
   - component: {fileID: 6736633655642152901}
   - component: {fileID: 4888245688514815458}
+  - component: {fileID: 4566337315048032125}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -243,6 +244,18 @@ MonoBehaviour:
   baseSplatRadius: 1
   baseThrownRadius: 1
   frequency: 0.2
+--- !u!114 &4566337315048032125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219927600155200263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4db8c417823e434f948ca0f5758dad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6219927600237785762
 GameObject:
   m_ObjectHideFlags: 0

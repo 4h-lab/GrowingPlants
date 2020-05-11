@@ -6,7 +6,9 @@ public class PlayerWetInteractable : BaseContactInteractables
 {
     public override void interact(GameObject initiator)
     {
-        if (initiator.GetComponent<PhysicWater>() != null) GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("water.touchedby");
+        if (initiator.GetComponent<Water>() != null) {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("water.touchedby");
+        } 
     }
 
     // Start is called before the first frame update
