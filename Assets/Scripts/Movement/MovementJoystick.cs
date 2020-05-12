@@ -101,7 +101,8 @@ public class MovementJoystick : MonoBehaviour
 
         // Multiply the player's x local scale by -1.
         //Vector3 theScale =
-        this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
+        //this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
+        this.transform.GetComponent<SpriteRenderer>().flipX = !this.transform.GetComponent<SpriteRenderer>().flipX;
     }
 
     Vector2 projectRB(Vector2 dir){
