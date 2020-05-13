@@ -23,6 +23,7 @@ public class TurnOffBlock : BaseSwitchable
     public void TurnOff()
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(gameObject.GetComponent<Rigidbody2D>());
         ChangeColorPlaceholder(); //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
         currentState = 0;
     }
