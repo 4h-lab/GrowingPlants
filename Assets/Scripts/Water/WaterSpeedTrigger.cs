@@ -50,7 +50,7 @@ public class WaterSpeedTrigger : MonoBehaviour
     private void Trigger()
     {
         if (triggerOnly) return;
-        if (required?.GetComponent<WaterSpeedTrigger>().activated == false) return;
+        if (required != null && required.GetComponent<WaterSpeedTrigger>().activated == false) return;
         if (vertical)
         {
             if ((player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser > 0)
