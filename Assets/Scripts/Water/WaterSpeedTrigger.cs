@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class WaterSpeedTrigger : MonoBehaviour
 {
-    [SerializeField] [Tooltip("if true, deactivate the script once the Trigger is activate")]
+
+    public bool activated;
+
+    [SerializeField]
+    [Tooltip("USE ONLY IF thIS IS 'required' BY ANOTHER TRIGGER: if true, this trigger will not apply any speedmod when activated")]
+    private bool triggerOnly;
+    [SerializeField] [Tooltip("if true, deactivate the script once the Trigger is activated")]
     private bool oneTime;
     [SerializeField] [Tooltip("if true, the trigger applies the opposite of speedMod if the player passes it in the opposite direction from the one")]
     private bool reversible;
@@ -17,6 +23,9 @@ public class WaterSpeedTrigger : MonoBehaviour
     [SerializeField] [Tooltip("if true, speedMod is added or assigned to risingSpeed")]
     private bool relative;
 
+    [SerializeField]
+    [Tooltip("if assigned, this trigger will not activate unless the trigger in this field is also activated")]
+    private GameObject required;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject water;
 
@@ -28,6 +37,7 @@ public class WaterSpeedTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        activated = false;
         //transform.localPosition = Vector2.zero;
         if (greater_lesser == 0) greater_lesser = 1;
         Water = water.GetComponent<Water>();
@@ -39,24 +49,20 @@ public class WaterSpeedTrigger : MonoBehaviour
 
     private void Trigger()
     {
-        //string str = "Triggered!" + (player.transform.position.y - transform.position.y);
-        //Debug.Log(str);
-        //str = "speed is " + Water.risingSpeed;
-        //Debug.Log(str);
+        if (triggerOnly) return;
+        if (required?.GetComponent<WaterSpeedTrigger>().activated == false) return;
         if (vertical)
         {
             if ((player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser > 0)
             {
-                //str = "entered ";
-                //Debug.Log(str);
+                activated = true;
                 if (relative) Water.risingSpeed += speedMod;
                 else Water.risingSpeed = speedMod;
                 if (oneTime) this.enabled = false;
             }
             else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
             {
-                //str = "exited ";
-                //Debug.Log(str);
+                activated = false;
                 Water.risingSpeed -= speedMod;
             }
         }
@@ -64,21 +70,17 @@ public class WaterSpeedTrigger : MonoBehaviour
         {
             if ((player.transform.position.x - transform.position.x - distanceFromPlayer) * greater_lesser > 0)
             {
-                //str = "entered ";
-                //Debug.Log(str);
+                activated = true;
                 if (relative) Water.risingSpeed += speedMod;
                 else Water.risingSpeed = speedMod;
                 if (oneTime) this.enabled = false;
             }
             else if (reversible && relative && (player.transform.position.x - transform.position.x - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
             {
-                //str = "exited ";
-                //Debug.Log(str);
+                activated = false;
                 Water.risingSpeed -= speedMod;
             }
         }
-        //str = "speed is now " + Water.risingSpeed;
-        //Debug.Log(str);
     }
 
     // Update is called once per frame
@@ -88,7 +90,6 @@ public class WaterSpeedTrigger : MonoBehaviour
         Vector3 t = new Vector3(-100, 0, 0);
         Debug.DrawLine((transform.position + f), (transform.position + t), Color.red, 0.01f);
         float dd = (player.transform.position.y - transform.position.y - distanceFromPlayer) * (lastDist - distanceFromPlayer);
-        //Debug.Log(dd);
         if (dd < 0) Trigger();
         if (vertical)
         {
