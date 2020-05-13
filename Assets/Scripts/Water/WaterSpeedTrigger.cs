@@ -20,6 +20,7 @@ public class WaterSpeedTrigger : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject water;
 
+    private bool vertical;
     private float lastDist = 0.0f;
 
     private Water Water;
@@ -30,6 +31,8 @@ public class WaterSpeedTrigger : MonoBehaviour
         //transform.localPosition = Vector2.zero;
         if (greater_lesser == 0) greater_lesser = 1;
         Water = water.GetComponent<Water>();
+        if (Mathf.Abs(Mathf.Sin(this.transform.rotation.z)) > 0.5f) vertical = true;
+        else vertical = false;
         Trigger();
         lastDist = player.transform.position.y - transform.position.y;
     }
@@ -40,19 +43,39 @@ public class WaterSpeedTrigger : MonoBehaviour
         //Debug.Log(str);
         //str = "speed is " + Water.risingSpeed;
         //Debug.Log(str);
-        if ((player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser > 0)
+        if (vertical)
         {
-            //str = "entered ";
-            //Debug.Log(str);
-            if (relative) Water.risingSpeed += speedMod;
-            else Water.risingSpeed = speedMod;
-            if (oneTime) this.enabled = false;
+            if ((player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser > 0)
+            {
+                //str = "entered ";
+                //Debug.Log(str);
+                if (relative) Water.risingSpeed += speedMod;
+                else Water.risingSpeed = speedMod;
+                if (oneTime) this.enabled = false;
+            }
+            else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
+            {
+                //str = "exited ";
+                //Debug.Log(str);
+                Water.risingSpeed -= speedMod;
+            }
         }
-        else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
+        else
         {
-            //str = "exited ";
-            //Debug.Log(str);
-            Water.risingSpeed -= speedMod;
+            if ((player.transform.position.x - transform.position.x - distanceFromPlayer) * greater_lesser > 0)
+            {
+                //str = "entered ";
+                //Debug.Log(str);
+                if (relative) Water.risingSpeed += speedMod;
+                else Water.risingSpeed = speedMod;
+                if (oneTime) this.enabled = false;
+            }
+            else if (reversible && relative && (player.transform.position.x - transform.position.x - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
+            {
+                //str = "exited ";
+                //Debug.Log(str);
+                Water.risingSpeed -= speedMod;
+            }
         }
         //str = "speed is now " + Water.risingSpeed;
         //Debug.Log(str);
@@ -67,6 +90,13 @@ public class WaterSpeedTrigger : MonoBehaviour
         float dd = (player.transform.position.y - transform.position.y - distanceFromPlayer) * (lastDist - distanceFromPlayer);
         //Debug.Log(dd);
         if (dd < 0) Trigger();
-        if (player.transform.position.y - transform.position.y != 0) lastDist = player.transform.position.y - transform.position.y;
+        if (vertical)
+        {
+            if (player.transform.position.y - transform.position.y != 0) lastDist = player.transform.position.y - transform.position.y;
+        }
+        else
+        {
+            if (player.transform.position.x - transform.position.x != 0) lastDist = player.transform.position.x - transform.position.x;
+        }
     }
 }
