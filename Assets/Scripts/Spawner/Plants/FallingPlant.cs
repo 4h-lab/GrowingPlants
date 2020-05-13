@@ -74,7 +74,6 @@ public class FallingPlant : BasePlant
 
     void FallAfterDelay(Object[] par) {
         this.FallAfterDelay();
-        Debug.Log("DIO EMRDA");
     }
     void FallAfterDelay() {
 
