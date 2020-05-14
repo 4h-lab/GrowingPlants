@@ -40,6 +40,13 @@ public class WaterSpeedTrigger : MonoBehaviour
         activated = false;
         //transform.localPosition = Vector2.zero;
         if (greater_lesser == 0) greater_lesser = 1;
+        if (triggerOnly) speedMod = 0.0f;
+        if (required != null)
+        {
+            if (required.GetComponent<WaterSpeedTrigger>().required == this.gameObject) required.GetComponent<WaterSpeedTrigger>().required = null;
+            if (speedMod == 0.0f) speedMod = required.GetComponent<WaterSpeedTrigger>().speedMod;
+            required.GetComponent<WaterSpeedTrigger>().triggerOnly = true;
+        }
         Water = water.GetComponent<Water>();
         if (Mathf.Abs(Mathf.Sin(this.transform.rotation.z)) < 0.5f) vertical = true;
         else vertical = false;
@@ -51,8 +58,6 @@ public class WaterSpeedTrigger : MonoBehaviour
     {
         //string msg;
         //msg = "TRIGGER. ";
-
-        if (triggerOnly) return;
         if (required != null && required.GetComponent<WaterSpeedTrigger>().activated == false)
         {
             /*msg = "required found ";
