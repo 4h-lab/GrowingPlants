@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7260112055057475845}
   - component: {fileID: 7260112055057475844}
   - component: {fileID: 3916682691247064400}
-  - component: {fileID: -5785213928523123936}
   - component: {fileID: -2858617815135887279}
+  - component: {fileID: 1391937295832013592}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e013c4a18b8bc6b40921c70c9ba7847e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetFrameRate: 60
 --- !u!114 &3916682691247064400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,19 +60,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minAwardedStars: 1
---- !u!114 &-5785213928523123936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7260112055057475847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa7adaa08837ef343a77cb4fd1257750, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAllowedNumberOfPlants: 10
 --- !u!114 &-2858617815135887279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,5 +70,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15c7f6d38d96be94aa0cb28837d2b743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1391937295832013592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260112055057475847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543f44e22af9d3f4eb71f7e957e9d1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
