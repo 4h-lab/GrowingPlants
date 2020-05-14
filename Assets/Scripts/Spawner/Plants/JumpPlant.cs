@@ -137,7 +137,7 @@ public class JumpPlant : BasePlant
     {
         playerFound = false;
         if (Vector2.Angle(collision.GetContact(0).normal, Vector2.down) > upArc) return;
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             player = collision.collider.gameObject;
             playerFound = true;

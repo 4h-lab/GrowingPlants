@@ -41,7 +41,7 @@ public class WaterSpeedTrigger : MonoBehaviour
         //transform.localPosition = Vector2.zero;
         if (greater_lesser == 0) greater_lesser = 1;
         Water = water.GetComponent<Water>();
-        if (Mathf.Abs(Mathf.Sin(this.transform.rotation.z)) > 0.5f) vertical = true;
+        if (Mathf.Abs(Mathf.Sin(this.transform.rotation.z)) < 0.5f) vertical = true;
         else vertical = false;
         Trigger();
         lastDist = player.transform.position.y - transform.position.y;
@@ -49,12 +49,25 @@ public class WaterSpeedTrigger : MonoBehaviour
 
     private void Trigger()
     {
+        //string msg;
+        //msg = "TRIGGER. ";
+
         if (triggerOnly) return;
-        if (required != null && required.GetComponent<WaterSpeedTrigger>().activated == false) return;
+        if (required != null && required.GetComponent<WaterSpeedTrigger>().activated == false)
+        {
+            /*msg = "required found ";
+            string str = (required.GetComponent<WaterSpeedTrigger>().activated) ? "and activated" : "but not activated";
+            msg = msg + str;
+            Debug.Log(msg);*/
+
+            return;
+        }
         if (vertical)
         {
             if ((player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser > 0)
             {
+                //msg += "acitvated";
+
                 activated = true;
                 if (relative) Water.risingSpeed += speedMod;
                 else Water.risingSpeed = speedMod;
@@ -62,6 +75,8 @@ public class WaterSpeedTrigger : MonoBehaviour
             }
             else if (reversible && relative && (player.transform.position.y - transform.position.y - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
             {
+                //msg += "DEacitvated";
+
                 activated = false;
                 Water.risingSpeed -= speedMod;
             }
@@ -70,6 +85,8 @@ public class WaterSpeedTrigger : MonoBehaviour
         {
             if ((player.transform.position.x - transform.position.x - distanceFromPlayer) * greater_lesser > 0)
             {
+                //msg += "acitvated";
+
                 activated = true;
                 if (relative) Water.risingSpeed += speedMod;
                 else Water.risingSpeed = speedMod;
@@ -77,9 +94,12 @@ public class WaterSpeedTrigger : MonoBehaviour
             }
             else if (reversible && relative && (player.transform.position.x - transform.position.x - distanceFromPlayer) * greater_lesser < 0 && lastDist != 0.0f)
             {
+                //msg += "DEacitvated";
+
                 activated = false;
                 Water.risingSpeed -= speedMod;
             }
+            //Debug.Log(msg);
         }
     }
 
@@ -89,8 +109,12 @@ public class WaterSpeedTrigger : MonoBehaviour
         Vector3 f = new Vector3(0, distanceFromPlayer, 0);
         Vector3 t = new Vector3(-100, 0, 0);
         Debug.DrawLine((transform.position + f), (transform.position + t), Color.red, 0.01f);
-        float dd = (player.transform.position.y - transform.position.y - distanceFromPlayer) * (lastDist - distanceFromPlayer);
+        float dd;
+        if (vertical) dd = (player.transform.position.y - transform.position.y - distanceFromPlayer) * (lastDist - distanceFromPlayer);
+        else dd = (player.transform.position.x - transform.position.x - distanceFromPlayer) * (lastDist - distanceFromPlayer);
+
         if (dd < 0) Trigger();
+
         if (vertical)
         {
             if (player.transform.position.y - transform.position.y != 0) lastDist = player.transform.position.y - transform.position.y;
@@ -99,5 +123,7 @@ public class WaterSpeedTrigger : MonoBehaviour
         {
             if (player.transform.position.x - transform.position.x != 0) lastDist = player.transform.position.x - transform.position.x;
         }
+
+        //Debug.Log("last distace from treshold = " + lastDist);
     }
 }
