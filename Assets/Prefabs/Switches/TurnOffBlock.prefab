@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 72050997753880556}
   - component: {fileID: 72050997753880557}
   - component: {fileID: -4149195528111757458}
+  - component: {fileID: 7467977990650205982}
+  - component: {fileID: -9127357269177279182}
   m_Layer: 14
   m_Name: TurnOffBlock
   m_TagString: Untagged
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 53fb23d4fa1d70d4f880ad48f1a854d1, type: 3}
-  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
+  m_Color: {r: 0.5372549, g: 0.26666668, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,3 +125,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingState: 1
   currentState: 1
+--- !u!114 &7467977990650205982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72050997753880552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e09e6315097ce445b9cc12d50d4f8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-9127357269177279182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72050997753880552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1c7b008e011f64b8c72083d915da1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnableObject: {fileID: 3307133423286067684, guid: d13466dc3ca7db9429d71c965c309cc3,
+    type: 3}

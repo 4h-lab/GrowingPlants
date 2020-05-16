@@ -22,6 +22,7 @@ public class TurnOffBlock : BaseSwitchable
 
     public void TurnOff()
     {
+        GetComponent<SwitchableSoil>()?.DeactivateSoil();
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject.GetComponent<Rigidbody2D>());
         ChangeColorPlaceholder(); //TEMP FUNCTION TO BE REMOVED WHEN SPRITES ARE IMPLEMENTED
