@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IsGrounded : MonoBehaviour
 {
+    [SerializeField] private float groundedTreshold;
     [SerializeField] private LayerMask ground;
 
     private bool grounded;
@@ -18,13 +19,28 @@ public class IsGrounded : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision){
         if (collision?.contactCount > 0) {
-            if (collision?.GetContact(0).normal.normalized == Vector2.up && ground == (ground | (1 << collision.gameObject.layer))) grounded = true;
+            if (
+                collision?.GetContact(0).normal.normalized == Vector2.up &&
+                this.gameObject.transform.position.y - collision?.GetContact(0).point.y > groundedTreshold &&
+                ground == (ground | (1 << collision.gameObject.layer))
+            )
+            {
+                grounded = true;
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision){
-        if (collision?.contactCount > 0) {
-            if (collision?.GetContact(0).normal.normalized == Vector2.up && ground == (ground | (1 << collision.gameObject.layer))) grounded = false;
+        if (collision?.contactCount > 0)
+        {
+            if (
+                collision?.GetContact(0).normal.normalized == Vector2.up &&
+                this.gameObject.transform.position.y - collision?.GetContact(0).point.y > groundedTreshold &&
+                ground == (ground | (1 << collision.gameObject.layer))
+            )
+            {
+                grounded = false;
+            }
         }
     }
 
