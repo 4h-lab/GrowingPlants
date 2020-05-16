@@ -6,7 +6,7 @@ public abstract class BaseSwitcher : MonoBehaviour
 {
     [SerializeField] protected int startingState = 0;
     [SerializeField] protected int currentState;
-    [SerializeField] protected GameObject[] connected_switchables;
+    [SerializeField] protected GameObject[] connectedSwitchables;
 
     void Start()
     {
