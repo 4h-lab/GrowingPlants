@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
+
+    [Tooltip("The maximum number of stars that can be awarded to the player in a specific level")]
+    public int maxAllowedNumberOfStars = 3;
+
     public static float customTimeScale = 1f;
 
     public static float totalTime = -1f;
@@ -82,6 +86,6 @@ public class GameManager : MonoBehaviour {
         foreach (CalcScoreStep css in scoreCalculator) { totalscore += css(notifiedAchievements);  }
 
         foreach (string s in notifiedAchievements) { Debug.Log("ACHIEVEMENT: " + s + " csss: " + scoreCalculator.Count + " notifachi: " + notifiedAchievements.Count); }
-        return totalscore;
+        return Mathf.Min(maxAllowedNumberOfStars, totalscore);
     }
 }
