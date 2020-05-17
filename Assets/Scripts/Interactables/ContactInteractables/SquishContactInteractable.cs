@@ -20,7 +20,7 @@ public class SquishContactInteractable : BaseContactInteractables
 
         passableObjectsLayerMask = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("collectible")) | (1 << LayerMask.NameToLayer("passable")) | (1<<2);
 
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         Gr = player.GetComponent<IsGrounded>();
     }
 
