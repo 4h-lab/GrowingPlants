@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TurnOffBlock : BaseSwitchable
 {
+    //TODO: remove when we have sprites
+    [SerializeField] private float deactivatedAlphaPlaceholder = 0f;
+
     public override void StartSwitchable()
     {
 
@@ -33,7 +36,7 @@ public class TurnOffBlock : BaseSwitchable
     private void ChangeColorPlaceholder()
     {
         Color tmpColor = gameObject.GetComponent<SpriteRenderer>().color;
-        tmpColor.a = 0.5f;
+        tmpColor.a = deactivatedAlphaPlaceholder;
         gameObject.GetComponent<SpriteRenderer>().color = tmpColor;
     }
 }
