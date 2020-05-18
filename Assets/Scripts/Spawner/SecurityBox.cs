@@ -12,9 +12,24 @@ public class SecurityBox : MonoBehaviour
     float shellDistance = 0.1f;
     PlatformEffector2D platform;
 
-    // Start is called before the first frame update
+    /*
+    * TEMP
+    * Used to prevent the plant from pressing button during the first frames after it's creation
+    * Check if there's a way to link this functionality to the animation state when we have some
+    * animated stuff going.
+    * 
+    * Other TEMP code related to this:
+    * - initializationTime in Start()
+    * - CanPressSwitches method at the end of this script
+    */
+    private float initializationTime;
+    [SerializeField] private float timeBeforeInteraction = 0.5f;
+
     void Start()
     {
+        //TEMP - see above
+        initializationTime = Time.timeSinceLevelLoad;
+
         collider = this.GetComponent<Collider2D>();
 
         bounds = this.GetComponent<Collider2D>().bounds;
@@ -49,5 +64,11 @@ public class SecurityBox : MonoBehaviour
             collider.isTrigger = true;
             //collider.enabled = false;
         }
+    }
+
+    //TEMP - see initializationTime notes
+    public bool CanPressSwitches()
+    {
+        return Time.timeSinceLevelLoad - initializationTime > timeBeforeInteraction;
     }
 }
