@@ -15,6 +15,7 @@ public class MovementJoystick : MonoBehaviour
     private BoxCollider2D playerCollider;
     private  Vector3 mVelocity;
     private Vector3 oldPos;
+    private bool isSquished = false;
 
     private FixedJoystick variableJoystick;
 
@@ -70,9 +71,17 @@ public class MovementJoystick : MonoBehaviour
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
         targetVelocity = dir;
-        transform.Translate( projectRB(dir * speed * Time.deltaTime * GameManager.customTimeScale));
-        
-        
+        if (!isSquished)
+        {
+            transform.Translate(projectRB(dir * speed * Time.deltaTime * GameManager.customTimeScale));
+        }
+        else
+        {
+            transform.Translate(dir * speed * Time.deltaTime * GameManager.customTimeScale);
+        }
+        if ((dir.x > 0) ^ facingRight) Flip();
+
+
         if ((dir.x > 0) ^ facingRight) Flip();
         
         
@@ -102,7 +111,7 @@ public class MovementJoystick : MonoBehaviour
         // Multiply the player's x local scale by -1.
         //Vector3 theScale =
         //this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
-        this.transform.GetComponent<SpriteRenderer>().flipX = !this.transform.GetComponent<SpriteRenderer>().flipX;
+        this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
     }
 
     Vector2 projectRB(Vector2 dir){
@@ -124,7 +133,10 @@ public class MovementJoystick : MonoBehaviour
         }
         return dir.normalized * distance;
     }
-
+    public void setSquished(bool s)
+    {
+        isSquished = s;
+    }
     public float getTargetVelocityX()
     {
         
