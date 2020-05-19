@@ -38,6 +38,8 @@ public class FallingPlatformContactInteractable : BaseCollisionInteractable, IIn
     public override void interact(GameObject initiator) {
         if (initiator.tag == "Player") {
             shaking = true;
+            ParticleSystem ps = GetComponentInChildren<ParticleSystem>(true);
+            if (ps != null) ps.Play();
         }
     }
     void FallAfterDelay() {
