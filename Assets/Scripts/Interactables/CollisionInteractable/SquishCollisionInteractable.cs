@@ -62,6 +62,7 @@ public class SquishCollisionInteractable : MonoBehaviour
             if (this.transform.position.y < collision.gameObject.transform.position.y)
             {
                 damaged();
+                this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
                 return;
             }
         }
