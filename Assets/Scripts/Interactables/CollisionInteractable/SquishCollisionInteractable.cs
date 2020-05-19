@@ -33,10 +33,23 @@ public class SquishCollisionInteractable : MonoBehaviour
     {
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision){
+        PopupText.createNewPopup(transform.position, "AHHHHHH!!!!!!!!", Color.white, 10f, 2f, PopupText.utilFuncs_moveUp);
+
+        // if its colliding with the water......
+        if (((1 << collision.gameObject.layer) & (1 << LayerMask.NameToLayer("water"))) != 0) {
+            damaged(); // kill the player
+            this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
+            return;
+        }
+
+        // if the layer is passable... just ignore it
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
-        this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true);
+        this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true); // itherwise start squishing
+
+        
+
+
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -53,8 +66,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
+    private void OnTriggerExit2D(Collider2D collision){
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
 
         if(((1 << collision.gameObject.layer)& (1 << LayerMask.NameToLayer("water"))) !=0)
