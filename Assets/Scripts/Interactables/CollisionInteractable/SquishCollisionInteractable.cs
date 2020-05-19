@@ -6,9 +6,11 @@ public class SquishCollisionInteractable : MonoBehaviour
 {
     private Vector2 o_scale;
     [Tooltip("time in seconds before the player dies")]
-    public float death_time = 1f;
-    [Tooltip("factor multiplied every frame")]
-    public float squish_amount = 0.1f;
+    public float death_time = 0.5f;
+    [Tooltip("factor multiplied every frame to squish the player")]
+    public float squish_amount =1f;
+    [Tooltip("factor multiplied every frame to go back to normal scale")]
+    public float de_squish_amount = 2f;
     private float time = 0;
     private EventEmitter ee;
     private IsGrounded GRD;
@@ -20,6 +22,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         GRD = this.transform.parent.GetComponent<IsGrounded>();
         passableObjectsLayerMask = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("collectible")) | (1 << 2);
+        ee.on("win", DeactivateSquishCollision);
     }
 
     // Update is called once per frame
@@ -37,10 +40,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
         if (GRD.GetGrounded())
         {
-            //var plant = this.transform.parent.parent.GetComponent<NormalPlant>().growthSpeed;
-            //this.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             this.transform.parent.Find("Sprite").localScale += new Vector3(Time.deltaTime, -Time.deltaTime) * squish_amount;
-            //this.transform.parent.position -= Vector3.up * Time.deltaTime * squish_amount*1/2;
             time += Time.deltaTime;
         }
 
@@ -71,10 +71,15 @@ public class SquishCollisionInteractable : MonoBehaviour
         
         while (this.transform.parent.Find("Sprite").localScale.y < o_scale.y)
         {
-            this.transform.parent.Find("Sprite").localScale -= new Vector3(Time.deltaTime, -Time.deltaTime) * squish_amount;
+            this.transform.parent.Find("Sprite").localScale -= new Vector3(Time.deltaTime, -Time.deltaTime) * de_squish_amount;
             yield return new WaitForEndOfFrame();
         }
         this.transform.parent.Find("Sprite").localScale = o_scale;
         yield return null;
+    }
+
+    public void DeactivateSquishCollision(Object[] p)
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 }
