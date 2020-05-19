@@ -15,6 +15,7 @@ public class SquishCollisionInteractable : MonoBehaviour
     private EventEmitter ee;
     private IsGrounded GRD;
     private LayerMask passableObjectsLayerMask;
+    private LayerMask passableObjectsLayerMaskWithWater;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,8 @@ public class SquishCollisionInteractable : MonoBehaviour
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         GRD = this.transform.parent.GetComponent<IsGrounded>();
         passableObjectsLayerMask = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("collectible")) | (1 << 2);
+        passableObjectsLayerMaskWithWater = (1 << LayerMask.NameToLayer("onewayplatform")) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("collectible")) | (1 << 2) | (1 << LayerMask.NameToLayer("water"));
+
         ee.on("win", DeactivateSquishCollision);
     }
 
@@ -32,12 +35,12 @@ public class SquishCollisionInteractable : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
+        if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
         this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
+        if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
         if (GRD.GetGrounded())
         {
             this.transform.parent.Find("Sprite").localScale += new Vector3(Time.deltaTime, -Time.deltaTime) * squish_amount;
@@ -46,18 +49,22 @@ public class SquishCollisionInteractable : MonoBehaviour
 
         if (time >= death_time)
         {
-            Health h = this.transform.parent.GetComponent<Health>();
-            if (h != null) h.damage(1);
-            else { Debug.Log("no health"); }
-
-            ee.invoke("player_damaged", (new[] { this.transform.parent.gameObject }));
-            time = 0;
+            damaged();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
+
+        if(((1 << collision.gameObject.layer)& (1 << LayerMask.NameToLayer("water"))) !=0)
+        {
+            if (this.transform.position.y < collision.gameObject.transform.position.y)
+            {
+                damaged();
+                return;
+            }
+        }
         this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
         StartCoroutine(growBack());
 
@@ -81,5 +88,15 @@ public class SquishCollisionInteractable : MonoBehaviour
     public void DeactivateSquishCollision(Object[] p)
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    private void damaged()
+    {
+        Health h = this.transform.parent.GetComponent<Health>();
+        if (h != null) h.damage(1);
+        else { Debug.Log("no health"); }
+
+        ee.invoke("player_damaged", (new[] { this.transform.parent.gameObject }));
+        time = 0;
     }
 }
