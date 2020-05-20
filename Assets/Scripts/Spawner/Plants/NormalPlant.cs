@@ -28,6 +28,16 @@ public class NormalPlant : BasePlant{
         ee.invoke("plant_created", (new[] { this.gameObject }));
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
+
+        ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
+        if (ps != null) {
+            ps.transform.parent = null;
+            ps?.Play();
+            StartCoroutine(ensureParticleSystemDestroyed(ps));
+        }
+
+
+
     }
 
     void Update()
@@ -148,4 +158,8 @@ public class NormalPlant : BasePlant{
         }
     }
 
+    private IEnumerator ensureParticleSystemDestroyed(ParticleSystem ps, float time = 1) {
+        yield return new WaitForSeconds(time);
+        Destroy(ps.gameObject);
+    }
 }

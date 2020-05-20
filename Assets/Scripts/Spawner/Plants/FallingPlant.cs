@@ -77,8 +77,9 @@ public class FallingPlant : BasePlant
     }
     void FallAfterDelay() {
 
-        for (int j = 0; j < this.transform.childCount; j++) {
-            var r = this.gameObject.transform.GetChild(j).gameObject.AddComponent<Rigidbody2D>();
+        for (int j = 0; j < stemflower.Length; j++)
+        {
+            var r = stemflower[j].gameObject.AddComponent<Rigidbody2D>();
             r.AddForce(Random.insideUnitSphere * 2, ForceMode2D.Impulse);
         }
         Destroy(this.gameObject.GetComponent<BoxCollider2D>());
