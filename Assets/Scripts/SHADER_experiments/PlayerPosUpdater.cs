@@ -22,9 +22,15 @@ public class PlayerPosUpdater : MonoBehaviour{
     private float offset;
     private void Awake()
     {
-        //reset the arrays to delete past iteration
-        Shader.SetGlobalVectorArray("_DaPoints", new Vector4[] { Vector4.positiveInfinity });
-        Shader.SetGlobalFloatArray("_DaRays", new float[] { 0f });
+        //reset the arrays to delete past iteration --> you can't pass arrays of different size to a shader; if you initialize and array with a size of 1 then you cant pass an array of size 10
+        Vector4[] points = new Vector4[20];
+        float[] rays = new float[20];
+        for (int i = 0; i < 20; i++) {
+            points[i] = Vector4.positiveInfinity;
+            rays[i] = 0f;
+        }
+        Shader.SetGlobalVectorArray("_DaPoints", points);
+        Shader.SetGlobalFloatArray("_DaRays", rays);
         Shader.SetGlobalInt("_DaPointsCount", 1);
         
     }
