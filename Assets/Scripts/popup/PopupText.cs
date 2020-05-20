@@ -32,7 +32,10 @@ public class PopupText: MonoBehaviour{
     /// <param name="_timeToFade"> the time (in seconds ) in which the text completely disappear (default = 2sec)</param>
     /// <param name="_moveFunc"> the function to move the text while it's still alive; moveFunc takes a float deltatime and a vector3 actualpos as parameters, and returns the vector3 newpos</param>
     public static void createNewPopup(Vector3 pos, string text, Color color, float _timeBeforeFading = 5f, float _timeToFade = 2f, Func<Vector3, float, Vector3> _moveFunc = null ) {
-        GameObject obj = Instantiate(GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceLoader>().popupPrefab , pos, Quaternion.identity);
+        ResourceLoader rl = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceLoader>();
+        if (rl == null) return;
+
+        GameObject obj = Instantiate(rl.popupPrefab , pos, Quaternion.identity);
 
         PopupText popup = obj.GetComponent<PopupText>();
         popup.startTime = Time.time;
