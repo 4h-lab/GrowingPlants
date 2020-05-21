@@ -45,11 +45,15 @@
 
             sampler2D _MainTex;
 
-            fixed4 frag (v2f i) : SV_Target{
+            fixed4 frag(v2f i) : SV_Target{
+                //i.uv = -i.uv;
+                //i.uv.x = -i.uv.x;
+                //i.uv.y = -i.uv.y;
+
                 fixed4 col = tex2D(_MainTex, i.uv);
                 // just invert the colors
-                if (-i.worldSpacePos.y < 0) {
-                    col.rgb = lerp(col.rgb, float3(0, 0, 1), 0.1);
+                if (i.worldSpacePos.y < 0.5) {
+                    col.rgb = lerp(col.rgb, float3(0, 0, 1), 0.5);
                     //col.a = 0;
                 }
 

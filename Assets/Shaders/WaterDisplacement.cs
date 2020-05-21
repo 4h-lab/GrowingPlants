@@ -22,7 +22,7 @@ public sealed class WaterDisplacementRenderer : PostProcessEffectRenderer<WaterD
         //context.command.BlitFullscreenTriangle(context.source, context.destination, sheet, 0);
         //Graphics.Blit(context.source, context.destination, sheet);
 
-        context.command.Blit(context.GetScreenSpaceTemporaryRT(), context.destination, m);
-
+        //context.command.Blit(context.GetScreenSpaceTemporaryRT(), context.destination, m  );
+        context.command.BuiltinBlit(context.source, context.destination, m);
     }
 }
