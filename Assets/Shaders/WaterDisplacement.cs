@@ -19,6 +19,7 @@ public sealed class WaterDisplacementRenderer : PostProcessEffectRenderer<WaterD
 
         sheet.properties.SetFloat("_MaxY", settings.Y);
         if (sheet == null) Debug.Log("DIO cane lo shader!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        
         //context.command.BlitFullscreenTriangle(context.source, context.destination, sheet, 0);
         //Graphics.Blit(context.source, context.destination, sheet);
 

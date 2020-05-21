@@ -28,10 +28,11 @@ public class Health : MonoBehaviour{
     private void die() {
         ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
         ps?.Play();
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
         StartCoroutine(dead(timeBeforeDying ));
         StartCoroutine(fade(timeBeforeDying ));
         //Destroy(this.gameObject);
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
+
     }
 
     private IEnumerator dead(float time) {
