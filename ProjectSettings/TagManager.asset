@@ -9,6 +9,7 @@ TagManager:
   - GameManager
   - CameraBoundary
   - Plant
+  - post-processing-volume
   layers:
   - Default
   - TransparentFX

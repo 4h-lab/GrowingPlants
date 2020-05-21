@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Health : MonoBehaviour{
     public int maxHealth;
@@ -27,8 +28,8 @@ public class Health : MonoBehaviour{
     private void die() {
         ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
         ps?.Play();
-        StartCoroutine(dead(timeBeforeDying));
-        StartCoroutine(fade(timeBeforeDying * .5f));
+        StartCoroutine(dead(timeBeforeDying ));
+        StartCoroutine(fade(timeBeforeDying ));
         //Destroy(this.gameObject);
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
     }
@@ -39,11 +40,21 @@ public class Health : MonoBehaviour{
     }
     private IEnumerator fade(float time) {
         float totalTime = 0;
+        GameObject go = GameObject.FindGameObjectWithTag("post-processing-volume");
+        DepthOfField dof = null;
+        if (go != null) go.GetComponent<PostProcessVolume>().profile.TryGetSettings<DepthOfField>(out dof);
+
+        
         while (totalTime < time) {
             time += Time.deltaTime;
             Color color = gameObject.GetComponent<SpriteRenderer>().color;
             color.a = (1 - totalTime / time);
             gameObject.GetComponent<SpriteRenderer>().color = color;
+
+            if (dof != null) {
+                Debug.Log("Focus distance --> " + dof.focusDistance.value);
+                dof.focusDistance.value = dof.focusDistance.value - Time.deltaTime * 8;
+            }
             yield return new WaitForEndOfFrame();
         }
     }
