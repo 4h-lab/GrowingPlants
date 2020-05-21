@@ -37,6 +37,25 @@ MonoBehaviour:
   speedDown:
     overrideState: 0
     value: 1
+--- !u!114 &-5100541776210738345
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6e094659b66af4caa58fb7a047783f, type: 3}
+  m_Name: WaterDisplacement
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  Y:
+    overrideState: 0
+    value: 0
 --- !u!114 &-2883548482172550354
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -108,7 +127,7 @@ MonoBehaviour:
   - {fileID: -384495371058057427}
   - {fileID: 6710234638912684701}
   - {fileID: 8801566554439832330}
-  - {fileID: 2828684110606846176}
+  - {fileID: -5100541776210738345}
 --- !u!114 &2070958460025015715
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -152,25 +171,6 @@ MonoBehaviour:
     defaultState: 1
   opacity:
     overrideState: 1
-    value: 0
---- !u!114 &2828684110606846176
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c6e094659b66af4caa58fb7a047783f, type: 3}
-  m_Name: WaterDisplacement
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  Y:
-    overrideState: 0
     value: 0
 --- !u!114 &4210767799958927844
 MonoBehaviour:
