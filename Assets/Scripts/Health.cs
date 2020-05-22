@@ -11,6 +11,8 @@ public class Health : MonoBehaviour{
     private Material m;
     private float dissolve = 1.2f;
 
+    private bool isDead = false;
+
 
     [Tooltip("The delay (in seconds) between the player death and the level reload --> it is used to do stuff like death animations ecc")]
     public float timeBeforeDying = 1f;
@@ -38,6 +40,8 @@ public class Health : MonoBehaviour{
     }
     
     private void die() {
+        if (isDead) return;
+        isDead = true;
         GameObject.FindGameObjectWithTag("Player").transform.Find("Sprite").gameObject.AddComponent<testDissolver>();
         ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
         ps?.Play();
