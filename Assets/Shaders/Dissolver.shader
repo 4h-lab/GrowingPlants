@@ -55,15 +55,17 @@
                 return o;
             }
 
-            fixed4 frag (v2f i) : COLOR{
+            fixed4 frag (v2f i) : SV_Target{ //Color{
                 fixed4 col = tex2D(_MainTex, i.uv);
 
                 float noise =  frac(sin(dot(i.uv, float2(12.9898, 4.1414))) * 43758.5453);
-                //float sampledNoise = step(_DissolveAmount, noise);
-                if (_DissolveAmount < noise) col.a = 0;
+                float sampledNoise = step(_DissolveAmount, noise);
+                //col.a = min(col.a, col.a-);
+                col.a *= sampledNoise;
+                //if (_DissolveAmount < noise) col.a = 0;
 
 
-                 //col.a -= sampledNoise;
+                 
                  return col;
             }
             ENDCG
