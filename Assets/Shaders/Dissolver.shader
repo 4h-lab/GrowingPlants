@@ -44,6 +44,7 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _DissolveAmount;
 
             v2f vert (appdata v)
             {
@@ -54,20 +55,16 @@
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target{
-                // sample the texture
+            fixed4 frag (v2f i) : COLOR{
                 fixed4 col = tex2D(_MainTex, i.uv);
-                //col = 1 - col;
-                
-                //int alpha = step(1, col.a);
-                //col.r = alpha;
-                //col.g = alpha;
-                //col.b = alpha;
-                //col.a = 0;
 
                 float noise =  frac(sin(dot(i.uv, float2(12.9898, 4.1414))) * 43758.5453);
-                
-                return col;
+                //float sampledNoise = step(_DissolveAmount, noise);
+                if (_DissolveAmount < noise) col.a = 0;
+
+
+                 //col.a -= sampledNoise;
+                 return col;
             }
             ENDCG
         }
