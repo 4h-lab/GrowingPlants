@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class testDissolver : MonoBehaviour{
     private Material m;
-    private float dissolve = 1.2f;
+    private float dissolve = .7f;
 
     // Start is called before the first frame update
     void Start(){

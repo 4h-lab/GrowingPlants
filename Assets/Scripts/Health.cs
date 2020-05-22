@@ -38,9 +38,12 @@ public class Health : MonoBehaviour{
     }
     
     private void die() {
+        GameObject.FindGameObjectWithTag("Player").transform.Find("Sprite").gameObject.AddComponent<testDissolver>();
         ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
         ps?.Play();
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().setWinPause(true);
+
         StartCoroutine(dead(timeBeforeDying ));
         //StartCoroutine(fade(timeBeforeDying ));
         //Destroy(this.gameObject);
@@ -48,6 +51,7 @@ public class Health : MonoBehaviour{
     }
 
     private IEnumerator dead(float time) {
+       
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
