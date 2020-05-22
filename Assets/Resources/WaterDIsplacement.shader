@@ -55,13 +55,32 @@
                 //i.uv.x = -i.uv.x;
                 //i.uv.y = -i.uv.y;
 
+                
+                //i.uv.y += cos(i.uv.x * _Time) * 0.2 * cos(_Time);
                 fixed4 col = tex2D(_MainTex, i.uv);
+
+                //fixed4 col = (1, 1, 1, 1);
+
                 // just invert the colors
                 if (i.worldSpacePos.y > 0.5) {
+                    //i.uv.y += cos(i.uv.x * _Time) * 0.2 * sin(_Time) * cos(i.uv.y * .3);
+
+                    i.uv.y += cos(i.uv.x + i.uv.y) * 0.21 * cos(_Time * 13.5);
+                    i.uv.x += sin(i.uv.x - i.uv.y) * 0.15 * sin(_Time * 42.5);
+                    //i.uv.y += cos(_Time * 6) * sin(_Time * 4.5) * sin(i.uv.x * .32 * _Time) * cos(i.uv.x) * .21;
+
+
+
+                    //i.uv.x += cos(i.uv.y * _Time) * 0.2 * cos(_Time);
+
+                    
+                    col = tex2D(_MainTex, i.uv);
+
                     col.rgb = lerp(col.rgb, float3(0, 0, 1), 0.5);
+                    //i.uv.y += cos(i.uv.x * 25.) * 0.06 * cos(_Time);
                     //col.a = 0;
                 }
-
+                
 
 
                 return col;

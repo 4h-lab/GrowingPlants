@@ -10,11 +10,19 @@ public class Health : MonoBehaviour{
 
     [Tooltip("The delay (in seconds) between the player death and the level reload --> it is used to do stuff like death animations ecc")]
     public float timeBeforeDying = 1f;
+    public Shader dissolver;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        //this.gameObject.GetComponent<SpriteRenderer>().material.shader = dissolver;
+        if (dissolver != null) {
+            Material m = new Material(dissolver);
+            gameObject.GetComponent<Renderer>().material = m;
+
+        }
+    
     }
 
     public void damage(int amount) {
