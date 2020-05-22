@@ -250,6 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  timeBeforeDying: 1
+  dissolver: {fileID: 0}
 --- !u!114 &1266408784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 7144201019997446966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.14, y: 0.29999998, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6219927600155200259}
   m_RootOrder: 2
@@ -5146,8 +5148,8 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0.002
-  m_MaxParticleSize: 0.01
+  m_MinParticleSize: 0.02
+  m_MaxParticleSize: 0.04
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

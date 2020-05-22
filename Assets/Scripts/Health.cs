@@ -8,6 +8,10 @@ public class Health : MonoBehaviour{
     public int maxHealth;
     public int health { get; private set; }
 
+    private Material m;
+    private float dissolve = 1.2f;
+
+
     [Tooltip("The delay (in seconds) between the player death and the level reload --> it is used to do stuff like death animations ecc")]
     public float timeBeforeDying = 1f;
     public Shader dissolver;
@@ -38,7 +42,7 @@ public class Health : MonoBehaviour{
         ps?.Play();
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
         StartCoroutine(dead(timeBeforeDying ));
-        StartCoroutine(fade(timeBeforeDying ));
+        //StartCoroutine(fade(timeBeforeDying ));
         //Destroy(this.gameObject);
 
     }
