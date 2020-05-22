@@ -56,7 +56,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
         if (GRD.GetGrounded())
         {
-            this.transform.parent.Find("Sprite").localScale += new Vector3(Time.deltaTime, -Time.deltaTime) * squish_amount*GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
+            this.transform.parent.Find("Sprite").localScale += new Vector3(Time.deltaTime*2f, -Time.deltaTime) * squish_amount*GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
             time += Time.deltaTime;
         }
 
@@ -91,7 +91,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         
         while (this.transform.parent.Find("Sprite").localScale.y < o_scale.y)
         {
-            this.transform.parent.Find("Sprite").localScale -= new Vector3(Time.deltaTime, -Time.deltaTime) * de_squish_amount;
+            this.transform.parent.Find("Sprite").localScale -= new Vector3(Time.deltaTime*2f, -Time.deltaTime) * de_squish_amount;
             yield return new WaitForEndOfFrame();
         }
         this.transform.parent.Find("Sprite").localScale = o_scale;

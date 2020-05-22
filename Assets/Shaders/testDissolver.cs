@@ -14,7 +14,9 @@ public class testDissolver : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+        if (dissolve>= 0) { 
         dissolve -= Time.deltaTime * .5f;
+        }
         m.SetFloat("_DissolveAmount", dissolve);
 
 
