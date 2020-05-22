@@ -6,12 +6,20 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" 
+        "Queue" = "Transparent"
+        "IgnoreProjector" = "True"
+        "RenderType" = "Transparent"
+        "PreviewType" = "Plane"
+        "CanUseSpriteAtlas" = "True"
+        }
         LOD 100
+
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
-            Blend SrcAlpha OneMinusSrcAlpha
+            
 
             CGPROGRAM
             #pragma vertex vert
@@ -51,11 +59,11 @@
                 fixed4 col = tex2D(_MainTex, i.uv);
                 //col = 1 - col;
                 
-                int alpha = step(1, col.a);
-                col.r = alpha;
-                col.g = alpha;
-                col.b = alpha;
-                col.a = 0;
+                //int alpha = step(1, col.a);
+                //col.r = alpha;
+                //col.g = alpha;
+                //col.b = alpha;
+                //col.a = 0;
 
                 float noise =  frac(sin(dot(i.uv, float2(12.9898, 4.1414))) * 43758.5453);
                 
