@@ -667,7 +667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719334057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: -1, z: 0}
+  m_LocalPosition: {x: 5, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 162931245}
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Pianta una pianta
   color: {r: 0, g: 1, b: 0, a: 1}
-  timeBeforeFading: 5
+  timeBeforeFading: 25
 --- !u!61 &719334060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: PIANTA ANCORA!!!!!!
   color: {r: 0, g: 1, b: 0, a: 1}
-  timeBeforeFading: 5
+  timeBeforeFading: 25
 --- !u!61 &1757234887
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2137,7 +2137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Muoviti con le frecce
   color: {r: 0, g: 1, b: 0, a: 1}
-  timeBeforeFading: 5
+  timeBeforeFading: 25
 --- !u!4 &2064584049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 72050997753880559, guid: 1308ec8e5d4552945907fa9b805803c0,
