@@ -2050,7 +2050,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646721704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -4845,15 +4845,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 792844262370596570, guid: d1c6a8bef5aa047488fdf928e64600b1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 46f67b118ecc17a48b894ea16ebcfe51, type: 2}
     - target: {fileID: 6219927600155200259, guid: d1c6a8bef5aa047488fdf928e64600b1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11
+      value: -3.05
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: d1c6a8bef5aa047488fdf928e64600b1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -2.82
       objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: d1c6a8bef5aa047488fdf928e64600b1,
         type: 3}
