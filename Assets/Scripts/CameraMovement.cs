@@ -17,6 +17,8 @@ public class CameraMovement : MonoBehaviour{
     private bool canMoveAlongX = true;
     private bool canMoveAlongY = true;
 
+    Vector3 panTranslate   =  Vector3.zero;
+
     private Transform playerTransform;
 
 
@@ -103,5 +105,29 @@ public class CameraMovement : MonoBehaviour{
 
 
 
+    }
+
+    private void LateUpdate()
+    {
+        if (Input.touchCount == 3)
+        {
+
+            var finger = Input.GetTouch(2).position;
+            Vector2 relativePlayerPos = finger;
+            Vector3 dir = Vector3.zero;
+
+            if (canMoveAlongX && ((relativePlayerPos.x < horizontalRatioBeforeScrolling) || (relativePlayerPos.x > 1 - horizontalRatioBeforeScrolling)))
+            {
+                dir.x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).x, minX, maxX) - transform.position.x;
+            }
+            if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling)))
+            {
+                dir.y = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).y, minY, maxY) - transform.position.y;
+            }
+
+            transform.Translate(dir * 0.02f * cameraspeed);
+
+
+        }
     }
 }
