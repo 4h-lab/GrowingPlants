@@ -16,6 +16,9 @@ public class MovementJoystick : MonoBehaviour
     private  Vector3 mVelocity;
     private Vector3 oldPos;
     private bool isSquished = false;
+    private bool isrunning = false;
+
+    private Animator anim;
 
     private FixedJoystick variableJoystick;
 
@@ -31,7 +34,7 @@ public class MovementJoystick : MonoBehaviour
         variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
     }
     void Start() {
-
+         anim = GetComponentInChildren<Animator>();
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         
         //var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
@@ -44,6 +47,7 @@ public class MovementJoystick : MonoBehaviour
     }
 
     public void FixedUpdate(){
+        isrunning = false;
         oldPos = transform.position;
         if (variableJoystick.Horizontal != 0f) {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
@@ -52,8 +56,8 @@ public class MovementJoystick : MonoBehaviour
         else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);//changeVelocity(-1f);
         else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);//changeVelocity(1f);
         else {
-                    speed = 0;
-                }
+            speed = 0;
+        }
         //cast the rb and see if it'll be stuck in something
 
 
@@ -64,15 +68,19 @@ public class MovementJoystick : MonoBehaviour
 
 
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
+        if (speed > 0) isrunning = true;
+        if(anim != null)anim.SetBool("running", isrunning);
+        
 
     }
-    private void movePlayer(Vector3 dir)
-    {
+    private void movePlayer(Vector3 dir){
+
+
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
         targetVelocity = dir;
-        if (!isSquished)
-        {
+        if (!isSquished){
+
             transform.Translate(projectRB(dir * speed * Time.deltaTime * GameManager.customTimeScale));
         }
         else
@@ -111,7 +119,11 @@ public class MovementJoystick : MonoBehaviour
         // Multiply the player's x local scale by -1.
         //Vector3 theScale =
         //this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
-        this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
+        //this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
+        Transform t = this.transform.Find("Sprite").transform.Find("Animated").transform;
+        t.localScale = new Vector3(-t.localScale.x, t.localScale.y, t.localScale.z);
+
+
     }
 
     Vector2 projectRB(Vector2 dir){
@@ -131,6 +143,7 @@ public class MovementJoystick : MonoBehaviour
                 distance = modifiedDistance < distance ? modifiedDistance : distance - 0.01f;
             }
         }
+
         return dir.normalized * distance;
     }
     public void setSquished(bool s)
