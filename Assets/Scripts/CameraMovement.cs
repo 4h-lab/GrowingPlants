@@ -17,6 +17,8 @@ public class CameraMovement : MonoBehaviour{
     private bool canMoveAlongX = true;
     private bool canMoveAlongY = true;
 
+    private GameManager gm;
+
     Vector3 panTranslate   =  Vector3.zero;
 
     private Transform playerTransform;
@@ -44,6 +46,8 @@ public class CameraMovement : MonoBehaviour{
             Debug.Log("Can't move along Y axis....");
         }
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        gm = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -109,10 +113,10 @@ public class CameraMovement : MonoBehaviour{
 
     private void LateUpdate()
     {
-        if (Input.touchCount == 3)
+        if (Input.touchCount >0 && gm.isPaused)
         {
 
-            var finger = Input.GetTouch(2).position;
+            var finger = Input.GetTouch(0).position;
             Vector2 relativePlayerPos = finger;
             Vector3 dir = Vector3.zero;
 

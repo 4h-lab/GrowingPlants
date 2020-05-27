@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public static float totalTime = -1f;
     private static float timeSinceLevelStarted = 0f;
 
+    public bool isPaused{get; private set;}
+
     EventEmitter ee;
 
     public delegate int CalcScoreStep(List<string> s);
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour {
 
     public float setPause(bool pause){
         float previousScale = customTimeScale;
+        isPaused = pause;
         customTimeScale = pause ? 0f : 1f;
         Time.timeScale = pause ? 0f : 1f;
         return previousScale;
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour {
         return previousScale;
     }
     public float setPause() {
+        isPaused = customTimeScale != 0f;
         return setPause(customTimeScale != 0f);
     }
 
