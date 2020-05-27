@@ -5,6 +5,7 @@
         _ColouredBorderWidth("ColouredBorder", float) = 0.1
         [HDR]_BorderColor("BorderColor", Color) = (1,0,0)
         _MainTex ("Texture", 2D) = "white" {}
+        _Seed("seed", float) = 0
     }
     SubShader
     {
@@ -214,6 +215,7 @@
             float _DissolveAmount;
             float _ColouredBorderWidth;
             float4 _BorderColor;
+            float _Seed;
 
             v2f vert (appdata v)
             {
@@ -228,7 +230,7 @@
                 fixed4 col = tex2D(_MainTex, i.uv);
 
 
-                float noise = cnoise(i.uv + float2(45, 1441));   // frac(sin(dot(i.uv, float2(12.9898, 4.1414))) * 43758.5453);
+                float noise = cnoise(i.uv + float2(45, 1441) + float2(_Seed, _Seed));   // frac(sin(dot(i.uv, float2(12.9898, 4.1414))) * 43758.5453);
                 float sampledNoise = 1-step(_DissolveAmount, noise);
                 float sampledColor = 1-step(_DissolveAmount - 0.5, noise);
                 //col.a = min(col.a, col.a-);
