@@ -23,6 +23,8 @@ public class MovementJoystick : MonoBehaviour
 
     [SerializeField]
     ContactFilter2D cf;
+    [SerializeField]
+    float maxFallingSpeed = 10;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 
@@ -61,8 +63,6 @@ public class MovementJoystick : MonoBehaviour
         //Debug.Log("Speed : " + speed);
         //Debug.Log("moved : " + (oldPos - transform.position).magnitude / (Time.deltaTime) + " --> from: " + oldPos + " to: " + transform.position );
 
-
-
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
 
     }
@@ -80,11 +80,9 @@ public class MovementJoystick : MonoBehaviour
             transform.Translate(dir * speed * Time.deltaTime * GameManager.customTimeScale);
         }
         if ((dir.x > 0) ^ facingRight) Flip();
-
-
         if ((dir.x > 0) ^ facingRight) Flip();
-        
-        
+        //tentative change
+        if ((dir.y > 0) ^ (mBody.velocity.magnitude > maxFallingSpeed)) mBody.velocity = Vector2.ClampMagnitude(mBody.velocity, maxFallingSpeed);
     }
     /*
     private void changeVelocity(float f){
