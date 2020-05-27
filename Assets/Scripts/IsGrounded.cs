@@ -62,7 +62,7 @@ public class IsGrounded : MonoBehaviour
     }
 
     private bool checkGroundLevel() {
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(_collider.bounds.center, _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
         return (hits.Length >= 1); // return true if there was at least 1 hit
     }
 
