@@ -65,7 +65,7 @@ Material:
     - _ColouredBorderWidth: 0.05
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DissolveAmount: 1
+    - _DissolveAmount: 1.48
     - _DstBlend: 0
     - _EnableExternalAlpha: 0
     - _GlossMapScale: 1
@@ -75,6 +75,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Seed: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
