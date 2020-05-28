@@ -91,7 +91,7 @@
 				fixed4 draw = _Color * (1 - d);
 
 				draw = max(col, draw) + (0.05*col);
-
+				if (d <= 0) draw = float4(0, 0, 0, 1);
 				return saturate(draw);
 
 				/*

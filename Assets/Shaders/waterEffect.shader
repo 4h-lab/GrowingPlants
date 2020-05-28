@@ -6,10 +6,14 @@
         _WaveThickness("wavethickness", float) = .05
         _WaterOpacity("wateropacity", float) = .1
 
-        [HDR] _WaterPrimaryColor("waterprimaryColor", Color) = (0,0,1)
-        [HDR]_WaterSecondaryColor("watersecondaryColor", Color) = (.44,1,1)
+        [HDR] _WaterPrimaryColor1("water primary Color", Color) = (0,0,1)
+        [HDR] _WaterPrimaryColor2("water primary othery Color", Color) = (0,0,1)
 
+        [HDR] _WaterSecondaryColor1("water secondary Color", Color) = (.44,1,1)
+        [HDR] _WaterSecondaryColor2("water secondary other Color", Color) = (.44,1,1)
+        [HDR] _WaterSecondaryColor3("water secondary other other Color", Color) = (.44,1,1)
 
+        
     }
     SubShader
     {
@@ -157,8 +161,11 @@
             float4 _MainTex_ST;
             float _WaveThickness;
             float _WaterOpacity;
-            fixed4 _WaterPrimaryColor;
-            fixed4 _WaterSecondaryColor;
+            fixed4 _WaterPrimaryColor1;
+            fixed4 _WaterPrimaryColor2;
+            fixed4 _WaterSecondaryColor1;
+            fixed4 _WaterSecondaryColor2;
+            fixed4 _WaterSecondaryColor3;
 
 
             v2f vert (appdata v)
@@ -174,26 +181,39 @@
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-             
-                float noise = cnoise(i.uv * _SinTime.yy);
-                noise += cnoise(i.uv * 5 * _CosTime.yy);
-                noise += cnoise(i.uv * .26 * _SinTime.yy);
-                noise += cnoise((float2(1,1) - i.uv) * 15 * _CosTime.xx);
-                noise += cnoise((i.uv * .5) + float2(.5, .5) * 7.7 * _SinTime.xx);
-                noise += cnoise((i.uv * float2(.5, 1)) + float2(.5, 0) * 17.7 * _SinTime.xx );
+            
+                float noise1 = cnoise(i.uv * _SinTime.yy * 0.316 );
+                float noise2 = cnoise(i.uv * 5.17 * _CosTime.yy);
+                float noise3 = cnoise(i.uv * .26 * _SinTime.yy);
+                noise1 += cnoise((float2(1, 1) - i.uv) * 4.712 * _CosTime.xx);
+                noise2 += cnoise((i.uv * .5) + float2(.5, .5) * 7.7 * _SinTime.xx);
+                noise3 += cnoise((i.uv * float2(.5, 1)) + float2(.5, 0) * 6.123 * _CosTime.xx);
+
+                noise1 += cnoise((float2(i.uv[1], i.uv[0])) * 15 * _CosTime.xx);
 
 
-
-                noise /= 5;
-                if (noise > 0 && noise < _WaveThickness) {
-                    col = _WaterSecondaryColor;
-                    col.a = 1;
-                }else {
-                    col = _WaterPrimaryColor;
-                    col.a = _WaterOpacity;
+                if ((noise1 > 0 && noise1 < _WaveThickness)) {
+                    col = _WaterSecondaryColor1; 
+                    col.a = _WaterOpacity + 0.35;
+                }
+                else {
+                    if ((noise2 > 0 && noise2 < _WaveThickness)) {
+                        col = _WaterSecondaryColor2;
+                        col.a = _WaterOpacity + 0.35;
+                    }
+                    else {
+                        if ((noise3 > 0 && noise3 < _WaveThickness)) {
+                            col = _WaterSecondaryColor3;
+                            col.a = _WaterOpacity + 0.5;
+                        }
+                        else {
+                            float blendFactor = cnoise(-1.2 * (i.uv + float2(5, 7)) * _CosTime.xx);
+                            col = _WaterPrimaryColor1 * blendFactor + (1 - blendFactor) * _WaterPrimaryColor2;
+                            col.a = _WaterOpacity;
+                        }
+                    }
                 }
 
-            
                 return col;
             }
             ENDCG
