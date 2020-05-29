@@ -55,7 +55,7 @@ public class CornerPauseButton : MonoBehaviour
         cameraM.follow = true;
         Destroy(instancedPauseScreen);
 
-        yield return new WaitUntil(()=> cameraM.isMoving==false);
+        yield return new WaitUntil(()=> Camera.main.velocity.magnitude<0.1f);
         gm.setPause(false);
         gm.ControlsEnabled(true);
         yield return null;
