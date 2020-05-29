@@ -7,6 +7,18 @@ public class PauseMenuButtons : MonoBehaviour
 {
     private int currentLevel = 0;
 
+    private List<CanvasRenderer> objs= new List<CanvasRenderer>();
+
+
+    private void Start()
+    {
+        for (int i = 0;i< this.transform.parent.childCount; i++){
+            if (this.transform.parent.GetChild(i).GetComponent<CanvasRenderer>() != null)
+            {
+                objs.Add(this.transform.parent.GetChild(i).GetComponent<CanvasRenderer>());
+            }
+        }
+    }
     public void NextLevel()
     {
         Debug.Log("current " + currentLevel + " - NEXT");
@@ -33,5 +45,23 @@ public class PauseMenuButtons : MonoBehaviour
     public void SetCurrentLevel(int currentLevel)
     {
         this.currentLevel = currentLevel;
+    }
+
+
+    private void LateUpdate()
+    {
+        if (Input.touchCount > 0)
+        {
+            foreach(CanvasRenderer r in objs)
+            {
+                r.SetAlpha(0);            }
+        }
+        else
+        {
+            foreach (CanvasRenderer r in objs)
+            {
+                r.SetAlpha(1);
+            }
+        }
     }
 }
