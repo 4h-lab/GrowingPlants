@@ -116,7 +116,7 @@ public class CameraMovement : MonoBehaviour{
     {
         if (Input.touchCount >0 && gm.isPaused)
         {
-
+            if (Input.GetTouch(0).phase == TouchPhase.Moved) { 
             var finger = Input.GetTouch(0).position;
             Vector2 relativePlayerPos = finger;
             Vector3 dir = Vector3.zero;
@@ -131,7 +131,7 @@ public class CameraMovement : MonoBehaviour{
             }
 
             transform.Translate(dir * Time.fixedDeltaTime * cameraspeed);
-
+            }
 
         }
     }

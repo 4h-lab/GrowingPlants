@@ -54,10 +54,10 @@ public class CornerPauseButton : MonoBehaviour
     {
         cameraM.follow = true;
         Destroy(instancedPauseScreen);
-
-        yield return new WaitUntil(()=> Mathf.Abs(Camera.main.velocity.y)<=0.1f);
+        yield return new WaitForEndOfFrame(); // let the camera start moving
         //yield return new WaitUntil(() => Camera.main.velocity == Vector3.zero);
-        
+        //while (!(Camera.main.velocity == Vector3.zero)) yield return null;
+        while ((Mathf.Abs(Camera.main.velocity.y) > 0.1f)) yield return null;
         gm.setPause(false);
         gm.ControlsEnabled(true);
         yield return null;
