@@ -16,6 +16,7 @@ public class CameraMovement : MonoBehaviour{
 
     private bool canMoveAlongX = true;
     private bool canMoveAlongY = true;
+    public bool isMoving { get; private set; } = false;
 
     private GameManager gm;
 
@@ -39,11 +40,11 @@ public class CameraMovement : MonoBehaviour{
 
         if (minX >= maxX) {
             canMoveAlongX = false;
-            Debug.Log("Can't move along X axis.... " + minX + " >" + maxX);
+            
         }
         if (minY >= maxY) {
             canMoveAlongY = false;
-            Debug.Log("Can't move along Y axis....");
+            
         }
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -63,8 +64,8 @@ public class CameraMovement : MonoBehaviour{
         if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling))) { 
             dir.y = Mathf.Clamp(playerTransform.position.y, minY, maxY) - transform.position.y;
         }
-
-        transform.Translate(dir * Time.deltaTime * cameraspeed);
+        isMoving = (dir == Vector3.zero) ? false : true;
+        transform.Translate(dir * Time.fixedDeltaTime* cameraspeed);
 
            
 
@@ -129,9 +130,11 @@ public class CameraMovement : MonoBehaviour{
                 dir.y = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).y, minY, maxY) - transform.position.y;
             }
 
-            transform.Translate(dir * 0.02f * cameraspeed);
+            transform.Translate(dir * Time.fixedDeltaTime * cameraspeed);
 
 
         }
     }
+
+    
 }
