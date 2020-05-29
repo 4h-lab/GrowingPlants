@@ -88,7 +88,15 @@ Shader "Sprites/Gray"{
 					half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
 
                     //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
-                    texcol.rgb *= maskcol.r;
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.1225, 0.435, 0.082)), maskcol);
+
+                    //texcol.rgb *= maskcol.r;
+                    //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, (float3(1,1,1)-texcol.rgb)), maskcol);
+
+
+                    if (maskcol == 1) {
+                        //texcol.rgb *= .5;
+                    }
 
 					texcol = texcol * IN.color; // * (1 - maskcol.r);
                     return texcol;

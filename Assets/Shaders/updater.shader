@@ -8,6 +8,7 @@
 		_Ray("Ray",Float) = 0
 		_SpritePos("Position", Vector) = (0,0,0,0)
 		_SpriteScale("Scale", Vector) = (1,1,0,0)
+
 	}
 		SubShader
 		{
@@ -91,7 +92,7 @@
 				//fixed4 draw = _Color * (pow((1 - d), 3));
 				fixed4 draw = _Color * (1 - d);
 
-				draw = max(col, draw) + (0.05*col);				
+				draw = max(col, draw) + (0.15*col);				
 				return saturate(draw);
 
 				/*
