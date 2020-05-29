@@ -16,7 +16,6 @@ public class CameraMovement : MonoBehaviour{
 
     private bool canMoveAlongX = true;
     private bool canMoveAlongY = true;
-    public bool isMoving { get; private set; } = false;
 
     private GameManager gm;
 
@@ -47,7 +46,7 @@ public class CameraMovement : MonoBehaviour{
             
         }
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
+        
         gm = GameObject.FindObjectOfType<GameManager>();
     }
 
@@ -64,8 +63,8 @@ public class CameraMovement : MonoBehaviour{
         if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling))) { 
             dir.y = Mathf.Clamp(playerTransform.position.y, minY, maxY) - transform.position.y;
         }
-        isMoving = (dir == Vector3.zero) ? false : true;
-        Debug.Log("VELOCITY "+Camera.main.velocity);
+        
+        Debug.Log(Camera.main.velocity.ToString());
         transform.Translate(dir * Time.fixedDeltaTime* cameraspeed);
 
            
@@ -135,6 +134,11 @@ public class CameraMovement : MonoBehaviour{
 
 
         }
+    }
+
+    public Vector4 levelBounds()
+    {
+        return new Vector4(minX, maxX, minY, maxY);
     }
 
     

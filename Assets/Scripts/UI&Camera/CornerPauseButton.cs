@@ -55,14 +55,16 @@ public class CornerPauseButton : MonoBehaviour
         cameraM.follow = true;
         Destroy(instancedPauseScreen);
 
-        yield return new WaitUntil(()=> Camera.main.velocity.magnitude<0.1f);
+        yield return new WaitUntil(()=> Mathf.Abs(Camera.main.velocity.y)<=0.1f);
+        //yield return new WaitUntil(() => Camera.main.velocity == Vector3.zero);
+        
         gm.setPause(false);
         gm.ControlsEnabled(true);
         yield return null;
     }
 
 
-    public static float DistancePointToRectangle(Vector2 point, Rect rect)
+    /*public static float DistancePointToRectangle(Vector2 point, Rect rect)
     {
         //  Calculate a distance between a point and a rectangle.
         //  The area around/in the rectangle is defined in terms of
@@ -131,10 +133,5 @@ public class CornerPauseButton : MonoBehaviour
                 return 0f;
             }
         }
-    }
-
-    void OnDestroy()
-    {
-        Debug.Log("Destroyed");
-    }
+    }*/
 }
