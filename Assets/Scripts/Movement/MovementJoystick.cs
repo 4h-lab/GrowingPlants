@@ -25,8 +25,8 @@ public class MovementJoystick : MonoBehaviour
     ContactFilter2D cf;
     [SerializeField]
     float maxFallingSpeed = 1;
-    [SerializeField]
-    bool clampFall = true;
+    //[SerializeField]
+    //bool clampFall = true;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 
@@ -65,7 +65,7 @@ public class MovementJoystick : MonoBehaviour
         //Debug.Log("Speed : " + speed);
         //Debug.Log("moved : " + (oldPos - transform.position).magnitude / (Time.deltaTime) + " --> from: " + oldPos + " to: " + transform.position );
 
-        if (clampFall)
+        /*if (clampFall)
         {
             if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
             {
@@ -74,7 +74,7 @@ public class MovementJoystick : MonoBehaviour
                 Debug.Log("CORRECT");
             }
         }
-        //Debug.Log("fall speed " + mBody.velocity + " --- magnitude " + mBody.velocity.magnitude);
+        //Debug.Log("fall speed " + mBody.velocity + " --- magnitude " + mBody.velocity.magnitude);*/
 
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
 
