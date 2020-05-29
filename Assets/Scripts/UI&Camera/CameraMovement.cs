@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour{
 
     private GameManager gm;
 
-    Vector3 panTranslate   =  Vector3.zero;
+    float touchtime=0;
 
     private Transform playerTransform;
 
@@ -114,23 +114,33 @@ public class CameraMovement : MonoBehaviour{
 
     private void LateUpdate()
     {
+
         if (Input.touchCount >0 && gm.isPaused)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Moved) { 
-            var finger = Input.GetTouch(0).position;
-            Vector2 relativePlayerPos = finger;
-            Vector3 dir = Vector3.zero;
-
-            if (canMoveAlongX && ((relativePlayerPos.x < horizontalRatioBeforeScrolling) || (relativePlayerPos.x > 1 - horizontalRatioBeforeScrolling)))
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                dir.x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).x, minX, maxX) - transform.position.x;
+                touchtime = Time.realtimeSinceStartup;
             }
-            if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling)))
-            {
-                dir.y = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).y, minY, maxY) - transform.position.y;
-            }
+            else if ((Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)&& Time.realtimeSinceStartup-touchtime>0.2f)
+            { 
+                var finger = Input.GetTouch(0).position;
+                Vector2 relativePlayerPos = finger;
+                Vector3 dir = Vector3.zero;
 
-            transform.Translate(dir * Time.fixedDeltaTime * cameraspeed);
+                if (canMoveAlongX && ((relativePlayerPos.x < horizontalRatioBeforeScrolling) || (relativePlayerPos.x > 1 - horizontalRatioBeforeScrolling)))
+                {
+                    dir.x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).x, minX, maxX) - transform.position.x;
+                }
+                if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling)))
+                {
+                    dir.y = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).y, minY, maxY) - transform.position.y;
+                }
+
+                transform.Translate(dir * Time.fixedDeltaTime * cameraspeed);
+            }
+            else if(Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                touchtime = 0f;
             }
 
         }
