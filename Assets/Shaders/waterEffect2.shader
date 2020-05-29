@@ -5,6 +5,10 @@
         _MainTex("Texture", 2D) = "white" {}
         _WaveThickness("wavethickness", float) = .05
         _WaterOpacity("wateropacity", float) = .1
+        _SurfaceWaveHeigth("Surface waves heigth", float) = .03
+        _SurfaceWaveBprderThickness("Surface waves border thickness", float) = .01
+
+
 
         [HDR] _WaterPrimaryColor1("water primary Color", Color) = (0,0,1)
         [HDR] _WaterPrimaryColor2("water primary othery Color", Color) = (0,0,1)
@@ -160,6 +164,8 @@
                 float4 _MainTex_ST;
                 float _WaveThickness;
                 float _WaterOpacity;
+                float _SurfaceWaveHeigth;
+                float _SurfaceWaveBprderThickness;
                 fixed4 _WaterPrimaryColor1;
                 fixed4 _WaterPrimaryColor2;
                 fixed4 _WaterSecondaryColor1;
@@ -179,9 +185,9 @@
                 fixed4 frag(v2f i) : SV_Target
                 {
                     // sample the texture
-                    fixed4 col = tex2D(_MainTex, i.uv);
+                    float4 col = tex2D(_MainTex, i.uv);
                     
-                    float noise1d = (cnoise(float2(i.uv[0] * 10, _Time.x)) + 1) * .5;
+                    float noise1d = (cnoise(float2(i.uv[0] * 10, _Time.y)) + 1) * .5;
 
 
                     float noise = (cnoise(i.uv * _SinTime.yy * 0.316) +
@@ -209,9 +215,14 @@
                             col.a = _WaterOpacity;
                         }
                     }
-                   noise1d = (noise1d * .1) + .9;
-                   if (noise1d > i.uv[1]) {
-                       col.r = noise1d;
+                   noise1d = (noise1d * _SurfaceWaveHeigth) + (1- _SurfaceWaveHeigth);
+                   
+                   if (i.uv[1] > noise1d - _SurfaceWaveBprderThickness) {
+                       col = _WaterSecondaryColor1;
+                       col.a = _WaterOpacity + .35;
+                   }
+                   if (i.uv[1] > noise1d) {
+                       col.a = 0;
                    }
 
 
