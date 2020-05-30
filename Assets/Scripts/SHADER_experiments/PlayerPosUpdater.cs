@@ -9,7 +9,7 @@ public class PlayerPosUpdater : MonoBehaviour{
     public int pointsGenerated = 10;
     private int pg;
     [Tooltip("The radius for each color splat; note that this number will be somewhat randomized")]
-    public float baseSplatRadius = 1f;
+    public float baseSplatRadius = .25f;
     private float bsr;
     [Tooltip("The radius around the player in which a color splat can be thrown")]
     public float baseThrownRadius = 2f;

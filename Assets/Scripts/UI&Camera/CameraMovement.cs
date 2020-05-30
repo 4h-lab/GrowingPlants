@@ -17,6 +17,12 @@ public class CameraMovement : MonoBehaviour{
     private bool canMoveAlongX = true;
     private bool canMoveAlongY = true;
 
+
+    private GameManager gm;
+
+    float touchtime=0;
+
+
     private Transform playerTransform;
 
 
@@ -35,13 +41,15 @@ public class CameraMovement : MonoBehaviour{
 
         if (minX >= maxX) {
             canMoveAlongX = false;
-            Debug.Log("Can't move along X axis.... " + minX + " >" + maxX);
+            
         }
         if (minY >= maxY) {
             canMoveAlongY = false;
-            Debug.Log("Can't move along Y axis....");
+            
         }
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        gm = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -57,8 +65,9 @@ public class CameraMovement : MonoBehaviour{
         if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling))) { 
             dir.y = Mathf.Clamp(playerTransform.position.y, minY, maxY) - transform.position.y;
         }
-
-        transform.Translate(dir * Time.deltaTime * cameraspeed);
+        
+        Debug.Log(Camera.main.velocity.ToString());
+        transform.Translate(dir * Time.fixedDeltaTime* cameraspeed);
 
            
 
@@ -104,4 +113,46 @@ public class CameraMovement : MonoBehaviour{
 
 
     }
+
+    private void LateUpdate()
+    {
+
+        if (Input.touchCount >0 && gm.isPaused)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                touchtime = Time.realtimeSinceStartup;
+            }
+            else if ((Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)&& Time.realtimeSinceStartup-touchtime>0.2f)
+            { 
+                var finger = Input.GetTouch(0).position;
+                Vector2 relativePlayerPos = finger;
+                Vector3 dir = Vector3.zero;
+
+                if (canMoveAlongX && ((relativePlayerPos.x < horizontalRatioBeforeScrolling) || (relativePlayerPos.x > 1 - horizontalRatioBeforeScrolling)))
+                {
+                    dir.x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).x, minX, maxX) - transform.position.x;
+                }
+                if (canMoveAlongY && ((relativePlayerPos.y < verticalRatioBeforeScrolling) || (relativePlayerPos.y > 1 - verticalRatioBeforeScrolling)))
+                {
+                    dir.y = Mathf.Clamp(Camera.main.ScreenToWorldPoint(finger).y, minY, maxY) - transform.position.y;
+                }
+
+                transform.Translate(dir * Time.fixedDeltaTime * cameraspeed);
+            }
+            else if(Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                touchtime = 0f;
+            }
+
+        }
+    }
+
+    public Vector4 levelBounds()
+    {
+        return new Vector4(minX, maxX, minY, maxY);
+    }
+
+    
+
 }
