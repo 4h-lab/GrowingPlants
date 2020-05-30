@@ -297,6 +297,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  maxFallingSpeed: 10
 --- !u!114 &6736633655642152901
 MonoBehaviour:
   m_ObjectHideFlags: 0
