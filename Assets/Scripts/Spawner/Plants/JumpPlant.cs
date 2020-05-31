@@ -41,7 +41,7 @@ public class JumpPlant : BasePlant
     {
 
         string str = "start of Update " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
-        Debug.Log(str);
+        //Debug.Log(str);
 
         if (playerFound && !playerFoundAfter)
         {
@@ -94,7 +94,7 @@ public class JumpPlant : BasePlant
         }
 
         str = "end of Update " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
-        Debug.Log(str);
+        //Debug.Log(str);
 
     }
 
@@ -144,7 +144,7 @@ public class JumpPlant : BasePlant
         }
 
         string str = "Collision " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
-        Debug.Log(str);
+        //Debug.Log(str);
 
     }
 }

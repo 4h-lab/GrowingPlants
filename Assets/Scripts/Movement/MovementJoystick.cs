@@ -23,10 +23,9 @@ public class MovementJoystick : MonoBehaviour
 
     [SerializeField]
     ContactFilter2D cf;
-    [SerializeField]
-    float maxFallingSpeed = 1;
-    //[SerializeField]
-    //bool clampFall = true;
+    [SerializeField][Tooltip("if < 0, turns off falling speed limiting function")]
+    private float maxFallingSpeed = 5;
+    private float standardGravityScale;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 
@@ -41,6 +40,7 @@ public class MovementJoystick : MonoBehaviour
         //var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
         //cf.SetLayerMask(lm);
         mBody = this.GetComponent<Rigidbody2D>();
+        standardGravityScale = mBody.gravityScale;
         oldPos = this.transform.position;
         playerCollider = this.GetComponent<BoxCollider2D>();
         mVelocity = Vector3.zero;
@@ -65,20 +65,11 @@ public class MovementJoystick : MonoBehaviour
         //Debug.Log("Speed : " + speed);
         //Debug.Log("moved : " + (oldPos - transform.position).magnitude / (Time.deltaTime) + " --> from: " + oldPos + " to: " + transform.position );
 
-        /*if (clampFall)
-        {
-            if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
-            {
-                //mBody.velocity = Vector2.ClampMagnitude(mBody.velocity, maxFallingSpeed);
-                mBody.gravityScale = 0;
-                Debug.Log("CORRECT");
-            }
-        }
-        //Debug.Log("fall speed " + mBody.velocity + " --- magnitude " + mBody.velocity.magnitude);*/
-
+        if (maxFallingSpeed >= 0) AlterFallingSpeed();
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
 
     }
+
     private void movePlayer(Vector3 dir)
     {
         speed += acceleration * Time.deltaTime;
@@ -123,6 +114,13 @@ public class MovementJoystick : MonoBehaviour
         this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
     }
 
+    void AlterFallingSpeed()
+    {
+        if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
+            if (mBody.gravityScale != 0) mBody.gravityScale = 0;
+        else if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
+    }
+
     Vector2 projectRB(Vector2 dir){
         float distance = dir.magnitude ; 
         if (mBody != null) {
@@ -132,7 +130,7 @@ public class MovementJoystick : MonoBehaviour
 
                 float projection = Vector2.Dot(dir, currentNormal);
 
-                Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
+                //Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
                 if (projection < 0) {
                     Debug.Log("dir: " + dir);
                 }
