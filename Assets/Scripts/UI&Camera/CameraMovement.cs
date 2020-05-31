@@ -66,7 +66,7 @@ public class CameraMovement : MonoBehaviour{
             dir.y = Mathf.Clamp(playerTransform.position.y, minY, maxY) - transform.position.y;
         }
         
-        Debug.Log(Camera.main.velocity.ToString());
+        //Debug.Log(Camera.main.velocity.ToString());
         transform.Translate(dir * Time.fixedDeltaTime* cameraspeed);
 
            
