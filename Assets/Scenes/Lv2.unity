@@ -2492,7 +2492,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -2503,21 +2503,30 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.48648834
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          time: 0.38649207
+          value: 0.9951854
+          inSlope: 0.51749724
+          outSlope: 0.51749724
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.98657227
+          value: 0
+          inSlope: -1.4213438
+          outSlope: -1.4213438
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.28518867
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
