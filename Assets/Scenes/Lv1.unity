@@ -1289,12 +1289,12 @@ PrefabInstance:
     - target: {fileID: 2222550130480910052, guid: ea0594feb3391f54d9126da8fdf6c82a,
         type: 3}
       propertyPath: speedMod
-      value: -0.25
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2222550130480910052, guid: ea0594feb3391f54d9126da8fdf6c82a,
         type: 3}
       propertyPath: distanceFromPlayer
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2222550130480910052, guid: ea0594feb3391f54d9126da8fdf6c82a,
         type: 3}
@@ -2401,6 +2401,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 274509492846332084, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 38.20999
+      objectReference: {fileID: 0}
+    - target: {fileID: 274509492846332084, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -38.95999
+      objectReference: {fileID: 0}
     - target: {fileID: 512466172684304439, guid: 8c5d60b8a38ba744c93fb7b722835c0a,
         type: 3}
       propertyPath: m_LocalPosition.x
