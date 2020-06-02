@@ -18,7 +18,9 @@ public class MovementJoystick : MonoBehaviour
     private bool isSquished = false;
     private bool isrunning = false;
 
+    // animations
     private Animator anim;
+    private ParticleSystem dust;
 
     private FixedJoystick variableJoystick;
 
@@ -34,7 +36,9 @@ public class MovementJoystick : MonoBehaviour
         variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
     }
     void Start() {
-         anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
+        dust = GameObject.Find("DustPS").GetComponent<ParticleSystem>();
+
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         
         //var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
@@ -68,13 +72,21 @@ public class MovementJoystick : MonoBehaviour
 
 
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
+
         if (speed > 0) isrunning = true;
         if(anim != null)anim.SetBool("running", isrunning);
-        
+        if (dust != null) {
+            if (isrunning) {
+                if(!dust.isPlaying) dust.Play();
+                Debug.Log("DIO MERDOSO : " + dust.isPlaying);
+            } else {
+                if(!dust.isStopped)dust.Stop();
+            } 
+        } 
 
     }
     private void movePlayer(Vector3 dir){
-
+        
 
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
@@ -122,6 +134,8 @@ public class MovementJoystick : MonoBehaviour
         //this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
         Transform t = this.transform.Find("Sprite").transform.Find("Animated").transform;
         t.localScale = new Vector3(-t.localScale.x, t.localScale.y, t.localScale.z);
+
+        if (dust != null) dust.transform.Rotate(new Vector3(0,0,180));
 
 
     }
