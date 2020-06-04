@@ -46,7 +46,7 @@ public class PlayerPosPasser : MonoBehaviour{
 
         StartCoroutine(spray());
         maxDistToUpdate = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPosUpdater>().baseThrownRadius + 
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPosUpdater>().baseThrownRadius +
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPosUpdater>().baseSplatRadius +
                             GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y +
                             GetComponent<SpriteRenderer>().sprite.bounds.extents.x * this.transform.localScale.x +
                             maxDistTolerance;

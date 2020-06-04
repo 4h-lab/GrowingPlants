@@ -3,6 +3,7 @@
 Shader "Sprites/Gray"{
     Properties {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
+        [HDR] _UnColouredColor("Color before colouring", Color) = (.3, .59, .11)
 		_ColorMaskTexture("Lighting Mask (RGB)", 2D) = "white" {}
 		_Pixels("Pixels", 2DArray) = "" {}
 		//_ColorMask = 
@@ -79,6 +80,7 @@ Shader "Sprites/Gray"{
                 uniform float _Ray;
 
 				float2 _Pixels;
+                float4 _UnColouredColor;
 
 				//float2 pp = float2(_PlayerPosX, _PlayerPosY);
 
@@ -87,7 +89,7 @@ Shader "Sprites/Gray"{
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
 					half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
 
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, _UnColouredColor.rgb),maskcol);
 					texcol = texcol * IN.color; // * (1 - maskcol.r);
                     return texcol;
                 }
