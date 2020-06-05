@@ -16,6 +16,8 @@ public class SquishCollisionInteractable : MonoBehaviour
     private IsGrounded GRD;
     private LayerMask passableObjectsLayerMask;
     private LayerMask passableObjectsLayerMaskWithWater;
+
+    private int collisionCounter=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,8 @@ public class SquishCollisionInteractable : MonoBehaviour
         // if the layer is passable... just ignore it
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
         this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true); // itherwise start squishing
+        collisionCounter++;
+        
 
         
 
@@ -69,17 +73,21 @@ public class SquishCollisionInteractable : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision){
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
 
-        if(((1 << collision.gameObject.layer)& (1 << LayerMask.NameToLayer("water"))) !=0)
+        if(((1 << collision.gameObject.layer)& (1 << LayerMask.NameToLayer("water"))) !=0) 
         {
-            if (this.transform.position.y < collision.gameObject.transform.position.y)
+            if (this.transform.position.y < collision.gameObject.transform.position.y) ///If the player is belowe water level kill it
             {
                 damaged();
                 this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
                 return;
             }
         }
-        this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
-        StartCoroutine(growBack());
+        collisionCounter--;
+        if (collisionCounter == 0) {
+            this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
+            StartCoroutine(growBack());
+        }
+        
 
     }
 
