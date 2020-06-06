@@ -48,11 +48,7 @@ public class IsGrounded : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
+    
     private IEnumerator check() {
         while (true) {
             grounded = checkGroundLevel();
@@ -62,7 +58,17 @@ public class IsGrounded : MonoBehaviour
     }
 
     private bool checkGroundLevel() {
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(_collider.bounds.center, _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
+        //RaycastHit2D[] hits = Physics2D.BoxCastAll(new Vector2(_collider.bounds.center.x, _collider.bounds.center.y + _collider.bounds.extents.y), _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
+        RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x, 
+                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
+                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
+                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f));
+        Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x,
+                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
+                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
+                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f), Color.red);
+
+        //PopupText.createNewPopup(transform.position, hits.Length.ToString(), Color.white);
         return (hits.Length >= 1); // return true if there was at least 1 hit
     }
 
