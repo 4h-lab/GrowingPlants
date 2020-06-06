@@ -261,6 +261,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5517220438642937703, guid: 814b6102b5206bd42b90e822565722ad,
+        type: 3}
+      propertyPath: m_TagString
+      value: playerps_death
+      objectReference: {fileID: 0}
     - target: {fileID: 6805260059204180708, guid: 814b6102b5206bd42b90e822565722ad,
         type: 3}
       propertyPath: m_RootOrder
