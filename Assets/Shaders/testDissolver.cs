@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class testDissolver : MonoBehaviour{
     private Material m;
-    private float dissolve = .7f;
+    private float dissolve = 1f;
 
     // Start is called before the first frame update
     void Start(){
@@ -14,9 +14,7 @@ public class testDissolver : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if (dissolve>= 0) { 
-        dissolve -= Time.deltaTime * .5f;
-        }
+        dissolve -= Time.deltaTime * 2.5f;
         m.SetFloat("_DissolveAmount", dissolve);
 
 

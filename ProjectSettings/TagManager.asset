@@ -10,6 +10,9 @@ TagManager:
   - CameraBoundary
   - Plant
   - post-processing-volume
+  - playerps_dustrunning
+  - playerps_death
+  - playerps_dustfalling
   layers:
   - Default
   - TransparentFX

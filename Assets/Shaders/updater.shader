@@ -8,7 +8,6 @@
 		_Ray("Ray",Float) = 0
 		_SpritePos("Position", Vector) = (0,0,0,0)
 		_SpriteScale("Scale", Vector) = (1,1,0,0)
-
 	}
 		SubShader
 		{
@@ -82,7 +81,6 @@
 					dist = max(dist, 0);
 					dist = pow(dist, 0.3);
 					d = min(d, dist);
-
 					//d = min(d, distance(IN.texcoord, (float2)_DaPoints[i]));
 					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), _DaRays[i]));
 					//d = min(d, pow(distance(IN.texcoord, (float2)_DaPoints[i]), 5));
@@ -92,7 +90,8 @@
 				//fixed4 draw = _Color * (pow((1 - d), 3));
 				fixed4 draw = _Color * (1 - d);
 
-				draw = max(col, draw) + (0.15*col);				
+				draw = max(col, draw) + (0.15*col);
+
 				return saturate(draw);
 
 				/*

@@ -16,6 +16,11 @@ public class MovementJoystick : MonoBehaviour
     private  Vector3 mVelocity;
     private Vector3 oldPos;
     private bool isSquished = false;
+    private bool isrunning = false;
+
+    // animations
+    private Animator anim;
+    private ParticleSystem dust;
 
     private FixedJoystick variableJoystick;
 
@@ -23,31 +28,32 @@ public class MovementJoystick : MonoBehaviour
 
     [SerializeField]
     ContactFilter2D cf;
-    [SerializeField][Tooltip("if < 0, turns off falling speed limiting function")]
-    private float maxFallingSpeed = 5;
-    private float standardGravityScale;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+    private IsGrounded grounded;
 
     private void Awake()
     {
         variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
     }
     void Start() {
+        anim = GetComponentInChildren<Animator>();
+        dust = GameObject.FindGameObjectWithTag("playerps_dustrunning").GetComponent<ParticleSystem>();
 
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         
         //var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
         //cf.SetLayerMask(lm);
         mBody = this.GetComponent<Rigidbody2D>();
-        standardGravityScale = mBody.gravityScale;
         oldPos = this.transform.position;
         playerCollider = this.GetComponent<BoxCollider2D>();
         mVelocity = Vector3.zero;
         speed = 0f;
+        grounded = GetComponent<IsGrounded>();
     }
 
     public void FixedUpdate(){
+        isrunning = false;
         oldPos = transform.position;
         if (variableJoystick.Horizontal != 0f) {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
@@ -56,8 +62,8 @@ public class MovementJoystick : MonoBehaviour
         else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);//changeVelocity(-1f);
         else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);//changeVelocity(1f);
         else {
-                    speed = 0;
-                }
+            speed = 0;
+        }
         //cast the rb and see if it'll be stuck in something
 
 
@@ -65,18 +71,30 @@ public class MovementJoystick : MonoBehaviour
         //Debug.Log("Speed : " + speed);
         //Debug.Log("moved : " + (oldPos - transform.position).magnitude / (Time.deltaTime) + " --> from: " + oldPos + " to: " + transform.position );
 
-        if (maxFallingSpeed >= 0) AlterFallingSpeed();
+
+
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
 
-    }
+        if (speed > 0) isrunning = true;
+        if(anim != null)anim.SetBool("running", isrunning);
+        if (dust != null) {
+            if (isrunning && grounded.GetGrounded()) {
+                if(!dust.isPlaying) dust.Play();
 
-    private void movePlayer(Vector3 dir)
-    {
+            } else {
+                if(!dust.isStopped)dust.Stop();
+            } 
+        } 
+
+    }
+    private void movePlayer(Vector3 dir){
+        
+
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
         targetVelocity = dir;
-        if (!isSquished)
-        {
+        if (!isSquished){
+
             transform.Translate(projectRB(dir * speed * Time.deltaTime * GameManager.customTimeScale));
         }
         else
@@ -84,7 +102,11 @@ public class MovementJoystick : MonoBehaviour
             transform.Translate(dir * speed * Time.deltaTime * GameManager.customTimeScale);
         }
         if ((dir.x > 0) ^ facingRight) Flip();
+
+
         if ((dir.x > 0) ^ facingRight) Flip();
+        
+        
     }
     /*
     private void changeVelocity(float f){
@@ -111,17 +133,13 @@ public class MovementJoystick : MonoBehaviour
         // Multiply the player's x local scale by -1.
         //Vector3 theScale =
         //this.transform.localScale = Vector3.Scale(new Vector3(-1, 1, 1), this.transform.localScale);
-        this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
-    }
+        //this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX = !this.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX;
+        Transform t = this.transform.Find("Sprite").transform.Find("Animated").transform;
+        t.localScale = new Vector3(-t.localScale.x, t.localScale.y, t.localScale.z);
 
-    void AlterFallingSpeed()
-    {
-        if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
-        {
-            if (mBody.gravityScale != 0) mBody.gravityScale = 0;
-        }
-        else if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
-        Debug.Log("falling speed " + mBody.velocity.magnitude + " ---  gravity " + mBody.gravityScale);
+        if (dust != null) dust.transform.Rotate(new Vector3(0,0,180));
+
+
     }
 
     Vector2 projectRB(Vector2 dir){
@@ -133,7 +151,7 @@ public class MovementJoystick : MonoBehaviour
 
                 float projection = Vector2.Dot(dir, currentNormal);
 
-                //Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
+                Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
                 if (projection < 0) {
                     Debug.Log("dir: " + dir);
                 }
@@ -141,6 +159,7 @@ public class MovementJoystick : MonoBehaviour
                 distance = modifiedDistance < distance ? modifiedDistance : distance - 0.01f;
             }
         }
+
         return dir.normalized * distance;
     }
     public void setSquished(bool s)

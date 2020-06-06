@@ -8,6 +8,8 @@ public class PlayerPosPasser : MonoBehaviour{
     private float time = 0;
     float speed = 10;
     float ray=4;
+    float maxDistToUpdate;
+    float maxDistTolerance = 1;
     [SerializeField]
     
     public float x = 0;
@@ -22,7 +24,6 @@ public class PlayerPosPasser : MonoBehaviour{
     private Material updater_m;
 
     private RenderTexture lightmap;
-    // Start is called before the first frame update
     private static bool col =true;
     
     private void Awake()
@@ -33,52 +34,43 @@ public class PlayerPosPasser : MonoBehaviour{
         float cornerY = GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y;
         updater_m.SetVector("_SpritePos", new Vector4(transform.position.x - cornerX, transform.position.y - cornerY, 0, 0));
         updater_m.SetVector("_SpriteScale", new Vector4(2*cornerX, 2*cornerY, 0, 0));
-        //updater_m.SetColor("_Color", RedIntensity);
-
-
 
 
         m = gameObject.GetComponent<Renderer>().material;
-        //m.SetFloatArray("_Points", new float[10]);
+
         lightmap = new RenderTexture(32, 32, 0, RenderTextureFormat.ARGBFloat);
         m.SetTexture("_ColorMaskTexture", lightmap);
     }
     void Start(){
         playert = GameObject.FindGameObjectWithTag("Player").transform;
 
-        //m.SetTexture("_Colorm", passMap);
-        //StartCoroutine(colorSprite());
         StartCoroutine(spray());
+        maxDistToUpdate = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPosUpdater>().baseThrownRadius + 
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPosUpdater>().baseSplatRadius +
+                            GetComponent<SpriteRenderer>().sprite.bounds.extents.y * this.transform.localScale.y +
+                            GetComponent<SpriteRenderer>().sprite.bounds.extents.x * this.transform.localScale.x +
+                            maxDistTolerance;
     }
     
-    // Update is called once per frame
-    void Update(){
-        /*if (!col) {
-            RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
-            Graphics.Blit(lightmap, temp);
-            Graphics.Blit(temp, lightmap, updater_m);
-            RenderTexture.ReleaseTemporary(temp);
-
-        }*/
-    }
-
     IEnumerator spray() {
         while (true) {
-            RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
-            Graphics.Blit(lightmap, temp);
-            Graphics.Blit(temp, lightmap, updater_m);
-            RenderTexture.ReleaseTemporary(temp);
-
+            if (Vector2.Distance(transform.position, playert.position) < maxDistToUpdate) {
+                RenderTexture temp = RenderTexture.GetTemporary(lightmap.width, lightmap.height, 0, RenderTextureFormat.ARGBFloat);
+                Graphics.Blit(lightmap, temp);
+                Graphics.Blit(temp, lightmap, updater_m);
+                RenderTexture.ReleaseTemporary(temp);
+            }
             yield return new WaitForSeconds(.1f);
         }
     }
 
-    /*private void OnGUI(){
+    /*
+    private void OnGUI(){
         float ratio = GetComponent<SpriteRenderer>().sprite.texture.height / GetComponent<SpriteRenderer>().sprite.texture.width;
 
         GUI.DrawTexture(new Rect(x, 0, 100, 100*ratio), lightmap, ScaleMode.ScaleToFit, false, 1);
-    }*/
-
+    }
+    */
     private void OnDestroy()
     {
         lightmap.Release();

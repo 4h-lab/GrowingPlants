@@ -3,6 +3,7 @@
 Shader "Sprites/Gray"{
     Properties {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
+        [HDR] _UnColouredColor("Color before colouring", Color) = (.3, .59, .11)
 		_ColorMaskTexture("Lighting Mask (RGB)", 2D) = "white" {}
 		_Pixels("Pixels", 2DArray) = "" {}
 		//_ColorMask = 
@@ -79,25 +80,31 @@ Shader "Sprites/Gray"{
                 uniform float _Ray;
 
 				float2 _Pixels;
+                float4 _UnColouredColor;
 
 				//float2 pp = float2(_PlayerPosX, _PlayerPosY);
 
                 fixed4 frag(v2f IN) : COLOR{
 					
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-					half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+					//half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+                    
+                    half maskcol = ((1 - tex2D(_ColorMaskTexture, IN.texcoord).r) +
+                        (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y + 0.0213)).r) +
+                        (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y - 0.0213)).r) +
+                        (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x + 0.0213, IN.texcoord.y)).r) +
+                        (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x - 0.0213, IN.texcoord.y)).r)) * .2;
+                    /*
+                    float maskcol = 1- ((tex2D(_ColorMaskTexture, IN.texcoord).r) +
+                        (tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y + 0.0213)).r) +
+                        (tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y - 0.0213)).r) +
+                        (tex2D(_ColorMaskTexture, float2(IN.texcoord.x + 0.0213, IN.texcoord.y)).r) +
+                        (tex2D(_ColorMaskTexture, float2(IN.texcoord.x - 0.0213, IN.texcoord.y)).r) * .2);
+                    */
 
-                    //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.3, 0.59, 0.11)),maskcol);
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, float3(0.1225, 0.435, 0.082)), maskcol);
-
-                    //texcol.rgb *= maskcol.r;
-                    //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, (float3(1,1,1)-texcol.rgb)), maskcol);
 
 
-                    if (maskcol == 1) {
-                        //texcol.rgb *= .5;
-                    }
-
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, _UnColouredColor.rgb),maskcol);
 					texcol = texcol * IN.color; // * (1 - maskcol.r);
                     return texcol;
                 }

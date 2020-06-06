@@ -42,9 +42,15 @@ public class Health : MonoBehaviour{
     private void die() {
         if (isDead) return;
         isDead = true;
-        GameObject.FindGameObjectWithTag("Player").transform.Find("Sprite").gameObject.AddComponent<testDissolver>();
-        ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
+        //GameObject.FindGameObjectWithTag("Player").transform.Find("Sprite").gameObject.AddComponent<testDissolver>();
+        foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>()) {
+            x.material.SetFloat("_Seed", Random.Range(0, 100));
+            x.gameObject.AddComponent<testDissolver>();
+        }
+
+        ParticleSystem ps = GameObject.FindGameObjectWithTag("playerps_death").GetComponent<ParticleSystem>();
         ps?.Play();
+
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().setWinPause(true);
 
