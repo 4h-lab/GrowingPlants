@@ -30,6 +30,7 @@ public class MovementJoystick : MonoBehaviour
     ContactFilter2D cf;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+    private IsGrounded grounded;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class MovementJoystick : MonoBehaviour
         playerCollider = this.GetComponent<BoxCollider2D>();
         mVelocity = Vector3.zero;
         speed = 0f;
+        grounded = GetComponent<IsGrounded>();
     }
 
     public void FixedUpdate(){
@@ -76,9 +78,9 @@ public class MovementJoystick : MonoBehaviour
         if (speed > 0) isrunning = true;
         if(anim != null)anim.SetBool("running", isrunning);
         if (dust != null) {
-            if (isrunning) {
+            if (isrunning && grounded.GetGrounded()) {
                 if(!dust.isPlaying) dust.Play();
-                Debug.Log("DIO MERDOSO : " + dust.isPlaying);
+
             } else {
                 if(!dust.isStopped)dust.Stop();
             } 
