@@ -10,6 +10,16 @@ public class PickUpInteractable : BaseContactInteractables{
         Debug.Log("pickup: " + initiator.name);
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("star.pickup");
+        StartCoroutine(fadeAway(1.1f));
+        Animator anim = GetComponentInChildren<Animator>();
+        anim.SetTrigger("pickedUp");
+
+
+
+    }
+
+    private IEnumerator fadeAway(float t) {
+        yield return new WaitForSeconds(t);
         Destroy(this.gameObject);
     }
 
