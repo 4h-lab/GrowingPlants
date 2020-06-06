@@ -34,7 +34,7 @@ public class SquishCollisionInteractable : MonoBehaviour
 
     }
     private void OnTriggerEnter2D(Collider2D collision){
-        PopupText.createNewPopup(transform.position, "AHHHHHH!!!!!!!!", Color.white, 10f, 2f, PopupText.utilFuncs_moveUp);
+        //PopupText.createNewPopup(transform.position, "AHHHHHH!!!!!!!!", Color.white, 10f, 2f, PopupText.utilFuncs_moveUp);
 
         // if its colliding with the water......
         if (((1 << collision.gameObject.layer) & (1 << LayerMask.NameToLayer("water"))) != 0) {
