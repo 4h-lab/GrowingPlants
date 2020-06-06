@@ -87,14 +87,14 @@ Shader "Sprites/Gray"{
                 fixed4 frag(v2f IN) : COLOR{
 					
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-					half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
-                    /*
-                    half maskcol = (1 - tex2D(_ColorMaskTexture, IN.texcoord).r) +
+					//half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
+                    
+                    half maskcol = ((1 - tex2D(_ColorMaskTexture, IN.texcoord).r) +
                         (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y + 0.0213)).r) +
                         (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y - 0.0213)).r) +
                         (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x + 0.0213, IN.texcoord.y)).r) +
-                        (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x - 0.0213, IN.texcoord.y)).r) * .2;
-                    
+                        (1 - tex2D(_ColorMaskTexture, float2(IN.texcoord.x - 0.0213, IN.texcoord.y)).r)) * .2;
+                    /*
                     float maskcol = 1- ((tex2D(_ColorMaskTexture, IN.texcoord).r) +
                         (tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y + 0.0213)).r) +
                         (tex2D(_ColorMaskTexture, float2(IN.texcoord.x, IN.texcoord.y - 0.0213)).r) +
