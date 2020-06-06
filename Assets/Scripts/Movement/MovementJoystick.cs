@@ -38,7 +38,7 @@ public class MovementJoystick : MonoBehaviour
     }
     void Start() {
         anim = GetComponentInChildren<Animator>();
-        dust = GameObject.Find("DustPS").GetComponent<ParticleSystem>();
+        dust = GameObject.FindGameObjectWithTag("playerps_dustrunning").GetComponent<ParticleSystem>();
 
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         

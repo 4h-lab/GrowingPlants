@@ -48,8 +48,8 @@ public class Health : MonoBehaviour{
             x.gameObject.AddComponent<testDissolver>();
         }
 
-        ParticleSystem[] pss = GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem ps in pss) ps.Play();
+        ParticleSystem ps = GameObject.FindGameObjectWithTag("playerps_death").GetComponent<ParticleSystem>();
+        ps?.Play();
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ControlsEnabled(false);
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().setWinPause(true);
