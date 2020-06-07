@@ -121,7 +121,7 @@ public class MovementJoystick : MonoBehaviour
             if (mBody.gravityScale != 0) mBody.gravityScale = 0;
         }
         else if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
-        Debug.Log("falling speed " + mBody.velocity.magnitude + " ---  gravity " + mBody.gravityScale);
+        //Debug.Log("falling speed " + mBody.velocity.magnitude + " ---  gravity " + mBody.gravityScale);
     }
 
     Vector2 projectRB(Vector2 dir){

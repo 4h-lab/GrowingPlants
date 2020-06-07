@@ -17,10 +17,14 @@ public class SquishCollisionInteractable : MonoBehaviour
     private LayerMask passableObjectsLayerMask;
     private LayerMask passableObjectsLayerMaskWithWater;
 
+    private Transform sprite;
+
     private int collisionCounter=0;
     // Start is called before the first frame update
     void Start()
     {
+
+        sprite = this.transform.parent.Find("Sprite");
         o_scale = this.transform.parent.Find("Sprite").localScale;
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         GRD = this.transform.parent.GetComponent<IsGrounded>();
@@ -33,7 +37,16 @@ public class SquishCollisionInteractable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GRD.GetGrounded() && collisionCounter > 0)
+        {
+            sprite.localScale += new Vector3(Time.deltaTime * 2f, -Time.deltaTime) * squish_amount * GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
+            time += Time.deltaTime;
+        }
 
+        if (time >= death_time)
+        {
+            damaged();
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision){
         PopupText.createNewPopup(transform.position, "AHHHHHH!!!!!!!!", Color.white, 10f, 2f, PopupText.utilFuncs_moveUp);
@@ -47,28 +60,32 @@ public class SquishCollisionInteractable : MonoBehaviour
 
         // if the layer is passable... just ignore it
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
-        this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true); // itherwise start squishing
+        this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true); // otherwise start squishing
         collisionCounter++;
+        Debug.Log("COLLISIONI:" + collisionCounter);
         
 
         
 
 
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    /*private void OnTriggerStay2D(Collider2D collision)
     {
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
-        if (GRD.GetGrounded())
+        if (GRD.GetGrounded() && collisionCounter > 0)
         {
-            this.transform.parent.Find("Sprite").localScale += new Vector3(Time.deltaTime*2f, -Time.deltaTime) * squish_amount*GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
-            time += Time.deltaTime;
+            sprite.localScale += new Vector3(Time.deltaTime*2f, -Time.deltaTime) * squish_amount/collisionCounter*GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
+            time += Time.deltaTime/collisionCounter;
+            Debug.Log(Time.deltaTime / collisionCounter);
         }
 
         if (time >= death_time)
         {
             damaged();
         }
-    }
+    }*/
+
+    
 
     private void OnTriggerExit2D(Collider2D collision){
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMask) != 0)) return;
@@ -83,6 +100,7 @@ public class SquishCollisionInteractable : MonoBehaviour
             }
         }
         collisionCounter--;
+        Debug.Log("COLLISIONI:" + collisionCounter);
         if (collisionCounter == 0) {
             this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(false);
             StartCoroutine(growBack());
@@ -94,15 +112,15 @@ public class SquishCollisionInteractable : MonoBehaviour
     IEnumerator growBack()
     {
         time = 0;
-        Debug.Log(this.transform.parent.Find("Sprite").localScale.y + "   " + o_scale.y);
+        Debug.Log(sprite.localScale.y + "   " + o_scale.y);
         
         
-        while (this.transform.parent.Find("Sprite").localScale.y < o_scale.y)
+        while (sprite.localScale.y < o_scale.y)
         {
-            this.transform.parent.Find("Sprite").localScale -= new Vector3(Time.deltaTime*2f, -Time.deltaTime) * de_squish_amount;
+            sprite.localScale -= new Vector3(Time.deltaTime*2f, -Time.deltaTime) * de_squish_amount;
             yield return new WaitForEndOfFrame();
         }
-        this.transform.parent.Find("Sprite").localScale = o_scale;
+        sprite.localScale = o_scale;
         yield return null;
     }
 
