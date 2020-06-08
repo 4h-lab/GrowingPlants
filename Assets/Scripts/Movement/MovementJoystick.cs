@@ -28,6 +28,10 @@ public class MovementJoystick : MonoBehaviour
 
     [SerializeField]
     ContactFilter2D cf;
+    [SerializeField]
+    [Tooltip("if < 0, turns off falling speed limiting function")]
+    private float maxFallingSpeed = 10;
+    private float standardGravityScale;
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     private IsGrounded grounded;
@@ -45,6 +49,7 @@ public class MovementJoystick : MonoBehaviour
         //var lm = Physics2D.GetLayerCollisionMask(gameObject.layer)+LayerMask.NameToLayer("plant");
         //cf.SetLayerMask(lm);
         mBody = this.GetComponent<Rigidbody2D>();
+        standardGravityScale = mBody.gravityScale;
         oldPos = this.transform.position;
         playerCollider = this.GetComponent<BoxCollider2D>();
         mVelocity = Vector3.zero;
@@ -65,14 +70,11 @@ public class MovementJoystick : MonoBehaviour
             speed = 0;
         }
         //cast the rb and see if it'll be stuck in something
-
-
         // update speed accounting for effective movement
         //Debug.Log("Speed : " + speed);
         //Debug.Log("moved : " + (oldPos - transform.position).magnitude / (Time.deltaTime) + " --> from: " + oldPos + " to: " + transform.position );
 
-
-
+        if (maxFallingSpeed >= 0) AlterFallingSpeed();
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
 
         if (speed > 0) isrunning = true;
@@ -102,11 +104,7 @@ public class MovementJoystick : MonoBehaviour
             transform.Translate(dir * speed * Time.deltaTime * GameManager.customTimeScale);
         }
         if ((dir.x > 0) ^ facingRight) Flip();
-
-
         if ((dir.x > 0) ^ facingRight) Flip();
-        
-        
     }
     /*
     private void changeVelocity(float f){
@@ -140,6 +138,26 @@ public class MovementJoystick : MonoBehaviour
         if (dust != null) dust.transform.Rotate(new Vector3(0,0,180));
 
 
+    }
+
+    void AlterFallingSpeed()
+    {
+        if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
+        {
+            if (mBody.gravityScale != 0)
+            {
+                Debug.Log("change to 0");
+                mBody.gravityScale = 0;
+            }
+        }
+        else
+        {
+            if (mBody.gravityScale != standardGravityScale)
+            {
+                Debug.Log("change to standard");
+                mBody.gravityScale = standardGravityScale;
+            }
+        }
     }
 
     Vector2 projectRB(Vector2 dir){
