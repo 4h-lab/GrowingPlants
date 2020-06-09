@@ -167,6 +167,7 @@ public class NormalPlant : BasePlant, IFallInteractable{
         StartCoroutine(boing(1f, transform.FindChild("Flower").transform)); 
     }
     private IEnumerator boing(float t, Transform trans ) {
+        if(budTime > budTimer) yield break;
         float actual_time = 0;
         Vector3 startpos = trans.position;
         while (actual_time < t) {
