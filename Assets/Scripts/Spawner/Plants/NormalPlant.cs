@@ -47,7 +47,7 @@ public class NormalPlant : BasePlant, IFallInteractable{
         if(budTimer> budTime)
         {
             bud.SetActive(false);
-            budTimer = 0;
+            //budTimer = 0;
         }
         budTimer += Time.deltaTime;
 
