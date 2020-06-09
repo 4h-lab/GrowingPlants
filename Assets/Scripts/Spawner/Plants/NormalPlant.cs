@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class NormalPlant : BasePlant{
+public class NormalPlant : BasePlant, IFallInteractable{
     private int layermask_passables;
     private int layermask_oneway;
     private int layermask_stem;
@@ -161,5 +161,20 @@ public class NormalPlant : BasePlant{
     private IEnumerator ensureParticleSystemDestroyed(ParticleSystem ps, float time = 1) {
         yield return new WaitForSeconds(time);
         Destroy(ps.gameObject);
+    }
+
+    public void fallInteract(GameObject initiator) {
+        StartCoroutine(boing(1f, transform.FindChild("Flower").transform)); 
+    }
+    private IEnumerator boing(float t, Transform trans ) {
+        if(budTime > budTimer) yield break;
+        float actual_time = 0;
+        Vector3 startpos = trans.position;
+        while (actual_time < t) {
+            actual_time += Time.deltaTime;
+            trans.position = new Vector3(startpos.x, startpos.y - (Mathf.Sin(actual_time * 10) / (30* actual_time)), startpos.z);
+            yield return new WaitForEndOfFrame();
+        }
+        trans.position = startpos;
     }
 }
