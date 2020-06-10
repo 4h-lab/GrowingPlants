@@ -47,6 +47,7 @@ public class JumpPlant : BasePlant
 
         if (player && stopped && !apex){
             player.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
+            player.GetComponentInChildren<Animator>().SetTrigger("jumping");
         }
 
         if (stopped){

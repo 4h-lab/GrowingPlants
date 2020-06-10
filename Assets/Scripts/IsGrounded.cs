@@ -11,10 +11,14 @@ public class IsGrounded : MonoBehaviour
     private Animator anim;
     private Collider2D _collider;
 
+    private Rigidbody2D rb;
+
+
     public bool GetGrounded() { return grounded; }
 
     // Start is called before the first frame update
     void Start() {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         _collider = GetComponent<Collider2D>();
         StartCoroutine(check());
@@ -33,7 +37,7 @@ public class IsGrounded : MonoBehaviour
                     }
                 }
             }
-            if (anim != null) anim.SetBool("Falling", !grounded);
+            if (anim != null) anim.SetBool("Falling", !grounded && (rb.velocity.y < 0.01f));
             yield return new WaitForSeconds(.05f); 
         }
     }
