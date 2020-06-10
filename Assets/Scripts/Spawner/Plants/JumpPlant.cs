@@ -39,30 +39,22 @@ public class JumpPlant : BasePlant
 
     void Update()
     {
-
-        string str = "start of Update " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
-        //Debug.Log(str);
-
         if (playerFound && !playerFoundAfter)
         {
             apex = false;
             playerFoundAfter = true;
         }
 
-        if (player && stopped && !apex)
-        {
+        if (player && stopped && !apex){
             player.GetComponent<Rigidbody2D>().AddForce(jumpForce, ForceMode2D.Impulse);
         }
 
-        if (stopped)
-        {
+        if (stopped){
             apex = true;
-            //gameObject.layer = 9;
             return;
         }
 
-        if (budTimer > budTime)
-        {
+        if (budTimer > budTime){
             bud.SetActive(false);
             budTimer = 0;
         }
@@ -92,17 +84,12 @@ public class JumpPlant : BasePlant
         {
             player = null;
         }
-
-        str = "end of Update " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
-        //Debug.Log(str);
-
     }
 
 
     public void checkObstacles()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, ray_point, 0f), Vector2.up, small_radius, ~layermask_passables); // fire a raycast directly down the player
-        //if (hit.collider != null && hit.collider.tag!="Player" && hit.collider.GetComponent<Passable>()==null){
         if (hit.collider != null)
         {
             Debug.Log(hit.collider.gameObject.name);
@@ -142,9 +129,5 @@ public class JumpPlant : BasePlant
             player = collision.collider.gameObject;
             playerFound = true;
         }
-
-        string str = "Collision " + "p:" + ((player != null)?1:0) + " pF: " + ((playerFound)?1:0) + " pFA: " + ((playerFoundAfter)?1:0) + " s: " + ((stopped)?1:0) + " a: " + ((apex)?1:0);
-        //Debug.Log(str);
-
     }
 }
