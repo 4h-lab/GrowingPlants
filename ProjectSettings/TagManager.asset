@@ -13,6 +13,7 @@ TagManager:
   - playerps_dustrunning
   - playerps_death
   - playerps_dustfalling
+  - Water
   layers:
   - Default
   - TransparentFX
