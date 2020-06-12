@@ -36,6 +36,8 @@ public class MovementJoystick : MonoBehaviour
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     private IsGrounded grounded;
 
+    private Vector3 lastDirection;
+
     private void Awake()
     {
         variableJoystick = GameObject.FindObjectOfType<FixedJoystick>();
@@ -57,18 +59,24 @@ public class MovementJoystick : MonoBehaviour
         grounded = GetComponent<IsGrounded>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) lastDirection = Vector3.left;
+        if (Input.GetKeyDown(KeyCode.D)) lastDirection = Vector3.right;
+    }
+
     public void FixedUpdate(){
         isrunning = false;
         oldPos = transform.position;
-        if (variableJoystick.Horizontal != 0f) {
+        if (variableJoystick.Horizontal != 0f)
+        {
             Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
             movePlayer(dir);
         }
-        else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);//changeVelocity(-1f);
-        else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);//changeVelocity(1f);
-        else {
-            speed = 0;
-        }
+        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) movePlayer(lastDirection);
+        else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);
+        else if (Input.GetKey(KeyCode.D)) movePlayer(Vector3.right);
+        else speed = 0;
         //cast the rb and see if it'll be stuck in something
         // update speed accounting for effective movement
         //Debug.Log("Speed : " + speed);
@@ -144,19 +152,11 @@ public class MovementJoystick : MonoBehaviour
     {
         if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
         {
-            if (mBody.gravityScale != 0)
-            {
-                Debug.Log("change to 0");
-                mBody.gravityScale = 0;
-            }
+            if (mBody.gravityScale != 0) mBody.gravityScale = 0;
         }
         else
         {
-            if (mBody.gravityScale != standardGravityScale)
-            {
-                Debug.Log("change to standard");
-                mBody.gravityScale = standardGravityScale;
-            }
+            if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
         }
     }
 
@@ -169,10 +169,6 @@ public class MovementJoystick : MonoBehaviour
 
                 float projection = Vector2.Dot(dir, currentNormal);
 
-                Debug.Log("CN:   " + currentNormal + " * " + dir + " = " + projection);
-                if (projection < 0) {
-                    Debug.Log("dir: " + dir);
-                }
                 float modifiedDistance = hitBuffer[i].distance;
                 distance = modifiedDistance < distance ? modifiedDistance : distance - 0.01f;
             }
