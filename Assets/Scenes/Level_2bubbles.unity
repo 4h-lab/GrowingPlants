@@ -598,6 +598,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player-backup
       objectReference: {fileID: 0}
+    - target: {fileID: 6219927600237785762, guid: d1c6a8bef5aa047488fdf928e64600b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1c6a8bef5aa047488fdf928e64600b1, type: 3}
 --- !u!1 &434761434 stripped
@@ -1189,16 +1194,6 @@ PrefabInstance:
     - target: {fileID: 6692347706846118793, guid: 56ac6b106801193469776a1410e1ed68,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8432334073794512178, guid: 56ac6b106801193469776a1410e1ed68,
-        type: 3}
-      propertyPath: InitialModule.startSizeY.minMaxState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8432334073794512178, guid: 56ac6b106801193469776a1410e1ed68,
-        type: 3}
-      propertyPath: InitialModule.startSizeZ.minMaxState
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
