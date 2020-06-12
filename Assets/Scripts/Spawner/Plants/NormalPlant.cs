@@ -164,7 +164,7 @@ public class NormalPlant : BasePlant, IFallInteractable{
     }
 
     public void fallInteract(GameObject initiator) {
-        StartCoroutine(boing(1f, transform.FindChild("Flower").transform)); 
+        StartCoroutine(boing(1f, transform.Find("Flower").transform)); 
     }
     private IEnumerator boing(float t, Transform trans ) {
         if(budTime > budTimer) yield break;
