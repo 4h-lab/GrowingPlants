@@ -5,6 +5,7 @@ using UnityEngine;
 public class EventEmitter : MonoBehaviour{
     public delegate void EventCallback(Object[] parameters);
 
+    [SerializeField]
     private Dictionary<string, List<EventCallback>> events;
 
     private void Awake(){
@@ -16,11 +17,17 @@ public class EventEmitter : MonoBehaviour{
         events[eventname].Add(eventcallback);
     }
 
+    public void unsubscribe(string eventname, EventCallback eventCallback) {
+        if (events.ContainsKey(eventname)) {
+            events[eventname].Remove(eventCallback);
+        }
+    }
+
     public void invoke(string eventname, Object[] parameters) {
         Debug.Log("EVENTO INVOCATO >>> " + eventname);
         if (!events.ContainsKey(eventname)) return; 
         foreach (EventCallback e in events[eventname]) {
-            e(parameters);
+            if(e != null)e(parameters);
         }
     }
 

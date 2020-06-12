@@ -16,13 +16,13 @@ public class TutorialWithEvents : MonoBehaviour
 
     private void Start() {
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
-        ee.on("playermoved", handleMovementControls );
-        ee.on("plantplanted", handlePlantControls);
-        ee.on("winsoilreached", handleWinSoilPlantButton);
-
         arrowAnim = GameObject.FindGameObjectWithTag("UI_Arrows").GetComponent<Animator>();
         plantAnim = GameObject.FindGameObjectWithTag("UI_PlantButton").GetComponent<Animator>();
 
+        ee.on("playermoved", handleMovementControls);
+        ee.on("winsoilreached", handleWinSoilPlantButton);
+        ee.on("plantplanted", handlePlantControls);
+        ee.on("plantplanted", stopPlantTutorial);
 
     }
 
@@ -34,8 +34,8 @@ public class TutorialWithEvents : MonoBehaviour
             ee.on("playermoved", stopMovementTutorial);
         }
         if(timer > 6 && !plantActivated) {
-            plantAnim.SetBool("blip", true);
-            ee.on("plantplanted", stopPlantTutorial);
+            //plantAnim.SetBool("blip", true);
+            //ee.on("plantplanted", stopPlantTutorial);
         }
 
     }
@@ -48,6 +48,7 @@ public class TutorialWithEvents : MonoBehaviour
     }
 
     private void handlePlantControls(object[] x) {
+        plantAnim.SetBool("blip", false);
         plantActivated = true;
     }
     private void stopPlantTutorial(object[] x) {
