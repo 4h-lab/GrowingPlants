@@ -18,7 +18,7 @@ public class PickUpInteractable : BaseContactInteractables{
 
         // play pickedup sound
         AudioSource audios = GetComponentInChildren<AudioSource>();
-        if (audios != null) audios.Play();
+        if (audios != null) AudioSource.PlayClipAtPoint(audios.clip, transform.position);
 
 
     }

@@ -13,6 +13,9 @@ TagManager:
   - playerps_dustrunning
   - playerps_death
   - playerps_dustfalling
+  - Water
+  - UI_Arrows
+  - UI_PlantButton
   layers:
   - Default
   - TransparentFX

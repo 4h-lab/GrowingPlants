@@ -29,7 +29,7 @@ public class NormalPlant : BasePlant, IFallInteractable{
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
 
-        ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
+        ParticleSystem ps = transform.Find("StartPS").GetComponent<ParticleSystem>();//GetComponentInChildren<ParticleSystem>();
         if (ps != null) {
             ps.transform.parent = null;
             ps?.Play();
@@ -47,7 +47,7 @@ public class NormalPlant : BasePlant, IFallInteractable{
         if(budTimer> budTime)
         {
             bud.SetActive(false);
-            //budTimer = 0;
+            // budTimer = 0;
         }
         budTimer += Time.deltaTime;
 
@@ -164,7 +164,8 @@ public class NormalPlant : BasePlant, IFallInteractable{
     }
 
     public void fallInteract(GameObject initiator) {
-        StartCoroutine(boing(1f, transform.Find("Flower").transform)); 
+        StartCoroutine(boing(1f, transform.Find("Flower").transform));
+        transform.Find("FallPS")?.GetComponent<ParticleSystem>()?.Play();
     }
     private IEnumerator boing(float t, Transform trans ) {
         if(budTime > budTimer) yield break;
