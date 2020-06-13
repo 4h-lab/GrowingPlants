@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MovementJoystick : MonoBehaviour
-{
-    private EventEmitter ee;
-
+public class MovementJoystick : MonoBehaviour{
     public float maxSpeed;
     public float acceleration;
+
+
+    private EventEmitter ee;
     private float speed;
     bool facingRight = true;
     private Rigidbody2D mBody;
@@ -17,6 +17,7 @@ public class MovementJoystick : MonoBehaviour
     private Vector3 oldPos;
     private bool isSquished = false;
     private bool isrunning = false;
+
 
     // animations
     private Animator anim;
@@ -98,7 +99,8 @@ public class MovementJoystick : MonoBehaviour
 
     }
     private void movePlayer(Vector3 dir){
-        
+        ee.invoke("playermoved", null);
+
 
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed) speed = maxSpeed;
