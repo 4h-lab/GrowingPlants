@@ -184,6 +184,11 @@ public class MovementJoystick : MonoBehaviour{
     {
         isSquished = s;
     }
+
+    public bool getSquished()
+    {
+        return isSquished;
+    }
     public float getTargetVelocityX()
     {
         
