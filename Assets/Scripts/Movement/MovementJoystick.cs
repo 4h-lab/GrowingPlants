@@ -156,10 +156,12 @@ public class MovementJoystick : MonoBehaviour{
         {
             if (mBody.gravityScale != 0) mBody.gravityScale = 0;
         }
+
         else
         {
             if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
         }
+
     }
 
     Vector2 projectRB(Vector2 dir){
