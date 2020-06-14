@@ -45,6 +45,11 @@ public class LoadLevels : MonoBehaviour
         SceneManager.LoadScene(l);
     }
     // Update is called once per frame
+
+        public void back()
+    {
+        SceneManager.LoadScene(0);
+    }
     void Update()
     {
         
