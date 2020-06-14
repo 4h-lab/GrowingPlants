@@ -14,6 +14,8 @@ public class IsGrounded : MonoBehaviour
     private Rigidbody2D rb;
 
 
+
+
     public bool GetGrounded() { return grounded; }
 
     // Start is called before the first frame update
@@ -29,7 +31,7 @@ public class IsGrounded : MonoBehaviour
             bool prev = grounded;
             Collider2D[] da_hits;
             grounded = checkGroundLevel(out da_hits);
-            if (grounded && !prev) { // first frame in which you touched the floor
+            if (grounded && !prev && !this.GetComponent<MovementJoystick>().getSquished()) { // first frame in which you touched the floor
                 GameObject.FindGameObjectWithTag("playerps_dustfalling").GetComponent<ParticleSystem>()?.Play();
                 if (da_hits != null) {
                     foreach (Collider2D c in da_hits) {

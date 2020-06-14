@@ -156,10 +156,12 @@ public class MovementJoystick : MonoBehaviour{
         {
             if (mBody.gravityScale != 0) mBody.gravityScale = 0;
         }
+
         else
         {
             if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
         }
+
     }
 
     Vector2 projectRB(Vector2 dir){
@@ -181,6 +183,11 @@ public class MovementJoystick : MonoBehaviour{
     public void setSquished(bool s)
     {
         isSquished = s;
+    }
+
+    public bool getSquished()
+    {
+        return isSquished;
     }
     public float getTargetVelocityX()
     {

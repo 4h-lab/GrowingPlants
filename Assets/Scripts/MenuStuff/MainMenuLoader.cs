@@ -7,7 +7,7 @@ public class MainMenuLoader : MonoBehaviour{
 
     public void loadLevel(string levelname) {
         //todo: use lookup table to get buildindex
-        SceneManager.LoadSceneAsync("Lv1");       
+        SceneManager.LoadScene("Level_1");       
     }
 
     public void loadSelectLevel()
