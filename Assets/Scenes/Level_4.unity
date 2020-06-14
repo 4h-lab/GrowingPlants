@@ -2456,6 +2456,11 @@ PrefabInstance:
       propertyPath: death_time
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5907295324848936080, guid: d1c6a8bef5aa047488fdf928e64600b1,
+        type: 3}
+      propertyPath: squish_amount
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6219927600155200259, guid: d1c6a8bef5aa047488fdf928e64600b1,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -5,6 +5,8 @@ using UnityEngine;
 public class SquishCollisionInteractable : MonoBehaviour
 {
     private Vector2 o_scale;
+    private Vector2 box_size;
+    private BoxCollider2D collider; 
     [Tooltip("time in seconds before the player dies")]
     public float death_time = 0.5f;
     [Tooltip("factor multiplied every frame to squish the player")]
@@ -25,6 +27,8 @@ public class SquishCollisionInteractable : MonoBehaviour
     {
 
         sprite = this.transform.parent.Find("Sprite");
+        collider = this.transform.parent.gameObject.GetComponent<BoxCollider2D>();
+        box_size = collider.size;
         o_scale = this.transform.parent.Find("Sprite").localScale;
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
         GRD = this.transform.parent.GetComponent<IsGrounded>();
@@ -40,6 +44,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         if (GRD.GetGrounded() && collisionCounter > 0)
         {
             sprite.localScale += new Vector3(Time.deltaTime * 2f, -Time.deltaTime) * squish_amount * GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
+            collider.size += new Vector2(0f, -Time.deltaTime*2) * squish_amount * GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
             time += Time.deltaTime;
         }
 
@@ -61,6 +66,7 @@ public class SquishCollisionInteractable : MonoBehaviour
         // if the layer is passable... just ignore it
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
         this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true); // otherwise start squishing
+        
         collisionCounter++;
         Debug.Log("COLLISIONI:" + collisionCounter);
         
@@ -112,15 +118,21 @@ public class SquishCollisionInteractable : MonoBehaviour
     IEnumerator growBack()
     {
         time = 0;
+        this.transform.parent.gameObject.GetComponent<Collider2D>().isTrigger = false;
+        this.transform.parent.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         Debug.Log(sprite.localScale.y + "   " + o_scale.y);
+
         
-        
+        collider.size = box_size;
         while (sprite.localScale.y < o_scale.y)
         {
             sprite.localScale -= new Vector3(Time.deltaTime*2f, -Time.deltaTime) * de_squish_amount;
+            
             yield return new WaitForEndOfFrame();
         }
+
         sprite.localScale = o_scale;
+        
         yield return null;
     }
 
