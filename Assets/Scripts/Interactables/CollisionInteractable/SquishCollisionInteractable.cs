@@ -118,8 +118,7 @@ public class SquishCollisionInteractable : MonoBehaviour
     IEnumerator growBack()
     {
         time = 0;
-        this.transform.parent.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        this.transform.parent.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        
         Debug.Log(sprite.localScale.y + "   " + o_scale.y);
 
         
