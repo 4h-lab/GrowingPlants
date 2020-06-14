@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   death_time: 0.5
   squish_amount: 1
-  de_squish_amount: 4
+  de_squish_amount: 2
 --- !u!1 &7144201019997446966
 GameObject:
   m_ObjectHideFlags: 0
