@@ -42,17 +42,18 @@ public class WinSoil : MonoBehaviour
 
         string obtainedStars = "";
         int score = gm.calcScore();
-        for (int i = 0; i < score; i++) obtainedStars += " *";
+        //for (int i = 0; i < score; i++) obtainedStars += " *";
+
+        GameObject.FindGameObjectWithTag("winscreen").GetComponentInChildren<StarUIManager>().showStars(score);
         
-        
-        popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
+        //popup.transform.Find("StarsTextR").gameObject.GetComponent<TextMeshProUGUI>().text = obtainedStars;
 
         
         time = Time.realtimeSinceStartup - time;
 
 
-        popup.transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = formatGameTime(time);
-        popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
+        popup.transform.Find("TimePanel").transform.Find("TimeTextR").gameObject.GetComponent<TextMeshProUGUI>().text = formatGameTime(time);
+        //popup.transform.Find("PauseMenuButtons").gameObject.GetComponent<PauseMenuButtons>().SetCurrentLevel(currentLevel);
 
         // after everithing was calculated, prepare to save the game : 
         int id = SceneManager.GetActiveScene().buildIndex; 

@@ -1471,6 +1471,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 923471182112932664, guid: 070214b88caf49449af583282ce81e5f,
+        type: 3}
+      propertyPath: winScreen
+      value: 
+      objectReference: {fileID: 6456046369404695145, guid: 79357badb544ec04f941c90856c6b77c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 070214b88caf49449af583282ce81e5f, type: 3}
 --- !u!1 &1397653645 stripped
