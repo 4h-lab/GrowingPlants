@@ -15,8 +15,8 @@ public class ParallaxBackground : MonoBehaviour{
     // I am using lateupdate because in this way i am sure that thecamera already moved for that frame
     void LateUpdate(){
         Vector3 delta = Camera.main.transform.position - previousPos;
-
-        transform.position += new Vector3(delta.x * parallaxModifier, delta.y * parallaxModifier, transform.position.z);
+        if (delta == Vector3.zero) return;
+        transform.position += new Vector3(delta.x * parallaxModifier, delta.y * parallaxModifier, 0);
 
         previousPos = Camera.main.transform.position;
         
