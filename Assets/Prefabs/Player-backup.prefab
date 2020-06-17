@@ -413,8 +413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2551cd4a913e9479d6573a79f2307f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  death_time: 0.5
-  squish_amount: 1
+  death_time: 0.48
+  squish_amount: 0.75
   de_squish_amount: 2
 --- !u!1 &7144201019997446966
 GameObject:
