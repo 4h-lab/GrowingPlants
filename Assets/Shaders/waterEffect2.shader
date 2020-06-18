@@ -190,6 +190,7 @@
                     float noise1d = (cnoise(float2(i.uv[0] * 10, _Time.y)) + 1) * .5;
 
 
+					/*
                     float noise = (cnoise(i.uv * _SinTime.yy * 0.316) +
                     cnoise(i.uv * 5.17 * _CosTime.yy) +
                     cnoise(i.uv * .26 * _SinTime.yy) +
@@ -197,7 +198,8 @@
                     cnoise((i.uv * .5) + float2(.5, .5) * 7.7 * _SinTime.xx) +
                     cnoise((i.uv * float2(.5, 1)) + float2(.5, 0) * 6.123 * _CosTime.xx)) *
                     0.1;
-
+					*/
+					float noise = cnoise((i.uv * _SinTime.yy * 0.316) + (i.uv * 5.17 * _CosTime.yy) + ((i.uv * .5) + float2(.5, .5) * 7.7 * _SinTime.xx));
 
 
                    
