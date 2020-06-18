@@ -5,7 +5,7 @@ using UnityEngine;
 public class IsGrounded : MonoBehaviour
 {
     [SerializeField] private float groundedTreshold;
-    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask groundLayerMask;
 
     private bool grounded;
     private Animator anim;
@@ -22,6 +22,7 @@ public class IsGrounded : MonoBehaviour
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        groundLayerMask = (1 << 0) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("onewayplatform"));
         _collider = GetComponent<Collider2D>();
         StartCoroutine(check());
     }
@@ -50,7 +51,7 @@ public class IsGrounded : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x, 
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
                                                     new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
-                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f));
+                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f), groundLayerMask);
         Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
                                                     new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
