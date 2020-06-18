@@ -16,6 +16,7 @@ TagManager:
   - Water
   - UI_Arrows
   - UI_PlantButton
+  - winscreen
   layers:
   - Default
   - TransparentFX
