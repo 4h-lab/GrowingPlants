@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e013c4a18b8bc6b40921c70c9ba7847e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAllowedNumberOfStars: 3
   targetFrameRate: 60
 --- !u!114 &3916682691247064400
 MonoBehaviour:
