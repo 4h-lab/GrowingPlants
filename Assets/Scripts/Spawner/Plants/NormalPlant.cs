@@ -165,10 +165,11 @@ public class NormalPlant : BasePlant, IFallInteractable{
 
     public void fallInteract(GameObject initiator) {
         StartCoroutine(boing(1f, transform.Find("Flower").transform));
-        transform.Find("FallPS")?.GetComponent<ParticleSystem>()?.Play();
     }
     private IEnumerator boing(float t, Transform trans ) {
         if(budTime > budTimer) yield break;
+        transform.Find("FallPS")?.GetComponent<ParticleSystem>()?.Play();
+
         float actual_time = 0;
         Vector3 startpos = trans.position;
         while (actual_time < t) {

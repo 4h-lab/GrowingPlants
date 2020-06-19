@@ -41,7 +41,7 @@ public class SquishCollisionInteractable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GRD.GetGrounded() && collisionCounter > 0)
+        if ( collisionCounter > 0)
         {
             sprite.localScale += new Vector3(Time.deltaTime * 2f, -Time.deltaTime) * squish_amount * GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
             collider.size += new Vector2(0f, -Time.deltaTime*2) * squish_amount * GameManager.FindObjectOfType<GameManager>().GetCustomTimeScale();
@@ -65,9 +65,11 @@ public class SquishCollisionInteractable : MonoBehaviour
 
         // if the layer is passable... just ignore it
         if ((((1 << collision.gameObject.layer) & passableObjectsLayerMaskWithWater) != 0)) return;
+        if (GRD.GetGrounded()) { 
         this.transform.parent.gameObject.GetComponent<MovementJoystick>().setSquished(true); // otherwise start squishing
         
         collisionCounter++;
+        }
         Debug.Log("COLLISIONI:" + collisionCounter);
         
 
