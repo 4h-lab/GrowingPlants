@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class UIMovement : MonoBehaviour
+using System;
+public class UIMovement : Controls
 {
     private MovementJoystick player;
     private Image right;
     private Image left;
+    private GameObject r;
+    private GameObject l;
 
     private Color white = Color.white;
     private Color Awhite = new Color(1f, 1f, 1f, .65f);
@@ -15,8 +17,15 @@ public class UIMovement : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementJoystick>();
-        right = transform.GetChild(0).gameObject.GetComponent<Image>();
-        left = transform.GetChild(1).gameObject.GetComponent<Image>();
+        
+        r = transform.GetChild(0).gameObject;
+        l = transform.GetChild(1).gameObject;
+        right = r.GetComponent<Image>();
+        left = l.GetComponent<Image>();
+
+
+        onControlsDisabled += onControlsDisabled_handler;
+        onControlsEnabled += onControlsEnabled_handler;
     }
 
     // Update is called once per frame
@@ -37,5 +46,14 @@ public class UIMovement : MonoBehaviour
             right.color = Awhite;
             left.color = Awhite;
         }
+    }
+
+    private void onControlsDisabled_handler(object obj, EventArgs e) {
+        l.SetActive(false);
+        r.SetActive(false);
+    }
+    private void onControlsEnabled_handler(object obj, EventArgs e) {
+        l.SetActive(true);
+        r.SetActive(true);
     }
 }
