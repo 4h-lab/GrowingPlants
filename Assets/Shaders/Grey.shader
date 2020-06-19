@@ -3,7 +3,7 @@
 Shader "Sprites/Gray"{
     Properties {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-        _SecondaryText("Secondary sprite texture", 2D) = "black" {}
+       // _SecondaryText("Secondary sprite texture", 2D) = "black" {}
 
 
         [HDR] _UnColouredColor("Color before colouring", Color) = (.3, .59, .11)
@@ -77,7 +77,7 @@ Shader "Sprites/Gray"{
 
                 sampler2D _MainTex;
 				sampler2D _ColorMaskTexture;
-                sampler2D _SecondaryText;
+                //sampler2D _SecondaryText;
                 uniform float _EffectAmount;
 				uniform float _PlayerPosX;
 				uniform float _PlayerPosY;
@@ -91,7 +91,7 @@ Shader "Sprites/Gray"{
                 fixed4 frag(v2f IN) : COLOR{
 					
                     half4 texcol = tex2D(_MainTex, IN.texcoord);
-                    half4 texcol2 = tex2D(_SecondaryText, IN.texcoord);
+                    //half4 texcol2 = tex2D(_SecondaryText, IN.texcoord);
 					//half maskcol = 1-tex2D(_ColorMaskTexture, IN.texcoord).r;
                     
                     half maskcol = ((1 - tex2D(_ColorMaskTexture, IN.texcoord).r) +
@@ -109,8 +109,8 @@ Shader "Sprites/Gray"{
 
 
 
-                    //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, _UnColouredColor.rgb),maskcol);
-                    texcol.rgb = lerp(texcol.rgb, texcol2.rgb, maskcol);
+                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, _UnColouredColor.rgb),maskcol);
+                    //texcol.rgb = lerp(texcol.rgb, texcol2.rgb, maskcol);
 
 					//texcol = texcol * IN.color; // * (1 - maskcol.r);
                     return texcol;
