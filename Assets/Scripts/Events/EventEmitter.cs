@@ -24,7 +24,7 @@ public class EventEmitter : MonoBehaviour{
     }
 
     public void invoke(string eventname, Object[] parameters) {
-        Debug.Log("EVENTO INVOCATO >>> " + eventname);
+        //Debug.Log("EVENTO INVOCATO >>> " + eventname);
         if (!events.ContainsKey(eventname)) return; 
         foreach (EventCallback e in events[eventname]) {
             if(e != null)e(parameters);
