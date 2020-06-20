@@ -18,6 +18,7 @@ TagManager:
   - UI_PlantButton
   - winscreen
   - Tracks
+  - Admix
   layers:
   - Default
   - TransparentFX

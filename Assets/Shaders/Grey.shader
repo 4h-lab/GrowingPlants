@@ -108,11 +108,11 @@ Shader "Sprites/Gray"{
                     */
 
 
-                    //texcol.rgb = lerp(float3(0,1 - texcol.g,0), dot(texcol.rgb, _UnColouredColor.rgb), maskcol);
+                    texcol.rgb = lerp(float3(0,1 - texcol.g,0), dot(texcol.rgb, _UnColouredColor.rgb), maskcol);
 
 
 
-                    texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, _UnColouredColor.rgb),maskcol);
+                    //texcol.rgb = lerp(texcol.rgb, dot(texcol.rgb, _UnColouredColor.rgb),maskcol);
                     //texcol.rgb = lerp(texcol.rgb, texcol2.rgb, maskcol);
 
 					//texcol = texcol * IN.color; // * (1 - maskcol.r);
