@@ -152,6 +152,7 @@ public class MovementJoystick : MonoBehaviour{
 
     void AlterFallingSpeed()
     {
+        
         if ((mBody.velocity.y < 0) && (mBody.velocity.magnitude > maxFallingSpeed))
         {
             if (mBody.gravityScale != 0) mBody.gravityScale = 0;
@@ -161,9 +162,10 @@ public class MovementJoystick : MonoBehaviour{
         {
             if (mBody.gravityScale != standardGravityScale) mBody.gravityScale = standardGravityScale;
         }
+        
 
     }
-
+     
     Vector2 projectRB(Vector2 dir){
         float distance = dir.magnitude ; 
         if (mBody != null) {

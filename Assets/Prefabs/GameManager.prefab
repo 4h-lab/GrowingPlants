@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAllowedNumberOfStars: 3
   targetFrameRate: 60
+  TracksObj: {fileID: 2652883650453146880, guid: 7d17935394fbf1d47980ce93ff6ba194,
+    type: 3}
 --- !u!114 &3916682691247064400
 MonoBehaviour:
   m_ObjectHideFlags: 0

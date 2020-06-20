@@ -12,8 +12,8 @@ public class WinPlant : BasePlant
         player = GameObject.FindGameObjectWithTag("Player");
 
         //FindObjectOfType<SmoothCamera2D>().enabled = false;
-        Destroy(player.GetComponent<Rigidbody2D>());
-        Destroy(player.GetComponent<BoxCollider2D>());
+        player.GetComponent<Rigidbody2D>().isKinematic = true;
+        player.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     void Update()

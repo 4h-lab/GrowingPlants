@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     public List<CalcScoreStep> scoreCalculator; // questo raccoglie i metodi che leggono dalla lista degli eventi e ti dicono quante stelle hai ottenuto
 
     [SerializeField] private int targetFrameRate = 60;
+    [SerializeField] private GameObject TracksObj;
 
     private void Awake(){
         //framerate lock test
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
         notifiedAchievements = new List<string>();
         scoreCalculator = new List<CalcScoreStep>();
+        checkSingletonMusic();
     }
 
     private void Start(){
@@ -91,5 +93,14 @@ public class GameManager : MonoBehaviour {
 
         foreach (string s in notifiedAchievements) { Debug.Log("ACHIEVEMENT: " + s + " csss: " + scoreCalculator.Count + " notifachi: " + notifiedAchievements.Count); }
         return Mathf.Min(maxAllowedNumberOfStars, totalscore);
+    }
+
+    private void checkSingletonMusic()
+    {
+        var count = GameObject.FindGameObjectsWithTag("Tracks").Length;
+        if (count == 0)
+        {
+            Instantiate(TracksObj);
+        }
     }
 }

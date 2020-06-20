@@ -17,6 +17,7 @@ TagManager:
   - UI_Arrows
   - UI_PlantButton
   - winscreen
+  - Tracks
   layers:
   - Default
   - TransparentFX

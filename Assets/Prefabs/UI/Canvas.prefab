@@ -584,6 +584,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7077321987424919315}
     m_Modifications:
+    - target: {fileID: 390936660212576996, guid: 4641d879132506440847111253b04ef4,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 390936660212576996, guid: 4641d879132506440847111253b04ef4,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 390936660212576997, guid: 4641d879132506440847111253b04ef4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
