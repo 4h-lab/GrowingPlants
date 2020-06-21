@@ -10027,5 +10027,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushStrength: {x: 0, y: 10}
   keepBounciness: 1
-  bounceStrength: {x: 0, y: 8}
+  bounceStrength: {x: 0, y: 10}
   triggerVelocity: 7
