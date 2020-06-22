@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ControlsEnabled(bool enable){
-        GameObject[] buttonList = GameObject.FindGameObjectsWithTag("Controls");
+        GameObject[] buttonList = GameObject.FindGameObjectsWithTag("Controls").Concat(GameObject.FindGameObjectsWithTag("UI_PlantButton")).Concat(GameObject.FindGameObjectsWithTag("UI_Arrows")).ToArray();
         foreach (GameObject b in buttonList)
         {
             b.GetComponent<Controls>().ControlsEnabled(enable);
