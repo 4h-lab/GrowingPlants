@@ -22,7 +22,7 @@ public class IsGrounded : MonoBehaviour
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        groundLayerMask = (1 << 0) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("onewayplatform"));
+        groundLayerMask = (1 << 0) | (1 << LayerMask.NameToLayer("plant")) | (1 << LayerMask.NameToLayer("onewayplatform"))|(1<<LayerMask.NameToLayer("switch"));
         _collider = GetComponent<Collider2D>();
         StartCoroutine(check());
     }

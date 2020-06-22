@@ -104,9 +104,9 @@ public class NormalPlant : BasePlant, IFallInteractable{
     {
         if (!stopped)
         {
-            if (stem.transform.localScale.y <= maxHeigth - ray_point * 2)
+            if (stem.transform.localScale.y <= maxHeigth *2)//- ray_point * 2)
             {
-                stem.transform.localScale += step * 0.9f;
+                stem.transform.localScale += step * 2f;
                 
             }
         }

@@ -259,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 4242503560192566226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.11, y: 0, z: 0}
-  m_LocalScale: {x: 0.417, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 6447525097476588124}
   m_RootOrder: 0
@@ -303,7 +303,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: 8a8912a6767c344489e87e029e1e501e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c94511fc821263548a5396f53944156d, type: 3}
   m_Color: {r: 0.15873085, g: 0.7232675, b: 0.8207547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
