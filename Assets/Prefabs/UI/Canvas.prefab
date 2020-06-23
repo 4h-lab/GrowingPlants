@@ -609,6 +609,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 54.8
       objectReference: {fileID: 0}
+    - target: {fileID: 390936660212576998, guid: 4641d879132506440847111253b04ef4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 6937783472043827582, guid: 4641d879132506440847111253b04ef4,
         type: 3}
       propertyPath: m_Name
