@@ -24,4 +24,14 @@ public class BasePlant : MonoBehaviour
     {
         this.spawner = spawner;
     }
+
+    public float GetInitY()
+    {
+        return initY;
+    }
+
+    public float GetMaxHeigth()
+    {
+        return maxHeigth;
+    }
 }
