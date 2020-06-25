@@ -42,7 +42,6 @@ public class WinSoil : MonoBehaviour
 
         string obtainedStars = "";
         int score = gm.calcScore();
-        //for (int i = 0; i < score; i++) obtainedStars += " *";
 
         GameObject.FindGameObjectWithTag("winscreen").GetComponentInChildren<StarUIManager>().showStars(score);
         
@@ -59,6 +58,7 @@ public class WinSoil : MonoBehaviour
         int id = SceneManager.GetActiveScene().buildIndex; 
         SavedGameData.gamedata.addOrModifyCompletedLevel(id, time, score); //add the completed level to the game data
         SavedGameData.gamedata.unlockNewLevel(id+1); //unlock the next level
+        SavedGameData.gamedata.unlockNewLevel(id + 2);
 
         SaveLoadManager.save(SavedGameData.gamedata);
     }
