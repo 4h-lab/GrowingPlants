@@ -9,6 +9,7 @@ public class JumpPlant : MonoBehaviour
     [SerializeField] Vector2 bounceStrength = Vector2.up;
     [SerializeField] float triggerVelocity = 1f;
 
+    private Animator anim;
     private NormalPlant mainPlantScript;
     private bool readyToPush = false;
 
@@ -22,6 +23,7 @@ public class JumpPlant : MonoBehaviour
         if (!readyToPush && UpdateReadyToPush())
         {
             GameObject player = mainPlantScript.GetPlayerOnPlant();
+            anim = player.GetComponentInChildren<Animator>();
             if (player) PushTarget(player, pushStrength);
         }
     }
@@ -41,6 +43,7 @@ public class JumpPlant : MonoBehaviour
     private void PushTarget(GameObject target, Vector2 strength)
     {
         target.GetComponent<Rigidbody2D>().AddForce(strength, ForceMode2D.Impulse);
+        anim.SetTrigger("jumping");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
