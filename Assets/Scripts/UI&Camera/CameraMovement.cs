@@ -69,29 +69,11 @@ public class CameraMovement : MonoBehaviour{
         //Debug.Log(Camera.main.velocity.ToString());
         transform.Translate(dir * Time.fixedDeltaTime* cameraspeed);
 
-           
 
-
-            /*
-            newpos.z = transform.position.z;
-            newpos.x = canMoveAlongX ? (Mathf.Clamp(newpos.x, minX, maxX)) : transform.position.x;
-            newpos.y = canMoveAlongY ? (Mathf.Clamp(newpos.y, minY, maxY)) : transform.position.y;
-
-            Debug.Log(transform.position + " <> " + newpos + " <> " + playerTransform.position);
-
-            transform.position = newpos;
-
-            
-            /*
-            transform.Translate(newpos * Time.deltaTime );
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), transform.position.z);
-            */
-        
-
-
-
+        /*
         Vector3 deb = transform.position;
         deb.z = 0;
+
 
         Debug.DrawLine(new Vector3(minX, minY, 0), new Vector3(maxX, minY, 0), Color.red);
         Debug.DrawLine(new Vector3(minX, maxY, 0), new Vector3(maxX, maxY, 0), Color.red);
@@ -109,7 +91,7 @@ public class CameraMovement : MonoBehaviour{
 
         Debug.DrawLine(deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.left, deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.right, Color.blue);
         Debug.DrawLine(deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.up, deb + new Vector3(Camera.main.orthographicSize * Camera.main.aspect, 0, 0) + Vector3.down, Color.blue);
-
+        */
 
 
     }
