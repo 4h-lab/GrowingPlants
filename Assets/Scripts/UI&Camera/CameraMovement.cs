@@ -37,7 +37,7 @@ public class CameraMovement : MonoBehaviour{
         maxX = Mathf.Max(xs) - Camera.main.orthographicSize * Camera.main.aspect;
         maxY = Mathf.Max(ys) - Camera.main.orthographicSize;
 
-        Debug.Log(Mathf.Min(xs) +"  " + Mathf.Max(xs) + " " + Camera.main.orthographicSize);
+        //Debug.Log(Mathf.Min(xs) +"  " + Mathf.Max(xs) + " " + Camera.main.orthographicSize);
 
         if (minX >= maxX) {
             canMoveAlongX = false;

@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpPlant : MonoBehaviour
+public class JumpPlant2 : MonoBehaviour
 {
-    [SerializeField] Vector2 pushStrength = Vector2.up;
+    [SerializeField] Vector2 push = Vector2.up;
     [SerializeField] bool keepBounciness = true;
-    [SerializeField] Vector2 bounceStrength = Vector2.up;
+    [SerializeField] Vector2 bounce = Vector2.up;
     [SerializeField] float triggerVelocity = 1f;
 
-    private Animator anim;
     private NormalPlant mainPlantScript;
     private bool readyToPush = false;
 
@@ -23,8 +23,7 @@ public class JumpPlant : MonoBehaviour
         if (!readyToPush && UpdateReadyToPush())
         {
             GameObject player = mainPlantScript.GetPlayerOnPlant();
-            anim = player.GetComponentInChildren<Animator>();
-            if (player) PushTarget(player, pushStrength);
+            if (player) PushTarget(player, push);
         }
     }
 
@@ -43,12 +42,11 @@ public class JumpPlant : MonoBehaviour
     private void PushTarget(GameObject target, Vector2 strength)
     {
         target.GetComponent<Rigidbody2D>().AddForce(strength, ForceMode2D.Impulse);
-        anim.SetTrigger("jumping");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (CanBounce(collision)) PushTarget(collision.gameObject, bounceStrength);
+        if (CanBounce(collision)) PushTarget(collision.gameObject, bounce);
     }
 
     private bool CanBounce(Collision2D target)
