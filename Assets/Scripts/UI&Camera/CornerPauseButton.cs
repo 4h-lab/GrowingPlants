@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class CornerPauseButton : MonoBehaviour
 {
+    public Sprite pauseImage;
+    public Sprite unpauseImage;
+
     EventEmitter ee;
 
     [SerializeField] private GameObject pauseScreen;
@@ -33,14 +36,17 @@ public class CornerPauseButton : MonoBehaviour
             gm.ControlsEnabled(false);
             Canvas cv = GameObject.FindObjectOfType<Canvas>();
             instancedPauseScreen = GameObject.Instantiate(
-                pauseScreen,
-                cv.transform.position,
-                Quaternion.identity,
-                cv.transform);
+                    pauseScreen,
+                    cv.transform.position,
+                    Quaternion.identity,
+                    cv.transform);
+            GetComponent<Image>().sprite = unpauseImage;
         }
+
         else
         {
             StartCoroutine(Unpause());
+            GetComponent<Image>().sprite = pauseImage;
         }
     }
 
