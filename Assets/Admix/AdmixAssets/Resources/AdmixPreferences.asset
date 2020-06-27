@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -253376139, guid: e97a86927d98e084a8bf97d7deb72c19, type: 3}
+  m_Name: AdmixPreferences
+  m_EditorClassIdentifier: 
+  ApplicationName: GrowingPlants
+  GenericPackageName: com.DefaultCompany.ProductName
+  ApplicationIdentifier: eaafbaa7-3ad2-49fa-901d-c696ea1f1d47
+  _applicationToken: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmZhV1FpT2lKbFlXRm1ZbUZoTnkwellXUXlMVFE1Wm1FdE9UQXhaQzFqTmprMlpXRXhaakZrTkRjaUxDSjFjMlZ5U1dRaU9pSXlOamRrTmpRM015MWlNalJoTFRSaE9UZ3RPREk1TkMxak1HRTVNMkpoTTJRMllqVWlMQ0poY0hCRmJtZHBibVVpT2lKVmJtbDBlU0lzSW1saGRDSTZNVFU1TXpJMk5qRTFOSDAuTndyNms3bFJ3bldicEpfeWhTYmJMTWVHRmVzeUxHV2lfOWlLdV9rSmc2WQ==
+  _logBehaviour: 2
+  SceneIdentifiersManager:
+    SceneStructsList:
+    - _sceneName: Level_1
+      _sceneIdentifier: 83dfbf0f-6157-4443-ab61-723c5049872e
+      _scenePath: Assets/Scenes/Level_1.unity
+      _applicationName: GrowingPlants
+  AppStateMode: 0
