@@ -43,6 +43,7 @@ public static class LoadSceneManager {
 
 
     private static IEnumerator loading(int newLevelIndex) {
+        yield return new WaitForSeconds(1f);
         AsyncOperation asyincOp = SceneManager.LoadSceneAsync(newLevelIndex);
         while (!asyincOp.isDone) { 
             float progress = asyincOp.progress;
@@ -53,6 +54,7 @@ public static class LoadSceneManager {
     }
 
     private static IEnumerator loading(string newLevelName) {
+        yield return new WaitForSeconds(1f);
         AsyncOperation asyincOp = SceneManager.LoadSceneAsync(newLevelName);
         while (!asyincOp.isDone) {
             float progress = asyincOp.progress;

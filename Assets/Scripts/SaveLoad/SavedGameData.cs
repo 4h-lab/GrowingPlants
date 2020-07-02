@@ -18,12 +18,16 @@ public class SavedGameData {
         //public bool completed;
         public float bestTime;
         public int stars;
+        public bool isNightmare;
+        public string[] n_levels;
 
-        public LevelData(int id) {
+        public LevelData(int id,bool nightmare=false,string[] nl=null) {
             levelID = id;//- SavedGameData.minLevelIndex;
             unlocked = false;
             bestTime = float.MaxValue;
             stars = 0;
+            isNightmare = nightmare;
+            n_levels = nl;
         }
 
         public override string ToString() {
@@ -77,14 +81,17 @@ public class SavedGameData {
         levels[id].unlocked = true;
         levels[id].bestTime = Mathf.Min(time, levels[id].bestTime);
         levels[id].stars = Mathf.Max(stars, levels[id].stars);
+
+        /*if (levels[id].stars == 3) {
+            unlockNewLevel(4, true);
+        }*/
     }
 
-    public void unlockNewLevel(int id) {
+    public void unlockNewLevel(int id, bool ignoreNightmare = false) {
         /* This method will unlock (set the unlocked variable a true) the level with ID id. 
          */
-        if (!levels.ContainsKey(id)) {
-            levels.Add(id, new LevelData(id));
-        }
+        if (!levels.ContainsKey(id)) levels.Add(id, new LevelData(id));
+        if (levels[id].isNightmare && !ignoreNightmare) return; // nightmare levels can only be unlocked in special occasions
         levels[id].unlocked = true;
     }
 

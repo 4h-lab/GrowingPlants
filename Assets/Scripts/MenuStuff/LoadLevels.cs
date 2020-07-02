@@ -42,7 +42,7 @@ public class LoadLevels : MonoBehaviour
 
     private void loadLevel(int l)
     {
-        SceneManager.LoadScene(l);
+        LoadSceneManager.loadNewLevel(l);
     }
     // Update is called once per frame
 
