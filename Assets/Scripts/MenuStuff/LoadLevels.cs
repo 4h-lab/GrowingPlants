@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.Events;
+using TMPro;
 
 public class LoadLevels : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class LoadLevels : MonoBehaviour
     private GameObject NormalPanel;
     [SerializeField]
     private GameObject NightmarePanel;
+    [SerializeField]
+    private GameObject switchButton;
 
     private SavedGameData.LevelData.levelType filter = SavedGameData.LevelData.levelType.nornal; 
 
@@ -68,9 +71,13 @@ public class LoadLevels : MonoBehaviour
         if (NormalPanel.activeSelf) {
             NormalPanel.SetActive(false);
             NightmarePanel.SetActive(true);
+            switchButton.GetComponent<Image>().color = Color.white;
+            switchButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
         } else {
             NormalPanel.SetActive(true);
             NightmarePanel.SetActive(false);
+            switchButton.GetComponent<Image>().color = Color.black;
+            switchButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
         
     }
