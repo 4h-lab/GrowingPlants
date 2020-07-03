@@ -13,21 +13,50 @@ public class SavedGameData {
      */
      [System.Serializable]
     public class LevelData { // this class will contains the informations pertaininig a single level
+        private static string nightmare_levels_folder = "Nightmare Levels";
+        private static string nightmare_suffix = " Nightmare";
+        public enum levelType {nornal, nightmare};
+        
         public int levelID; // the id of this level's scene.
         public bool unlocked;
         //public bool completed;
         public float bestTime;
         public int stars;
-        public bool isNightmare;
-        public string[] n_levels;
+        //public bool isNightmare;
+        public levelType lt;
+        public int[] n_levels_indexes;
 
-        public LevelData(int id,bool nightmare=false,string[] nl=null) {
+        public LevelData(int id, levelType levelType = levelType.nornal ,int[] nl=null) {
             levelID = id;//- SavedGameData.minLevelIndex;
             unlocked = false;
             bestTime = float.MaxValue;
             stars = 0;
-            isNightmare = nightmare;
-            n_levels = nl;
+            lt = levelType;
+            n_levels_indexes = nl;
+
+            //è terribile, va trovato un altro sistema..............
+            if (SceneUtility.GetScenePathByBuildIndex(id).Contains(nightmare_suffix)) lt = levelType.nightmare;
+
+            if (n_levels_indexes == null && (lt != levelType.nightmare)) {
+                n_levels_indexes = new int[1];
+                //find the name of the current scene.....
+                string scenepath =  SceneUtility.GetScenePathByBuildIndex(id);
+
+                //find the corrisponding nightmare level-.....
+                int levelNamestartsAt = scenepath.LastIndexOf("/");
+                string path = scenepath.Substring(0, levelNamestartsAt+1);
+                string levelname = scenepath.Substring(levelNamestartsAt +1).Split('.')[0];
+
+                string nightmareLevelPath = path + nightmare_levels_folder + "/" + levelname + nightmare_suffix + ".unity";
+
+                //find that level's build id....
+                int nightmare_id = SceneUtility.GetBuildIndexByScenePath(nightmareLevelPath);
+                Debug.Log(nightmareLevelPath + "  > " + nightmare_id);
+
+                //profit!
+                if (nightmare_id > 0) n_levels_indexes[0] = nightmare_id;
+
+            }
         }
 
         public override string ToString() {
@@ -82,16 +111,16 @@ public class SavedGameData {
         levels[id].bestTime = Mathf.Min(time, levels[id].bestTime);
         levels[id].stars = Mathf.Max(stars, levels[id].stars);
 
-        /*if (levels[id].stars == 3) {
-            unlockNewLevel(4, true);
-        }*/
+        if (levels[id].stars == 3) {
+            foreach (int newnightmare in levels[id].n_levels_indexes) unlockNewLevel(newnightmare, true);
+        }
     }
 
     public void unlockNewLevel(int id, bool ignoreNightmare = false) {
         /* This method will unlock (set the unlocked variable a true) the level with ID id. 
          */
         if (!levels.ContainsKey(id)) levels.Add(id, new LevelData(id));
-        if (levels[id].isNightmare && !ignoreNightmare) return; // nightmare levels can only be unlocked in special occasions
+        if ((levels[id].lt == LevelData.levelType.nightmare) && !ignoreNightmare) return; // nightmare levels can only be unlocked in special occasions
         levels[id].unlocked = true;
     }
 
