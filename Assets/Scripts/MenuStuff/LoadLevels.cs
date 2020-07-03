@@ -13,31 +13,12 @@ public class LoadLevels : MonoBehaviour
     private GameObject button;
     private Dictionary<int, SavedGameData.LevelData> levels;
 
-    
+    private SavedGameData.LevelData.levelType filter = SavedGameData.LevelData.levelType.nornal; 
+
     // Start is called before the first frame update
     void Start()
     {
-        levels = SavedGameData.gamedata.getLevelInfos();
-        UnityAction startView;
-        foreach (KeyValuePair<int, SavedGameData.LevelData> level in levels)
-        {
-            var c = Instantiate(button, this.transform);
-            c.transform.GetComponentInChildren<TextMeshProUGUI>().text = (level.Value.levelID-1).ToString();
-            startView = () => loadLevel(level.Value.levelID);
-            if (level.Value.unlocked) { 
-            c.GetComponent<Button>().onClick.AddListener(startView);
-            }
-            else
-            {
-                c.GetComponentInChildren<Button>().interactable = false;
-            }
-            var stars = level.Value.stars > 3 ? 3 : level.Value.stars;
-            for (int i=0;i<stars; i++)
-            {
-                c.transform.Find("Stars").transform.GetChild(i).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-            }
-
-        }
+        requestnewlevels();
     }
 
     private void loadLevel(int l)
@@ -54,4 +35,30 @@ public class LoadLevels : MonoBehaviour
     {
         
     }
+
+    private void requestnewlevels() {
+        levels = SavedGameData.gamedata.getLevelInfos();
+        UnityAction startView;
+        foreach (KeyValuePair<int, SavedGameData.LevelData> level in levels) {
+            if (level.Value.lt == filter) {
+                var c = Instantiate(button, this.transform);
+                c.transform.GetComponentInChildren<TextMeshProUGUI>().text = (level.Value.levelID - 1).ToString();
+                startView = () => loadLevel(level.Value.levelID);
+                if (level.Value.unlocked) {
+                    c.GetComponent<Button>().onClick.AddListener(startView);
+                } else {
+                    c.GetComponentInChildren<Button>().interactable = false;
+                }
+                var stars = level.Value.stars > 3 ? 3 : level.Value.stars;
+                for (int i = 0; i < stars; i++) {
+                    c.transform.Find("Stars").transform.GetChild(i).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+                }
+            }
+        }
+    }
+    public void setFilter(SavedGameData.LevelData.levelType x) {
+        filter = x;
+        requestnewlevels();
+    }
+
 }
