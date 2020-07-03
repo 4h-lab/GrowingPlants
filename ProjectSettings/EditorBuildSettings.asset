@@ -101,7 +101,50 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_30.unity
     guid: e5ab0f71e7d82c546bb34b7d0ba9662c
-  - enabled: 0
-    path: Assets/Scenes/Lv25.unity
-    guid: 658685147d2a4c54d900a7d462254cc6
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_1 Nightmare.unity
+    guid: 871aa763b70c9214a8561f0a28d9896d
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_2 Nightmare.unity
+    guid: d92466d5b0eb3a845b6dc001a1178284
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_3 Nightmare.unity
+    guid: 025079b38cff38f4480ea3e4809e853d
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_4 Nightmare.unity
+    guid: 59fac2e38768aa144abb0b440add9710
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_5 Nightmare.unity
+    guid: 20bd57cf419e2c54990a3f65a9d9df5d
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_6 Nightmare.unity
+    guid: 24e3081414ff4b146b9d62e81da27f3e
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_7 Nightmare.unity
+    guid: 5adb9c66a4e319a40a8179b054631bca
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_8 Nightmare.unity
+    guid: f64f530dff022894b9b7219198b4b491
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_9 Nightmare.unity
+    guid: a97c579c5cb80614f9282218cc22b4aa
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_10 Nightmare.unity
+    guid: 6389866d102aee043aabccfb7e619697
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_11 Nightmare.unity
+    guid: e371045d7725b3848a81248060cb6701
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_12 Nightmare.unity
+    guid: bcf1833f2b5ae7749a64639fd7197035
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_16 Nightmare.unity
+    guid: 4a21216a4ad7051419a40d5c92c3c4e3
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_19 Nightmare.unity
+    guid: 8ad4a47785dc0ca46a72835b32ca980b
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_21 Nightmare.unity
+    guid: b655a242d64fd8c4c94fa7407b784526
+
   m_configObjects: {}

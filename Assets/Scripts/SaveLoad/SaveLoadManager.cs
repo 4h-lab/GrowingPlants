@@ -26,7 +26,6 @@ public static  class SaveLoadManager {
     public static SavedGameData load() {
         /* This method returns the save file, or null if the file doesn't exists
          */
-
         SavedGameData sgd = null;
         if (File.Exists(Application.persistentDataPath + savefilename)) {
             BinaryFormatter bf = new BinaryFormatter();
