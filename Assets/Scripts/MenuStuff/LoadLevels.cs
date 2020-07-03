@@ -22,8 +22,8 @@ public class LoadLevels : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        requestnewlevelsNormal();
-        requestnewlevelsNightmare();
+        requestNewLevels(NormalPanel, SavedGameData.LevelData.levelType.nornal);
+        requestNewLevels(NightmarePanel, SavedGameData.LevelData.levelType.nightmare);
         NightmarePanel.SetActive(false);
     }
 
@@ -42,12 +42,12 @@ public class LoadLevels : MonoBehaviour
         
     }
 
-    private void requestnewlevelsNormal() {
+    private void requestNewLevels(GameObject p, SavedGameData.LevelData.levelType t) {
         levels = SavedGameData.gamedata.getLevelInfos();
         UnityAction startView;
         foreach (KeyValuePair<int, SavedGameData.LevelData> level in levels) {
-            if (level.Value.lt == SavedGameData.LevelData.levelType.nornal) {
-                var c = Instantiate(button, NormalPanel.transform);
+            if (level.Value.lt == t) {
+                var c = Instantiate(button, p.transform);
                 c.transform.GetComponentInChildren<TextMeshProUGUI>().text = (level.Value.levelID - 1).ToString();
                 startView = () => loadLevel(level.Value.levelID);
                 if (level.Value.unlocked) {
@@ -62,39 +62,20 @@ public class LoadLevels : MonoBehaviour
             }
         }
     }
-    private void requestnewlevelsNightmare()
-    {
-        levels = SavedGameData.gamedata.getLevelInfos();
-        UnityAction startView;
-        foreach (KeyValuePair<int, SavedGameData.LevelData> level in levels)
-        {
-            if (level.Value.lt == SavedGameData.LevelData.levelType.nightmare)
-            {
-                var c = Instantiate(button, NightmarePanel.transform);
-                c.transform.GetComponentInChildren<TextMeshProUGUI>().text = (level.Value.levelID - 1).ToString();
-                startView = () => loadLevel(level.Value.levelID);
-                if (level.Value.unlocked)
-                {
-                    c.GetComponent<Button>().onClick.AddListener(startView);
-                }
-                else
-                {
-                    c.GetComponentInChildren<Button>().interactable = false;
-                }
-                var stars = level.Value.stars > 3 ? 3 : level.Value.stars;
-                for (int i = 0; i < stars; i++)
-                {
-                    c.transform.Find("Stars").transform.GetChild(i).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-                }
-            }
+
+
+    public void getNightmare()    {
+        if (NormalPanel.activeSelf) {
+            NormalPanel.SetActive(false);
+            NightmarePanel.SetActive(true);
+        } else {
+            NormalPanel.SetActive(true);
+            NightmarePanel.SetActive(false);
         }
+        
     }
 
-    public void getNightmare()
-    {
-        NormalPanel.SetActive(false);
-        NightmarePanel.SetActive(true);
-    }
+   
     
 
 }
