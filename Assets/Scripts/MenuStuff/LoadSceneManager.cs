@@ -15,6 +15,7 @@ public static class LoadSceneManager {
 
     public static void loadNewLevel(int newLevelIndex) {
         loadnewlevel_managestuffandloadingscreen();
+        Debug.Log(go);
         go.StartCoroutine(loading(newLevelIndex));
     }
 
@@ -27,10 +28,10 @@ public static class LoadSceneManager {
         if (isAlreadyLoading) return;
 
         if (go == null) go = new GameObject().AddComponent<CoroutineCaller>();
-        if (loadingScreen == null) loadingScreen = Resources.Load<GameObject>("Screens/loadingScreen");
-        isAlreadyLoading = true;
+        if (loadingScreen == null) loadingScreen = Resources.Load<GameObject>("Screens/loadingScreen");isAlreadyLoading = true;
 
 
+        
         GameObject xxx = GameObject.Instantiate(loadingScreen, Vector3.zero, Quaternion.identity);
         RectTransform xxx_rt = xxx.GetComponent<RectTransform>();
 
@@ -45,22 +46,24 @@ public static class LoadSceneManager {
     private static IEnumerator loading(int newLevelIndex) {
         yield return new WaitForSeconds(1f);
         AsyncOperation asyincOp = SceneManager.LoadSceneAsync(newLevelIndex);
-        while (!asyincOp.isDone) { 
+        while (!asyincOp.isDone) {
+            isAlreadyLoading = false;
             float progress = asyincOp.progress;
             Debug.Log(progress);
             yield return new WaitForEndOfFrame();
         }
-        isAlreadyLoading = false;
+        
     }
 
     private static IEnumerator loading(string newLevelName) {
         yield return new WaitForSeconds(1f);
         AsyncOperation asyincOp = SceneManager.LoadSceneAsync(newLevelName);
         while (!asyincOp.isDone) {
+            isAlreadyLoading = false;
             float progress = asyincOp.progress;
             yield return new WaitForEndOfFrame();
         }
-        isAlreadyLoading = false;
+
     }
 
 }

@@ -39,6 +39,7 @@ public class SavedGameData {
 
             if (n_levels_indexes == null && (lt != levelType.nightmare)) {
                 n_levels_indexes = new int[1];
+
                 //find the name of the current scene.....
                 string scenepath =  SceneUtility.GetScenePathByBuildIndex(id);
 
