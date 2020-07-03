@@ -52,6 +52,7 @@ public class LoadLevels : MonoBehaviour
             if (level.Value.lt == t) {
                 var c = Instantiate(button, p.transform);
                 c.transform.GetComponentInChildren<TextMeshProUGUI>().text = (level.Value.levelID - 1).ToString();
+                c.transform.GetComponentInChildren<TextMeshProUGUI>().color = new Color(.26f, .26f, .26f);
                 startView = () => loadLevel(level.Value.levelID);
                 if (level.Value.unlocked) {
                     c.GetComponent<Button>().onClick.AddListener(startView);
