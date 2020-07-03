@@ -16,14 +16,13 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
-        songIndex = SceneManager.GetActiveScene().buildIndex % tracks.Length;
+        songIndex = 0;
         sceneIndex = changeMusic = SceneManager.GetActiveScene().buildIndex;
         DontDestroyOnLoad(gameObject);
 
         audio = this.GetComponent<AudioSource>();
         audio.clip = tracks[songIndex];
         audio.Play();
-        songIndex = SceneManager.GetActiveScene().buildIndex % tracks.Length;
         SceneManager.activeSceneChanged += nextScene;
         playNewTrack(sceneIndex);
 
@@ -38,8 +37,8 @@ public class MusicManager : MonoBehaviour
 
     private void playNewTrack(int index)
     {
-        index = index % tracks.Length;
-        audio.clip = tracks[index];
+        var newIndex = songIndex++ % tracks.Length;
+        audio.clip = tracks[newIndex];
         audio.Play();
     }
     private void nextScene(Scene scene, Scene next)
