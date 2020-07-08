@@ -2001,6 +2001,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VideoPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7195148681871398018, guid: 2e9e0543c3261484aa13427cd37ca092,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7195148681871398025, guid: 2e9e0543c3261484aa13427cd37ca092,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2059,11 +2064,16 @@ PrefabInstance:
     - target: {fileID: 7195148681871398029, guid: 2e9e0543c3261484aa13427cd37ca092,
         type: 3}
       propertyPath: m_Url
-      value: https://r5---sn-45nufxc-hm2l.googlevideo.com/videoplayback?expire=1593793205&ei=VQb_Xrf_IpKKgAeWxrSACw&ip=2001%3Ab07%3A6475%3A34f2%3Aa09c%3A4cff%3A6fa8%3A8ff&id=o-AILkOatctdO5mUcEe0mw351ippcq4eJy1R4QOif9dzw2&itag=18&source=youtube&requiressl=yes&mh=KN&mm=31%2C26&mn=sn-45nufxc-hm2l%2Csn-1gi7znes&ms=au%2Conr&mv=m&mvi=5&pl=48&initcwndbps=1371250&vprv=1&mime=video%2Fmp4&gir=yes&clen=1002786&ratebypass=yes&dur=30.650&lmt=1485819175005664&mt=1593771569&fvip=5&c=WEB&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIgclADuU1Qb8bJ7YURGKfJ2SHBl1tCcbFiglJnQwjv4O0CIQDDXbJQDiWGUy_2MfOvLua4XjnRIuGyomDo9eBI_eyMew%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgCD_3kRVfofA_AMDXY-WJQ_eCNS7wF9vm3tYWZQZ0bHwCIG94S7TNrkil4mCgzqIM54QMwpGQid0FtIx1N704HH7v
+      value: https://r3---sn-8vq54voxpu-hm2s.googlevideo.com/videoplayback?expire=1594171737&ei=-cwEX_e5BNXrgAf5lbz4BA&ip=93.71.46.243&id=o-APr5SHs1zKIsvthqhPyEm5DMqrQN9DYKWJ042wbQEVNd&itag=22&source=youtube&requiressl=yes&mh=L_&mm=31%2C26&mn=sn-8vq54voxpu-hm2s%2Csn-hgn7rn7k&ms=au%2Conr&mv=m&mvi=3&pcm2cms=yes&pl=23&usequic=no&initcwndbps=1066250&vprv=1&mime=video%2Fmp4&ratebypass=yes&dur=42.399&lmt=1594150048296931&mt=1594150062&fvip=3&c=WEB&txp=6216222&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRgIhAJJe4MJvkxjzPgROQr6kYV2AmT2ze5ZZnUEOdrWh-yPMAiEA_WkGmc9eMlIB6Do0sfSnPfCYiOfI-uW1SK6-wx6MB6Y%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Cusequic%2Cinitcwndbps&lsig=AG3C_xAwRQIhAPRbre_BLMjXrgRmKULugqXPVk189FSbRbqoWV1UdOkJAiBAHCCu04VFEM7Nz9HgEZG7bu1EMTYbl7XDlPOD1GC7gQ%3D%3D
       objectReference: {fileID: 0}
     - target: {fileID: 7195148681871398029, guid: 2e9e0543c3261484aa13427cd37ca092,
         type: 3}
       propertyPath: m_Looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195148681871398029, guid: 2e9e0543c3261484aa13427cd37ca092,
+        type: 3}
+      propertyPath: m_DataSource
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
