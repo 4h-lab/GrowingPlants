@@ -14,6 +14,7 @@ public class DestroyParticles : MonoBehaviour
 
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private Direction DestroyIf;
+    [Tooltip("How much beyond (before if negative) the limit the particles are destroyed")]
     [SerializeField] private float offset = 0.5f;
     [Header("alternative non-water limit")]
     [SerializeField] private GameObject customLimit;
