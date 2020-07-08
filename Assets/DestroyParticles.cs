@@ -12,11 +12,16 @@ public class DestroyParticles : MonoBehaviour
         below
     };
 
+    [Tooltip("Particle system to affect. Get one from this component object if none is specified.")]
     [SerializeField] private ParticleSystem particleSystem;
+    [Tooltip("Particles are destroyed when they're in a certain position relative to the limit object (Water by default)")]
     [SerializeField] private Direction DestroyIf;
-    [Tooltip("How much beyond (before if negative) the limit the particles are destroyed")]
-    [SerializeField] private float offset = 0.5f;
-    [Header("alternative non-water limit")]
+    [Tooltip("Sets remainingLifetime to this value when the limit is reached. Death subemitters won't work if this is set to 0.")]
+    [SerializeField] private float setLifetimeTo = 0f;
+    [Tooltip("How much beyond (before if negative) the limit the particles are destroyed.")]
+    [SerializeField] private float offset = 0f;
+    [Header("Alternative non-water limit")]
+    [Tooltip("Use a custom object transform as limit. Water is used if none is specified.")]
     [SerializeField] private GameObject customLimit;
 
     private ParticleSystem.Particle[] particles;
@@ -28,7 +33,7 @@ public class DestroyParticles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        if (!particleSystem) particleSystem = GetComponent<ParticleSystem>();
         particles = new ParticleSystem.Particle[particleSystem.main.maxParticles];
         if (customLimit) limit = customLimit;
         else limit = GameObject.FindGameObjectWithTag("Water");
@@ -40,8 +45,8 @@ public class DestroyParticles : MonoBehaviour
     {
         int particlesNum = particleSystem.GetParticles(particles);
         for (int i = 0; i < particlesNum; i++)
-            if (checkLimit(particles[i]) && particles[i].remainingLifetime > 0.1f)
-                particles[i].remainingLifetime = 0.1f;
+            if (checkLimit(particles[i]) && particles[i].remainingLifetime > setLifetimeTo)
+                particles[i].remainingLifetime = setLifetimeTo;
         particleSystem.SetParticles(particles, particlesNum);
     }
 

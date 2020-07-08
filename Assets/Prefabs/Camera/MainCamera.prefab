@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 4969609525999832399}
   DestroyIf: 3
+  setLifetimeTo: 0
   offset: 0
   customLimit: {fileID: 0}
 --- !u!1 &6692347706846118773
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 8432334073794512178}
   DestroyIf: 0
+  setLifetimeTo: 0.1
   offset: 0.5
   customLimit: {fileID: 0}
 --- !u!1001 &1461517385078887909
