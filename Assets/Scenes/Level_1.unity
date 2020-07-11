@@ -2064,7 +2064,7 @@ PrefabInstance:
     - target: {fileID: 7195148681871398029, guid: 2e9e0543c3261484aa13427cd37ca092,
         type: 3}
       propertyPath: m_Url
-      value: https://r3---sn-8vq54voxpu-hm2s.googlevideo.com/videoplayback?expire=1594171737&ei=-cwEX_e5BNXrgAf5lbz4BA&ip=93.71.46.243&id=o-APr5SHs1zKIsvthqhPyEm5DMqrQN9DYKWJ042wbQEVNd&itag=22&source=youtube&requiressl=yes&mh=L_&mm=31%2C26&mn=sn-8vq54voxpu-hm2s%2Csn-hgn7rn7k&ms=au%2Conr&mv=m&mvi=3&pcm2cms=yes&pl=23&usequic=no&initcwndbps=1066250&vprv=1&mime=video%2Fmp4&ratebypass=yes&dur=42.399&lmt=1594150048296931&mt=1594150062&fvip=3&c=WEB&txp=6216222&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRgIhAJJe4MJvkxjzPgROQr6kYV2AmT2ze5ZZnUEOdrWh-yPMAiEA_WkGmc9eMlIB6Do0sfSnPfCYiOfI-uW1SK6-wx6MB6Y%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Cusequic%2Cinitcwndbps&lsig=AG3C_xAwRQIhAPRbre_BLMjXrgRmKULugqXPVk189FSbRbqoWV1UdOkJAiBAHCCu04VFEM7Nz9HgEZG7bu1EMTYbl7XDlPOD1GC7gQ%3D%3D
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7195148681871398029, guid: 2e9e0543c3261484aa13427cd37ca092,
         type: 3}
