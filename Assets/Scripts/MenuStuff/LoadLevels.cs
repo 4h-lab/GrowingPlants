@@ -17,14 +17,14 @@ public class LoadLevels : MonoBehaviour
     private GameObject NormalPanel;
     [SerializeField]
     private GameObject NightmarePanel;
-    [SerializeField]
-    private GameObject switchButton;
+    private ScrollRect scrollrect;
 
     private SavedGameData.LevelData.levelType filter = SavedGameData.LevelData.levelType.nornal; 
 
     // Start is called before the first frame update
     void Start()
     {
+        scrollrect = this.GetComponent<ScrollRect>();
         requestNewLevels(NormalPanel, SavedGameData.LevelData.levelType.nornal);
         requestNewLevels(NightmarePanel, SavedGameData.LevelData.levelType.nightmare);
         NightmarePanel.SetActive(false);
@@ -69,20 +69,28 @@ public class LoadLevels : MonoBehaviour
 
 
     public void getNightmare()    {
-        if (NormalPanel.activeSelf) {
+        
             NormalPanel.SetActive(false);
             NightmarePanel.SetActive(true);
-            switchButton.GetComponent<Image>().color = Color.white;
+        scrollrect.content = NightmarePanel.GetComponent<RectTransform>();
+            /*switchButton.GetComponent<Image>().color = Color.white;
             switchButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-        } else {
+        
             NormalPanel.SetActive(true);
             NightmarePanel.SetActive(false);
             switchButton.GetComponent<Image>().color = Color.black;
-            switchButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        }
+            switchButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;*/
+        
         
     }
 
+    public void getNormal()
+    {
+        NormalPanel.SetActive(true);
+        NightmarePanel.SetActive(false);
+        scrollrect.content = NormalPanel.GetComponent<RectTransform>();
+    }
+                
    
     
 
