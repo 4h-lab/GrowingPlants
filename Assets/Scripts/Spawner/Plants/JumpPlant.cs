@@ -9,22 +9,29 @@ public class JumpPlant : MonoBehaviour
     [SerializeField] Vector2 bounceStrength = Vector2.up;
     [SerializeField] float triggerVelocity = 1f;
 
-    private Animator anim;
+    private GameObject player;
     private NormalPlant mainPlantScript;
+    private PlayerOverPlant playerOverPlant;
     private bool readyToPush = false;
 
     void Start()
     {
         mainPlantScript = GetComponent<NormalPlant>();
+        playerOverPlant = GetComponent<PlayerOverPlant>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        if (!readyToPush && UpdateReadyToPush())
+        if (!readyToPush)
         {
-            GameObject player = mainPlantScript.GetPlayerOnPlant();
-            anim = player.GetComponentInChildren<Animator>();
-            if (player) PushTarget(player, pushStrength);
+            //if the plant isn't ready, but gets ready with the current update, it can PUSH the player if he's standing on it or just landed
+            if (UpdateReadyToPush() && (playerOverPlant.PlayerEntered() || playerOverPlant.PlayerOver())) PushTarget(player, pushStrength);
+        } 
+        else
+        {
+            //if the plant is ready (max height), it can BOUNCE the player if he's landing on it
+            if(playerOverPlant.PlayerEntered()) PushTarget(player, bounceStrength);
         }
     }
 
@@ -42,8 +49,17 @@ public class JumpPlant : MonoBehaviour
 
     private void PushTarget(GameObject target, Vector2 strength)
     {
-        target.GetComponent<Rigidbody2D>().AddForce(strength, ForceMode2D.Impulse);
-        anim.SetTrigger("jumping");
+        Rigidbody2D targetRB = target.GetComponent<Rigidbody2D>();
+        //TODO: refactor to make it work with every pushable object
+        MovementJoystick mj = target.GetComponent<MovementJoystick>();
+        bool jumping = false;
+        if (!mj || mj.IsJumping()) jumping = true;
+
+        if (!jumping) 
+        {
+            mj.SetIsJumping(true);
+            target.GetComponent<Rigidbody2D>()?.AddForce(strength, ForceMode2D.Impulse);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
