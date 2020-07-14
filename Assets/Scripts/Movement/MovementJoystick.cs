@@ -104,7 +104,6 @@ public class MovementJoystick : MonoBehaviour{
 
         //TODO: this is probably gonna break something
         if (mBody.velocity.y <= 0) isJumping = false;
-        if (anim != null) anim.SetBool("jumping", isJumping);
 
 
     }

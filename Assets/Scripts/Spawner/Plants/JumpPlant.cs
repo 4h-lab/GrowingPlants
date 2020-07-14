@@ -58,6 +58,7 @@ public class JumpPlant : MonoBehaviour
         if (!jumping) 
         {
             mj.SetIsJumping(true);
+            target.GetComponentInChildren<Animator>()?.SetTrigger("jumping");
             target.GetComponent<Rigidbody2D>()?.AddForce(strength, ForceMode2D.Impulse);
         }
     }
