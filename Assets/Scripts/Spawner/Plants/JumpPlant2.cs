@@ -22,8 +22,7 @@ public class JumpPlant2 : MonoBehaviour
     {
         if (!readyToPush && UpdateReadyToPush())
         {
-            GameObject player = mainPlantScript.GetPlayerOnPlant();
-            if (player) PushTarget(player, push);
+            
         }
     }
 

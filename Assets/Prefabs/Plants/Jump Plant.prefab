@@ -9864,6 +9864,7 @@ GameObject:
   - component: {fileID: 3297556054455174177}
   - component: {fileID: 315885697953267844}
   - component: {fileID: -8423536569603437237}
+  - component: {fileID: 4945034775395119680}
   m_Layer: 10
   m_Name: Jump Plant
   m_TagString: Untagged
@@ -10029,3 +10030,15 @@ MonoBehaviour:
   keepBounciness: 1
   bounceStrength: {x: 0, y: 10}
   triggerVelocity: 7
+--- !u!114 &4945034775395119680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7908200954036282873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55392ae7d80a4f42af87045495264bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

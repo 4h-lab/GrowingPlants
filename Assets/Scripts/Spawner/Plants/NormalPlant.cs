@@ -178,12 +178,4 @@ public class NormalPlant : BasePlant, IFallInteractable{
         }
         trans.position = startpos;
     }
-
-    //TODO: remove if not used
-    public GameObject GetPlayerOnPlant()
-    {
-        foreach (Transform child in transform)
-            if (child.tag == "Player") return child.gameObject;
-        return null;
-    }
 }
