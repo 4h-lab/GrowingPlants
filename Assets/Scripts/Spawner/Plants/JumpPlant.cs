@@ -49,6 +49,9 @@ public class JumpPlant : MonoBehaviour
 
     private void PushTarget(GameObject target, Vector2 strength)
     {
+        IsGrounded isGrounded = target.GetComponent<IsGrounded>();
+        if (!isGrounded || !isGrounded.GetGrounded()) return;
+
         Rigidbody2D targetRB = target.GetComponent<Rigidbody2D>();
         //TODO: refactor to make it work with every pushable object
         MovementJoystick mj = target.GetComponent<MovementJoystick>();
