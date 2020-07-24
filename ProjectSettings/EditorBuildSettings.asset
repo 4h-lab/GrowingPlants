@@ -159,6 +159,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Nightmare Levels/Level_19 Nightmare.unity
     guid: 8ad4a47785dc0ca46a72835b32ca980b
   - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_20 Nightmare.unity
+    guid: be512655bad37c547a75218b082158d2
+  - enabled: 1
     path: Assets/Scenes/Nightmare Levels/Level_21 Nightmare.unity
+    guid: e468298886e080642a6c700ae8240c5d
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_22 Nightmare.unity
+    guid: c06a3f108dc72214a920a5cd9526a3dc
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_26 Nightmare.unity
     guid: b655a242d64fd8c4c94fa7407b784526
   m_configObjects: {}
