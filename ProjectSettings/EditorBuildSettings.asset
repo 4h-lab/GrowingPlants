@@ -185,4 +185,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Nightmare Levels/Level_28 Nightmare.unity
     guid: fbbe9138c84043c4ebbe246963609a8c
+  - enabled: 1
+    path: Assets/Scenes/Nightmare Levels/Level_30 Nightmare.unity
+    guid: f41ecb6ee91e85149a706366bad13b98
   m_configObjects: {}
