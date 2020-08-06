@@ -52,13 +52,13 @@ public class IsGrounded : MonoBehaviour
 
     private bool checkGroundLevel(out Collider2D[] da_hits) {
         //RaycastHit2D[] hits = Physics2D.BoxCastAll(new Vector2(_collider.bounds.center.x, _collider.bounds.center.y + _collider.bounds.extents.y), _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
-        RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x, 
+        RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x-.05f, 
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
-                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
+                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x+.05f,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f));
-        Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x,
+        Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x - .05f,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
-                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
+                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x + .05f,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f), Color.red);
 
         if (hits.Length > 0) {
