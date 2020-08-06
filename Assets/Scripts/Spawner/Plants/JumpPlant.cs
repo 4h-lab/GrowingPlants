@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class JumpPlant : MonoBehaviour
 {
+    [Tooltip("Strength of the force added to the player if he's on the plant when it reaches its max height")]
     [SerializeField] Vector2 pushStrength = Vector2.up;
+    [Tooltip("Makes the plant bounce the player if he fall on it after the initial push frame")]
     [SerializeField] bool keepBounciness = true;
+    [Tooltip("Strength of the force added to the player if he lands on the plant after the initial push frame (only if keepBounciness is true)")]
     [SerializeField] Vector2 bounceStrength = Vector2.up;
+    [Tooltip("Minimum falling speed to trigger the bounce (only if keepBounciness is true)")]
     [SerializeField] float triggerVelocity = 1f;
 
     private GameObject player;
     private NormalPlant mainPlantScript;
     private PlayerOverPlant playerOverPlant;
-    private bool readyToPush = false;
+    private bool JumpActive = false;
 
     void Start()
     {
@@ -23,25 +27,27 @@ public class JumpPlant : MonoBehaviour
 
     void Update()
     {
-        if (!readyToPush)
+        if (!JumpActive)
         {
-            //if the plant isn't ready, but gets ready with the current update, it can PUSH the player if he's standing on it or just landed
-            if (UpdateReadyToPush() && (playerOverPlant.PlayerEntered() || playerOverPlant.PlayerOver())) PushTarget(player, pushStrength);
-        } 
+            //the plant can push only during the frame when the push and bounce status becomes true (see CanPush conditions)
+            if (CanPush()) PushTarget(player, pushStrength);
+        }
         else
         {
-            //if the plant is ready (max height), it can BOUNCE the player if he's landing on it
-            if(playerOverPlant.PlayerEntered()) PushTarget(player, bounceStrength);
+            if (CanBounce()) PushTarget(player, bounceStrength);
         }
     }
 
-    // Set readyToPush to true when the max heigth has just been reached, and return true in that frame, False otherwise
-    private bool UpdateReadyToPush()
+    /*
+     * updates the status of the plant, which is "active" from the moment it reaches its max height onward
+     * also returns true during the frame when the status is changed, false otherwise
+     */
+    private bool UpdateJumpActive()
     {
-        if (readyToPush) return false;
+        if (JumpActive) return false;
         if (transform.position.y >= mainPlantScript.GetInitY() + mainPlantScript.GetMaxHeigth())
         {
-            readyToPush = true;
+            JumpActive = true;
             return true;
         }
         return false;
@@ -62,16 +68,26 @@ public class JumpPlant : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*
+     * the plant can push the player only if he has just landed on it or is staying on it
+     * when UpdateReadyToPush returns true, which is only during the frame when the plant
+     * reaches its max height
+     */
+    private bool CanPush()
     {
-        if (CanBounce(collision)) PushTarget(collision.gameObject, bounceStrength);
+        return UpdateJumpActive()
+            && (playerOverPlant.PlayerEntered() || playerOverPlant.PlayerOver());
     }
 
-    private bool CanBounce(Collision2D target)
+    /*
+     * the plant can bounce the player only after having reached its max height
+     * (this is checked by Update) and only if the bounce mechanic is active and
+     * the player is moving toward it fast enough
+     */
+    private bool CanBounce()
     {
-        return target.gameObject.tag == "Player"
-            && target.GetContact(0).relativeVelocity.y < -triggerVelocity
-            && keepBounciness
-            && readyToPush;
+        return keepBounciness
+            && playerOverPlant.PlayerEntered()
+            && player.GetComponent<Rigidbody2D>().velocity.y < triggerVelocity;
     }
 }

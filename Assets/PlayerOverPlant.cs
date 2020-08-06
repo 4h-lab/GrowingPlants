@@ -8,39 +8,34 @@ public class PlayerOverPlant : MonoBehaviour
     private bool playerStay;
     private bool playerExit;
 
-    private bool previousEnter;
-    private bool previousExit;
-
     void Start()
     {
         
     }
 
-    void LateUpdate()
-    {
-        if (playerEnter) playerEnter = !playerEnter;
-        if (playerExit) playerExit = !playerExit;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Player") return;
+        if (collision.contacts[0].normal != Vector2.down) return;
         playerEnter = true;
-        previousEnter = true;
+        playerStay = false;
+        playerExit = false;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Player") return;
+        playerEnter = false;
         playerStay = true;
+        playerExit = false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Player") return;
+        playerEnter = false;
         playerStay = false;
         playerExit = true;
-        previousExit = true;
     }
 
     public bool PlayerEntered()
