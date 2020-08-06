@@ -20,6 +20,7 @@ public class MovementJoystick : MonoBehaviour{
 
     //TODO: refactor
     private bool isJumping = false;
+    private bool previousJumping = false;
 
 
     // animations
@@ -103,8 +104,15 @@ public class MovementJoystick : MonoBehaviour{
 
 
         //TODO: this is probably gonna break something
-        if (mBody.velocity.y <= 0) isJumping = false;
-        if (anim != null) anim.SetBool("jumping", isJumping);
+        if (mBody.velocity.y <= 0) {
+            previousJumping = false;
+            isJumping = false;
+        }
+        if (anim != null && previousJumping != isJumping)
+        {
+            anim.SetTrigger("jumping");
+            previousJumping = isJumping;
+        }
 
 
     }
@@ -207,6 +215,7 @@ public class MovementJoystick : MonoBehaviour{
 
     public void SetIsJumping(bool isJumping)
     {
+        previousJumping = this.isJumping;
         this.isJumping = isJumping;
     }
 
