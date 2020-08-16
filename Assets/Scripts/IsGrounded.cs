@@ -8,6 +8,7 @@ public class IsGrounded : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
 
     private bool grounded;
+    private bool prevGrounded;
     private Animator anim;
     private Collider2D _collider;
 
@@ -29,10 +30,10 @@ public class IsGrounded : MonoBehaviour
     
     private IEnumerator check() {
         while (true) {
-            bool prev = grounded;
+            prevGrounded = grounded;
             Collider2D[] da_hits;
             grounded = checkGroundLevel(out da_hits);
-            if (grounded && !prev && !this.GetComponent<MovementJoystick>().getSquished()) { // first frame in which you touched the floor
+            if (grounded && !prevGrounded && !this.GetComponent<MovementJoystick>().getSquished()) { // first frame in which you touched the floor
                 GameObject.FindGameObjectWithTag("playerps_dustfalling").GetComponent<ParticleSystem>()?.Play();
                 if (da_hits != null) {
                     foreach (Collider2D c in da_hits) {
@@ -45,16 +46,21 @@ public class IsGrounded : MonoBehaviour
         }
     }
 
+    public bool JustGrounded()
+    {
+        return grounded && !prevGrounded;
+    }
 
     private bool checkGroundLevel(out Collider2D[] da_hits) {
         //RaycastHit2D[] hits = Physics2D.BoxCastAll(new Vector2(_collider.bounds.center.x, _collider.bounds.center.y + _collider.bounds.extents.y), _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
-        RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x, 
+        RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x-.05f, 
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
-                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
-                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f), groundLayerMask);
-        Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x,
+
+                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x+.05f,
+                                                                _collider.bounds.center.y - _collider.bounds.extents.y - .025f));
+        Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x - .05f,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
-                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x,
+                                                    new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x + .05f,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f), Color.red);
 
         if (hits.Length > 0) {

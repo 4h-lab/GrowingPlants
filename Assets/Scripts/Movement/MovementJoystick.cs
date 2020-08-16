@@ -16,7 +16,11 @@ public class MovementJoystick : MonoBehaviour{
     private  Vector3 mVelocity;
     private Vector3 oldPos;
     private bool isSquished = false;
-    private bool isrunning = false;
+    private bool isRunning = false;
+
+    //TODO: refactor
+    private bool isJumping = false;
+    private bool previousJumping = false;
 
 
     // animations
@@ -67,7 +71,7 @@ public class MovementJoystick : MonoBehaviour{
     }
 
     public void FixedUpdate(){
-        isrunning = false;
+        isRunning = false;
         oldPos = transform.position;
         if (variableJoystick.Horizontal != 0f)
         {
@@ -86,16 +90,30 @@ public class MovementJoystick : MonoBehaviour{
         if (maxFallingSpeed >= 0) AlterFallingSpeed();
         speed = Mathf.Min(speed, ((oldPos - transform.position).magnitude / (Time.deltaTime)));
 
-        if (speed > 0) isrunning = true;
-        if(anim != null)anim.SetBool("running", isrunning);
+        if (speed > 0) isRunning = true;
+        if (anim != null) anim.SetBool("running", isRunning);
+
         if (dust != null) {
-            if (isrunning && grounded.GetGrounded()) {
+            if (isRunning && grounded.GetGrounded()) {
                 if(!dust.isPlaying) dust.Play();
 
             } else {
                 if(!dust.isStopped)dust.Stop();
             } 
-        } 
+        }
+
+
+        //TODO: this is probably gonna break something
+        if (mBody.velocity.y <= 0) {
+            previousJumping = false;
+            isJumping = false;
+        }
+        if (anim != null && previousJumping != isJumping)
+        {
+            anim.SetTrigger("jumping");
+            previousJumping = isJumping;
+        }
+
 
     }
     private void movePlayer(Vector3 dir){
@@ -195,5 +213,16 @@ public class MovementJoystick : MonoBehaviour{
     {
         
         return variableJoystick.Horizontal;
+    }
+
+    public void SetIsJumping(bool isJumping)
+    {
+        previousJumping = this.isJumping;
+        this.isJumping = isJumping;
+    }
+
+    public bool IsJumping()
+    {
+        return isJumping;
     }
 }
