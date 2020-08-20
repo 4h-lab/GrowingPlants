@@ -760,6 +760,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpSoil
       objectReference: {fileID: 0}
+    - target: {fileID: 72050997753880558, guid: c577a2d7d00d4804fa42902d25bab12a,
+        type: 3}
+      propertyPath: spawnableObject
+      value: 
+      objectReference: {fileID: 7908200954036282873, guid: c5b1d448fb82566418b7dbca2df8f30f,
+        type: 3}
     - target: {fileID: 72050997753880559, guid: c577a2d7d00d4804fa42902d25bab12a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2189,6 +2195,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f0ed4eea2166c44d94ad7985630a8f7, type: 3}
+--- !u!1 &868490536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 72050997753880552, guid: 1308ec8e5d4552945907fa9b805803c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 387016115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &868490541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868490536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91381c552d52ee243a06e3d02407cf28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &873907769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8040191261652622273, guid: 3f0ed4eea2166c44d94ad7985630a8f7,
@@ -4782,6 +4806,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpSoil (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 72050997753880558, guid: c577a2d7d00d4804fa42902d25bab12a,
+        type: 3}
+      propertyPath: spawnableObject
+      value: 
+      objectReference: {fileID: 7908200954036282873, guid: c5b1d448fb82566418b7dbca2df8f30f,
+        type: 3}
     - target: {fileID: 72050997753880559, guid: c577a2d7d00d4804fa42902d25bab12a,
         type: 3}
       propertyPath: m_LocalPosition.x
