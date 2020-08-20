@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetActivator : MonoBehaviour{
     private int numberOfObservers = 0;
-    public GameObject physicalTarget; 
+    public GameObject physicalTarget;
 
     public void add(TargetManager tm) {
         numberOfObservers++;
@@ -18,6 +18,7 @@ public class TargetActivator : MonoBehaviour{
     private void activate() {
         //display target.....
         physicalTarget.SetActive(true);
+        physicalTarget.GetComponent<Target>().activate();
     }
     private void deactivate() {
         //dont display target

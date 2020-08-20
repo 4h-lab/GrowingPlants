@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TargetManager: MonoBehaviour{
     public GameObject physicalTarget;
+    public float teleportDistance = 7f;
+    private void Start() {
+        if (physicalTarget != null) physicalTarget.GetComponent<Target>().teleportDistance = teleportDistance;
+    }
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject go = collision.collider.gameObject;
         if (go.tag == "Player") {
