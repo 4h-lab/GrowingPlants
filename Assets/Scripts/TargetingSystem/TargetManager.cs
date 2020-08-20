@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetManager: MonoBehaviour{
     public GameObject physicalTarget;
-    private void OnCollisionEnter2D(Collision collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         GameObject go = collision.collider.gameObject;
         if (go.tag == "Player") {
             if (!go.GetComponent<TargetActivator>()) {
@@ -15,7 +15,7 @@ public class TargetManager: MonoBehaviour{
             
         }
     }
-    private void OnCollisionExit2D(Collision collision) {
+    private void OnCollisionExit2D(Collision2D collision) {
         collision.collider.gameObject.GetComponent<TargetActivator>().remove(this);
     }
 
