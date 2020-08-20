@@ -17,9 +17,11 @@ public class TargetActivator : MonoBehaviour{
 
     private void activate() {
         //display target.....
+        physicalTarget.SetActive(true);
     }
-    private void deactivate() { 
+    private void deactivate() {
         //dont display target
+        physicalTarget.SetActive(false);
     }
 
     
