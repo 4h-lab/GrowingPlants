@@ -55,7 +55,6 @@ public class IsGrounded : MonoBehaviour
         //RaycastHit2D[] hits = Physics2D.BoxCastAll(new Vector2(_collider.bounds.center.x, _collider.bounds.center.y + _collider.bounds.extents.y), _collider.bounds.extents * 2, 0f, Vector2.down, _collider.bounds.extents.y + .01f, ground);
         RaycastHit2D[] hits = Physics2D.LinecastAll(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x-.05f, 
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f),
-
                                                     new Vector2(_collider.bounds.center.x + _collider.bounds.extents.x+.05f,
                                                                 _collider.bounds.center.y - _collider.bounds.extents.y - .025f));
         Debug.DrawLine(new Vector2(_collider.bounds.center.x - _collider.bounds.extents.x - .05f,

@@ -17,11 +17,14 @@ public class MovementJoystick : MonoBehaviour{
     private Vector3 oldPos;
     private bool isSquished = false;
     private bool isRunning = false;
-
-    //TODO: refactor
     private bool isJumping = false;
     private bool previousJumping = false;
 
+    public float Dir {
+        get { return (speed == 0) ? 0 : Mathf.Sign(dir.x); }
+    }
+
+    Vector3 dir;
 
     // animations
     private Animator anim;
@@ -75,8 +78,8 @@ public class MovementJoystick : MonoBehaviour{
         oldPos = transform.position;
         if (variableJoystick.Horizontal != 0f)
         {
-            Vector3 dir = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
-            movePlayer(dir);
+            Vector3 d = Vector3.right * Mathf.Sign(variableJoystick.Horizontal);
+            movePlayer(d);
         }
         else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) movePlayer(lastDirection);
         else if (Input.GetKey(KeyCode.A)) movePlayer(Vector3.left);
@@ -117,6 +120,7 @@ public class MovementJoystick : MonoBehaviour{
 
     }
     private void movePlayer(Vector3 dir){
+        this.dir = dir;
         ee.invoke("playermoved", null);
 
 
@@ -132,7 +136,7 @@ public class MovementJoystick : MonoBehaviour{
             transform.Translate(dir * speed * Time.deltaTime * GameManager.customTimeScale);
         }
         if ((dir.x > 0) ^ facingRight) Flip();
-        if ((dir.x > 0) ^ facingRight) Flip();
+        //if ((dir.x > 0) ^ facingRight) Flip();
     }
     /*
     private void changeVelocity(float f){
