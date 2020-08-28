@@ -11,7 +11,7 @@ public class TargetActivator : MonoBehaviour{
         if (numberOfObservers == 1) activate(); 
     }
     public void remove(TargetManager tm) {
-        numberOfObservers--;
+        if(numberOfObservers > 0) numberOfObservers--;
         if (numberOfObservers == 0) deactivate();
     }
 
