@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 1863739690625152541}
   - component: {fileID: 537767066073910330}
   - component: {fileID: 8934827586588208805}
+  - component: {fileID: 3157140824922497859}
   m_Layer: 2
   m_Name: Player-backup
   m_TagString: Player
@@ -311,9 +312,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundedTreshold: 0
-  ground:
+  groundLayerMask:
     serializedVersion: 2
-    m_Bits: 18177
+    m_Bits: 0
 --- !u!114 &537767066073910330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +344,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4db8c417823e434f948ca0f5758dad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3157140824922497859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365046929659650783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67e8d9d85f024e45923d0830ad89ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicalTarget: {fileID: 6537697613850372961, guid: a122cd7502c6d2e438e90991ffda461d,
+    type: 3}
 --- !u!1 &1365046930650815354
 GameObject:
   m_ObjectHideFlags: 0

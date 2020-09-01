@@ -14,7 +14,7 @@ public class TargetManager: MonoBehaviour{
         GameObject go = collision.collider.gameObject;
         if (go.tag == "Player") {
             RaycastHit2D hit = Physics2D.Raycast(go.transform.position, Vector2.down);
-            if (!hit.collider.gameObject.GetComponent<TargetManager>()) return;
+         //   if (!hit.collider.gameObject.GetComponent<TargetManager>()) return;
             if (!go.GetComponent<TargetActivator>()) {
                 go.AddComponent<TargetActivator>();
                 go.GetComponent<TargetActivator>().physicalTarget = physicalTarget;
