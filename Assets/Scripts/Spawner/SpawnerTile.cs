@@ -17,6 +17,7 @@ public class SpawnerTile : MonoBehaviour{
         //GameObject.Instantiate(spawnableObject, new Vector3(initiator.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         GameObject spawnedObject = GameObject.Instantiate(spawnableObject, point,Quaternion.identity);
         //TODO: try catch here?
+        
         spawnedObject.GetComponent<BasePlant>().SetSpawner(gameObject);
     }
 

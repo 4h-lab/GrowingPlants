@@ -15,10 +15,7 @@ public class BasePlant : MonoBehaviour
     protected float ray_point;
     protected float small_radius = 0.01f;
 
-    public GameObject GetSpawner()
-    {
-        return spawner;
-    }
+    public GameObject GetSpawner() => this.spawner;
 
     public void SetSpawner(GameObject spawner)
     {
