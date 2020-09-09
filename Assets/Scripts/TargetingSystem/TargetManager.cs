@@ -13,8 +13,10 @@ public class TargetManager: MonoBehaviour{
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject go = collision.collider.gameObject;
         if (go.tag == "Player") {
-            RaycastHit2D hit = Physics2D.Raycast(go.transform.position, Vector2.down);
-            if (!hit.collider.gameObject.GetComponent<TargetManager>()) return;
+            //TODO: optimize this
+            RaycastHit2D hitSx = Physics2D.Raycast((Vector2)go.transform.position - new Vector2(go.GetComponent<SpriteRenderer>().bounds.extents.x, 0), Vector2.down);
+            RaycastHit2D hitDx = Physics2D.Raycast((Vector2)go.transform.position + new Vector2(go.GetComponent<SpriteRenderer>().bounds.extents.x, 0), Vector2.down);
+            if (!hitSx.collider.gameObject.GetComponent<TargetManager>() && !hitDx.collider.gameObject.GetComponent<TargetManager>()) return;
             if (!go.GetComponent<TargetActivator>()) {
                 go.AddComponent<TargetActivator>();
                 go.GetComponent<TargetActivator>().physicalTarget = physicalTarget;
