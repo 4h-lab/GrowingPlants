@@ -25,9 +25,7 @@ public class NormalPlant : BasePlant, IFallInteractable{
 
         checkEdges();
         ee = GameObject.FindGameObjectWithTag("EventEmitter").GetComponent<EventEmitter>();
-        Debug.Log("EE1");
         ee.invoke("plant_created", (new[] { this.gameObject }));
-        Debug.Log("EE2");
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().notifyOfNewSomething("plant.planted");
 
@@ -37,9 +35,6 @@ public class NormalPlant : BasePlant, IFallInteractable{
             ps?.Play();
             StartCoroutine(ensureParticleSystemDestroyed(ps));
         }
-
-
-
     }
 
     void Update()

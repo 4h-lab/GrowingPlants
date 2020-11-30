@@ -70,7 +70,6 @@ public class SquishCollisionInteractable : MonoBehaviour
         
         collisionCounter++;
         }
-        Debug.Log("COLLISIONI:" + collisionCounter);
         
 
         

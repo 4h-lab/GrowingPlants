@@ -27,6 +27,20 @@ public class TargetManager: MonoBehaviour{
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        GameObject go = collision.collider.gameObject;
+        TargetActivator activator = go.GetComponent<TargetActivator>();
+
+        if (go.tag == "Player")
+        {
+            if (activator.GetNumberOfObservers() < 1)
+            {
+                activator.add(this);
+            }
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D collision) {
         GameObject go = collision.collider.gameObject;
         if (go.tag == "Player")

@@ -34,7 +34,6 @@ public class PlantButton : Controls{
 
     public void onControlsDisabled_handler(object obj, EventArgs e) {
         child.SetActive(false);
-        Debug.Log("PIANTA DISATTIVATA!!!!!!!");
         
     }
     public void onControlsEnabled_handler(object obj, EventArgs e) {

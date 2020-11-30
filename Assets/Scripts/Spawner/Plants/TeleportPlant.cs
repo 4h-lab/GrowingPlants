@@ -15,6 +15,7 @@ public class TeleportPlant : MonoBehaviour
 
     void Start()
     {
+        Destroy(gameObject);
         mainPlantScript = GetComponent<NormalPlant>();
         playerOverPlant = GetComponent<PlayerOverPlant>();
         player = GameObject.FindGameObjectWithTag("Player");
